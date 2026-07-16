@@ -43,26 +43,64 @@ function Blocks({ blocks }) {
   );
 }
 
-// Flattens tabs (which may contain dropdown groups) into a lookup keyed by a stable path,
-// e.g. "News Bulletin > Circulars" — used so we can select the right leaf content.
-function flattenTabs(tabs) {
-  const flat = [];
-  tabs.forEach((t, i) => {
-    if (t.children) {
-      t.children.forEach((c, j) => flat.push({ key: `${i}-${j}`, label: c.label, blocks: c.blocks, parentLabel: t.label }));
-    } else {
-      flat.push({ key: `${i}`, label: t.label, blocks: t.blocks, parentLabel: null });
-    }
+// Recursively walks a node tree, assigning each leaf a stable path key like "1.0.2"
+// so we can select it regardless of nesting depth.
+function flattenLeaves(nodes, prefix = '') {
+  let out = [];
+  nodes.forEach((n, i) => {
+    const key = prefix ? `${prefix}.${i}` : `${i}`;
+    if (n.children) out = out.concat(flattenLeaves(n.children, key));
+    else out.push({ key, label: n.label, blocks: n.blocks });
   });
-  return flat;
+  return out;
+}
+
+// Recursive flyout submenu — each level opens to the right of its parent, cascading.
+function FlyoutMenu({ nodes, prefix, activeKey, onSelect }) {
+  return (
+    <div className="min-w-[180px] rounded-lg bg-white py-1 shadow-lift">
+      {nodes.map((n, i) => {
+        const key = prefix ? `${prefix}.${i}` : `${i}`;
+        const isActiveBranch = activeKey === key || activeKey.startsWith(`${key}.`);
+        if (n.children) {
+          return (
+            <div key={n.label} className="group/flyout relative">
+              <button
+                className={`flex w-full items-center justify-between gap-3 px-4 py-2 text-left text-sm hover:bg-navy/5 ${
+                  isActiveBranch ? 'font-semibold text-crimson' : 'text-ink'
+                }`}
+              >
+                {n.label} <i className="fa-solid fa-chevron-right text-[9px]" aria-hidden="true" />
+              </button>
+              <div className="invisible absolute left-full top-0 z-10 opacity-0 transition group-hover/flyout:visible group-hover/flyout:opacity-100">
+                <FlyoutMenu nodes={n.children} prefix={key} activeKey={activeKey} onSelect={onSelect} />
+              </div>
+            </div>
+          );
+        }
+        return (
+          <button
+            key={n.label}
+            onClick={() => onSelect(key)}
+            className={`block w-full px-4 py-2 text-left text-sm hover:bg-navy/5 ${
+              activeKey === key ? 'font-semibold text-crimson' : 'text-ink'
+            }`}
+          >
+            {n.label}
+          </button>
+        );
+      })}
+    </div>
+  );
 }
 
 function TabBar({ tabs, activeKey, onSelect }) {
   return (
     <div className="flex flex-wrap gap-1 border-b border-slate-200 px-3 pt-3">
       {tabs.map((t, i) => {
+        const topKey = `${i}`;
         if (t.children) {
-          const isActiveGroup = t.children.some((_, j) => activeKey === `${i}-${j}`);
+          const isActiveGroup = activeKey === topKey || activeKey.startsWith(`${topKey}.`);
           return (
             <div key={t.label} className="group/tab relative">
               <button
@@ -72,18 +110,8 @@ function TabBar({ tabs, activeKey, onSelect }) {
               >
                 {t.label} <i className="fa-solid fa-chevron-down text-[9px]" aria-hidden="true" />
               </button>
-              <div className="invisible absolute left-0 top-full z-10 w-56 rounded-b-lg bg-white py-1 opacity-0 shadow-lift transition group-hover/tab:visible group-hover/tab:opacity-100">
-                {t.children.map((c, j) => (
-                  <button
-                    key={c.label}
-                    onClick={() => onSelect(`${i}-${j}`)}
-                    className={`block w-full px-4 py-2 text-left text-sm hover:bg-navy/5 ${
-                      activeKey === `${i}-${j}` ? 'font-semibold text-crimson' : 'text-ink'
-                    }`}
-                  >
-                    {c.label}
-                  </button>
-                ))}
+              <div className="invisible absolute left-0 top-full z-10 opacity-0 transition group-hover/tab:visible group-hover/tab:opacity-100">
+                <FlyoutMenu nodes={t.children} prefix={topKey} activeKey={activeKey} onSelect={onSelect} />
               </div>
             </div>
           );
@@ -91,9 +119,9 @@ function TabBar({ tabs, activeKey, onSelect }) {
         return (
           <button
             key={t.label}
-            onClick={() => onSelect(`${i}`)}
+            onClick={() => onSelect(topKey)}
             className={`rounded-t-md px-4 py-2 text-sm font-medium transition ${
-              activeKey === `${i}` ? 'border-b-2 border-navy text-navy' : 'text-slate-500 hover:text-navy'
+              activeKey === topKey ? 'border-b-2 border-navy text-navy' : 'text-slate-500 hover:text-navy'
             }`}
           >
             {t.label}
@@ -113,7 +141,7 @@ export default function DirectoratePage({ resolveKey }) {
   if (!data) return <ContentPage resolveId={() => `dir-${key}`} />;
 
   const { title, director, notifications = [], quickLinks = [], tabs = [] } = data;
-  const flat = flattenTabs(tabs);
+  const flat = flattenLeaves(tabs);
   const active = flat.find((t) => t.key === activeKey) || flat[0];
 
   return (

@@ -55,16 +55,18 @@ function flattenLeaves(nodes, prefix = '') {
   return out;
 }
 
-// Recursive flyout submenu — each level opens to the right of its parent, cascading.
+// Recursive flyout submenu — each level tracks its own "open" child via state,
+// so only one branch is ever visible at a time (no CSS group-name collisions).
 function FlyoutMenu({ nodes, prefix, activeKey, onSelect }) {
+  const [openIndex, setOpenIndex] = useState(null);
   return (
-    <div className="min-w-[180px] rounded-lg bg-white py-1 shadow-lift">
+    <div className="min-w-[200px] rounded-lg bg-white py-1 shadow-lift" onMouseLeave={() => setOpenIndex(null)}>
       {nodes.map((n, i) => {
         const key = prefix ? `${prefix}.${i}` : `${i}`;
         const isActiveBranch = activeKey === key || activeKey.startsWith(`${key}.`);
         if (n.children) {
           return (
-            <div key={n.label} className="group/flyout relative">
+            <div key={n.label} className="relative" onMouseEnter={() => setOpenIndex(i)}>
               <button
                 className={`flex w-full items-center justify-between gap-3 px-4 py-2 text-left text-sm hover:bg-navy/5 ${
                   isActiveBranch ? 'font-semibold text-crimson' : 'text-ink'
@@ -72,15 +74,18 @@ function FlyoutMenu({ nodes, prefix, activeKey, onSelect }) {
               >
                 {n.label} <i className="fa-solid fa-chevron-right text-[9px]" aria-hidden="true" />
               </button>
-              <div className="invisible absolute left-full top-0 z-10 opacity-0 transition group-hover/flyout:visible group-hover/flyout:opacity-100">
-                <FlyoutMenu nodes={n.children} prefix={key} activeKey={activeKey} onSelect={onSelect} />
-              </div>
+              {openIndex === i && (
+                <div className="absolute left-full top-0 z-10">
+                  <FlyoutMenu nodes={n.children} prefix={key} activeKey={activeKey} onSelect={onSelect} />
+                </div>
+              )}
             </div>
           );
         }
         return (
           <button
             key={n.label}
+            onMouseEnter={() => setOpenIndex(i)}
             onClick={() => onSelect(key)}
             className={`block w-full px-4 py-2 text-left text-sm hover:bg-navy/5 ${
               activeKey === key ? 'font-semibold text-crimson' : 'text-ink'
@@ -95,14 +100,15 @@ function FlyoutMenu({ nodes, prefix, activeKey, onSelect }) {
 }
 
 function TabBar({ tabs, activeKey, onSelect }) {
+  const [openTab, setOpenTab] = useState(null);
   return (
-    <div className="flex flex-wrap gap-1 border-b border-slate-200 px-3 pt-3">
+    <div className="flex flex-wrap gap-1 border-b border-slate-200 px-3 pt-3" onMouseLeave={() => setOpenTab(null)}>
       {tabs.map((t, i) => {
         const topKey = `${i}`;
         if (t.children) {
           const isActiveGroup = activeKey === topKey || activeKey.startsWith(`${topKey}.`);
           return (
-            <div key={t.label} className="group/tab relative">
+            <div key={t.label} className="relative" onMouseEnter={() => setOpenTab(i)}>
               <button
                 className={`flex items-center gap-1 rounded-t-md px-4 py-2 text-sm font-medium transition ${
                   isActiveGroup ? 'border-b-2 border-navy text-navy' : 'text-slate-500 hover:text-navy'
@@ -110,9 +116,11 @@ function TabBar({ tabs, activeKey, onSelect }) {
               >
                 {t.label} <i className="fa-solid fa-chevron-down text-[9px]" aria-hidden="true" />
               </button>
-              <div className="invisible absolute left-0 top-full z-10 opacity-0 transition group-hover/tab:visible group-hover/tab:opacity-100">
-                <FlyoutMenu nodes={t.children} prefix={topKey} activeKey={activeKey} onSelect={onSelect} />
-              </div>
+              {openTab === i && (
+                <div className="absolute left-0 top-full z-10">
+                  <FlyoutMenu nodes={t.children} prefix={topKey} activeKey={activeKey} onSelect={onSelect} />
+                </div>
+              )}
             </div>
           );
         }

@@ -1,3 +1,4 @@
+import DirectoratePage from '../components/DirectoratePage.jsx';
 import { lazy } from 'react';
 import ContentPage from '../components/ContentPage.jsx';
 import { NAV, DIRECTORATES, UNITS, ACADEMICS } from '../content/nav.js';

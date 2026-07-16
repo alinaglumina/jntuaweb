@@ -271,7 +271,7 @@
 "naac-criteria-6": { "title": "Criteria 6", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
 "naac-criteria-7": { "title": "Criteria 7", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
 "naac-workshops": { "title": "Workshops / Seminars", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
-"naac-ssr": { "title": "Self Study Report (SSR)", "blocks": [{ "type": "p", "text": "Details will be published soon." }] }
+"naac-ssr": { "title": "Self Study Report (SSR)", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
  "dir-academic": {
   "title": "Directorate of Academic & Planning",
   "blocks": [

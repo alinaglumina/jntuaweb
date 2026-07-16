@@ -26,6 +26,19 @@ export const UNITS = [
   ['unit-sports', 'Sports Council', 'sports'],
 ];
 
+export const NAAC_ITEMS = [
+  ['naac-extended-profile', 'Extended Profile Metrics', 'extended-profile'],
+  ['naac-criteria-1', 'Criteria 1', 'criteria-1'],
+  ['naac-criteria-2', 'Criteria 2', 'criteria-2'],
+  ['naac-criteria-3', 'Criteria 3', 'criteria-3'],
+  ['naac-criteria-4', 'Criteria 4', 'criteria-4'],
+  ['naac-criteria-5', 'Criteria 5', 'criteria-5'],
+  ['naac-criteria-6', 'Criteria 6', 'criteria-6'],
+  ['naac-criteria-7', 'Criteria 7', 'criteria-7'],
+  ['naac-workshops', 'Workshops / Seminars', 'workshops-seminars'],
+  ['naac-ssr', 'Self Study Report (SSR)', 'ssr'],
+];
+
 export const ACADEMICS = [
   ['acad-methodology', 'Methodology', 'methodology'],
   ['acad-admission', 'Admission', 'admission'],
@@ -71,6 +84,12 @@ export const NAV = [
       label, to: `/directorates/${slug}`, kind: 'content', id,
     })),
   },
+  {
+  label: 'NAAC',
+  children: NAAC_ITEMS.map(([id, label, slug]) => ({
+    label, to: `/naac/${slug}`, kind: 'content', id,
+  })),
+},
   {
     label: 'Academics',
     children: ACADEMICS.map(([id, label, slug]) => ({

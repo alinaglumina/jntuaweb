@@ -59,10 +59,18 @@ export default function DirectoratePage({ resolveKey }) {
         {/* Sidebar */}
         <aside className="space-y-6">
           <div className="flex flex-col items-center rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm">
-            <Avatar name={director.name} role={director.role} />
-            <p className="mt-4 font-display font-semibold text-navy">{director.name || director.role}</p>
-{director.name && <p className="text-sm text-slate-600">{director.role}</p>}
-          </div>
+  {director.photo ? (
+    <img
+      src={director.photo}
+      alt={director.name || director.role}
+      className="h-28 w-28 rounded-full object-cover"
+    />
+  ) : (
+    <Avatar name={director.name} role={director.role} />
+  )}
+  <p className="mt-4 font-display font-semibold text-navy">{director.name || director.role}</p>
+  {director.name && <p className="text-sm text-slate-600">{director.role}</p>}
+</div>
 
           {quickLinks.length > 0 && (
             <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">

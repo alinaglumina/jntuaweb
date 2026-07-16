@@ -21,9 +21,42 @@
   { "label": "Research Programmes", "blocks": [] }
 ]},
 { "label": "Curriculum & Syllabus", "children": [
-  { "label": "B.Tech — Overview", "blocks": [{ "type": "p", "text": "4-year programme. Governed by regulations R15, R19, R20, R23 and onwards." }] },
-  { "label": "M.Tech — Overview", "blocks": [] },
-  { "label": "B.Pharm", "blocks": [] }
+  { "label": "UG", "children": [
+    { "label": "B.Tech", "children": [
+      { "label": "Regulations", "blocks": [{ "type": "p", "text": "4-year programme. Governed by regulations R15, R19, R20, R23 and onwards." }] },
+      { "label": "Course Structure & Syllabi", "blocks": [] }
+    ]},
+    { "label": "B.Pharm", "children": [
+      { "label": "Regulations", "blocks": [] },
+      { "label": "Course Structure & Syllabi", "blocks": [] }
+    ]}
+  ]},
+  { "label": "PG", "children": [
+    { "label": "M.Tech", "children": [
+      { "label": "Regulations", "blocks": [] },
+      { "label": "Course Structure & Syllabi", "blocks": [] }
+    ]},
+    { "label": "M.Pharm", "children": [
+      { "label": "Regulations", "blocks": [] },
+      { "label": "Course Structure & Syllabi", "blocks": [] }
+    ]},
+    { "label": "MBA", "children": [
+      { "label": "Regulations", "blocks": [] },
+      { "label": "Course Structure & Syllabi", "blocks": [] }
+    ]},
+    { "label": "MCA", "children": [
+      { "label": "Regulations", "blocks": [] },
+      { "label": "Course Structure & Syllabi", "blocks": [] }
+    ]},
+    { "label": "Pharm.D & Pharm.D(PB)", "children": [
+      { "label": "Regulations", "blocks": [] },
+      { "label": "Course Structure & Syllabi", "blocks": [] }
+    ]},
+    { "label": "M.Sc.", "children": [
+      { "label": "Regulations", "blocks": [] },
+      { "label": "Course Structure & Syllabi", "blocks": [] }
+    ]}
+  ]}
 ]},
 { "label": "News Bulletin", "children": [
   { "label": "Circulars", "blocks": [] },

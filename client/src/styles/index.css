@@ -1,1 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+@layer base {
+  :root {
+    --navy: #003087; --crimson: #c8102e; --gold: #c9a227;
+    /* Semantic surfaces (light) — R G B triplets for <alpha-value> support */
+    --canvas: 247 248 250;   /* page background  */
+    --surface: 255 255 255;  /* cards / panels   */
+    --content: 27 31 42;     /* primary text     */
+    --muted: 100 116 139;    /* secondary text   */
+    --line: 226 232 240;     /* borders          */
+    --brand: 0 48 135;       /* navy             */
+  }
+  .dark {
+    --canvas: 15 18 26;
+    --surface: 26 31 43;
+    --content: 226 232 240;
+    --muted: 148 163 184;
+    --line: 42 50 66;
+    --brand: 120 150 210;    /* lighter navy for contrast on dark */
+    color-scheme: dark;
+  }
+  html { scroll-behavior: smooth; }
+  body { @apply bg-canvas text-content font-sans antialiased transition-colors; }
+  h1, h2, h3, h4 { @apply font-display text-brand; }
+  a { @apply text-brand hover:text-crimson transition-colors; }
+  :focus-visible { @apply outline-none ring-2 ring-crimson ring-offset-2 ring-offset-canvas; }
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 font-semibold transition-colors disabled:opacity-60 disabled:cursor-not-allowed; }
+  .btn-primary { @apply btn bg-navy text-white hover:bg-crimson; }
+  .btn-ghost { @apply btn border border-navy/20 text-brand hover:bg-navy hover:text-white; }
+  .field { @apply w-full rounded-md border border-line bg-surface px-3 py-2 text-sm text-content focus:border-navy; }
+  .card { @apply rounded-lg bg-surface shadow-card; }
+
+  /* Skip-to-content link (a11y) */
+  .skip-link { @apply sr-only; }
+  .skip-link:focus { @apply not-sr-only fixed left-4 top-4 z-[100] rounded bg-navy px-4 py-2 text-white; }
+
+  /* Loading skeleton */
+  .skeleton { @apply relative overflow-hidden rounded bg-line/60; }
+  .skeleton::after { content: ''; @apply absolute inset-0 -translate-x-full; background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent); animation: shimmer 1.5s infinite; }
+  .dark .skeleton::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+@layer components {
+  .prose-jntua h2, .prose-jntua h3, .prose-jntua h4 { @apply font-display text-brand; }
+  .prose-jntua h2 { @apply text-2xl; }
+  .prose-jntua h3 { @apply text-xl; }
+  .prose-jntua h4 { @apply text-lg; }
+  .prose-jntua { @apply text-content; }
+}

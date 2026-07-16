@@ -60,7 +60,7 @@ export const publicRoutes = [
   // DYNAMIC routes — crumb derives the label from the URL param.
   { path: 'directorates/:key', element: S(<DirectoratePage resolveKey={(p) => p.key} />), loader: contentLoader(dirId),
     handle: { crumb: (m) => [{ label: 'Directorates' }, { label: dirLabel(m.params.key), to: `/directorates/${m.params.key}` }] } },
-  { path: 'units/:key', element: S(<ContentPage resolveId={unitId} />), loader: contentLoader(unitId),
+  { path: 'units/:key', element: S(<DirectoratePage resolveKey={(p) => p.key} />), loader: contentLoader(unitId),
     handle: { crumb: (m) => [{ label: 'Important Units' }, { label: unitLabel(m.params.key), to: `/units/${m.params.key}` }] } },
   { path: 'academics/:slug', element: S(<AcademicDocs />),
     handle: { crumb: (m) => [{ label: 'Academics' }, { label: acadLabel(m.params.slug), to: `/academics/${m.params.slug}` }] } },

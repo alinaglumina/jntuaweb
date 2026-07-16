@@ -27,7 +27,7 @@
       { "label": "Course Structure & Syllabi", "blocks": [] }
     ]},
     { "label": "B.Pharm", "children": [
-      { "label": "Regulations", "blocks": [] },
+      { "label": "Regulations", "blocks": [{ "type": "p", "text": "4-year programme. Governed by regulations R15, R19, R20, R23 and onwards." }] },
       { "label": "Course Structure & Syllabi", "blocks": [] }
     ]}
   ]},

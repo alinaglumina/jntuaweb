@@ -1,7 +1,7 @@
 {
   "academic": {
     "title": "Academic & Planning",
-    "director": { "name": "Prof. S.V. Satyanarayana", "role": "Director of Academic & Planning", "photo": null },
+    "director": { "name": "Prof. S.V. Satyanarayana", "role": "Director of Academic & Planning", "photo": "dap.jpg" },
     "notifications": [
       { "text": "Updated Curriculum for B.Tech 2024-25 Batch", "date": "May 2026", "isNew": true },
       { "text": "Revised Syllabus for M.Tech Programs 2025-26", "date": "Apr 2026" },

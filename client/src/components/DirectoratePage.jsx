@@ -4,10 +4,12 @@ import PageShell from './PageShell.jsx';
 import ContentPage from './ContentPage.jsx';
 import directorates from '../content/directorates.json';
 
-function Avatar({ name }) {
-  const initials = name
+function Avatar({ name, role }) {
+  const source = name || role || '?';
+  const initials = source
     .replace(/^(Prof\.|Dr\.|Mr\.|Mrs\.|Ms\.)\s*/i, '')
     .split(' ')
+    .filter(Boolean)
     .slice(0, 2)
     .map((w) => w[0])
     .join('')
@@ -57,7 +59,7 @@ export default function DirectoratePage({ resolveKey }) {
         {/* Sidebar */}
         <aside className="space-y-6">
           <div className="flex flex-col items-center rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm">
-            <Avatar name={director.name} />
+            <Avatar name={director.name} role={director.role} />
             <p className="mt-4 font-display font-semibold text-navy">{director.name || director.role}</p>
 {director.name && <p className="text-sm text-slate-600">{director.role}</p>}
           </div>

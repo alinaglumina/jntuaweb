@@ -14,25 +14,21 @@
     ],
     "tabs": [
       { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to Academic & Planning." }] },
-      { "label": "Courses Offered", "blocks": [
-        { "type": "p", "text": "Select a programme category from the menu above or use the tabs below." },
-        { "type": "heading", "level": 4, "text": "UG Programmes" },
-        { "type": "heading", "level": 4, "text": "PG Programmes" },
-        { "type": "heading", "level": 4, "text": "Integrated Dual Degree Programmes" },
-        { "type": "p", "text": "Five-year integrated programmes combining UG & PG degrees awarded simultaneously upon completion." },
-        { "type": "heading", "level": 4, "text": "Research Programmes" }
-      ]},
-      { "label": "Curriculum & Syllabus", "blocks": [
-        { "type": "p", "text": "Select a programme from the dropdown menu above, or use the tabs below." },
-        { "type": "heading", "level": 4, "text": "B.Tech — Overview" },
-        { "type": "p", "text": "4-year programme. Governed by regulations R15, R19, R20, R23 and onwards." },
-        { "type": "heading", "level": 4, "text": "M.Tech — Overview" },
-        { "type": "heading", "level": 4, "text": "B.Pharm" }
-      ]},
-      { "label": "News Bulletin", "blocks": [
-        { "type": "heading", "level": 4, "text": "Circulars" },
-        { "type": "heading", "level": 4, "text": "Downloads" }
-      ]},
+      { "label": "Courses Offered", "children": [
+  { "label": "UG Programmes", "blocks": [] },
+  { "label": "PG Programmes", "blocks": [] },
+  { "label": "Integrated Dual Degree Programmes", "blocks": [{ "type": "p", "text": "Five-year integrated programmes combining UG & PG degrees awarded simultaneously upon completion." }] },
+  { "label": "Research Programmes", "blocks": [] }
+]},
+{ "label": "Curriculum & Syllabus", "children": [
+  { "label": "B.Tech — Overview", "blocks": [{ "type": "p", "text": "4-year programme. Governed by regulations R15, R19, R20, R23 and onwards." }] },
+  { "label": "M.Tech — Overview", "blocks": [] },
+  { "label": "B.Pharm", "blocks": [] }
+]},
+{ "label": "News Bulletin", "children": [
+  { "label": "Circulars", "blocks": [] },
+  { "label": "Downloads", "blocks": [] }
+]},
       { "label": "Newsletter", "blocks": [{ "type": "p", "text": "Periodical academic newsletters published by the Directorate of Academic & Planning, JNTUA." }] },
       { "label": "Academic Senate", "blocks": [{ "type": "p", "text": "The Academic Senate is the supreme academic body of JNTUA, responsible for maintaining standards of teaching, examination, and research." }] },
       { "label": "Gallery", "blocks": [{ "type": "p", "text": "Academic events, activities and achievements." }] },

@@ -3,11 +3,65 @@ import { Link, useLocation } from 'react-router-dom';
 import PrefetchLink from '../ui/PrefetchLink.jsx';
 import { NAV } from '../../content/nav.js';
 
+function DesktopChild({ c, pathname }) {
+  // c can be a plain link { label, to } or a nested group { label, children: [...] }
+  if (c.children) {
+    return (
+      <div className="group/sub relative">
+        <button className="flex w-full items-center justify-between px-4 py-2 text-sm text-ink hover:bg-navy/5">
+          {c.label} <i className="fa-solid fa-chevron-right text-[9px]" aria-hidden="true" />
+        </button>
+        <div className="invisible absolute left-full top-0 w-64 rounded-lg bg-surface py-2 opacity-0 shadow-lift transition group-hover/sub:visible group-hover/sub:opacity-100">
+          {c.children.map((sc) => (
+            <PrefetchLink key={sc.to} to={sc.to}
+              className={`block px-4 py-2 text-sm hover:bg-navy/5 ${pathname === sc.to ? 'font-semibold text-crimson' : 'text-ink'}`}>
+              {sc.label}
+            </PrefetchLink>
+          ))}
+        </div>
+      </div>
+    );
+  }
+  return (
+    <PrefetchLink to={c.to}
+      className={`block px-4 py-2 text-sm hover:bg-navy/5 ${pathname === c.to ? 'font-semibold text-crimson' : 'text-ink'}`}>
+      {c.label}
+    </PrefetchLink>
+  );
+}
+
+function MobileChild({ c, onNavigate }) {
+  const [open, setOpen] = useState(false);
+  if (c.children) {
+    return (
+      <div className="border-t border-white/5">
+        <button className="flex w-full items-center justify-between px-6 py-2 text-sm font-medium text-white/90"
+          onClick={() => setOpen((v) => !v)}>
+          {c.label}
+          <i className={`fa-solid fa-chevron-${open ? 'up' : 'down'} text-[9px]`} aria-hidden="true" />
+        </button>
+        {open && (
+          <div className="bg-navy-900/40 pb-1">
+            {c.children.map((sc) => (
+              <Link key={sc.to} to={sc.to} onClick={onNavigate}
+                className="block px-8 py-2 text-sm text-white/80 hover:text-gold">{sc.label}</Link>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+  return (
+    <Link to={c.to} onClick={onNavigate} className="block px-6 py-2 text-sm text-white/90 hover:text-gold">
+      {c.label}
+    </Link>
+  );
+}
+
 export default function MegaNav() {
   const [openMobile, setOpenMobile] = useState(false);
   const [mobileGroup, setMobileGroup] = useState(null);
   const { pathname } = useLocation();
-
   return (
     <nav className="sticky top-0 z-40 bg-navy text-white shadow-md">
       <div className="container flex items-center justify-between">
@@ -22,10 +76,7 @@ export default function MegaNav() {
                   </button>
                   <div className={`invisible absolute left-0 top-full ${item.wide ? 'w-80' : 'w-64'} rounded-b-lg bg-surface py-2 text-ink opacity-0 shadow-lift transition group-hover:visible group-hover:opacity-100`}>
                     {item.children.map((c) => (
-                      <PrefetchLink key={c.to} to={c.to}
-                        className={`block px-4 py-2 text-sm hover:bg-navy/5 ${pathname === c.to ? 'font-semibold text-crimson' : 'text-ink'}`}>
-                        {c.label}
-                      </PrefetchLink>
+                      <DesktopChild key={c.to || c.label} c={c} pathname={pathname} />
                     ))}
                   </div>
                 </>
@@ -37,7 +88,6 @@ export default function MegaNav() {
             </li>
           ))}
         </ul>
-
         {/* Mobile toggle */}
         <button className="flex items-center gap-2 px-2 py-3 text-sm font-semibold md:hidden" onClick={() => setOpenMobile((v) => !v)}>
           <i className={`fa-solid ${openMobile ? 'fa-xmark' : 'fa-bars'}`} aria-hidden="true" /> Menu
@@ -46,7 +96,6 @@ export default function MegaNav() {
           Admin
         </Link>
       </div>
-
       {/* Mobile drawer */}
       {openMobile && (
         <div className="border-t border-white/10 bg-navy-700 md:hidden">
@@ -62,8 +111,7 @@ export default function MegaNav() {
                   {mobileGroup === item.label && (
                     <div className="bg-navy-900/40 pb-2">
                       {item.children.map((c) => (
-                        <Link key={c.to} to={c.to} onClick={() => setOpenMobile(false)}
-                          className="block px-6 py-2 text-sm text-white/90 hover:text-gold">{c.label}</Link>
+                        <MobileChild key={c.to || c.label} c={c} onNavigate={() => setOpenMobile(false)} />
                       ))}
                     </div>
                   )}

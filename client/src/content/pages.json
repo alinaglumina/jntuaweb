@@ -272,6 +272,14 @@
 "naac-criteria-7": { "title": "Criteria 7", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
 "naac-workshops": { "title": "Workshops / Seminars", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
 "naac-ssr": { "title": "Self Study Report (SSR)", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+"aa-iqac-about": { "title": "About IQAC", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+"aa-iqac-functions": { "title": "Functions of IQAC", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+"aa-iqac-benefits": { "title": "Benefits of IQAC", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+"aa-iqac-initiatives": { "title": "Important Initiatives started at JNTUA", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+"aa-aishe-jntua": { "title": "JNTUA AISHE", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+"aa-aishe-reports": { "title": "AISHE Reports", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+"aa-nirf-jntua": { "title": "JNTUA NIRF", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+"aa-nirf-reports": { "title": "NIRF Reports", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
  "dir-academic": {
   "title": "Directorate of Academic & Planning",
   "blocks": [

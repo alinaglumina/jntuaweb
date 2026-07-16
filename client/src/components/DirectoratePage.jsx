@@ -58,8 +58,8 @@ export default function DirectoratePage({ resolveKey }) {
         <aside className="space-y-6">
           <div className="flex flex-col items-center rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm">
             <Avatar name={director.name} />
-            <p className="mt-4 font-display font-semibold text-navy">{director.name}</p>
-            <p className="text-sm text-slate-600">{director.role}</p>
+            <p className="mt-4 font-display font-semibold text-navy">{director.name || director.role}</p>
+{director.name && <p className="text-sm text-slate-600">{director.role}</p>}
           </div>
 
           {quickLinks.length > 0 && (
@@ -117,7 +117,9 @@ export default function DirectoratePage({ resolveKey }) {
                 ))}
               </div>
               <div className="p-6">
-                <Blocks blocks={tabs[activeTab].blocks} />
+                {tabs[activeTab].blocks.length > 0
+  ? <Blocks blocks={tabs[activeTab].blocks} />
+  : <p className="text-slate-500">Details will be published soon.</p>}
               </div>
             </div>
           )}

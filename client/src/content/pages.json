@@ -262,7 +262,7 @@
    }
   ]
  },
- "naac-extended-profile": { "title": "Extended Profile Metrics", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+"naac-extended-profile": { "title": "Extended Profile Metrics", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
 "naac-criteria-1": { "title": "Criteria 1", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
 "naac-criteria-2": { "title": "Criteria 2", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
 "naac-criteria-3": { "title": "Criteria 3", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },

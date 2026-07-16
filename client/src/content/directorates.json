@@ -1,7 +1,7 @@
 {
   "academic": {
     "title": "Academic & Planning",
-    "director": { "name": "Prof. S.V. Satyanarayana", "role": "Director of Academic & Planning", "photo": "dap.jpg" },
+    "director": { "name": "Prof. S.V. Satyanarayana", "role": "Director of Academic & Planning", "photo": "/images/directors/dap.jpg" },
     "notifications": [
       { "text": "Updated Curriculum for B.Tech 2024-25 Batch", "date": "May 2026", "isNew": true },
       { "text": "Revised Syllabus for M.Tech Programs 2025-26", "date": "Apr 2026" },
@@ -42,7 +42,7 @@
 
   "audit": {
     "title": "Academic Audit",
-    "director": { "name": "Prof. B. Durga Prasad", "role": "Director of Academic Audit", "photo": "daa.jpg" },
+    "director": { "name": "Prof. B. Durga Prasad", "role": "Director of Academic Audit", "photo": "/images/directors/daa.jpg" },
     "notifications": [],
     "quickLinks": [],
     "tabs": [

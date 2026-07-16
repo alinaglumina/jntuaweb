@@ -22,6 +22,7 @@ function Avatar({ name, role }) {
 }
 
 function Blocks({ blocks }) {
+  if (!blocks || blocks.length === 0) return <p className="text-slate-500">Details will be published soon.</p>;
   return (
     <div className="space-y-3">
       {blocks.map((b, i) => {
@@ -42,51 +43,105 @@ function Blocks({ blocks }) {
   );
 }
 
+// Flattens tabs (which may contain dropdown groups) into a lookup keyed by a stable path,
+// e.g. "News Bulletin > Circulars" — used so we can select the right leaf content.
+function flattenTabs(tabs) {
+  const flat = [];
+  tabs.forEach((t, i) => {
+    if (t.children) {
+      t.children.forEach((c, j) => flat.push({ key: `${i}-${j}`, label: c.label, blocks: c.blocks, parentLabel: t.label }));
+    } else {
+      flat.push({ key: `${i}`, label: t.label, blocks: t.blocks, parentLabel: null });
+    }
+  });
+  return flat;
+}
+
+function TabBar({ tabs, activeKey, onSelect }) {
+  return (
+    <div className="flex flex-wrap gap-1 border-b border-slate-200 px-3 pt-3">
+      {tabs.map((t, i) => {
+        if (t.children) {
+          const isActiveGroup = t.children.some((_, j) => activeKey === `${i}-${j}`);
+          return (
+            <div key={t.label} className="group/tab relative">
+              <button
+                className={`flex items-center gap-1 rounded-t-md px-4 py-2 text-sm font-medium transition ${
+                  isActiveGroup ? 'border-b-2 border-navy text-navy' : 'text-slate-500 hover:text-navy'
+                }`}
+              >
+                {t.label} <i className="fa-solid fa-chevron-down text-[9px]" aria-hidden="true" />
+              </button>
+              <div className="invisible absolute left-0 top-full z-10 w-56 rounded-b-lg bg-white py-1 opacity-0 shadow-lift transition group-hover/tab:visible group-hover/tab:opacity-100">
+                {t.children.map((c, j) => (
+                  <button
+                    key={c.label}
+                    onClick={() => onSelect(`${i}-${j}`)}
+                    className={`block w-full px-4 py-2 text-left text-sm hover:bg-navy/5 ${
+                      activeKey === `${i}-${j}` ? 'font-semibold text-crimson' : 'text-ink'
+                    }`}
+                  >
+                    {c.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          );
+        }
+        return (
+          <button
+            key={t.label}
+            onClick={() => onSelect(`${i}`)}
+            className={`rounded-t-md px-4 py-2 text-sm font-medium transition ${
+              activeKey === `${i}` ? 'border-b-2 border-navy text-navy' : 'text-slate-500 hover:text-navy'
+            }`}
+          >
+            {t.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function DirectoratePage({ resolveKey }) {
   const params = useParams();
   const key = resolveKey ? resolveKey(params) : params.key;
   const data = directorates[key];
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeKey, setActiveKey] = useState('0');
 
-  // Fallback: no rich data yet for this directorate → use the generic renderer.
   if (!data) return <ContentPage resolveId={() => `dir-${key}`} />;
 
   const { title, director, notifications = [], quickLinks = [], tabs = [] } = data;
+  const flat = flattenTabs(tabs);
+  const active = flat.find((t) => t.key === activeKey) || flat[0];
 
   return (
     <PageShell title={title}>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-[280px_1fr]">
-        {/* Sidebar */}
         <aside className="space-y-6">
           <div className="flex flex-col items-center rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm">
-  {director.photo ? (
-    <img
-      src={director.photo}
-      alt={director.name || director.role}
-      className="h-28 w-28 rounded-full object-cover"
-    />
-  ) : (
-    <Avatar name={director.name} role={director.role} />
-  )}
-  <p className="mt-4 font-display font-semibold text-navy">{director.name || director.role}</p>
-  {director.name && <p className="text-sm text-slate-600">{director.role}</p>}
-</div>
+            {director.photo ? (
+              <img src={director.photo} alt={director.name || director.role} className="h-28 w-28 rounded-full object-cover" />
+            ) : (
+              <Avatar name={director.name} role={director.role} />
+            )}
+            <p className="mt-4 font-display font-semibold text-navy">{director.name || director.role}</p>
+            {director.name && <p className="text-sm text-slate-600">{director.role}</p>}
+          </div>
 
           {quickLinks.length > 0 && (
             <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
               <h4 className="mb-2 font-display font-semibold text-navy">Quick Links</h4>
               <ul className="space-y-1">
                 {quickLinks.map((l, i) => (
-                  <li key={i}>
-                    <a href={l.to} className="text-sm text-slate-700 hover:text-navy hover:underline">{l.label}</a>
-                  </li>
+                  <li key={i}><a href={l.to} className="text-sm text-slate-700 hover:text-navy hover:underline">{l.label}</a></li>
                 ))}
               </ul>
             </div>
           )}
         </aside>
 
-        {/* Main content */}
         <div>
           {notifications.length > 0 && (
             <div className="mb-6 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
@@ -111,25 +166,9 @@ export default function DirectoratePage({ resolveKey }) {
 
           {tabs.length > 0 && (
             <div className="rounded-lg border border-slate-200 bg-white shadow-sm">
-              <div className="flex flex-wrap gap-1 border-b border-slate-200 px-3 pt-3">
-                {tabs.map((t, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveTab(i)}
-                    className={`rounded-t-md px-4 py-2 text-sm font-medium transition ${
-                      activeTab === i
-                        ? 'border-b-2 border-navy text-navy'
-                        : 'text-slate-500 hover:text-navy'
-                    }`}
-                  >
-                    {t.label}
-                  </button>
-                ))}
-              </div>
+              <TabBar tabs={tabs} activeKey={active.key} onSelect={setActiveKey} />
               <div className="p-6">
-                {tabs[activeTab].blocks.length > 0
-  ? <Blocks blocks={tabs[activeTab].blocks} />
-  : <p className="text-slate-500">Details will be published soon.</p>}
+                <Blocks blocks={active.blocks} />
               </div>
             </div>
           )}

@@ -60,7 +60,7 @@
 
   "admissions": {
     "title": "Admissions, Foreign Affairs & Alumni",
-    "director": { "name": null, "role": "Admissions, Foreign Affairs & Alumni", "photo": null },
+    "director": { "name": "Prof. A. Sureshbabu", "role": "Admissions, Foreign Affairs & Alumni", "photo": "/images/directors/dafa.jpg" },
     "notifications": [],
     "quickLinks": [],
     "tabs": [
@@ -85,7 +85,7 @@
 
   "evaluation": {
     "title": "Evaluation",
-    "director": { "name": null, "role": "Director of Evaluation", "photo": null },
+    "director": { "name": "Prof. V. Naga Prasad Naidu", "role": "Director of Evaluation", "photo": "/images/directors/de.png" },
     "notifications": [],
     "quickLinks": [],
     "tabs": [
@@ -107,7 +107,7 @@
 
   "rd": {
     "title": "Research & Development",
-    "director": { "name": null, "role": "Research & Development", "photo": null },
+    "director": { "name": "Prof. Vaishali G. Ghorpade", "role": "Research & Development", "photo": "/images/directors/drd.jpeg" },
     "notifications": [],
     "quickLinks": [],
     "tabs": [

@@ -21,6 +21,10 @@ import { NAV, DIRECTORATES, UNITS, ACADEMICS, NAAC_ITEMS } from '../content/nav.
 // ...
 const naacId    = ({ key }) => (NAAC_ITEMS.find(([, , s]) => s === key) || [])[0];
 const naacLabel = (key) => (NAAC_ITEMS.find(([, , s]) => s === key) || [, key])[1];
+import { ASSESSMENT_ACCREDITATION } from '../content/nav.js';
+const assessmentFlat = ASSESSMENT_ACCREDITATION.flatMap((g) => g.children);
+const assessmentId    = ({ '*': path }) => (assessmentFlat.find(([, , s]) => s === path) || [])[0];
+const assessmentLabel = (path) => (assessmentFlat.find(([, , s]) => s === path) || [, path])[1];
 // slug → human label, for breadcrumbs.
 const dirLabel  = (key) => (DIRECTORATES.find(([, , s]) => s === key) || [, key])[1];
 const unitLabel = (key) => (UNITS.find(([, , s]) => s === key) || [, key])[1];
@@ -69,6 +73,8 @@ export const publicRoutes = [
   handle: { crumb: (m) => [{ label: 'NAAC' }, { label: naacLabel(m.params.key), to: `/naac/${m.params.key}` }] } },
   { path: 'academics/:slug', element: S(<AcademicDocs />),
     handle: { crumb: (m) => [{ label: 'Academics' }, { label: acadLabel(m.params.slug), to: `/academics/${m.params.slug}` }] } },
+  { path: 'assessment/*', element: S(<ContentPage resolveId={assessmentId} />), loader: contentLoader(assessmentId),
+  handle: { crumb: (m) => [{ label: 'Assessment & Accreditation' }, { label: assessmentLabel(m.params['*']), to: `/assessment/${m.params['*']}` }] } },
 
   ...fixedContent,
   ...dynamicRoutes,

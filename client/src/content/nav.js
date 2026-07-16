@@ -26,6 +26,32 @@ export const UNITS = [
   ['unit-sports', 'Sports Council', 'sports'],
 ];
 
+export const ASSESSMENT_ACCREDITATION = [
+  {
+    label: 'IQAC',
+    children: [
+      ['aa-iqac-about', 'About IQAC', 'iqac/about'],
+      ['aa-iqac-functions', 'Functions of IQAC', 'iqac/functions'],
+      ['aa-iqac-benefits', 'Benefits of IQAC', 'iqac/benefits'],
+      ['aa-iqac-initiatives', 'Important Initiatives started at JNTUA', 'iqac/initiatives'],
+    ],
+  },
+  {
+    label: 'AISHE',
+    children: [
+      ['aa-aishe-jntua', 'JNTUA AISHE', 'aishe/jntua'],
+      ['aa-aishe-reports', 'AISHE Reports', 'aishe/reports'],
+    ],
+  },
+  {
+    label: 'NIRF',
+    children: [
+      ['aa-nirf-jntua', 'JNTUA NIRF', 'nirf/jntua'],
+      ['aa-nirf-reports', 'NIRF Reports', 'nirf/reports'],
+    ],
+  },
+];
+
 export const NAAC_ITEMS = [
   ['naac-extended-profile', 'Extended Profile Metrics', 'extended-profile'],
   ['naac-criteria-1', 'Criteria 1', 'criteria-1'],
@@ -84,6 +110,15 @@ export const NAV = [
       label, to: `/directorates/${slug}`, kind: 'content', id,
     })),
   },
+  {
+  label: 'Assessment & Accreditation',
+  children: ASSESSMENT_ACCREDITATION.map((group) => ({
+    label: group.label,
+    children: group.children.map(([id, label, slug]) => ({
+      label, to: `/assessment/${slug}`, kind: 'content', id,
+    })),
+  })),
+},
   {
   label: 'NAAC',
   children: NAAC_ITEMS.map(([id, label, slug]) => ({

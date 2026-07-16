@@ -1,0 +1,7 @@
+[Unit]
+Description=JNTUAWEB backup (MongoDB + uploads)
+After=network-online.target mongod.service
+
+[Service]
+Type=oneshot
+ExecStart=/var/www/jntuaweb/deploy/backup.sh

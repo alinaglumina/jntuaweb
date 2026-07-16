@@ -1,0 +1,94 @@
+import { useState, useEffect } from 'react';
+import { Outlet, useNavigate, useLocation, Navigate, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { RESOURCES, GROUPS } from './resources.js';
+import { useAuth } from '../hooks/useAuth.js';
+import { useLogout } from '../api/auth.js';
+import { Sidebar, Breadcrumbs, NavProgress } from '../components/index.js';
+import { ThemeToggle } from '../components/ui/index.js';
+import AdminSearch from './AdminSearch.jsx';
+import { Button } from '../components/ui/index.js';
+
+export default function AdminLayout() {
+  const { user, isAdmin } = useAuth();
+  const location = useLocation();
+  const [searchOpen, setSearchOpen] = useState(false);
+  useEffect(() => {
+    const onKey = (e) => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); setSearchOpen(true); } };
+    window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
+  }, []);
+  const mustChange = user?.must_change_pwd && !location.pathname.includes('/account/password');
+  const logout = useLogout();
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
+
+  const visible = Object.entries(RESOURCES).filter(([, def]) => def.roles.includes(user?.role));
+
+  // Build the Sidebar groups from the resource manifest.
+  const groups = GROUPS.map((g) => {
+    const items = visible.filter(([, d]) => d.group === g.id).map(([key, d]) => ({ to: `/admin/r/${key}`, label: d.label, icon: d.icon, onClick: close }));
+    if (g.id === 'system' && isAdmin) {
+      items.push({ to: '/admin/media', label: 'Media Library', icon: 'fa-photo-film', onClick: close });
+      items.push({ to: '/admin/page-builder', label: 'Page Builder', icon: 'fa-cubes', onClick: close });
+      items.push({ to: '/admin/menus-manager', label: 'Menu Management', icon: 'fa-bars', onClick: close });
+    }
+    return { label: g.label, items };
+  }).filter((g) => g.items.length);
+
+  // Curated CMS/admin groups (custom screens beyond the resource manifest).
+  if (isAdmin) {
+    groups.push({ label: 'Communication', items: [
+      { to: '/admin/messages', label: 'Contact Messages', icon: 'fa-inbox', onClick: close },
+      { to: '/admin/enquiries', label: 'Enquiries', icon: 'fa-comments', onClick: close },
+    ] });
+    groups.push({ label: 'Administration', items: [
+      { to: '/admin/roles', label: 'Roles & Permissions', icon: 'fa-user-shield', onClick: close },
+      { to: '/admin/users', label: 'Users', icon: 'fa-users-gear', onClick: close },
+      { to: '/admin/settings', label: 'Website Settings', icon: 'fa-gear', onClick: close },
+      { to: '/admin/logs', label: 'Audit Logs', icon: 'fa-clipboard-list', onClick: close },
+      { to: '/admin/backup', label: 'Backup', icon: 'fa-database', onClick: close },
+    ] });
+  }
+  groups.push({ label: 'Account', items: [
+    { to: '/admin/profile', label: 'My Profile', icon: 'fa-id-badge', onClick: close },
+    { to: '/admin/login-history', label: 'Login History', icon: 'fa-clock-rotate-left', onClick: close },
+    { to: '/admin/account/password', label: 'Change Password', icon: 'fa-key', onClick: close },
+  ] });
+
+  const signOut = async () => { await logout.mutateAsync(); navigate('/login', { replace: true }); };
+
+  const nav = (
+    <Sidebar
+      header={<Link to="/admin"><span className="block font-display text-lg font-bold text-white">JNTUA Admin</span><span className="text-xs text-white/60">{isAdmin ? 'Super Admin' : (user?.directorate || 'Director')}</span></Link>}
+      groups={groups}
+      footer={<>
+        <Link to="/admin/account/password" className="mb-2 block text-xs text-white/60 hover:text-gold"><i className="fa-solid fa-key" /> Change password</Link>
+        <Link to="/" className="mb-2 block text-xs text-white/60 hover:text-gold"><i className="fa-solid fa-arrow-left" /> View site</Link>
+        <Button variant="danger" size="sm" className="w-full" onClick={signOut}>Sign out</Button>
+      </>}
+    />
+  );
+
+  return (
+    <div className="min-h-screen bg-canvas text-content"><NavProgress />
+      <Helmet><title>Admin — JNTUA</title></Helmet>
+      <aside className="fixed inset-y-0 left-0 hidden w-64 md:block">{nav}</aside>
+      {open && <><aside className="fixed inset-y-0 left-0 z-50 w-64 md:hidden">{nav}</aside><div className="fixed inset-0 z-40 bg-black/40 md:hidden" onClick={close} /></>}
+      <div className="md:pl-64">
+        <header className="flex items-center gap-3 border-b border-line bg-surface px-4 py-3 md:hidden">
+          <button onClick={() => setOpen(true)} aria-label="Menu"><i className="fa-solid fa-bars text-navy" /></button>
+          <span className="font-display font-bold text-navy">JNTUA Admin</span>
+        </header>
+        <div className="flex items-center justify-end gap-3 border-b border-line bg-surface px-6 py-2">
+          <button onClick={() => setSearchOpen(true)} className="flex items-center gap-2 rounded-full border border-line px-3 py-1 text-xs text-muted hover:border-navy hover:text-brand">
+            <i className="fa-solid fa-magnifying-glass" /> Search <kbd className="rounded bg-line/60 px-1 text-[10px]">⌘K</kbd>
+          </button>
+          <ThemeToggle className="text-brand" />
+        </div>
+        <main className="p-6">{mustChange ? <Navigate to="/admin/account/password" replace /> : <><div className="mb-4"><Breadcrumbs bar={false} root={{ label: 'Dashboard', to: '/admin' }} /></div><Outlet /></>}</main>
+      </div>
+      <AdminSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
+    </div>
+  );
+}

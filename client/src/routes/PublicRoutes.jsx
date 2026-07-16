@@ -18,6 +18,10 @@ const UIKit             = lazy(() => import('../pages/UIKit.jsx'));
 // slug (URL param) → content-manifest id, for DYNAMIC routes.
 const dirId  = ({ key }) => (DIRECTORATES.find(([, , s]) => s === key) || [])[0];
 const unitId = ({ key }) => (UNITS.find(([, , s]) => s === key) || [])[0];
+import { NAV, DIRECTORATES, UNITS, ACADEMICS, NAAC_ITEMS } from '../content/nav.js';
+// ...
+const naacId    = ({ key }) => (NAAC_ITEMS.find(([, , s]) => s === key) || [])[0];
+const naacLabel = (key) => (NAAC_ITEMS.find(([, , s]) => s === key) || [, key])[1];
 // slug → human label, for breadcrumbs.
 const dirLabel  = (key) => (DIRECTORATES.find(([, , s]) => s === key) || [, key])[1];
 const unitLabel = (key) => (UNITS.find(([, , s]) => s === key) || [, key])[1];
@@ -62,6 +66,8 @@ export const publicRoutes = [
     handle: { crumb: (m) => [{ label: 'Directorates' }, { label: dirLabel(m.params.key), to: `/directorates/${m.params.key}` }] } },
   { path: 'units/:key', element: S(<DirectoratePage resolveKey={(p) => p.key} />), loader: contentLoader(unitId),
     handle: { crumb: (m) => [{ label: 'Important Units' }, { label: unitLabel(m.params.key), to: `/units/${m.params.key}` }] } },
+  { path: 'naac/:key', element: S(<ContentPage resolveId={naacId} />), loader: contentLoader(naacId),
+  handle: { crumb: (m) => [{ label: 'NAAC' }, { label: naacLabel(m.params.key), to: `/naac/${m.params.key}` }] } },
   { path: 'academics/:slug', element: S(<AcademicDocs />),
     handle: { crumb: (m) => [{ label: 'Academics' }, { label: acadLabel(m.params.slug), to: `/academics/${m.params.slug}` }] } },
 

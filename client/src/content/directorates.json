@@ -42,7 +42,7 @@
 
   "audit": {
     "title": "Academic Audit",
-    "director": { "name": null, "role": "Director of Academic Audit", "photo": null },
+    "director": { "name": "Prof. B. Durga Prasad", "role": "Director of Academic Audit", "photo": "daa.jpg" },
     "notifications": [],
     "quickLinks": [],
     "tabs": [

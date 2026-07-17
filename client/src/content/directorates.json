@@ -231,80 +231,81 @@
   },
 
   "iqac": {
-    "title": "Internal Quality Assurance Cell",
-    "director": { "name": null, "role": "Internal Quality Assurance Cell (IQAC)", "photo": null },
-    "notifications": [],
-    "quickLinks": [],
-    "tabs": [
-      { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the directorate portal." }] },
-      { "label": "About", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
-      { "label": "Committees", "blocks": [
-        { "type": "heading", "level": 4, "text": "2018 Committee" },
-        { "type": "heading", "level": 4, "text": "2022 Committee" }
-      ]},
-      { "label": "Feedback", "blocks": [
-        { "type": "heading", "level": 4, "text": "Curriculum Feedback" },
-        { "type": "heading", "level": 4, "text": "Parent Feedback" },
-        { "type": "heading", "level": 4, "text": "Alumni Feedback" },
-        { "type": "heading", "level": 4, "text": "Department-wise Feedback Action Taken Report" }
-      ]},
-      { "label": "Policies", "blocks": [
-        { "type": "heading", "level": 4, "text": "Research Policies" },
-        { "type": "heading", "level": 4, "text": "Code of Conduct" },
-        { "type": "heading", "level": 4, "text": "Anti Ragging" },
-        { "type": "heading", "level": 4, "text": "Research Seed Grant" },
-        { "type": "heading", "level": 4, "text": "Startup & Innovation Policy" },
-        { "type": "heading", "level": 4, "text": "UGC Minimum Standards for Award of Ph.D Degree" },
-        { "type": "heading", "level": 4, "text": "University IT Policy" }
-      ]},
-      { "label": "Accreditation & Reports", "blocks": [
-        { "type": "heading", "level": 4, "text": "NAAC Certificate" },
-        { "type": "heading", "level": 4, "text": "NBA Certificate" },
-        { "type": "heading", "level": 4, "text": "NIRF" },
-        { "type": "heading", "level": 4, "text": "Green Audit" },
-        { "type": "heading", "level": 4, "text": "Environment Audit" },
-        { "type": "heading", "level": 4, "text": "ISO Certificate" },
-        { "type": "heading", "level": 4, "text": "JNTUA ISO QMS 9001:2015 Certificate" },
-        { "type": "heading", "level": 4, "text": "AQAR" },
-        { "type": "heading", "level": 4, "text": "SSR / Minutes" }
-      ]},
-      { "label": "Gallery", "blocks": [] },
-      { "label": "Newsletter", "blocks": [] },
-      { "label": "Contact Us", "blocks": [{ "type": "p", "text": "Internal Quality Assurance Cell" }] }
-    ]
-  },
+  "title": "Internal Quality Assurance Cell",
+  "director": { "name": null, "role": "Internal Quality Assurance Cell (IQAC)", "photo": null },
+  "notifications": [],
+  "quickLinks": [],
+  "tabs": [
+    { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the directorate portal." }] },
+    { "label": "About", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+    { "label": "Committee", "children": [
+      { "label": "2018 Committee", "blocks": [] },
+      { "label": "2022 Committee", "blocks": [] }
+    ]},
+    { "label": "SSR / Minutes", "blocks": [] },
+    { "label": "Feedback", "children": [
+      { "label": "Curriculum Feedback", "blocks": [] },
+      { "label": "Parent Feedback", "blocks": [] },
+      { "label": "Alumni Feedback", "blocks": [] },
+      { "label": "Department-wise Feedback Action Taken Report", "blocks": [] }
+    ]},
+    { "label": "Guidelines", "children": [
+      { "label": "Research Policies", "blocks": [] },
+      { "label": "Code of Conduct", "blocks": [] },
+      { "label": "Anti Ragging", "blocks": [] },
+      { "label": "Research Seed Grant", "blocks": [] },
+      { "label": "Startup & Innovation Policy", "blocks": [] },
+      { "label": "UGC Minimum Standards for Award of Ph.D Degree", "blocks": [] },
+      { "label": "University IT Policy", "blocks": [] }
+    ]},
+    { "label": "Certificates", "children": [
+      { "label": "NAAC Certificate", "blocks": [] },
+      { "label": "NBA Certificate", "blocks": [] },
+      { "label": "NIRF", "blocks": [] },
+      { "label": "Green Audit", "blocks": [] },
+      { "label": "Environment Audit", "blocks": [] },
+      { "label": "ISO Certificate", "blocks": [] },
+      { "label": "JNTUA ISO QMS 9001:2015 Certificate", "blocks": [] }
+    ]},
+    { "label": "AQAR", "blocks": [] },
+    { "label": "SSR", "blocks": [] },
+    { "label": "Gallery", "blocks": [] },
+    { "label": "Newsletter", "blocks": [] },
+    { "label": "Contact Us", "blocks": [{ "type": "p", "text": "Internal Quality Assurance Cell" }] }
+  ]
+},
 
   "skill": {
-    "title": "Skill, Software Development & Incubation Centre",
-    "director": { "name": null, "role": "Skill, Software Development & Incubation Centre", "photo": null },
-    "notifications": [],
-    "quickLinks": [],
-    "tabs": [
-      { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the directorate portal." }] },
-      { "label": "About", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+  "title": "Skill, Software Development & Incubation Centre",
+  "director": { "name": null, "role": "Skill, Software Development & Incubation Centre", "photo": null },
+  "notifications": [],
+  "quickLinks": [],
+  "tabs": [
+    { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the directorate portal." }] },
+    { "label": "About", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+    { "label": "Gallery", "blocks": [] },
+    { "label": "Newsletter", "blocks": [] },
+    { "label": "Skill Development", "children": [
       { "label": "Events", "blocks": [{ "type": "p", "text": "Upcoming and past skill development events and workshops." }] },
-      { "label": "Company Links", "blocks": [
-        { "type": "p", "text": "Industry partner companies and their collaboration details." },
-        { "type": "heading", "level": 4, "text": "Dassault Systems" },
-        { "type": "p", "text": "JNTUA Dassault Systems Center of Excellence details and programmes." },
-        { "type": "heading", "level": 4, "text": "Siemens Centre of Excellence" },
-        { "type": "p", "text": "JNTUA Siemens Centre of Excellence details and programmes." }
-      ]},
-      { "label": "Incubation", "blocks": [
-        { "type": "heading", "level": 4, "text": "Services" },
-        { "type": "heading", "level": 4, "text": "Facilities" },
-        { "type": "heading", "level": 4, "text": "Startups" },
-        { "type": "heading", "level": 4, "text": "Partners" },
-        { "type": "heading", "level": 4, "text": "Incubatee" },
-        { "type": "heading", "level": 4, "text": "Mentors" },
-        { "type": "heading", "level": 4, "text": "Investors" },
-        { "type": "heading", "level": 4, "text": "Advisory Board" }
-      ]},
-      { "label": "Gallery", "blocks": [] },
-      { "label": "Newsletter", "blocks": [] },
-      { "label": "Contact Us", "blocks": [{ "type": "p", "text": "Directorate of Skill & Incubation Centre" }] }
-    ]
-  },
+      { "label": "Company Links", "blocks": [{ "type": "p", "text": "Industry partner companies and their collaboration details." }] },
+      { "label": "Dassault Systems", "blocks": [{ "type": "p", "text": "JNTUA Dassault Systems Center of Excellence details and programmes." }] },
+      { "label": "Siemens Centre of Excellence", "blocks": [{ "type": "p", "text": "JNTUA Siemens Centre of Excellence details and programmes." }] }
+    ]},
+    { "label": "Incubation Centre", "children": [
+      { "label": "Services", "blocks": [] },
+      { "label": "Facilities", "blocks": [] },
+      { "label": "Startups", "blocks": [] },
+      { "label": "Partners", "blocks": [] },
+      { "label": "Incubatee", "blocks": [] }
+    ]},
+    { "label": "Team", "children": [
+      { "label": "Mentors", "blocks": [] },
+      { "label": "Investors", "blocks": [] },
+      { "label": "Advisory Board", "blocks": [] }
+    ]},
+    { "label": "Contact Us", "blocks": [{ "type": "p", "text": "Directorate of Skill & Incubation Centre" }] }
+  ]
+},
 
   "ipr": {
     "title": "Intellectual Property Rights",
@@ -398,31 +399,42 @@
   ]
 },
 
-  "sms": {
-    "title": "School of Management Studies",
-    "director": { "name": null, "role": "School of Management Studies", "photo": null },
-    "notifications": [],
-    "quickLinks": [],
-    "tabs": [
-      { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the directorate portal." }] },
-      { "label": "About", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
-      { "label": "AICTE Approval Orders", "blocks": [] },
+  Now I have everything for SMS, Skill, and IQAC. Let's finish them off.
+json"sms": {
+  "title": "School of Management Studies",
+  "director": { "name": null, "role": "School of Management Studies", "photo": null },
+  "notifications": [],
+  "quickLinks": [],
+  "tabs": [
+    { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the directorate portal." }] },
+    { "label": "About", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+    { "label": "Administration", "children": [
+      { "label": "Vice-Chancellor", "blocks": [] },
+      { "label": "Rector", "blocks": [] },
+      { "label": "Registrar", "blocks": [] },
+      { "label": "Director/Head", "blocks": [] }
+    ]},
+    { "label": "AICTE Approval Orders", "blocks": [] },
+    { "label": "Academics", "children": [
       { "label": "Courses Offered", "blocks": [{ "type": "p", "text": "Content coming soon." }] },
       { "label": "Syllabus", "blocks": [] },
       { "label": "Guest Lectures", "blocks": [] },
       { "label": "Previous Papers", "blocks": [] },
-      { "label": "Master Time Table of MBA", "blocks": [] },
+      { "label": "Master Time Table of MBA", "blocks": [] }
+    ]},
+    { "label": "Students", "children": [
       { "label": "Alumni", "blocks": [] },
       { "label": "Students Club", "blocks": [] },
-      { "label": "Student Activities", "blocks": [] },
-      { "label": "Admissions", "blocks": [] },
-      { "label": "RTI Act", "blocks": [] },
-      { "label": "Library", "blocks": [] },
-      { "label": "NIRF", "blocks": [] },
-      { "label": "ISO", "blocks": [] },
-      { "label": "Contact Us", "blocks": [{ "type": "p", "text": "School of Management Studies" }] }
-    ]
-  },
+      { "label": "Student Activities", "blocks": [] }
+    ]},
+    { "label": "Admissions", "blocks": [] },
+    { "label": "RTI Act", "blocks": [] },
+    { "label": "Library", "blocks": [] },
+    { "label": "NIRF", "blocks": [] },
+    { "label": "ISO", "blocks": [] },
+    { "label": "Contact Us", "blocks": [{ "type": "p", "text": "School of Management Studies" }] }
+  ]
+},
 
   "nss": {
     "title": "NSS Cell",

@@ -312,68 +312,80 @@
   },
 
   "otpri": {
-    "title": "Oil Technological & Pharmaceutical Research Institute",
-    "director": { "name": null, "role": "Oil Technological & Pharmaceutical Research Institute", "photo": null },
-    "notifications": [],
-    "quickLinks": [],
-    "tabs": [
-      { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the OTPRI directorate portal." }] },
-      { "label": "About College", "blocks": [
-        { "type": "heading", "level": 4, "text": "Salient Features of Institution" },
-        { "type": "heading", "level": 4, "text": "Approvals" },
-        { "type": "heading", "level": 4, "text": "Pharmacy History & Evolution of Pharmacy" },
-        { "type": "heading", "level": 4, "text": "JNTUA Anthem" }
+  "title": "Oil Technological & Pharmaceutical Research Institute (OTPRI)",
+  "director": { "name": null, "role": "Director/Head, OTPRI", "photo": null },
+  "notifications": [],
+  "quickLinks": [],
+  "tabs": [
+    { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the directorate portal." }] },
+    { "label": "About", "children": [
+      { "label": "About College", "blocks": [] },
+      { "label": "Accreditations", "children": [
+        { "label": "ISO", "blocks": [{ "type": "p", "text": "Content coming soon." }] },
+        { "label": "NAAC", "blocks": [{ "type": "p", "text": "Content coming soon." }] }
       ]},
-      { "label": "Accreditations", "blocks": [
-        { "type": "p", "text": "Content coming soon." },
-        { "type": "heading", "level": 4, "text": "ISO" },
-        { "type": "heading", "level": 4, "text": "NAAC" }
+      { "label": "Salient Features of Institution", "blocks": [] },
+      { "label": "Approvals", "blocks": [] },
+      { "label": "Pharmacy History & Evolution of Pharmacy", "blocks": [] },
+      { "label": "JNTUA Anthem (Video)", "blocks": [] }
+    ]},
+    { "label": "Academics", "children": [
+      { "label": "Faculty", "children": [
+        { "label": "Pharmacy", "blocks": [] },
+        { "label": "Food Technology", "blocks": [] }
       ]},
-      { "label": "Faculty", "blocks": [
-        { "type": "heading", "level": 4, "text": "Faculty — Pharmacy" },
-        { "type": "heading", "level": 4, "text": "Faculty — Food Technology" }
-      ]},
-      { "label": "Admissions & Courses", "blocks": [
-        { "type": "heading", "level": 4, "text": "Admissions" },
-        { "type": "heading", "level": 4, "text": "Courses Offered" },
-        { "type": "heading", "level": 4, "text": "Fee Structure" },
-        { "type": "heading", "level": 4, "text": "Library" },
-        { "type": "heading", "level": 4, "text": "Admitted Details" }
-      ]},
-      { "label": "Notifications & Circulars", "blocks": [
-        { "type": "heading", "level": 4, "text": "University Notifications" },
-        { "type": "heading", "level": 4, "text": "Internal Notifications" },
-        { "type": "heading", "level": 4, "text": "Malpractice Rules" },
-        { "type": "heading", "level": 4, "text": "Circulars" }
-      ]},
-      { "label": "Departments & Committees", "blocks": [
-        { "type": "heading", "level": 4, "text": "Department — Pharmacy" },
-        { "type": "heading", "level": 4, "text": "Department — Food Technology" },
-        { "type": "heading", "level": 4, "text": "Career Guidance / Placement Cell" },
-        { "type": "heading", "level": 4, "text": "Grievance Redressal Cell" },
-        { "type": "heading", "level": 4, "text": "Students & Committees" },
-        { "type": "heading", "level": 4, "text": "SC/ST Committee" },
-        { "type": "heading", "level": 4, "text": "Women Empowerment Committee" },
-        { "type": "heading", "level": 4, "text": "Anti Ragging Documents" },
-        { "type": "heading", "level": 4, "text": "Gender Sensitisation" }
-      ]},
-      { "label": "Resources & Rankings", "blocks": [
-        { "type": "heading", "level": 4, "text": "Swayam Central" },
-        { "type": "heading", "level": 4, "text": "ePG Pathashala" },
-        { "type": "heading", "level": 4, "text": "National Digital Library of India" },
-        { "type": "heading", "level": 4, "text": "Shodhganga" },
-        { "type": "heading", "level": 4, "text": "E-ShodhSindhu" },
-        { "type": "heading", "level": 4, "text": "Vidwan / Profile Page" },
-        { "type": "heading", "level": 4, "text": "Swayam Plus" },
-        { "type": "heading", "level": 4, "text": "Programmes Organised" },
-        { "type": "heading", "level": 4, "text": "NIPER Ranks" },
-        { "type": "heading", "level": 4, "text": "GPAT Ranks" },
-        { "type": "heading", "level": 4, "text": "APPGECET Ranks" }
-      ]},
-      { "label": "Gallery", "blocks": [{ "type": "p", "text": "Gallery images managed via Admin Dashboard." }] },
-      { "label": "Contact Us", "blocks": [{ "type": "p", "text": "Oil Technological & Pharmaceutical Research Institute" }] }
-    ]
-  },
+      { "label": "Admissions", "blocks": [] },
+      { "label": "Courses Offered", "blocks": [] },
+      { "label": "Fee Structure", "blocks": [] },
+      { "label": "Library", "blocks": [] },
+      { "label": "Admitted Details", "blocks": [] }
+    ]},
+    { "label": "Examinations", "children": [
+      { "label": "University Notifications", "blocks": [] },
+      { "label": "Internal Notifications", "blocks": [] },
+      { "label": "Malpractice Rules", "blocks": [] },
+      { "label": "Circulars", "blocks": [] }
+    ]},
+    { "label": "Administration", "children": [
+      { "label": "Vice-Chancellor", "blocks": [] },
+      { "label": "Rector", "blocks": [] },
+      { "label": "Registrar", "blocks": [] },
+      { "label": "Director/Head", "blocks": [] },
+      { "label": "Principal", "blocks": [] }
+    ]},
+    { "label": "Department", "children": [
+      { "label": "Pharmacy", "blocks": [] },
+      { "label": "Food Technology", "blocks": [] }
+    ]},
+    { "label": "Student Corner", "children": [
+      { "label": "Career Guidance/Placement Cell", "blocks": [] },
+      { "label": "Grievance Redressal Cell", "blocks": [] },
+      { "label": "Students & Committees", "children": [
+        { "label": "SC/ST Committee", "blocks": [] },
+        { "label": "Women Empowerment Committee", "blocks": [] },
+        { "label": "Anti Ragging Documents", "blocks": [] },
+        { "label": "Gender Sensitisation", "blocks": [] }
+      ]}
+    ]},
+    { "label": "Online Resources", "children": [
+      { "label": "Swayam Central", "blocks": [] },
+      { "label": "ePG Pathashala", "blocks": [] },
+      { "label": "National Digital Library of India", "blocks": [] },
+      { "label": "Shodhganga", "blocks": [] },
+      { "label": "E-ShodhSindhu", "blocks": [] },
+      { "label": "Vidwan / Profile Page", "blocks": [] },
+      { "label": "Swayam Plus", "blocks": [] }
+    ]},
+    { "label": "Programmes Organised", "blocks": [] },
+    { "label": "Student Achievements", "children": [
+      { "label": "NIPER Ranks", "blocks": [] },
+      { "label": "GPAT Ranks", "blocks": [] },
+      { "label": "APPGECET Ranks", "blocks": [] }
+    ]},
+    { "label": "Gallery", "blocks": [{ "type": "p", "text": "Gallery images managed via Admin Dashboard." }] },
+    { "label": "Contact Us", "blocks": [{ "type": "p", "text": "Oil Technological & Pharmaceutical Research Institute" }] }
+  ]
+},
 
   "sms": {
     "title": "School of Management Studies",

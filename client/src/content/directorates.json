@@ -88,84 +88,95 @@
   },
 
   "admissions": {
-    "title": "Admissions, Foreign Affairs & Alumni",
-    "director": { "name": "Prof. A. Sureshbabu", "role": "Admissions, Foreign Affairs & Alumni", "photo": "/images/directors/dafa.jpg" },
-    "notifications": [],
-    "quickLinks": [],
-    "tabs": [
-      { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the Admissions, Foreign Affairs & Alumni directorate portal." }] },
-      { "label": "About", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
-      { "label": "Notifications", "blocks": [] },
-      { "label": "Newsletter", "blocks": [] },
-      { "label": "Gallery", "blocks": [] },
+  "title": "Admissions, Foreign Affairs & Alumni",
+  "director": { "name": null, "role": "Admissions, Foreign Affairs & Alumni", "photo": null },
+  "notifications": [],
+  "quickLinks": [],
+  "tabs": [
+    { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the Admissions, Foreign Affairs & Alumni directorate portal." }] },
+    { "label": "About", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+    { "label": "Notifications", "blocks": [] },
+    { "label": "Newsletter", "blocks": [] },
+    { "label": "Gallery", "blocks": [] },
+    { "label": "Foreign Affairs", "children": [
       { "label": "MoU's / Collaborations", "blocks": [] },
-      { "label": "List of Foreign Students", "blocks": [] },
+      { "label": "List of Foreign Students", "blocks": [] }
+    ]},
+    { "label": "Alumni Matters", "children": [
       { "label": "Distinguished Alumni", "blocks": [] },
       { "label": "Registrations", "blocks": [] },
       { "label": "Sponsored Gold Medals / Scholarships / Donations", "blocks": [] },
-      { "label": "Emeritus", "blocks": [] },
+      { "label": "Emeritus", "blocks": [] }
+    ]},
+    { "label": "UGC Matters", "children": [
       { "label": "12(B) & 2(F) Certificates", "blocks": [] },
       { "label": "UGC XI Plan", "blocks": [] },
-      { "label": "UGC XII Plan Grants", "blocks": [] },
-      { "label": "BTH Students List", "blocks": [] },
-      { "label": "Contact Us", "blocks": [{ "type": "p", "text": "Directorate of Admissions, Foreign Affairs & Alumni" }] }
-    ]
-  },
+      { "label": "UGC XII Plan Grants", "blocks": [] }
+    ]},
+    { "label": "BTH Students List", "blocks": [] },
+    { "label": "Contact Us", "blocks": [{ "type": "p", "text": "Directorate of Admissions, Foreign Affairs & Alumni" }] }
+  ]
+},
 
   "evaluation": {
-    "title": "Evaluation",
-    "director": { "name": "Prof. V. Naga Prasad Naidu", "role": "Director of Evaluation", "photo": "/images/directors/de.png" },
-    "notifications": [],
-    "quickLinks": [],
-    "tabs": [
-      { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the directorate portal." }] },
-      { "label": "About", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+  "title": "Evaluation",
+  "director": { "name": null, "role": "Director of Evaluation", "photo": null },
+  "notifications": [],
+  "quickLinks": [],
+  "tabs": [
+    { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the Evaluation directorate portal." }] },
+    { "label": "About", "blocks": [{ "type": "p", "text": "Details will be published soon." }] },
+    { "label": "Officers", "children": [
       { "label": "Controller of Examinations", "blocks": [{ "type": "p", "text": "Profile and contact details of the Controller of Examinations." }] },
-      { "label": "Additional Controller of Examinations", "blocks": [{ "type": "p", "text": "Overview of ACOE office." }] },
-      { "label": "ACE-I", "blocks": [{ "type": "p", "text": "Additional Controller of Examinations - I details." }] },
-      { "label": "ACE-II", "blocks": [{ "type": "p", "text": "Additional Controller of Examinations - II details." }] },
-      { "label": "ACE-III", "blocks": [{ "type": "p", "text": "Additional Controller of Examinations - III details." }] },
-      { "label": "Notifications", "blocks": [] },
-      { "label": "Application Forms", "blocks": [] },
-      { "label": "Results", "blocks": [{ "type": "p", "text": "Results are available on the official portal." }] },
-      { "label": "Newsletter", "blocks": [] },
-      { "label": "Gallery", "blocks": [{ "type": "p", "text": "Gallery images managed via Admin Dashboard." }] },
-      { "label": "Contact Us", "blocks": [{ "type": "p", "text": "Directorate of Evaluation" }] }
-    ]
-  },
+      { "label": "Additional Controller of Examinations", "children": [
+        { "label": "ACE-I", "blocks": [{ "type": "p", "text": "Additional Controller of Examinations - I details." }] },
+        { "label": "ACE-II", "blocks": [{ "type": "p", "text": "Additional Controller of Examinations - II details." }] },
+        { "label": "ACE-III", "blocks": [{ "type": "p", "text": "Additional Controller of Examinations - III details." }] }
+      ]}
+    ]},
+    { "label": "Notifications", "blocks": [] },
+    { "label": "Application Forms", "blocks": [] },
+    { "label": "Results", "blocks": [{ "type": "p", "text": "Results are available on the official portal." }] },
+    { "label": "Newsletter", "blocks": [] },
+    { "label": "Gallery", "blocks": [{ "type": "p", "text": "Gallery images managed via Admin Dashboard." }] },
+    { "label": "Contact Us", "blocks": [{ "type": "p", "text": "Directorate of Evaluation" }] }
+  ]
+},
 
   "rd": {
-    "title": "Research & Development",
-    "director": { "name": "Prof. Vaishali G. Ghorpade", "role": "Research & Development", "photo": "/images/directors/drd.jpeg" },
-    "notifications": [],
-    "quickLinks": [],
-    "tabs": [
-      { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the directorate portal." }] },
-      { "label": "About", "blocks": [{ "type": "p", "text": "This directorate is responsible for Research & Development at JNTUA and its affiliated institutions." }] },
-      { "label": "Ph.D Scholars Admitted", "blocks": [] },
-      { "label": "Syllabus", "blocks": [
-        { "type": "heading", "level": 4, "text": "R18 — Research Methodology" },
-        { "type": "heading", "level": 4, "text": "R18 — IPR" },
-        { "type": "heading", "level": 4, "text": "R18 — Part 1 & Part 2 Subjects" },
-        { "type": "heading", "level": 4, "text": "R21 — Research & Publication Ethics" }
-      ]},
-      { "label": "Guidelines", "blocks": [] },
-      { "label": "Research Centres", "blocks": [
-        { "type": "heading", "level": 4, "text": "Applications for Recognition and Research Centre" },
-        { "type": "heading", "level": 4, "text": "List of Research Centres" },
-        { "type": "heading", "level": 4, "text": "Engineering — Constituent Units" },
-        { "type": "heading", "level": 4, "text": "Engineering — Affiliated Colleges" },
-        { "type": "heading", "level": 4, "text": "Pharmacy — Constituent Units" },
-        { "type": "heading", "level": 4, "text": "Pharmacy — Affiliated Colleges" }
-      ]},
-      { "label": "Notifications", "blocks": [] },
-      { "label": "Regulations", "blocks": [] },
-      { "label": "Downloads", "blocks": [] },
-      { "label": "Newsletter", "blocks": [] },
-      { "label": "Gallery", "blocks": [{ "type": "p", "text": "Gallery images managed via Admin Dashboard." }] },
-      { "label": "Contact Us", "blocks": [{ "type": "p", "text": "Directorate of Research & Development" }] }
-    ]
-  },
+  "title": "Research & Development",
+  "director": { "name": null, "role": "Research & Development", "photo": null },
+  "notifications": [],
+  "quickLinks": [],
+  "tabs": [
+    { "label": "Home", "blocks": [{ "type": "p", "text": "Welcome to the directorate portal." }] },
+    { "label": "About", "blocks": [
+      { "type": "p", "text": "JNTUA is focusing on Research Programs and need based technology. Accordingly, an independent Research & Development (R&D) Cell has been established in the year 2010 to promote and monitor the research programs of the University. The Directorate administers all the research programs of the University by monitoring and coordinating the research programs. Research and Development Cell coordinates with the Directorate of Admissions for selection and admission of research scholars, and also interacts with Director of Evaluation for evaluation of Thesis. It conducts the research review meetings once in every three months to evaluate and monitor the research work progress of the scholars. The R & D Cell also recommends the sanction of research scholarships to scholars. After the evaluation part of the thesis, R & D Cell conducts viva-voce examinations for the award of the Ph.D. Degree in the faculties of Engineering, Science & Technology, Pharmacy, Management and Humanities & Social Sciences." },
+      { "type": "p", "text": "Aims and Policy: JNTUA aims at promotion of research culture in accordance with the academic standards, legal framework, good governance and ethical practices. Research policy provides guidelines on good and ethical practices in the conduct of research to achieve highest standards. The policy also focuses on utilizing the outcome of the research for the benefit of the society." }
+    ]},
+    { "label": "Ph.D Scholars Admitted", "blocks": [] },
+    { "label": "Syllabus", "children": [
+      { "label": "R18 — Research Methodology", "blocks": [] },
+      { "label": "R18 — IPR", "blocks": [] },
+      { "label": "R18 — Part 1 & Part 2 Subjects", "blocks": [] },
+      { "label": "R21 — Research & Publication Ethics", "blocks": [] }
+    ]},
+    { "label": "Research Centres", "children": [
+      { "label": "Applications for Recognition and Research Centre", "blocks": [] },
+      { "label": "List of Research Centres", "blocks": [] },
+      { "label": "Engineering — Constituent Units", "blocks": [] },
+      { "label": "Engineering — Affiliated Colleges", "blocks": [] },
+      { "label": "Pharmacy — Constituent Units", "blocks": [] },
+      { "label": "Pharmacy — Affiliated Colleges", "blocks": [] }
+    ]},
+    { "label": "Notifications", "blocks": [] },
+    { "label": "Regulations", "blocks": [] },
+    { "label": "Downloads", "blocks": [] },
+    { "label": "Newsletter", "blocks": [] },
+    { "label": "Gallery", "blocks": [{ "type": "p", "text": "Gallery images managed via Admin Dashboard." }] },
+    { "label": "Contact Us", "blocks": [{ "type": "p", "text": "Directorate of Research & Development" }] }
+  ]
+},
 
   "placements": {
     "title": "IR, Placements & Sponsored Research",

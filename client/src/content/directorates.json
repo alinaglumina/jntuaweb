@@ -399,8 +399,7 @@
   ]
 },
 
-  Now I have everything for SMS, Skill, and IQAC. Let's finish them off.
-json"sms": {
+"sms": {
   "title": "School of Management Studies",
   "director": { "name": null, "role": "School of Management Studies", "photo": null },
   "notifications": [],

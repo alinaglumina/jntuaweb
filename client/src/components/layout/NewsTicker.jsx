@@ -1,15 +1,14 @@
 import { Link } from 'react-router-dom';
-import { useNews, useNotifications } from '../../api/public.js';
+import { useNews } from '../../api/public.js';
 
 const MAX_ITEMS = 15;
 
-// Scrolling "LIVE NEWS" ticker — merges News and Notifications, sorted by
-// most recent, into a continuously moving marquee.
+// Scrolling "LIVE NEWS" ticker — pulls from the News resource only,
+// sorted by most recent, into a continuously moving marquee.
 export default function NewsTicker() {
   const { data: news = [] } = useNews();
-  const { data: notifications = [] } = useNotifications();
 
-  const merged = [...news, ...notifications]
+  const merged = [...news]
     .sort((a, b) => new Date(b.publishedAt || b.createdAt) - new Date(a.publishedAt || a.createdAt))
     .slice(0, MAX_ITEMS);
 

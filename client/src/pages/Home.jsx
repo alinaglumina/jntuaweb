@@ -6,17 +6,20 @@ import { useSlides, useNotifications } from '../api/public.js';
 import { HeroSlider, NoticeCard } from '../components/index.js';
 
 const UNITS = [
-  ['JNTUACEA Ananthapuramu', 'https://www.jntuacea.ac.in/'],
-  ['JNTUACEA Pulivendula', 'https://www.jntuacep.ac.in/'],
-  ['JNTUACEA Kalikiri', 'https://www.jntuacea.ac.in/'],
-  ['JNTUA OTPRI', 'https://www.jntua.ac.in/otpri'],
-  ['JNTUA SMS', 'https://www.jntua.ac.in/profile/school-of-management-studies'],
+  ['JNTUACEA Ananthapuramu', 'https://www.jntuacea.ac.in/', '/campuses/cea.jpg'],
+  ['JNTUACEA Pulivendula', 'https://www.jntuacep.ac.in/', '/campuses/cep.jpg'],
+  ['JNTUACEA Kalikiri', 'https://www.jntuacea.ac.in/', '/campuses/cek.jpg'],
+  ['JNTUA OTPRI', 'https://www.jntua.ac.in/otpri', '/campuses/otpri.jpg'],
+  ['JNTUA SMS', 'https://www.jntua.ac.in/profile/school-of-management-studies', '/campuses/sms.jpg'],
 ];
 const RECOGNITIONS = [
-  ['UGC', 'https://www.ugc.gov.in/'], ['AICTE', 'https://www.aicte-india.org/'],
-  ['APSCHE', 'https://cets.apsche.ap.gov.in/'], ['NAAC', 'https://www.naac.gov.in/'],
-  ['NIRF', 'https://www.nirfindia.org/'], ['MoE', 'https://www.education.gov.in/'],
-  ['Govt. of AP', 'https://www.ap.gov.in/'],
+  ['UGC', 'https://www.ugc.gov.in/', '/logos/ugc.png'],
+  ['AICTE', 'https://www.aicte-india.org/', '/logos/aicte.png'],
+  ['APSCHE', 'https://cets.apsche.ap.gov.in/', '/logos/apsche.png'],
+  ['NAAC', 'https://www.naac.gov.in/', '/logos/naac-full.png'],
+  ['NIRF', 'https://www.nirfindia.org/', '/logos/nirf.png'],
+  ['MoE', 'https://www.education.gov.in/', '/logos/mhrd.png'],
+  ['Govt. of AP', 'https://www.ap.gov.in/', '/logos/ap-emblem.png'],
 ];
 const NOTIF_TABS = [['news', 'Latest News'], ['exam', 'Examinations'], ['admission', 'Admissions'], ['research', 'R&D'], ['placement', 'Placements'], ['sports', 'Sports'], ['tenders', 'Tenders']];
 
@@ -86,10 +89,12 @@ export default function Home() {
       <section className="container py-14">
         <div className="text-center"><h2 className="text-2xl">Constituent Units</h2><div className="mx-auto mt-2 h-1 w-16 rounded bg-gold" /></div>
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5">
-          {UNITS.map(([name, url]) => (
-            <a key={name} href={url} target="_blank" rel="noopener noreferrer" className="card p-4 text-center hover:shadow-lift">
-              <div className="mb-3 grid h-24 place-items-center rounded bg-navy/5 text-navy"><i className="fa-solid fa-building-columns text-2xl" aria-hidden="true" /></div>
-              <span className="text-sm font-semibold text-navy">{name}</span>
+          {UNITS.map(([name, url, photo]) => (
+            <a key={name} href={url} target="_blank" rel="noopener noreferrer" className="card overflow-hidden text-center hover:shadow-lift">
+              <div className="h-24 w-full overflow-hidden bg-navy/5">
+                <img src={photo} alt={name} className="h-full w-full object-cover" />
+              </div>
+              <span className="block p-4 text-sm font-semibold text-navy">{name}</span>
             </a>
           ))}
         </div>
@@ -102,9 +107,9 @@ export default function Home() {
         <div className="container py-14">
           <div className="text-center"><h2 className="text-2xl">Our Recognitions & Approvals</h2><div className="mx-auto mt-2 h-1 w-16 rounded bg-gold" /></div>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            {RECOGNITIONS.map(([label, url]) => (
-              <a key={label} href={url} target="_blank" rel="noopener noreferrer" className="card grid h-24 w-32 place-items-center gap-1 p-3 text-center hover:shadow-lift">
-                <i className="fa-solid fa-award text-xl text-crimson" aria-hidden="true" />
+            {RECOGNITIONS.map(([label, url, logo]) => (
+              <a key={label} href={url} target="_blank" rel="noopener noreferrer" className="card flex h-24 w-32 flex-col items-center justify-center gap-1 p-3 text-center hover:shadow-lift">
+                <img src={logo} alt={label} className="h-10 w-auto object-contain" />
                 <span className="text-xs font-semibold text-navy">{label}</span>
               </a>
             ))}

@@ -2,8 +2,17 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import PageShell from './PageShell.jsx';
 import SafeHtml from './SafeHtml.jsx';
-import { pageContentQuery } from '../api/queries.js';
+import { pageContentQuery, administrationQuery } from '../api/queries.js';
 import pages from '../content/pages.json';
+
+// Maps a content page id to an Administration roleKey, when that page
+// should show a photo pulled from the Administration collection.
+const ROLE_KEY_BY_PAGE = {
+  'vice-chancellor': 'vc',
+  'chancellor': 'chancellor',
+  'rector': 'rector',
+  'registrar': 'registrar',
+};
 
 // Renders a static page from the content manifest. If an admin has published an
 // editable PageContent override under the same key, that HTML wins.
@@ -11,16 +20,36 @@ export default function ContentPage({ pageId, resolveId }) {
   const params = useParams();
   const id = pageId || (resolveId ? resolveId(params) : null);
   const page = id && pages[id];
-
+  const roleKey = id && ROLE_KEY_BY_PAGE[id];
   const { data: override } = useQuery({ ...pageContentQuery(id), enabled: !!id });
+  const { data: admin } = useQuery({ ...administrationQuery(roleKey) });
+
+  const photo = admin?.photo
+    ? (admin.photo.startsWith('http') ? admin.photo : admin.photo)
+    : null;
+
+  const PhotoBlock = photo ? (
+    <div className="mb-6 flex justify-center">
+      <img
+        src={photo}
+        alt={admin?.name || page?.title || 'Photo'}
+        className="h-40 w-40 rounded-full object-cover shadow-md"
+      />
+    </div>
+  ) : null;
 
   if (override?.body) {
-    return <PageShell title={override.heading || page?.title || 'Page'}><SafeHtml html={override.body} className="mx-auto max-w-3xl" /></PageShell>;
+    return (
+      <PageShell title={override.heading || page?.title || 'Page'}>
+        {PhotoBlock}
+        <SafeHtml html={override.body} className="mx-auto max-w-3xl" />
+      </PageShell>
+    );
   }
   if (!page) return <PageShell title="Page not found"><p className="text-slate-600">This page has no content yet.</p></PageShell>;
-
   return (
     <PageShell title={page.title}>
+      {PhotoBlock}
       <article className="prose-jntua mx-auto max-w-3xl space-y-4">
         {page.blocks.map((b, i) => {
           if (b.type === 'heading') { const Tag = `h${Math.min(b.level + 1, 4)}`; return <Tag key={i} className="mt-6 font-display text-navy">{b.text}</Tag>; }

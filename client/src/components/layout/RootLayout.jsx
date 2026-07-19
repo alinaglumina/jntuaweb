@@ -5,6 +5,7 @@ import { SearchContext } from '../../hooks/useGlobalSearch.js';
 import TopRibbon from './TopRibbon.jsx';
 import Header from './Header.jsx';
 import MegaNav from './MegaNav.jsx';
+import NewsTicker from './NewsTicker.jsx';
 import Footer from './Footer.jsx';
 import Breadcrumbs from '../Breadcrumbs.jsx';
 import NavProgress from '../NavProgress.jsx';
@@ -30,6 +31,7 @@ export default function RootLayout() {
       <TopRibbon />
       <Header />
       <MegaNav />
+      <NewsTicker />
       <Breadcrumbs />
       <main id="main" tabIndex={-1} className="flex-1 focus:outline-none"><Outlet /></main>
       <Footer />

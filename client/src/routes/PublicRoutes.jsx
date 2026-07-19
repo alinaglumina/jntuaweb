@@ -48,7 +48,6 @@ const fixedContent = NAV.flatMap((group) =>
 const dynamicPages = {
   '/about/gallery': [<Gallery />, galleryLoader], '/about/mous': [<Mous />, mousLoader],
   '/about/e-magazines': [<EMagazines />, emagazinesLoader], '/about/honoris': [<Honoris />, honorisLoader],
-  '/administration/faculty': [<Faculty />, facultyLoader],
 };
 const dynamicRoutes = NAV.flatMap((group) =>
   (group.children || [])
@@ -64,6 +63,7 @@ export const publicRoutes = [
   { path: 'notifications', element: S(<NotificationCentre />), loader: notificationsLoader, handle: crumb([{ label: 'Notification Centre' }]) },
   { path: 'search', element: S(<SearchResults />), handle: crumb([{ label: 'Search' }]) },
   { path: 'alumni', element: S(<ContentPage pageId="alumni" />), loader: contentLoader(() => 'alumni'), handle: crumb([{ label: 'Alumni' }]) },
+  { path: 'administration/faculty', element: S(<Faculty />), loader: facultyLoader, handle: crumb([{ label: 'Administration' }, { label: 'Faculty Corner', to: '/administration/faculty' }]) },
   { path: 'ui-kit', element: S(<UIKit />), handle: crumb([{ label: 'UI Kit' }]) },
 
   // DYNAMIC routes — crumb derives the label from the URL param.

@@ -24,9 +24,9 @@ export default function Header() {
             <kbd className="hidden rounded bg-line/60 px-1.5 text-[10px] lg:inline">⌘K</kbd>
           </button>
           <ThemeToggle className="text-brand" />
-          <img src="/logos/azadi-ka-amrit-mahotsav.png" alt="Azadi Ka Amrit Mahotsav" className="h-14 w-14 shrink-0 object-contain" />
-          <img src="/logos/naac-badge.png" alt="NAAC Accredited" className="h-14 w-14 shrink-0 object-contain" />
-          <img src="/logos/75-years-badge.png" alt="75 Years" className="h-14 w-14 shrink-0 object-contain" />
+          <img src="/logos/azadi-ka-amrit-mahotsav.png" alt="Azadi Ka Amrit Mahotsav" className="h-12 w-auto shrink-0 object-contain" />
+          <img src="/logos/naac-badge.png" alt="NAAC Accredited" className="h-12 w-auto shrink-0 object-contain" />
+          <img src="/logos/75-years-badge.png" alt="75 Years" className="h-12 w-auto shrink-0 object-contain" />
         </div>
       </div>
     </header>

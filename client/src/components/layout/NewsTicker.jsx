@@ -1,14 +1,19 @@
 import { Link } from 'react-router-dom';
-import { useNotifications } from '../../api/public.js';
+import { useNews, useNotifications } from '../../api/public.js';
 
-// Scrolling "LIVE NEWS" ticker — shows the latest notifications in a
-// continuously moving marquee, matching the legacy site's ribbon.
+const MAX_ITEMS = 15;
+
+// Scrolling "LIVE NEWS" ticker — merges News and Notifications, sorted by
+// most recent, into a continuously moving marquee.
 export default function NewsTicker() {
-  const { data = [] } = useNotifications();
-  const items = data.slice(0, 12);
+  const { data: news = [] } = useNews();
+  const { data: notifications = [] } = useNotifications();
 
-  // Duplicate the list so the CSS animation loops seamlessly.
-  const loopItems = items.length > 0 ? [...items, ...items] : [];
+  const merged = [...news, ...notifications]
+    .sort((a, b) => new Date(b.publishedAt || b.createdAt) - new Date(a.publishedAt || a.createdAt))
+    .slice(0, MAX_ITEMS);
+
+  const loopItems = merged.length > 0 ? [...merged, ...merged] : [];
 
   return (
     <div className="overflow-hidden border-b border-gold/40 bg-gold/10">
@@ -17,7 +22,7 @@ export default function NewsTicker() {
           <i className="fa-solid fa-tower-broadcast" aria-hidden="true" /> Live News
         </span>
         <div className="relative flex-1 overflow-hidden">
-          {items.length === 0 ? (
+          {merged.length === 0 ? (
             <span className="text-xs font-medium text-slate-500">No live updates at the moment.</span>
           ) : (
             <div className="ticker-track flex w-max gap-10 whitespace-nowrap">

@@ -2,7 +2,7 @@ import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import api from '../lib/axios.js';
 import {
   slidesQuery, galleryQuery, mousQuery, emagazinesQuery, honorisQuery,
-  settingsQuery, notificationsQuery,
+  settingsQuery, notificationsQuery, newsQuery,
 } from './queries.js';
 
 export const useSlides       = () => useQuery(slidesQuery());
@@ -10,6 +10,7 @@ export const useGallery      = () => useQuery(galleryQuery());
 export const useMous         = () => useQuery(mousQuery());
 export const useEMagazines   = () => useQuery(emagazinesQuery());
 export const useHonoris      = () => useQuery(honorisQuery());
+export const useNews          = () => useQuery(newsQuery());
 export const useSettings     = () => useQuery(settingsQuery());
 export const useNotifications = (category) => useQuery(notificationsQuery(category));
 

@@ -18,10 +18,10 @@ export default function Header() {
         </Link>
         <div className="flex shrink-0 items-center gap-3">
           <button onClick={openSearch} aria-label="Search (press / or Ctrl+K)" title="Search  (Ctrl/⌘+K)"
-            className="flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-sm text-muted transition hover:border-navy hover:text-brand">
-            <i className="fa-solid fa-magnifying-glass" aria-hidden="true" />
+            className="flex items-center gap-2 rounded-full bg-navy/5 px-3.5 py-2 text-sm font-medium text-navy shadow-sm transition hover:bg-navy/10 hover:shadow">
+            <i className="fa-solid fa-magnifying-glass text-xs" aria-hidden="true" />
             <span className="hidden lg:inline">Search</span>
-            <kbd className="hidden rounded bg-line/60 px-1.5 text-[10px] lg:inline">⌘K</kbd>
+            <kbd className="hidden rounded-md bg-white px-1.5 py-0.5 text-[10px] font-semibold text-muted shadow-sm lg:inline">⌘K</kbd>
           </button>
           <ThemeToggle className="text-brand" />
           <img src="/logos/azadi-ka-amrit-mahotsav.png" alt="Azadi Ka Amrit Mahotsav" className="h-12 w-auto shrink-0 object-contain" />

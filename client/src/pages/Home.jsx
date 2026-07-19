@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSlides, useNotifications } from '../api/public.js';
+import { useSlides, useNotifications, useAdministration } from '../api/public.js';
 import { HeroSlider, NoticeCard } from '../components/index.js';
 
 const UNITS = [
@@ -51,6 +51,7 @@ function Notifications() {
 function Hero() { const { data: slides = [] } = useSlides(); return <HeroSlider slides={slides} />; }
 
 export default function Home() {
+  const { data: vc } = useAdministration('vc');
   return (
     <>
       <Helmet><title>JNTUA — Jawaharlal Nehru Technological University Anantapur</title></Helmet>
@@ -59,7 +60,11 @@ export default function Home() {
       {/* VC message */}
       <section className="container grid gap-8 py-14 md:grid-cols-[240px_1fr] md:items-start">
         <div className="text-center">
-          <div className="mx-auto grid h-64 w-56 place-items-center rounded-lg border-4 border-white bg-navy/5 font-display text-lg text-navy shadow-card">Photo</div>
+          {vc?.photo ? (
+            <img src={vc.photo} alt={vc?.name || 'Vice Chancellor'} className="mx-auto h-64 w-56 rounded-lg border-4 border-white object-cover shadow-card" />
+          ) : (
+            <div className="mx-auto grid h-64 w-56 place-items-center rounded-lg border-4 border-white bg-navy/5 font-display text-lg text-navy shadow-card">Photo</div>
+          )}
           <p className="mt-3 font-display text-lg font-bold text-navy">Prof. H. Sudarsana Rao</p>
           <p className="text-sm text-slate-500">Vice Chancellor, JNTUA</p>
           <Link to="/administration/vice-chancellor" className="btn-ghost mt-3 text-sm">View Profile</Link>

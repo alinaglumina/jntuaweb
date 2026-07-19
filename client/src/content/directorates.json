@@ -437,7 +437,7 @@
 
   "nss": {
     "title": "NSS Cell",
-    "director": { "name": "Dr. Mamatha", "role": "NSS Cell Coordinator", "photo": "/images/directors/mamatha.jpg" },
+    "director": { "name": "Dr. G. Mamatha", "role": "NSS Cell Coordinator", "photo": "/images/directors/mamatha.jpg" },
     "notifications": [],
     "quickLinks": [],
     "tabs": [

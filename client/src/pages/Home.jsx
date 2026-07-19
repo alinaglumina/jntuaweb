@@ -39,7 +39,7 @@ function Notifications() {
           <p className="rounded-md border border-dashed border-slate-300 p-8 text-center text-sm text-slate-500">No notifications in this category yet.</p>
         ) : (
           <div className="divide-y divide-slate-100 rounded-lg bg-white shadow-card">
-            {data.slice(0, 8).map((n) => <NoticeCard key={n._id} title={n.title} category={n.category} date={n.createdAt} href={n.attachment} />)}
+            {data.slice(0, 8).map((n) => <NoticeCard key={n._id} title={n.title} category={n.category} date={n.publishedAt || n.createdAt} href={n.attachment} />)}
           </div>
         )}
         <div className="mt-4 text-center"><Link to="/notifications" className="btn-ghost text-sm">View all notifications</Link></div>

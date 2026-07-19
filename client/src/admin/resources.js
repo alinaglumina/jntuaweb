@@ -18,8 +18,9 @@ const CAT = ['news', 'exam', 'admission', 'research', 'placement', 'sports', 'te
 export const RESOURCES = {
   notifications: {
     label: 'Notifications', group: 'content', icon: 'fa-bell', roles: ['admin', 'director'],
-    columns: ['title', 'category', 'createdAt'],
+    columns: ['title', 'category', 'publishedAt'],
     fields: [F('title', 'Title'), F('category', 'Category', 'select', { options: CAT }),
+             F('publishedAt', 'Date', 'date'),
              F('attachment', 'PDF attachment', 'file'), F('isActive', 'Active', 'checkbox', { default: true })],
   },
   news: {

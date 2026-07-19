@@ -36,7 +36,7 @@ export default function NotificationCentre() {
       ) : (
         <>
           <Card><div className="divide-y divide-line">
-            {items.map((n) => <NoticeCard key={n._id} title={n.title} category={n.category} date={n.createdAt} href={n.attachment} />)}
+            {items.map((n) => <NoticeCard key={n._id} title={n.title} category={n.category} date={n.publishedAt || n.createdAt} href={n.attachment} />)}
           </div></Card>
           {/* Infinite-scroll sentinel */}
           <div ref={sentinel} className="grid place-items-center py-6">

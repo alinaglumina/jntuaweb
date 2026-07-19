@@ -101,7 +101,6 @@ export const NAV = [
       { label: 'Registrar', to: '/administration/registrar', kind: 'content', id: 'registrar' },
       { label: 'Executive Council', to: '/administration/executive-council', kind: 'content', id: 'exec-council' },
       { label: 'Former Vice-Chancellors', to: '/administration/former-vice-chancellors', kind: 'content', id: 'former-vcs' },
-      { label: 'Faculty', to: '/administration/faculty', kind: 'dynamic' },
     ],
   },
   {

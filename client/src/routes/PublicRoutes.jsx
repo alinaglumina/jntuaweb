@@ -2,7 +2,7 @@ import DirectoratePage from '../components/DirectoratePage.jsx';
 import { lazy } from 'react';
 import ContentPage from '../components/ContentPage.jsx';
 import { S } from './lazy.jsx';
-import { homeLoader, notificationsLoader, galleryLoader, mousLoader, emagazinesLoader, honorisLoader, contentLoader } from './loaders.js';
+import { homeLoader, notificationsLoader, galleryLoader, mousLoader, emagazinesLoader, honorisLoader, contentLoader, facultyLoader } from './loaders.js';
 
 const Home              = lazy(() => import('../pages/Home.jsx'));
 const NotificationCentre= lazy(() => import('../pages/NotificationCentre.jsx'));
@@ -11,6 +11,7 @@ const Gallery           = lazy(() => import('../pages/Gallery.jsx'));
 const Mous              = lazy(() => import('../pages/Mous.jsx'));
 const EMagazines        = lazy(() => import('../pages/EMagazines.jsx'));
 const Honoris           = lazy(() => import('../pages/Honoris.jsx'));
+const Faculty            = lazy(() => import('../pages/Faculty.jsx'));
 const AcademicDocs      = lazy(() => import('../pages/AcademicDocs.jsx'));
 const UIKit             = lazy(() => import('../pages/UIKit.jsx'));
 
@@ -47,6 +48,7 @@ const fixedContent = NAV.flatMap((group) =>
 const dynamicPages = {
   '/about/gallery': [<Gallery />, galleryLoader], '/about/mous': [<Mous />, mousLoader],
   '/about/e-magazines': [<EMagazines />, emagazinesLoader], '/about/honoris': [<Honoris />, honorisLoader],
+  '/administration/faculty': [<Faculty />, facultyLoader],
 };
 const dynamicRoutes = NAV.flatMap((group) =>
   (group.children || [])

@@ -6,7 +6,7 @@
 import { queryClient } from '../lib/queryClient.js';
 import {
   slidesQuery, notificationsQuery, galleryQuery, mousQuery,
-  emagazinesQuery, honorisQuery, pageContentQuery, adminListQuery, adminPageQuery,
+  emagazinesQuery, honorisQuery, pageContentQuery, adminListQuery, adminPageQuery, facultyQuery,
 } from '../api/queries.js';
 
 const prime = (opts) => queryClient.prefetchQuery(opts);
@@ -18,6 +18,7 @@ export const galleryLoader     = async () => { await prime(galleryQuery()); retu
 export const mousLoader        = async () => { await prime(mousQuery()); return null; };
 export const emagazinesLoader  = async () => { await prime(emagazinesQuery()); return null; };
 export const honorisLoader     = async () => { await prime(honorisQuery()); return null; };
+export const facultyLoader     = async () => { await prime(facultyQuery()); return null; };
 
 // Content pages: prefetch the admin-editable override (if any) for this key.
 export const contentLoader = (resolveId) => async ({ params }) => {

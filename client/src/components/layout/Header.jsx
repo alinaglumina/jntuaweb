@@ -8,7 +8,7 @@ export default function Header() {
     <header className="border-b border-line bg-surface">
       <div className="container flex items-center justify-between gap-4 py-3">
         <Link to="/" className="flex items-center gap-4">
-          <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-navy font-display text-2xl font-bold text-white">J</span>
+          <img src="/logos/jntua-logo.webp" alt="JNTUA Logo" className="h-16 w-16 shrink-0 object-contain" />
           <span className="leading-tight">
             <h1 className="font-display text-lg font-bold text-brand md:text-2xl">Jawaharlal Nehru Technological University Anantapur</h1>
             <span className="block text-sm text-muted">జవహర్‌లాల్ నెహ్రూ సాంకేతిక విశ్వవిద్యాలయం అనంతపురం</span>
@@ -24,8 +24,9 @@ export default function Header() {
             <kbd className="hidden rounded bg-line/60 px-1.5 text-[10px] lg:inline">⌘K</kbd>
           </button>
           <ThemeToggle className="text-brand" />
-          <span className="grid h-14 w-14 place-items-center rounded-full border-2 border-navy/20 text-[10px] font-semibold text-navy">NAAC</span>
-          <span className="grid h-14 w-14 place-items-center rounded-full border-2 border-gold/40 text-[10px] font-semibold text-gold">75 Yrs</span>
+          <img src="/logos/azadi-ka-amrit-mahotsav.png" alt="Azadi Ka Amrit Mahotsav" className="h-14 w-14 shrink-0 object-contain" />
+          <img src="/logos/naac-badge.png" alt="NAAC Accredited" className="h-14 w-14 shrink-0 object-contain" />
+          <img src="/logos/75-years-badge.png" alt="75 Years" className="h-14 w-14 shrink-0 object-contain" />
         </div>
       </div>
     </header>

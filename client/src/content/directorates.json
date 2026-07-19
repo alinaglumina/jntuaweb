@@ -89,7 +89,7 @@
 
   "admissions": {
   "title": "Admissions, Foreign Affairs & Alumni",
-  "director": { "name": null, "role": "Admissions, Foreign Affairs & Alumni", "photo": null },
+  "director": { "name": "Prof.A.Sureshbabu", "role": "Admissions, Foreign Affairs & Alumni", "photo": "/images/directors/dafa.jpg" },
   "notifications": [],
   "quickLinks": [],
   "tabs": [
@@ -120,7 +120,7 @@
 
   "evaluation": {
   "title": "Evaluation",
-  "director": { "name": null, "role": "Director of Evaluation", "photo": null },
+  "director": { "name": "Prof.V.Naga Prasad Naidu", "role": "Director of Evaluation", "photo": "de.png" },
   "notifications": [],
   "quickLinks": [],
   "tabs": [
@@ -145,7 +145,7 @@
 
   "rd": {
   "title": "Research & Development",
-  "director": { "name": null, "role": "Research & Development", "photo": null },
+  "director": { "name": "Prof.Vaishali G. Ghorpade", "role": "Research & Development", "photo": "/images/directors/drd.jpeg" },
   "notifications": [],
   "quickLinks": [],
   "tabs": [
@@ -180,7 +180,7 @@
 
   "placements": {
     "title": "IR, Placements & Sponsored Research",
-    "director": { "name": null, "role": "Industrial Relations, Placements & Sponsored Research", "photo": null },
+    "director": { "name": "Prof. V. Vasundra", "role": "Industrial Relations, Placements & Sponsored Research", "photo": "/images/directors/dipr.jpg" },
     "notifications": [],
     "quickLinks": [],
     "tabs": [
@@ -200,7 +200,7 @@
 
   "consultancy": {
     "title": "Industrial Consultancy Services",
-    "director": { "name": null, "role": "Industrial Consultancy & Services", "photo": null },
+    "director": { "name": "Prof.P.R.Bhanu Murthy", "role": "Industrial Consultancy & Services", "photo": "/images/directors/dics.jpg" },
     "notifications": [],
     "quickLinks": [],
     "tabs": [
@@ -215,7 +215,7 @@
 
   "faculty": {
     "title": "Faculty Development & Women Empowerment",
-    "director": { "name": null, "role": "Faculty Development & Women Empowerment Cell", "photo": null },
+    "director": { "name": "Prof. P. Sujatha", "role": "Faculty Development & Women Empowerment Cell", "photo": "/images/directors/dfdwe.jpg" },
     "notifications": [],
     "quickLinks": [],
     "tabs": [
@@ -232,7 +232,7 @@
 
   "iqac": {
   "title": "Internal Quality Assurance Cell",
-  "director": { "name": null, "role": "Internal Quality Assurance Cell (IQAC)", "photo": null },
+  "director": { "name": "Prof.R.Padma Suvarna", "role": "Internal Quality Assurance Cell (IQAC)", "photo": "/images/directors/diqac.png" },
   "notifications": [],
   "quickLinks": [],
   "tabs": [
@@ -277,7 +277,7 @@
 
   "skill": {
   "title": "Skill, Software Development & Incubation Centre",
-  "director": { "name": null, "role": "Skill, Software Development & Incubation Centre", "photo": null },
+  "director": { "name": "Prof. C. Shoba Bindu", "role": "Skill, Software Development & Incubation Centre", "photo": "/images/directors/dssdcic.jpg" },
   "notifications": [],
   "quickLinks": [],
   "tabs": [
@@ -309,7 +309,7 @@
 
   "ipr": {
     "title": "Intellectual Property Rights",
-    "director": { "name": null, "role": "Intellectual Property Rights (IPR)", "photo": null },
+    "director": { "name": "Prof.", "role": "Intellectual Property Rights (IPR)", "photo": "/images/directors/dipr.jpg" },
     "notifications": [],
     "quickLinks": [],
     "tabs": [
@@ -325,7 +325,7 @@
 
   "otpri": {
   "title": "Oil Technological & Pharmaceutical Research Institute (OTPRI)",
-  "director": { "name": null, "role": "Director/Head, OTPRI", "photo": null },
+  "director": { "name": "Prof. G.V. Subba Reddy", "role": "Director/Head, OTPRI", "photo": "/images/directors/dotpri.jpg" },
   "notifications": [],
   "quickLinks": [],
   "tabs": [
@@ -401,7 +401,7 @@
 
 "sms": {
   "title": "School of Management Studies",
-  "director": { "name": null, "role": "School of Management Studies", "photo": null },
+  "director": { "name": "Prof. B. Chandra Mohan Reddy", "role": "School of Management Studies", "photo": "/images/directors/dsms.jpg" },
   "notifications": [],
   "quickLinks": [],
   "tabs": [
@@ -437,7 +437,7 @@
 
   "nss": {
     "title": "NSS Cell",
-    "director": { "name": "Dr. Mamatha", "role": "NSS Cell Coordinator", "photo": null },
+    "director": { "name": "Dr. Mamatha", "role": "NSS Cell Coordinator", "photo": "/images/directors/mamatha.jpg" },
     "notifications": [],
     "quickLinks": [],
     "tabs": [

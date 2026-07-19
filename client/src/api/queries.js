@@ -40,9 +40,3 @@ export const administrationQuery = (roleKey) => ({
   select: roleKey ? (items) => items.find((a) => a.roleKey === roleKey) ?? null : undefined,
   enabled: !!roleKey,
 });
-export const administrationQuery = (roleKey) => ({
-  queryKey: ['administration', roleKey],
-  queryFn: list('/administration'),
-  select: roleKey ? (items) => items.find((a) => a.roleKey === roleKey) ?? null : undefined,
-  enabled: !!roleKey,
-});

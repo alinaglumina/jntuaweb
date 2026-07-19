@@ -120,7 +120,7 @@
 
   "evaluation": {
   "title": "Evaluation",
-  "director": { "name": "Prof.V.Naga Prasad Naidu", "role": "Director of Evaluation", "photo": "de.png" },
+  "director": { "name": "Prof.V.Naga Prasad Naidu", "role": "Director of Evaluation", "photo": "/images/directors/de.png" },
   "notifications": [],
   "quickLinks": [],
   "tabs": [
@@ -180,7 +180,7 @@
 
   "placements": {
     "title": "IR, Placements & Sponsored Research",
-    "director": { "name": "Prof. V. Vasundra", "role": "Industrial Relations, Placements & Sponsored Research", "photo": "/images/directors/dipr.jpg" },
+    "director": { "name": "Prof. V. Vasundra", "role": "Industrial Relations, Placements & Sponsored Research", "photo": "/images/directors/dirpsr.jpg" },
     "notifications": [],
     "quickLinks": [],
     "tabs": [
@@ -277,7 +277,7 @@
 
   "skill": {
   "title": "Skill, Software Development & Incubation Centre",
-  "director": { "name": "Prof. C. Shoba Bindu", "role": "Skill, Software Development & Incubation Centre", "photo": "/images/directors/dssdcic.jpg" },
+  "director": { "name": "Prof. C. Shoba Bindu", "role": "Skill, Software Development & Incubation Centre", "photo": "/images/directors/dssdic.jpg" },
   "notifications": [],
   "quickLinks": [],
   "tabs": [

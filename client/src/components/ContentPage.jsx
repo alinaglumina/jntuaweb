@@ -29,13 +29,11 @@ export default function ContentPage({ pageId, resolveId }) {
     : null;
 
   const PhotoBlock = photo ? (
-    <div className="mb-6 flex justify-center">
-      <img
-        src={photo}
-        alt={admin?.name || page?.title || 'Photo'}
-        className="h-40 w-40 rounded-full object-cover shadow-md"
-      />
-    </div>
+    <img
+      src={photo}
+      alt={admin?.name || page?.title || 'Photo'}
+      className="float-left mr-6 mb-4 h-40 w-40 rounded-full object-cover shadow-md"
+    />
   ) : null;
 
   if (override?.body) {

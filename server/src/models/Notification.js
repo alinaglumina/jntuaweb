@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
   title:      { type: String, required: true, trim: true },
+  publishedAt: { type: Date, default: Date.now },
   category:   { type: String, enum: ['news','exam','admission','research','placement','sports','tenders'], default: 'news', index: true },
   attachment: { type: String, default: '' },
   isActive:   { type: Boolean, default: true },

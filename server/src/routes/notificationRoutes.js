@@ -6,7 +6,7 @@ import { requireRole } from '../middleware/roleGuard.js';
 
 const c = crudController(Notification, {
   searchable: ['title'],
-  defaultSort: '-createdAt',
+  defaultSort: '-publishedAt',
   // Public list only shows active notifications; staff see all.
   baseFilter: (req) => ({ ...(req.user ? {} : { isActive: true }), ...(req.query.category ? { category: req.query.category } : {}) }),
 });

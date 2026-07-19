@@ -142,6 +142,7 @@ export const NAV = [
 export const RIBBON_LINKS = [
   { label: 'Notification Centre', to: '/notifications', icon: 'fa-bell' },
   { label: 'Alumni', to: '/alumni', icon: 'fa-user-graduate' },
+  { label: 'Faculty Corner', to: '/administration/faculty', icon: 'fa-chalkboard-user' },
 ];
 
 export const SOCIALS = [

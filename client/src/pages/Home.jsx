@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSlides, useNotifications, useAdministration, useFaculty } from '../api/public.js';
+import { useSlides, useNotifications, useAdministration } from '../api/public.js';
 import { HeroSlider, NoticeCard } from '../components/index.js';
 
 const UNITS = [
@@ -44,33 +44,6 @@ function Notifications() {
         )}
         <div className="mt-4 text-center"><Link to="/notifications" className="btn-ghost text-sm">View all notifications</Link></div>
       </div>
-    </section>
-  );
-}
-
-function FacultyCorner() {
-  const { data = [] } = useFaculty();
-  const items = data.slice(0, 8);
-  if (items.length === 0) return null;
-  return (
-    <section className="container py-14">
-      <div className="text-center"><h2 className="text-2xl">Faculty Corner</h2><div className="mx-auto mt-2 h-1 w-16 rounded bg-gold" /></div>
-      <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
-        {items.map((f) => (
-          <div key={f._id} className="card p-4 text-center">
-            {f.photo ? (
-              <img src={f.photo} alt={f.name} className="mx-auto h-20 w-20 rounded-full object-cover shadow-card" />
-            ) : (
-              <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-navy/5 text-navy">
-                <i className="fa-solid fa-user text-xl" aria-hidden="true" />
-              </div>
-            )}
-            <p className="mt-2 text-sm font-semibold text-navy">{f.name}</p>
-            {f.designation && <p className="text-xs text-slate-500">{f.designation}</p>}
-          </div>
-        ))}
-      </div>
-      <div className="mt-6 text-center"><Link to="/administration/faculty" className="btn-ghost text-sm">View all faculty</Link></div>
     </section>
   );
 }
@@ -133,8 +106,6 @@ export default function Home() {
       </section>
 
       <Notifications />
-
-      <FacultyCorner />
 
       {/* Recognitions */}
       <section className="bg-paper">

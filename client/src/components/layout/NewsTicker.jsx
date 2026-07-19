@@ -7,10 +7,8 @@ export default function NewsTicker() {
   const { data = [] } = useNotifications();
   const items = data.slice(0, 12);
 
-  if (items.length === 0) return null;
-
   // Duplicate the list so the CSS animation loops seamlessly.
-  const loopItems = [...items, ...items];
+  const loopItems = items.length > 0 ? [...items, ...items] : [];
 
   return (
     <div className="overflow-hidden border-b border-gold/40 bg-gold/10">
@@ -19,17 +17,21 @@ export default function NewsTicker() {
           <i className="fa-solid fa-tower-broadcast" aria-hidden="true" /> Live News
         </span>
         <div className="relative flex-1 overflow-hidden">
-          <div className="ticker-track flex w-max gap-10 whitespace-nowrap">
-            {loopItems.map((n, i) => (
-              <Link
-                key={`${n._id}-${i}`}
-                to={n.attachment || '/notifications'}
-                className="text-xs font-medium text-navy hover:text-crimson"
-              >
-                {n.title}
-              </Link>
-            ))}
-          </div>
+          {items.length === 0 ? (
+            <span className="text-xs font-medium text-slate-500">No live updates at the moment.</span>
+          ) : (
+            <div className="ticker-track flex w-max gap-10 whitespace-nowrap">
+              {loopItems.map((n, i) => (
+                <Link
+                  key={`${n._id}-${i}`}
+                  to={n.attachment || '/notifications'}
+                  className="text-xs font-medium text-navy hover:text-crimson"
+                >
+                  {n.title}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <style>{`

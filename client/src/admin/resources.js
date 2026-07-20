@@ -3,7 +3,11 @@
 // (matching a server registry key) and a fully working panel appears.
 // field types: text | textarea | html | number | date | checkbox | select | file | image
 
+import { DIRECTORATES } from '../content/nav.js';
+
 const F = (name, label, type = 'text', extra = {}) => ({ name, label, type, ...extra });
+const DIRECTORATE_OPTIONS = DIRECTORATES.map(([, label, slug]) => ({ value: slug, label }));
+const directorateField = () => F('directorateKey', 'Directorate', 'select', { options: DIRECTORATE_OPTIONS, required: true });
 
 export const GROUPS = [
   { id: 'content', label: 'Content' },
@@ -19,25 +23,25 @@ export const RESOURCES = {
   notifications: {
     label: 'Notifications', group: 'content', icon: 'fa-bell', roles: ['admin', 'director'],
     columns: ['title', 'category', 'publishedAt'],
-    fields: [F('title', 'Title'), F('category', 'Category', 'select', { options: CAT }),
+    fields: [directorateField(), F('title', 'Title'), F('category', 'Category', 'select', { options: CAT }),
              F('publishedAt', 'Date', 'date'),
              F('attachment', 'PDF attachment', 'file'), F('isActive', 'Active', 'checkbox', { default: true })],
   },
   news: {
     label: 'News', group: 'content', icon: 'fa-newspaper', roles: ['admin', 'director'],
     columns: ['title', 'category', 'isPublished', 'createdAt'],
-    fields: [F('title', 'Title'), F('category', 'Category'), F('content', 'Content', 'html'),
+    fields: [directorateField(), F('title', 'Title'), F('category', 'Category'), F('content', 'Content', 'html'),
              F('attachment', 'Attachment', 'file'), F('isPublished', 'Published', 'checkbox', { default: true })],
   },
   gallery: {
     label: 'Gallery', group: 'content', icon: 'fa-images', roles: ['admin', 'director'],
     columns: ['caption', 'category', 'uploadedAt'],
-    fields: [F('filename', 'Image', 'image', { required: true }), F('caption', 'Caption'), F('category', 'Category')],
+    fields: [directorateField(), F('filename', 'Image', 'image', { required: true }), F('caption', 'Caption'), F('category', 'Category')],
   },
   emagazines: {
     label: 'E-Magazines', group: 'content', icon: 'fa-book-open', roles: ['admin', 'director'],
     columns: ['monthYear', 'issueDate'],
-    fields: [F('monthYear', 'Month / Year', 'text', { required: true }), F('issueDate', 'Issue date', 'date'),
+    fields: [directorateField(), F('monthYear', 'Month / Year', 'text', { required: true }), F('issueDate', 'Issue date', 'date'),
              F('filename', 'PDF / link', 'file')],
   },
   slides: {
@@ -61,7 +65,7 @@ export const RESOURCES = {
   faculty: {
     label: 'Faculty', group: 'institutional', icon: 'fa-chalkboard-user', roles: ['admin', 'director'],
     columns: ['name', 'designation', 'department'],
-    fields: [F('name', 'Name', 'text', { required: true }), F('designation', 'Designation'), F('department', 'Department'),
+    fields: [directorateField(), F('name', 'Name', 'text', { required: true }), F('designation', 'Designation'), F('department', 'Department'),
              F('qualification', 'Qualification'), F('specialization', 'Specialization'), F('email', 'Email'),
              F('mobile', 'Mobile'), F('photo', 'Photo', 'image'), F('sortOrder', 'Order', 'number'),
              F('isActive', 'Active', 'checkbox', { default: true })],
@@ -79,7 +83,7 @@ export const RESOURCES = {
   senate: {
     label: 'Senate Documents', group: 'academics', icon: 'fa-file-signature', roles: ['admin', 'director'],
     columns: ['title', 'createdAt'],
-    fields: [F('title', 'Title', 'text', { required: true }), F('filename', 'Document', 'file'), F('url', 'External URL')],
+    fields: [directorateField(), F('title', 'Title', 'text', { required: true }), F('filename', 'Document', 'file'), F('url', 'External URL')],
   },
   dacp: {
     label: 'DACP Files', group: 'academics', icon: 'fa-folder-open', roles: ['admin', 'director'],
@@ -101,7 +105,7 @@ export const RESOURCES = {
   mous: {
     label: 'Tie-Ups & MOUs', group: 'collaboration', icon: 'fa-handshake', roles: ['admin', 'director'],
     columns: ['orgName', 'mouType', 'mouDate'],
-    fields: [F('orgName', 'Organization', 'text', { required: true }),
+    fields: [directorateField(), F('orgName', 'Organization', 'text', { required: true }),
              F('mouType', 'Type', 'select', { options: ['National', 'International'] }),
              F('mouDate', 'Date', 'date'), F('document', 'Document', 'file'), F('isActive', 'Active', 'checkbox', { default: true })],
   },
@@ -109,7 +113,7 @@ export const RESOURCES = {
   events: {
     label: 'Events', group: 'content', icon: 'fa-calendar-day', roles: ['admin', 'director'],
     columns: ['title', 'startDate', 'venue'],
-    fields: [F('title', 'Title', 'text', { required: true }), F('category', 'Category'),
+    fields: [directorateField(), F('title', 'Title', 'text', { required: true }), F('category', 'Category'),
              F('startDate', 'Start date', 'date', { required: true }), F('endDate', 'End date', 'date'),
              F('venue', 'Venue'), F('description', 'Description', 'html'), F('banner', 'Banner', 'image'),
              F('registrationUrl', 'Registration URL'), F('isPublished', 'Published', 'checkbox', { default: true })],
@@ -117,7 +121,7 @@ export const RESOURCES = {
   circulars: {
     label: 'Circulars', group: 'content', icon: 'fa-file-circle-exclamation', roles: ['admin', 'director'],
     columns: ['title', 'refNo', 'circularDate'],
-    fields: [F('title', 'Title', 'text', { required: true }), F('refNo', 'Reference No.'),
+    fields: [directorateField(), F('title', 'Title', 'text', { required: true }), F('refNo', 'Reference No.'),
              F('category', 'Category'), F('circularDate', 'Date', 'date'),
              F('attachment', 'PDF', 'file'), F('isNewItem', 'Mark as new', 'checkbox'),
              F('isActive', 'Active', 'checkbox', { default: true })],
@@ -154,7 +158,7 @@ export const RESOURCES = {
   admissions: {
     label: 'Admissions', group: 'content', icon: 'fa-user-plus', roles: ['admin', 'director'],
     columns: ['title', 'programme', 'status'],
-    fields: [F('title', 'Title', 'text', { required: true }), F('programme', 'Programme', 'text', { required: true }),
+    fields: [directorateField(), F('title', 'Title', 'text', { required: true }), F('programme', 'Programme', 'text', { required: true }),
              F('academicYear', 'Academic year'), F('category', 'Category', 'select', { options: ['UG', 'PG', 'PhD', 'Diploma', 'Other'] }),
              F('description', 'Description', 'html'), F('openDate', 'Open date', 'date'), F('closeDate', 'Close date', 'date'),
              F('applyUrl', 'Apply URL'), F('attachment', 'Notification PDF', 'file'),
@@ -164,7 +168,7 @@ export const RESOURCES = {
   examinations: {
     label: 'Examinations', group: 'academics', icon: 'fa-file-pen', roles: ['admin', 'director'],
     columns: ['title', 'examType', 'examDate'],
-    fields: [F('title', 'Title', 'text', { required: true }),
+    fields: [directorateField(), F('title', 'Title', 'text', { required: true }),
              F('examType', 'Type', 'select', { options: ['Regular', 'Supplementary', 'Revaluation', 'Recounting', 'Fee', 'TimeTable', 'Other'] }),
              F('regulation', 'Regulation'), F('programme', 'Programme'), F('semester', 'Semester'),
              F('examDate', 'Exam date', 'date'), F('lastDate', 'Last date', 'date'),
@@ -173,7 +177,7 @@ export const RESOURCES = {
   results: {
     label: 'Results', group: 'academics', icon: 'fa-square-poll-vertical', roles: ['admin', 'director'],
     columns: ['title', 'programme', 'publishedOn'],
-    fields: [F('title', 'Title', 'text', { required: true }), F('regulation', 'Regulation'), F('programme', 'Programme'),
+    fields: [directorateField(), F('title', 'Title', 'text', { required: true }), F('regulation', 'Regulation'), F('programme', 'Programme'),
              F('semester', 'Semester'), F('month', 'Month/Year'), F('resultUrl', 'Results portal URL'),
              F('attachment', 'PDF', 'file'), F('publishedOn', 'Published on', 'date'),
              F('isPublished', 'Published', 'checkbox', { default: true })],
@@ -190,7 +194,7 @@ export const RESOURCES = {
   videos: {
     label: 'Video Gallery', group: 'content', icon: 'fa-video', roles: ['admin', 'director'],
     columns: ['title', 'provider', 'category'],
-    fields: [F('title', 'Title', 'text', { required: true }), F('url', 'Video URL', 'text', { required: true }),
+    fields: [directorateField(), F('title', 'Title', 'text', { required: true }), F('url', 'Video URL', 'text', { required: true }),
              F('provider', 'Provider', 'select', { options: ['youtube', 'vimeo', 'file'] }),
              F('thumbnail', 'Thumbnail', 'image'), F('category', 'Category'), F('description', 'Description', 'textarea'),
              F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],

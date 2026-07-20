@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useLocation, Navigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { RESOURCES, GROUPS } from './resources.js';
+import { DIRECTORATES } from '../content/nav.js';
 import { useAuth } from '../hooks/useAuth.js';
 import { useLogout } from '../api/auth.js';
 import { Sidebar, Breadcrumbs, NavProgress } from '../components/index.js';
@@ -25,9 +26,17 @@ export default function AdminLayout() {
 
   const visible = Object.entries(RESOURCES).filter(([, def]) => def.roles.includes(user?.role));
 
+  // Resources whose form includes a 'directorateKey' field are directorate-scoped.
+  const scopedEntries = visible.filter(([, d]) => d.fields?.some((f) => f.name === 'directorateKey'));
+  const scopedKeys = new Set(scopedEntries.map(([key]) => key));
+  const [expandedDirs, setExpandedDirs] = useState({});
+  const toggleDir = (slug) => setExpandedDirs((p) => ({ ...p, [slug]: !p[slug] }));
+
   // Build the Sidebar groups from the resource manifest.
   const groups = GROUPS.map((g) => {
-    const items = visible.filter(([, d]) => d.group === g.id).map(([key, d]) => ({ to: `/admin/r/${key}`, label: d.label, icon: d.icon, onClick: close }));
+    const items = visible
+      .filter(([key, d]) => d.group === g.id && !(isAdmin && scopedKeys.has(key)))
+      .map(([key, d]) => ({ to: `/admin/r/${key}`, label: d.label, icon: d.icon, onClick: close }));
     if (g.id === 'system' && isAdmin) {
       items.push({ to: '/admin/media', label: 'Media Library', icon: 'fa-photo-film', onClick: close });
       items.push({ to: '/admin/page-builder', label: 'Page Builder', icon: 'fa-cubes', onClick: close });
@@ -35,6 +44,27 @@ export default function AdminLayout() {
     }
     return { label: g.label, items };
   }).filter((g) => g.items.length);
+
+  // Super Admin: one collapsible section per Directorate, listing that
+  // directorate's scoped resources when expanded. Directors don't see this —
+  // their own sidebar already only shows their directorate's data (server-scoped).
+  if (isAdmin) {
+    const directorateGroups = DIRECTORATES.map(([, dirLabel, slug]) => {
+      const isOpen = !!expandedDirs[slug];
+      return {
+        label: (
+          <button type="button" onClick={() => toggleDir(slug)} className="flex w-full items-center justify-between text-left hover:text-white">
+            <span><i className="fa-solid fa-building-columns mr-1.5 text-[10px]" aria-hidden="true" />{dirLabel}</span>
+            <i className={`fa-solid ${isOpen ? 'fa-chevron-down' : 'fa-chevron-right'} text-[9px]`} aria-hidden="true" />
+          </button>
+        ),
+        items: isOpen ? scopedEntries.map(([key, d]) => ({
+          to: `/admin/r/${key}?directorate=${slug}`, label: d.label, icon: d.icon, onClick: close,
+        })) : [],
+      };
+    });
+    groups.push(...directorateGroups);
+  }
 
   // Curated CMS/admin groups (custom screens beyond the resource manifest).
   if (isAdmin) {

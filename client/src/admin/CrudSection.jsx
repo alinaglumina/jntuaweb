@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth.js';
 import { RESOURCES } from './resources.js';
 import { useResourcePage, useSaveResource, useDeleteResource, useRestoreResource } from '../api/admin.js';
 import { useDebounce } from '../hooks/useDebounce.js';
@@ -12,6 +13,10 @@ const PAGE_SIZE = 25;
 export default function CrudSection() {
   const { resource } = useParams();
   const def = RESOURCES[resource];
+  const { user, isAdmin } = useAuth();
+  const [searchParams] = useSearchParams();
+  const directorateParam = searchParams.get('directorate');
+  const isDirectorateScoped = !!def?.fields?.some((f) => f.name === 'directorateKey');
   const toast = useToast();
   const [view, setView] = useState('active');
   const [editing, setEditing] = useState(null);
@@ -21,7 +26,7 @@ export default function CrudSection() {
   const debouncedQ = useDebounce(q, 350);   // query only after typing stops
 
   const trash = view === 'trash';
-  const params = { page, limit: PAGE_SIZE, ...(debouncedQ ? { q: debouncedQ } : {}), ...(trash ? { deleted: 'only' } : {}) };
+  const params = { page, limit: PAGE_SIZE, ...(debouncedQ ? { q: debouncedQ } : {}), ...(trash ? { deleted: 'only' } : {}), ...(isDirectorateScoped && isAdmin && directorateParam ? { directorate: directorateParam } : {}) };
   const { data, isLoading, isError, error, isPlaceholderData } = useResourcePage(resource, params);
   const save = useSaveResource(resource);
   const del = useDeleteResource(resource);
@@ -38,6 +43,12 @@ export default function CrudSection() {
   const onRestore = async (row) => { try { await restore.mutateAsync(row._id); toast.success('Restored.'); } catch (e) { toast.error(e.message); } };
 
   const columns = def.columns.map((key) => ({ key }));
+  const visibleFields = isDirectorateScoped && !isAdmin
+    ? def.fields.filter((f) => f.name !== 'directorateKey')
+    : def.fields;
+  const newRecordDefaults = isDirectorateScoped && isAdmin && directorateParam
+    ? { directorateKey: directorateParam }
+    : null;
   const setSearch = (v) => { setQ(v); reset(); };
   const switchView = (v) => { setView(v); reset(); };
 
@@ -78,7 +89,7 @@ export default function CrudSection() {
       )}
 
       <Modal open={!!editing} onClose={() => setEditing(null)} title={editing === 'new' ? `Add ${def.label}` : `Edit ${def.label}`}>
-        {editing && <ResourceForm fields={def.fields} initial={editing === 'new' ? null : editing} onSubmit={onSave} onCancel={() => setEditing(null)} busy={save.isPending} error={save.error} />}
+        {editing && <ResourceForm fields={visibleFields} initial={editing === 'new' ? newRecordDefaults : editing} onSubmit={onSave} onCancel={() => setEditing(null)} busy={save.isPending} error={save.error} />}
       </Modal>
       <ConfirmDialog open={!!confirm} title={confirm?.hard ? 'Delete permanently?' : 'Move to trash?'}
         body={confirm?.hard ? 'This permanently removes the item and cannot be undone.' : 'The item will be moved to Trash. You can restore it later.'}

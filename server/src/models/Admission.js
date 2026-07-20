@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
+  directorateKey: { type: String, default: '', index: true },
   title:       { type: String, required: [true, 'Title is required'], trim: true, maxlength: 300 },
   programme:   { type: String, required: true, trim: true },                 // B.Tech, M.Tech, MBA, Ph.D…
   academicYear:{ type: String, default: '', trim: true, match: [/^\d{4}(-\d{2,4})?$/, 'Use YYYY or YYYY-YY'] },

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
+  directorateKey: { type: String, default: '', index: true },
   title:     { type: String, required: [true, 'Title is required'], trim: true },
   url:       { type: String, required: [true, 'Video URL is required'] },  // YouTube/Vimeo/file
   provider:  { type: String, enum: ['youtube', 'vimeo', 'file'], default: 'youtube' },

@@ -24,14 +24,31 @@ router.use(auditLogger);   // record all successful mutations
 
 function scopedFilter(def) {
   return (req) => {
-    if (req.user.role === 'admin' || !def.sectionField || !req.user.directorate) return {};
+    if (!def.sectionField) return {};
+    if (req.user.role === 'admin') {
+      // Admin browsing "unscoped" — optionally drill into one directorate via ?directorate=
+      const q = req.query.directorate;
+      return q ? { [def.sectionField]: { $regex: `^(dir-)?${q}`, $options: 'i' } } : {};
+    }
+    if (!req.user.directorate) return {};
     return { [def.sectionField]: { $regex: `^(dir-)?${req.user.directorate}`, $options: 'i' } };
+  };
+}
+
+// Directors can only WRITE into their own directorate's scope — forces the
+// section field server-side so a director can't spoof another directorate's key.
+function scopedWrite(def) {
+  return (body, req) => {
+    if (def.sectionField && req.user.role !== 'admin' && req.user.directorate) {
+      body[def.sectionField] = req.user.directorate;
+    }
+    return body;
   };
 }
 
 // ── Generic CRUD for every registered resource ──
 for (const [key, def] of Object.entries(RESOURCES)) {
-  const c = crudController(def.model, { searchable: def.searchable || [], baseFilter: scopedFilter(def) });
+  const c = crudController(def.model, { searchable: def.searchable || [], baseFilter: scopedFilter(def), beforeWrite: scopedWrite(def) });
   const guard = requireRole(...def.roles);
   const withUpload = def.upload ? [resourceUpload(def.upload[0], def.upload[1])] : [];
   router.get(`/${key}`, guard, c.list);

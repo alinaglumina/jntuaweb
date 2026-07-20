@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 // Exam notifications / schedules (time-tables, fee notifications, revaluation…).
 const schema = new mongoose.Schema({
+  directorateKey: { type: String, default: '', index: true },
   title:       { type: String, required: [true, 'Title is required'], trim: true, maxlength: 300 },
   examType:    { type: String, enum: ['Regular', 'Supplementary', 'Revaluation', 'Recounting', 'Fee', 'TimeTable', 'Other'], default: 'Regular', index: true },
   regulation:  { type: String, default: '' },                               // R18, R21…

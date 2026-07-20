@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
+  directorateKey: { type: String, default: '', index: true },
   title:       { type: String, required: [true, 'Title is required'], trim: true, maxlength: 300 },
   examination: { type: mongoose.Schema.Types.ObjectId, ref: 'Examination', default: null }, // optional link
   regulation:  { type: String, default: '' },

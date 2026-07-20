@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
+  directorateKey: { type: String, default: '', index: true },
   orgName:   { type: String, required: true, trim: true },
   mouType:   { type: String, enum: ['National','International'], default: 'National', index: true },
   document:  { type: String, default: '' },

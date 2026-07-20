@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
+  directorateKey: { type: String, default: '', index: true },
   title:      { type: String, required: true, trim: true },
   publishedAt: { type: Date, default: Date.now },
   category:   { type: String, enum: ['news','exam','admission','research','placement','sports','tenders'], default: 'news', index: true },

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
+  directorateKey: { type: String, default: '', index: true },
   name:           { type: String, required: true },
   designation:    { type: String, default: '' },
   department:     { type: String, default: '', index: true },

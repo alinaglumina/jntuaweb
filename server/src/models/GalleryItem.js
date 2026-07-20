@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
+  directorateKey: { type: String, default: '', index: true },
   filename:   { type: String, required: true },
   caption:    { type: String, default: '' },
   category:   { type: String, default: 'General', index: true },

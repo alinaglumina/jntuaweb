@@ -31,6 +31,16 @@ mount('/faculty',     Faculty,      { defaultSort: 'sortOrder',    baseFilter: (
 mount('/administration', Administration, { defaultSort: 'createdAt' });
 mount('/directorate-content', DirectorateContent, { defaultSort: 'createdAt' });
 
+// Directorate menu items — a directorate's custom nav (Home, About, Syllabus, ...).
+router.get('/directorate-menu/:directorateKey', async (req, res, next) => {
+  try {
+    const { DirectorateMenuItem } = await import('../models/index.js');
+    const items = await DirectorateMenuItem.find({ directorateKey: req.params.directorateKey, isActive: true })
+      .sort('sortOrder').lean();
+    res.json({ success: true, data: items, error: null });
+  } catch (e) { next(e); }
+});
+
 // Fetch a single administration profile / directorate by its key (used by pages).
 router.get('/administration/key/:roleKey', async (req, res, next) => {
   try {

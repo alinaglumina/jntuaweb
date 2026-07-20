@@ -62,6 +62,22 @@ export const RESOURCES = {
     fields: [F('directorateKey', 'Directorate key', 'text', { required: true }), F('directorName', 'Director name'),
              F('directorDesignation', 'Designation'), F('directorPhoto', 'Photo', 'image'), F('aboutText', 'About', 'html')],
   },
+  'directorate-menu': {
+    label: 'Menu Items', group: 'institutional', icon: 'fa-bars', roles: ['admin', 'director'],
+    columns: ['label', 'menuKey', 'type', 'sortOrder'],
+    fields: [directorateField(),
+             F('label', 'Menu label (e.g. "Syllabus")', 'text', { required: true }),
+             F('menuKey', 'URL key (e.g. "syllabus")', 'text', { required: true }),
+             F('type', 'Type', 'select', { options: [
+               { value: 'page', label: 'Content page (write text here)' },
+               { value: 'resource', label: 'Linked resource (e.g. Notifications)' },
+               { value: 'link', label: 'External URL' },
+             ] }),
+             F('body', 'Page content (only if Type = Content page)', 'html'),
+             F('linkResource', 'Resource key (only if Type = Linked resource, e.g. "notifications")'),
+             F('externalUrl', 'External URL (only if Type = External URL)'),
+             F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   faculty: {
     label: 'Faculty', group: 'institutional', icon: 'fa-chalkboard-user', roles: ['admin', 'director'],
     columns: ['name', 'designation', 'department'],

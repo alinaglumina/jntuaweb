@@ -4,7 +4,7 @@ import {
   DacpFile, DafaDoc, PageContent,
   Event, Department, Student, Circular, Download, Menu,
   Admission, Examination, Result, ContentBlock,
-  Video, SeoMeta,
+  Video, SeoMeta, DirectorateMenuItem,
 } from '../models/index.js';
 
 // Each entry: model + upload config + which roles may write + list search fields.
@@ -20,6 +20,7 @@ export const RESOURCES = {
   faculty:             { model: Faculty,            upload: ['photo', 'images'],         searchable: ['name', 'department'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   administration:      { model: Administration,     upload: ['photo', 'images'],         roles: ['admin'] },
   'directorate-content': { model: DirectorateContent, upload: ['directorPhoto', 'images'], searchable: ['directorName'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
+  'directorate-menu':    { model: DirectorateMenuItem, searchable: ['label', 'menuKey'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   honoris:             { model: HonorisCausa,       searchable: ['name'], roles: ['admin'] },
   senate:              { model: SenateDoc,          upload: ['filename', 'senate'],      searchable: ['title'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   regulations:         { model: Regulation,         roles: ['admin'] },

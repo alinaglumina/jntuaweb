@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PageShell from './PageShell.jsx';
 import ContentPage from './ContentPage.jsx';
+import SafeHtml from './SafeHtml.jsx';
 import directorates from '../content/directorates.json';
+import { useDirectorateMenu } from '../api/public.js';
 
 function Avatar({ name, role }) {
   const source = name || role || '?';
@@ -19,6 +21,28 @@ function Avatar({ name, role }) {
       {initials}
     </div>
   );
+}
+
+function DynamicTabContent({ item }) {
+  if (item.type === 'page') {
+    return item.body ? <SafeHtml html={item.body} /> : <p className="text-slate-500">Content coming soon.</p>;
+  }
+  if (item.type === 'link') {
+    return item.externalUrl ? (
+      <a href={item.externalUrl} target="_blank" rel="noopener noreferrer"
+         className="inline-flex items-center gap-2 rounded-md bg-navy px-4 py-2 text-sm font-semibold text-white hover:bg-navy/90">
+        Open {item.label} <i className="fa-solid fa-arrow-up-right-from-square text-xs" aria-hidden="true" />
+      </a>
+    ) : <p className="text-slate-500">Link not set yet.</p>;
+  }
+  if (item.type === 'resource' && item.linkResource) {
+    return (
+      <p className="text-slate-700">
+        See <a href={`/${item.linkResource}`} className="font-semibold text-crimson hover:underline">{item.label}</a> for this directorate.
+      </p>
+    );
+  }
+  return <p className="text-slate-500">Details will be published soon.</p>;
 }
 
 function Blocks({ blocks }) {
@@ -50,7 +74,7 @@ function flattenLeaves(nodes, prefix = '') {
   nodes.forEach((n, i) => {
     const key = prefix ? `${prefix}.${i}` : `${i}`;
     if (n.children) out = out.concat(flattenLeaves(n.children, key));
-    else out.push({ key, label: n.label, blocks: n.blocks });
+    else out.push({ key, label: n.label, blocks: n.blocks, dynamic: n.dynamic, item: n.item });
   });
   return out;
 }
@@ -146,25 +170,36 @@ export default function DirectoratePage({ resolveKey }) {
   const data = directorates[key];
   const [activeKey, setActiveKey] = useState('0');
 
-  if (!data) return <ContentPage resolveId={() => `dir-${key}`} />;
+  const { data: dynamicItems = [] } = useDirectorateMenu(key);
 
-  const { title, director, notifications = [], quickLinks = [], tabs = [] } = data;
+  if (!data && dynamicItems.length === 0) return <ContentPage resolveId={() => `dir-${key}`} />;
+
+  const { title, director, notifications = [], quickLinks = [], tabs: staticTabs = [] } = data || {};
+  const tabs = [...staticTabs];
+  dynamicItems.forEach((item) => {
+    const idx = tabs.findIndex((t) => !t.children && t.label === item.label);
+    const dynamicTab = { label: item.label, dynamic: true, item };
+    if (idx >= 0) tabs[idx] = dynamicTab;
+    else tabs.push(dynamicTab);
+  });
   const flat = flattenLeaves(tabs);
   const active = flat.find((t) => t.key === activeKey) || flat[0];
 
   return (
-    <PageShell title={title}>
+    <PageShell title={title || key}>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-[280px_1fr]">
         <aside className="space-y-6">
-          <div className="flex flex-col items-center rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm">
-            {director.photo ? (
-              <img src={director.photo} alt={director.name || director.role} className="h-28 w-28 rounded-full object-cover" />
-            ) : (
-              <Avatar name={director.name} role={director.role} />
-            )}
-            <p className="mt-4 font-display font-semibold text-navy">{director.name || director.role}</p>
-            {director.name && <p className="text-sm text-slate-600">{director.role}</p>}
-          </div>
+          {director && (
+            <div className="flex flex-col items-center rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm">
+              {director.photo ? (
+                <img src={director.photo} alt={director.name || director.role} className="h-28 w-28 rounded-full object-cover" />
+              ) : (
+                <Avatar name={director.name} role={director.role} />
+              )}
+              <p className="mt-4 font-display font-semibold text-navy">{director.name || director.role}</p>
+              {director.name && <p className="text-sm text-slate-600">{director.role}</p>}
+            </div>
+          )}
 
           {quickLinks.length > 0 && (
             <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
@@ -204,7 +239,7 @@ export default function DirectoratePage({ resolveKey }) {
             <div className="rounded-lg border border-slate-200 bg-white shadow-sm">
               <TabBar tabs={tabs} activeKey={active.key} onSelect={setActiveKey} />
               <div className="p-6">
-                <Blocks blocks={active.blocks} />
+                {active.dynamic ? <DynamicTabContent item={active.item} /> : <Blocks blocks={active.blocks} />}
               </div>
             </div>
           )}

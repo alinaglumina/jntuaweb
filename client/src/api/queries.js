@@ -11,6 +11,11 @@ export const mousQuery        = () => ({ queryKey: ['mous'],        queryFn: lis
 export const emagazinesQuery  = () => ({ queryKey: ['emagazines'],  queryFn: list('/emagazines') });
 export const honorisQuery     = () => ({ queryKey: ['honoris'],     queryFn: list('/honoris') });
 export const facultyQuery     = () => ({ queryKey: ['faculty'],     queryFn: list('/faculty') });
+export const directorateMenuQuery = (key) => ({
+  queryKey: ['directorate-menu-public', key],
+  queryFn: () => api.get(`/directorate-menu/${key}`).catch(() => []),
+  retry: false,
+});
 export const newsQuery        = () => ({ queryKey: ['news'],        queryFn: list('/news') });
 export const settingsQuery    = () => ({ queryKey: ['settings'],    queryFn: () => api.get('/settings') });
 

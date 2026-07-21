@@ -53,6 +53,15 @@ export default function MediaLibrary() {
   const doReplace = (f) => { setReplacing(f); replaceRef.current?.click(); };
   const onReplaceFile = (e) => { const file = e.target.files?.[0]; if (file && replacing) replace.mutate({ id: replacing._id, file }); e.target.value = ''; setReplacing(null); };
   const download = (f) => { window.location.href = `/api/media/${f._id}/download`; };
+  const fullUrl = (f) => `${window.location.origin}${f.url}`;
+  const copyUrl = async (f) => {
+    try {
+      await navigator.clipboard.writeText(fullUrl(f));
+      toast.success('URL copied to clipboard.');
+    } catch {
+      toast.error('Could not copy URL.');
+    }
+  };
 
   const onDrop = (e) => { e.preventDefault(); setDrag(false); const files = [...(e.dataTransfer.files || [])]; if (files.length) uploadFiles(files); };
   const files = data?.files || [];
@@ -118,6 +127,7 @@ export default function MediaLibrary() {
                       <button onClick={() => setPreview(f)} className="text-brand hover:text-crimson" title="Preview"><i className="fa-solid fa-eye" /></button>
                       <button onClick={() => download(f)} className="text-brand hover:text-crimson" title="Download"><i className="fa-solid fa-download" /></button>
                       <button onClick={() => doReplace(f)} className="text-brand hover:text-crimson" title="Replace"><i className="fa-solid fa-arrows-rotate" /></button>
+                      <button onClick={() => copyUrl(f)} className="text-brand hover:text-crimson" title="Copy URL"><i className="fa-solid fa-link" /></button>
                       <button onClick={() => setConfirm(f)} className="text-muted hover:text-crimson" title="Delete"><i className="fa-solid fa-trash" /></button>
                     </div>
                   </div>
@@ -132,6 +142,7 @@ export default function MediaLibrary() {
 
       <Modal open={!!preview} onClose={() => setPreview(null)} size="xl" title={preview?.originalName}
         footer={<><span className="mr-auto text-xs text-muted">{preview && `${fmtSize(preview.size)} · ${preview.downloadCount || 0} downloads`}</span>
+          <Button size="sm" variant="ghost" icon="fa-link" onClick={() => copyUrl(preview)}>Copy URL</Button>
           <Button size="sm" variant="ghost" onClick={() => doReplace(preview)}>Replace</Button>
           <Button size="sm" icon="fa-download" onClick={() => download(preview)}>Download</Button></>}>
         {preview && <FilePreview url={preview.url} type={preview.fileType} name={preview.originalName} height={520} />}

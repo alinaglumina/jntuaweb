@@ -3,6 +3,8 @@ import { Outlet, useNavigate, useLocation, Navigate, Link } from 'react-router-d
 import { Helmet } from 'react-helmet-async';
 import { RESOURCES, GROUPS } from './resources.js';
 import { DIRECTORATES } from '../content/nav.js';
+import { useQuery } from '@tanstack/react-query';
+import { adminPageQuery } from '../api/queries.js';
 import { useAuth } from '../hooks/useAuth.js';
 import { useLogout } from '../api/auth.js';
 import { Sidebar, Breadcrumbs, NavProgress } from '../components/index.js';
@@ -32,6 +34,22 @@ export default function AdminLayout() {
   const [expandedDirs, setExpandedDirs] = useState({});
   const toggleDir = (slug) => setExpandedDirs((p) => ({ ...p, [slug]: !p[slug] }));
 
+  // Fetch ALL directorate menu items in one go (admin sees every directorate
+  // unfiltered), then group them client-side — avoids 13 separate requests.
+  const { data: menuData } = useQuery({ ...adminPageQuery('directorate-menu', { limit: 500 }), enabled: isAdmin });
+  const menuByDirectorate = {};
+  (menuData?.items || []).forEach((item) => {
+    (menuByDirectorate[item.directorateKey] ||= []).push(item);
+  });
+  Object.values(menuByDirectorate).forEach((list) => list.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0)));
+
+  const TYPE_ICON = { page: 'fa-file-lines', resource: 'fa-link', link: 'fa-arrow-up-right-from-square' };
+  const menuItemHref = (item, slug) => {
+    if (item.type === 'resource' && item.linkResource) return `/admin/r/${item.linkResource}?directorate=${slug}`;
+    if (item.type === 'link' && item.externalUrl) return item.externalUrl;
+    return `/admin/r/directorate-menu?directorate=${slug}&edit=${item._id}`;
+  };
+
   // Build the Sidebar groups from the resource manifest.
   const groups = GROUPS.map((g) => {
     const items = visible
@@ -58,9 +76,18 @@ export default function AdminLayout() {
             <i className={`fa-solid ${isOpen ? 'fa-chevron-down' : 'fa-chevron-right'} text-[9px]`} aria-hidden="true" />
           </button>
         ),
-        items: isOpen ? scopedEntries.map(([key, d]) => ({
-          to: `/admin/r/${key}?directorate=${slug}`, label: d.label, icon: d.icon, onClick: close,
-        })) : [],
+        items: !isOpen ? [] : (menuByDirectorate[slug]?.length
+          ? [
+              ...menuByDirectorate[slug].map((item) => ({
+                to: menuItemHref(item, slug), label: item.label, icon: TYPE_ICON[item.type] || 'fa-file', onClick: close,
+              })),
+              { to: `/admin/r/directorate-menu?directorate=${slug}`, label: 'Manage menu items', icon: 'fa-sliders', onClick: close },
+            ]
+          : [
+              ...scopedEntries.map(([key, d]) => ({
+                to: `/admin/r/${key}?directorate=${slug}`, label: d.label, icon: d.icon, onClick: close,
+              })),
+            ]),
       };
     });
     groups.push(...directorateGroups);

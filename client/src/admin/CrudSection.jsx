@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth.js';
 import { RESOURCES } from './resources.js';
@@ -16,6 +16,7 @@ export default function CrudSection() {
   const { user, isAdmin } = useAuth();
   const [searchParams] = useSearchParams();
   const directorateParam = searchParams.get('directorate');
+  const editParam = searchParams.get('edit');
   const isDirectorateScoped = !!def?.fields?.some((f) => f.name === 'directorateKey');
   const toast = useToast();
   const [view, setView] = useState('active');
@@ -37,6 +38,14 @@ export default function CrudSection() {
   const rows = data?.items || [];
   const total = data?.total || 0;
   const reset = () => setPage(1);
+
+  // Deep-link support: /admin/r/xyz?edit=<id> opens that record's edit modal directly.
+  useEffect(() => {
+    if (editParam && rows.length) {
+      const match = rows.find((r) => r._id === editParam);
+      if (match) setEditing(match);
+    }
+  }, [editParam, rows]);
 
   const onSave = async (values) => { try { await save.mutateAsync({ id: editing === 'new' ? null : editing._id, values }); setEditing(null); toast.success('Saved.'); } catch (e) { toast.error(e.message); } };
   const onDelete = async () => { try { await del.mutateAsync({ id: confirm.row._id, hard: confirm.hard }); setConfirm(null); toast.success(confirm.hard ? 'Permanently deleted.' : 'Moved to trash.'); } catch (e) { toast.error(e.message); } };

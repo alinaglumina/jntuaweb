@@ -18,6 +18,8 @@ export default function MediaLibrary() {
   const [progress, setProgress] = useState(null);      // 0..100 while uploading
   const [report, setReport] = useState(false);
   const [moveTo, setMoveTo] = useState(null);
+  const [newFolderOpen, setNewFolderOpen] = useState(false);
+  const [newFolderName, setNewFolderName] = useState('');
   const replaceRef = useRef(null);
   const [replacing, setReplacing] = useState(null);
 
@@ -48,6 +50,11 @@ export default function MediaLibrary() {
   const del = useMutation({ mutationFn: (id) => api.delete(`/admin/media/${id}`), onSuccess: () => { invalidate(); toast.success('Deleted.'); } });
   const bulkDelete = useMutation({ mutationFn: (ids) => api.post('/admin/media/bulk-delete', { ids }), onSuccess: (r) => { invalidate(); clearSel(); toast.success(`Deleted ${r.deleted} files.`); } });
   const bulkMove = useMutation({ mutationFn: ({ ids, folder }) => api.post('/admin/media/bulk-move', { ids, folder }), onSuccess: (r) => { invalidate(); clearSel(); setMoveTo(null); toast.success(`Moved ${r.moved} files.`); } });
+  const createFolder = useMutation({
+    mutationFn: (name) => api.post('/admin/media/folders', { name, parent: folder }),
+    onSuccess: () => { invalidate(); setNewFolderOpen(false); setNewFolderName(''); toast.success('Folder created.'); },
+    onError: (e) => toast.error(e.message),
+  });
 
   const toggle = (id) => setSelected((s) => { const n = new Set(s); n.has(id) ? n.delete(id) : n.add(id); return n; });
   const doReplace = (f) => { setReplacing(f); replaceRef.current?.click(); };
@@ -71,6 +78,7 @@ export default function MediaLibrary() {
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl"><i className="fa-solid fa-photo-film mr-2 text-crimson" /> Media Library</h1>
         <div className="flex gap-2">
+          <Button variant="ghost" size="sm" icon="fa-folder-plus" onClick={() => setNewFolderOpen(true)}>New folder</Button>
           <Button variant="ghost" size="sm" icon="fa-chart-simple" onClick={() => setReport(true)}>Download report</Button>
           <label className="btn-primary cursor-pointer text-sm">
             <i className="fa-solid fa-upload" /> Upload
@@ -154,6 +162,17 @@ export default function MediaLibrary() {
           <Button size="sm" loading={bulkMove.isPending} onClick={() => bulkMove.mutate({ ids: [...selected], folder: moveTo })}>Move here</Button></>}>
         <Select value={moveTo || 'root'} onChange={(e) => setMoveTo(e.target.value)} placeholder="Root"
           options={[{ value: 'root', label: 'Root' }, ...(data?.folders || []).map((f) => ({ value: f._id, label: f.name }))]} />
+      </Modal>
+
+      <Modal open={newFolderOpen} onClose={() => setNewFolderOpen(false)} title="New Folder"
+        footer={<><Button size="sm" variant="ghost" onClick={() => setNewFolderOpen(false)}>Cancel</Button>
+          <Button size="sm" loading={createFolder.isPending} disabled={!newFolderName.trim()} onClick={() => createFolder.mutate(newFolderName.trim())}>Create</Button></>}>
+        <input
+          type="text" value={newFolderName} onChange={(e) => setNewFolderName(e.target.value)}
+          placeholder="Folder name" autoFocus
+          onKeyDown={(e) => { if (e.key === 'Enter' && newFolderName.trim()) createFolder.mutate(newFolderName.trim()); }}
+          className="w-full rounded-md border border-line px-3 py-2 text-sm"
+        />
       </Modal>
 
       <ReportModal open={report} onClose={() => setReport(false)} fmtSize={fmtSize} />

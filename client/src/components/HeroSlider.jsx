@@ -9,10 +9,11 @@ export default function HeroSlider({ slides = [], interval = 6000, height = 'min
   const s = items[i % items.length];
   return (
     <section className="relative overflow-hidden bg-white text-navy">
-      {s.image && <img src={s.image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />}
+      {s.image && <img src={s.image} alt="" className="absolute inset-0 h-full w-full object-cover" />}
       <div className={`container relative grid ${height} place-items-center py-16`}>
         <AnimatePresence mode="wait">
-          <motion.div key={s._id || i} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="max-w-2xl text-center">
+          <motion.div key={s._id || i} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+            className="max-w-2xl rounded-2xl bg-white/85 px-8 py-6 text-center shadow-lift backdrop-blur-sm">
             {s.badge && <span className="mb-3 inline-block rounded-full border border-gold/40 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gold">{s.badge}</span>}
             <h2 className="font-display text-3xl font-bold text-navy md:text-5xl">{s.title}</h2>
             {s.subtext && <p className="mt-3 text-slate-600">{s.subtext}</p>}

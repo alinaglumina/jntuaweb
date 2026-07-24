@@ -2,6 +2,7 @@ import { useState, useRef, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import api from '../lib/axios.js';
 import { Loading, ErrorState, EmptyState, Modal, Button, Badge, ConfirmDialog, FilePreview, fileIcon, Select, useToast } from '../components/ui/index.js';
+import { useAuth } from '../hooks/useAuth.js';
 
 const TYPES = [['', 'All'], ['image', 'Images'], ['pdf', 'PDF'], ['word', 'Word'], ['excel', 'Excel'], ['powerpoint', 'PPT'], ['video', 'Video'], ['archive', 'ZIP'], ['other', 'Other']];
 const fmtSize = (b) => (b > 1e6 ? `${(b / 1e6).toFixed(1)} MB` : b > 1e3 ? `${(b / 1e3).toFixed(0)} KB` : `${b} B`);
@@ -9,6 +10,7 @@ const fmtSize = (b) => (b > 1e6 ? `${(b / 1e6).toFixed(1)} MB` : b > 1e3 ? `${(b
 export default function MediaLibrary() {
   const qc = useQueryClient();
   const toast = useToast();
+  const { isAdmin } = useAuth();
   const [folder, setFolder] = useState('root');
   const [type, setType] = useState('');
   const [preview, setPreview] = useState(null);
@@ -78,7 +80,7 @@ export default function MediaLibrary() {
       <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-2xl"><i className="fa-solid fa-photo-film mr-2 text-crimson" /> Media Library</h1>
         <div className="flex gap-2">
-          <Button variant="ghost" size="sm" icon="fa-folder-plus" onClick={() => setNewFolderOpen(true)}>New folder</Button>
+          {isAdmin && <Button variant="ghost" size="sm" icon="fa-folder-plus" onClick={() => setNewFolderOpen(true)}>New folder</Button>}
           <Button variant="ghost" size="sm" icon="fa-chart-simple" onClick={() => setReport(true)}>Download report</Button>
           <label className="btn-primary cursor-pointer text-sm">
             <i className="fa-solid fa-upload" /> Upload
@@ -106,8 +108,8 @@ export default function MediaLibrary() {
       {selected.size > 0 && (
         <div className="mb-4 flex flex-wrap items-center gap-3 rounded-md bg-navy/5 px-4 py-2 text-sm">
           <span className="font-semibold text-navy">{selected.size} selected</span>
-          <Button size="sm" variant="ghost" icon="fa-folder" onClick={() => setMoveTo('root')}>Move</Button>
-          <Button size="sm" variant="danger" icon="fa-trash" loading={bulkDelete.isPending} onClick={() => bulkDelete.mutate([...selected])}>Delete</Button>
+          {isAdmin && <Button size="sm" variant="ghost" icon="fa-folder" onClick={() => setMoveTo('root')}>Move</Button>}
+          {isAdmin && <Button size="sm" variant="danger" icon="fa-trash" loading={bulkDelete.isPending} onClick={() => bulkDelete.mutate([...selected])}>Delete</Button>}
           <button className="text-muted hover:text-crimson" onClick={clearSel}>Clear</button>
         </div>
       )}
@@ -134,9 +136,9 @@ export default function MediaLibrary() {
                     <div className="mt-1.5 flex items-center justify-between text-xs">
                       <button onClick={() => setPreview(f)} className="text-brand hover:text-crimson" title="Preview"><i className="fa-solid fa-eye" /></button>
                       <button onClick={() => download(f)} className="text-brand hover:text-crimson" title="Download"><i className="fa-solid fa-download" /></button>
-                      <button onClick={() => doReplace(f)} className="text-brand hover:text-crimson" title="Replace"><i className="fa-solid fa-arrows-rotate" /></button>
+                      {isAdmin && <button onClick={() => doReplace(f)} className="text-brand hover:text-crimson" title="Replace"><i className="fa-solid fa-arrows-rotate" /></button>}
                       <button onClick={() => copyUrl(f)} className="text-brand hover:text-crimson" title="Copy URL"><i className="fa-solid fa-link" /></button>
-                      <button onClick={() => setConfirm(f)} className="text-muted hover:text-crimson" title="Delete"><i className="fa-solid fa-trash" /></button>
+                      {isAdmin && <button onClick={() => setConfirm(f)} className="text-muted hover:text-crimson" title="Delete"><i className="fa-solid fa-trash" /></button>}
                     </div>
                   </div>
                 </div>
@@ -151,7 +153,7 @@ export default function MediaLibrary() {
       <Modal open={!!preview} onClose={() => setPreview(null)} size="xl" title={preview?.originalName}
         footer={<><span className="mr-auto text-xs text-muted">{preview && `${fmtSize(preview.size)} · ${preview.downloadCount || 0} downloads`}</span>
           <Button size="sm" variant="ghost" icon="fa-link" onClick={() => copyUrl(preview)}>Copy URL</Button>
-          <Button size="sm" variant="ghost" onClick={() => doReplace(preview)}>Replace</Button>
+          {isAdmin && <Button size="sm" variant="ghost" onClick={() => doReplace(preview)}>Replace</Button>}
           <Button size="sm" icon="fa-download" onClick={() => download(preview)}>Download</Button></>}>
         {preview && <FilePreview url={preview.url} type={preview.fileType} name={preview.originalName} height={520} />}
       </Modal>

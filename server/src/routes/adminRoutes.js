@@ -63,15 +63,17 @@ for (const [key, def] of Object.entries(RESOURCES)) {
 router.get('/dashboard', dashboard);
 
 // ── Media library ──
+// View, upload, and download-report are open to admin + director.
+// Replace, delete, bulk actions, and folder management are admin-only.
 router.get('/media', media.listMedia);
 router.post('/media', uploader('media-library').single('file'), media.uploadMedia);
-router.put('/media/:id/replace', uploader('media-library').single('file'), media.replaceMedia);
-router.post('/media/folders', media.createFolder);
-router.post('/media/bulk-delete', media.bulkDelete);
-router.post('/media/bulk-move', media.bulkMove);
 router.get('/media/report', media.downloadReport);
-router.delete('/media/:id', media.deleteMedia);
-router.delete('/media/folders/:id', media.deleteFolder);
+router.put('/media/:id/replace', requireRole('admin'), uploader('media-library').single('file'), media.replaceMedia);
+router.post('/media/folders', requireRole('admin'), media.createFolder);
+router.post('/media/bulk-delete', requireRole('admin'), media.bulkDelete);
+router.post('/media/bulk-move', requireRole('admin'), media.bulkMove);
+router.delete('/media/:id', requireRole('admin'), media.deleteMedia);
+router.delete('/media/folders/:id', requireRole('admin'), media.deleteFolder);
 
 // ── Users (permission-gated) ──
 router.get('/users', requirePermission('users:manage'), users.listUsers);

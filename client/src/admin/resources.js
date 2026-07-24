@@ -63,7 +63,7 @@ export const RESOURCES = {
              F('directorDesignation', 'Designation'), F('directorPhoto', 'Photo', 'image'), F('aboutText', 'About', 'html')],
   },
   'directorate-menu': {
-    label: 'Menu Items', group: 'institutional', icon: 'fa-bars', roles: ['admin', 'director'],
+    label: 'Menu Items', group: 'institutional', icon: 'fa-bars', roles: ['admin'],
     columns: ['label', 'menuKey', 'type', 'sortOrder'],
     fields: [directorateField(),
              F('label', 'Menu label (e.g. "Syllabus")', 'text', { required: true }),

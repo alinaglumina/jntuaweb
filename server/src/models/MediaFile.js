@@ -11,6 +11,7 @@ const schema = new mongoose.Schema({
   description:  { type: String, default: '' },
   url:          { type: String, default: '' },
   storagePath:  { type: String, default: '' },
+  cloudinaryId: { type: String, default: '' },
   uploadedBy:   { type: String, default: '' },
   downloadCount:{ type: Number, default: 0, index: true },
   lastDownloadedAt: { type: Date, default: null },

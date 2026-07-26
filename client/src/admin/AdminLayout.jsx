@@ -37,11 +37,36 @@ export default function AdminLayout() {
   // Fetch ALL directorate menu items in one go (admin sees every directorate
   // unfiltered), then group them client-side — avoids 13 separate requests.
   const { data: menuData } = useQuery({ ...adminPageQuery('directorate-menu', { limit: 500 }), enabled: isAdmin });
+  // Build a nested tree (parentKey) per directorate, then flatten it with
+  // depth info for the sidebar's flat item list (indented + folder icon for groups).
+  function buildMenuTree(items) {
+    const byKey = {};
+    items.forEach((it) => { byKey[it.menuKey] = { ...it, children: [] }; });
+    const roots = [];
+    items.forEach((it) => {
+      const node = byKey[it.menuKey];
+      if (it.parentKey && byKey[it.parentKey]) byKey[it.parentKey].children.push(node);
+      else if (!it.parentKey) roots.push(node);
+    });
+    const sortRec = (list) => { list.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0)); list.forEach((n) => sortRec(n.children)); };
+    sortRec(roots);
+    return roots;
+  }
+  function flattenForSidebar(nodes, depth = 0) {
+    let out = [];
+    nodes.forEach((n) => {
+      out.push({ ...n, depth });
+      if (n.children.length) out = out.concat(flattenForSidebar(n.children, depth + 1));
+    });
+    return out;
+  }
   const menuByDirectorate = {};
   (menuData?.items || []).forEach((item) => {
     (menuByDirectorate[item.directorateKey] ||= []).push(item);
   });
-  Object.values(menuByDirectorate).forEach((list) => list.sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0)));
+  Object.keys(menuByDirectorate).forEach((slug) => {
+    menuByDirectorate[slug] = flattenForSidebar(buildMenuTree(menuByDirectorate[slug]));
+  });
 
   const TYPE_ICON = { page: 'fa-file-lines', resource: 'fa-link', link: 'fa-arrow-up-right-from-square' };
   const menuItemHref = (item, slug) => {
@@ -79,7 +104,10 @@ export default function AdminLayout() {
         items: !isOpen ? [] : (menuByDirectorate[slug]?.length
           ? [
               ...menuByDirectorate[slug].map((item) => ({
-                to: menuItemHref(item, slug), label: item.label, icon: TYPE_ICON[item.type] || 'fa-file', onClick: close,
+                to: menuItemHref(item, slug),
+                label: `${'\u2003'.repeat(item.depth)}${item.children.length ? '' : ''}${item.label}`,
+                icon: item.children.length ? 'fa-folder' : (TYPE_ICON[item.type] || 'fa-file'),
+                onClick: close,
               })),
               { to: `/admin/r/directorate-menu?directorate=${slug}`, label: 'Manage menu items', icon: 'fa-sliders', onClick: close },
             ]

@@ -62,6 +62,19 @@ export const RESOURCES = {
     fields: [F('directorateKey', 'Directorate key', 'text', { required: true }), F('directorName', 'Director name'),
              F('directorDesignation', 'Designation'), F('directorPhoto', 'Photo', 'image'), F('aboutText', 'About', 'html')],
   },
+  'nav-menu': {
+    label: 'Header Menu', group: 'system', icon: 'fa-bars', roles: ['admin'],
+    columns: ['label', 'key', 'parentKey', 'order'],
+    fields: [
+      F('label', 'Label (text shown in the menu)', 'text', { required: true }),
+      F('key', 'Key (unique, e.g. "about-genesis")', 'text', { required: true }),
+      F('parentKey', 'Parent key (blank = top-level group; e.g. "about" for a sub-item)'),
+      F('to', 'Link URL (leave blank if this is a group/dropdown, not a clickable page)'),
+      F('order', 'Order', 'number'),
+      F('wide', 'Wide dropdown (top-level groups only)', 'checkbox'),
+      F('isActive', 'Active', 'checkbox', { default: true }),
+    ],
+  },
   'directorate-menu': {
     label: 'Menu Items', group: 'institutional', icon: 'fa-bars', roles: ['admin'],
     columns: ['label', 'menuKey', 'type', 'sortOrder'],

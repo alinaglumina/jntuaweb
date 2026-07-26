@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 // type='link'     → points to an arbitrary external URL.
 const schema = new mongoose.Schema({
   directorateKey: { type: String, required: true, index: true },
+  parentKey:      { type: String, default: null },  // menuKey of the parent item, for one level of nested dropdown groups
   label:          { type: String, required: true, trim: true },
   menuKey:        { type: String, required: true, trim: true },   // url-safe slug, unique per directorate
   type:           { type: String, enum: ['page', 'resource', 'link'], default: 'page' },

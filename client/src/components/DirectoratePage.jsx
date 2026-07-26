@@ -23,6 +23,27 @@ function Avatar({ name, role }) {
   );
 }
 
+// Builds a nested {label, children, dynamic, item} tree from the flat
+// menuKey/parentKey list of a directorate's admin-managed menu items.
+function buildDynamicTabs(items) {
+  const byKey = {};
+  items.forEach((it) => { byKey[it.menuKey] = { label: it.label, dynamic: true, item: it, order: it.sortOrder || 0, children: [] }; });
+  const roots = [];
+  items.forEach((it) => {
+    const node = byKey[it.menuKey];
+    if (it.parentKey && byKey[it.parentKey]) byKey[it.parentKey].children.push(node);
+    else if (!it.parentKey) roots.push(node);
+  });
+  function cleanup(node) {
+    node.children.sort((a, b) => a.order - b.order);
+    node.children.forEach(cleanup);
+    if (node.children.length === 0) delete node.children;
+  }
+  roots.sort((a, b) => a.order - b.order);
+  roots.forEach(cleanup);
+  return roots;
+}
+
 function DynamicTabContent({ item }) {
   if (item.type === 'page') {
     return item.body ? <SafeHtml html={item.body} /> : <p className="text-slate-500">Content coming soon.</p>;
@@ -175,13 +196,10 @@ export default function DirectoratePage({ resolveKey }) {
   if (!data && dynamicItems.length === 0) return <ContentPage resolveId={() => `dir-${key}`} />;
 
   const { title, director, notifications = [], quickLinks = [], tabs: staticTabs = [] } = data || {};
-  const tabs = [...staticTabs];
-  dynamicItems.forEach((item) => {
-    const idx = tabs.findIndex((t) => !t.children && t.label === item.label);
-    const dynamicTab = { label: item.label, dynamic: true, item };
-    if (idx >= 0) tabs[idx] = dynamicTab;
-    else tabs.push(dynamicTab);
-  });
+  // Prefer the admin-managed (database) menu items — they're the migrated,
+  // editable source of truth. Fall back to the static tabs only if this
+  // directorate has no database items yet.
+  const tabs = dynamicItems.length > 0 ? buildDynamicTabs(dynamicItems) : staticTabs;
   const flat = flattenLeaves(tabs);
   const active = flat.find((t) => t.key === activeKey) || flat[0];
 

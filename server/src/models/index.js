@@ -8,6 +8,7 @@ export { default as Mou }                from './Mou.js';
 export { default as EMagazine }          from './EMagazine.js';
 export { default as DirectorateContent } from './DirectorateContent.js';
 export { default as DirectorateMenuItem } from './DirectorateMenuItem.js';
+export { default as NavMenuItem } from './NavMenuItem.js';
 export { default as Administration }     from './Administration.js';
 export { default as HonorisCausa }       from './HonorisCausa.js';
 export { default as SiteSetting }        from './SiteSetting.js';

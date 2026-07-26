@@ -1,7 +1,29 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import PrefetchLink from '../ui/PrefetchLink.jsx';
-import { NAV } from '../../content/nav.js';
+import { DIRECTORATES } from '../../content/nav.js';
+import { useNavMenu } from '../../api/public.js';
+
+// Builds a nested {label, to, children, wide} tree from the flat
+// key/parentKey list stored in the database (everything except Directorates).
+function buildTree(items) {
+  const byKey = {};
+  items.forEach((it) => { byKey[it.key] = { label: it.label, to: it.to || undefined, wide: it.wide, order: it.order || 0, children: [] }; });
+  const roots = [];
+  items.forEach((it) => {
+    const node = byKey[it.key];
+    if (it.parentKey && byKey[it.parentKey]) byKey[it.parentKey].children.push(node);
+    else if (!it.parentKey) roots.push(node);
+  });
+  function cleanup(node) {
+    node.children.sort((a, b) => a.order - b.order);
+    node.children.forEach(cleanup);
+    if (node.children.length === 0) delete node.children;
+  }
+  roots.sort((a, b) => a.order - b.order);
+  roots.forEach(cleanup);
+  return roots;
+}
 
 function DesktopChild({ c, pathname }) {
   // c can be a plain link { label, to } or a nested group { label, children: [...] }
@@ -62,6 +84,15 @@ export default function MegaNav() {
   const [openMobile, setOpenMobile] = useState(false);
   const [mobileGroup, setMobileGroup] = useState(null);
   const { pathname } = useLocation();
+  const { data: navItems = [] } = useNavMenu();
+
+  const dynamicRoots = buildTree(navItems);
+  const directoratesGroup = {
+    label: 'Directorates', wide: true, order: 3,
+    children: DIRECTORATES.map(([, label, slug]) => ({ label, to: `/directorates/${slug}` })),
+  };
+  const NAV = [...dynamicRoots, directoratesGroup].sort((a, b) => (a.order || 0) - (b.order || 0));
+
   return (
     <nav className="sticky top-0 z-40 bg-navy text-white shadow-md">
       <div className="container flex items-center justify-between">

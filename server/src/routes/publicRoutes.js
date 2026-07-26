@@ -30,6 +30,13 @@ mount('/honoris',     HonorisCausa, { defaultSort: '-convocationDate' });
 mount('/faculty',     Faculty,      { defaultSort: 'sortOrder',    baseFilter: () => ({ isActive: true }), searchable: ['name', 'department', 'designation'] });
 mount('/administration', Administration, { defaultSort: 'createdAt' });
 mount('/directorate-content', DirectorateContent, { defaultSort: 'createdAt' });
+router.get('/nav-menu', async (req, res, next) => {
+  try {
+    const { NavMenuItem } = await import('../models/index.js');
+    const items = await NavMenuItem.find({ isActive: true }).sort('order').lean();
+    res.json({ success: true, data: items, error: null });
+  } catch (e) { next(e); }
+});
 
 // Directorate menu items — a directorate's custom nav (Home, About, Syllabus, ...).
 router.get('/directorate-menu/:directorateKey', async (req, res, next) => {

@@ -2,7 +2,7 @@ import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import api from '../lib/axios.js';
 import {
   slidesQuery, galleryQuery, mousQuery, emagazinesQuery, honorisQuery,
-  settingsQuery, notificationsQuery, newsQuery, facultyQuery, directorateMenuQuery,
+  settingsQuery, notificationsQuery, newsQuery, facultyQuery, directorateMenuQuery, navMenuQuery,
 } from './queries.js';
 
 export const useSlides       = () => useQuery(slidesQuery());
@@ -12,6 +12,7 @@ export const useEMagazines   = () => useQuery(emagazinesQuery());
 export const useHonoris      = () => useQuery(honorisQuery());
 export const useFaculty       = () => useQuery(facultyQuery());
 export const useDirectorateMenu = (key) => useQuery({ ...directorateMenuQuery(key), enabled: !!key });
+export const useNavMenu = () => useQuery(navMenuQuery());
 export const useNews          = () => useQuery(newsQuery());
 export const useSettings     = () => useQuery(settingsQuery());
 export const useNotifications = (category) => useQuery(notificationsQuery(category));

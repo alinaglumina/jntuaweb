@@ -123,7 +123,7 @@ export default function MediaLibrary() {
             </div>
           )}
           {files.length === 0 ? <EmptyState label="No files here." icon="fa-folder-open" /> : (
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+            <div className="grid grid-cols-3 gap-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10">
               {files.map((f) => (
                 <div key={f._id} className={`card relative overflow-hidden ${selected.has(f._id) ? 'ring-2 ring-crimson' : ''}`}>
                   <input type="checkbox" checked={selected.has(f._id)} onChange={() => toggle(f._id)} className="absolute left-2 top-2 z-10 h-4 w-4 rounded border-slate-300 text-navy" aria-label="Select file" />

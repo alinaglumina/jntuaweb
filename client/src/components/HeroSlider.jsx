@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 // Reusable auto-advancing hero carousel. slides: [{ image?, badge?, title, subtext? }].
-export default function HeroSlider({ slides = [], interval = 6000, height = 'min-h-[340px]' }) {
+export default function HeroSlider({ slides = [], interval = 6000, height = 'min-h-[480px]' }) {
   const items = slides.length ? slides : [{ _id: 'd', title: 'Welcome to JNTUA', subtext: 'Excellence in technical education since 2008.', badge: 'Anantapur' }];
   const [i, setI] = useState(0);
   const go = useCallback((d) => setI((p) => (p + d + items.length) % items.length), [items.length]);

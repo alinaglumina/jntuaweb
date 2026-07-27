@@ -14,9 +14,9 @@ export default function HeroSlider({ slides = [], interval = 6000, height = 'min
         <AnimatePresence mode="wait">
           <motion.div key={s._id || i} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
             className="max-w-2xl rounded-2xl bg-white/85 px-8 py-6 text-center shadow-lift backdrop-blur-sm">
-            {s.badge && <span className="mb-3 inline-block rounded-full border border-gold/40 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gold">{s.badge}</span>}
             <h2 className="font-display text-3xl font-bold text-navy md:text-5xl">{s.title}</h2>
             {s.subtext && <p className="mt-3 text-slate-600">{s.subtext}</p>}
+            {s.badge && <span className="mt-4 inline-block rounded-full border border-gold/40 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-gold">{s.badge}</span>}
           </motion.div>
         </AnimatePresence>
       </div>

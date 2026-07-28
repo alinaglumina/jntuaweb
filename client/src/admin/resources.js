@@ -94,7 +94,7 @@ export const RESOURCES = {
   faculty: {
     label: 'Faculty', group: 'institutional', icon: 'fa-chalkboard-user', roles: ['admin', 'director'],
     columns: ['name', 'designation', 'department'],
-    fields: [directorateField(), F('name', 'Name', 'text', { required: true }), F('designation', 'Designation'), F('department', 'Department'),
+    fields: [F('name', 'Name', 'text', { required: true }), F('designation', 'Designation'), F('department', 'Department'),
              F('qualification', 'Qualification'), F('specialization', 'Specialization'), F('email', 'Email'),
              F('mobile', 'Mobile'), F('photo', 'Photo', 'image'), F('sortOrder', 'Order', 'number'),
              F('isActive', 'Active', 'checkbox', { default: true })],

@@ -17,7 +17,7 @@ export const RESOURCES = {
   mous:                { model: Mou,                upload: ['document', 'mous'],         searchable: ['orgName'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   emagazines:          { model: EMagazine,          upload: ['filename', 'magazines'],   searchable: ['monthYear'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   slides:              { model: Slide,              upload: ['image', 'slider'],         roles: ['admin'] },
-  faculty:             { model: Faculty,            upload: ['photo', 'images'],         searchable: ['name', 'department'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
+  faculty:             { model: Faculty,            upload: ['photo', 'images'],         searchable: ['name', 'department'], roles: ['admin', 'director'] },
   administration:      { model: Administration,     upload: ['photo', 'images'],         roles: ['admin'] },
   'directorate-content': { model: DirectorateContent, upload: ['directorPhoto', 'images'], searchable: ['directorName'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   'directorate-menu':    { model: DirectorateMenuItem, searchable: ['label', 'menuKey'], roles: ['admin'], sectionField: 'directorateKey' },

@@ -22,15 +22,15 @@ export default function HeroSlider({ slides = [], interval = 6000, height = 'min
 
       {/* Full-width heading bar flush at the bottom, matching the top ribbon's style */}
       <div className="absolute inset-x-0 bottom-0 bg-navy-900 text-white/90">
-        <div className="container flex items-center justify-between gap-4 py-2.5">
+        <div className="container relative flex items-center justify-center py-2.5">
           <AnimatePresence mode="wait">
             <motion.h2 key={s._id || i} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="font-display text-sm font-semibold text-white md:text-base">
+              className="text-center font-display text-sm font-semibold text-white md:text-base">
               {s.title}
             </motion.h2>
           </AnimatePresence>
           {items.length > 1 && (
-            <div className="flex shrink-0 gap-2">
+            <div className="absolute right-0 flex shrink-0 gap-2">
               {items.map((_, k) => <button key={k} onClick={() => setI(k)} aria-label={`Slide ${k + 1}`} className={`h-2 w-2 rounded-full ${k === i % items.length ? 'bg-gold' : 'bg-white/30'}`} />)}
             </div>
           )}

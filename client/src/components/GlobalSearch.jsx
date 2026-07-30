@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { useSearch, usePopularSearches } from '../api/search.js';
 import { useRecentSearches } from '../hooks/useRecentSearches.js';
@@ -49,7 +50,7 @@ export default function GlobalSearch({ open, onClose }) {
 
   if (!open) return null;
   let idx = -1;
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[80] flex items-start justify-center overflow-y-auto p-4 pt-44 sm:pt-56" style={{ backgroundColor: "rgba(0,0,0,0.5)" }} onClick={onClose}>
       <div className="w-full max-w-xl overflow-hidden rounded-xl bg-surface shadow-lift" onClick={(e) => e.stopPropagation()} role="dialog" aria-label="Search">
         <div className="flex items-center gap-3 border-b border-line px-4">
@@ -113,6 +114,7 @@ export default function GlobalSearch({ open, onClose }) {
           </button>
         )}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

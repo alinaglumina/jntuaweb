@@ -50,7 +50,7 @@ export default function GlobalSearch({ open, onClose }) {
   if (!open) return null;
   let idx = -1;
   return (
-    <div className="fixed inset-0 z-[80] flex items-start justify-center bg-black/40 p-4 pt-24 sm:pt-32" onClick={onClose}>
+    <div className="fixed inset-0 z-[80] flex items-start justify-center p-4 pt-40 sm:pt-44" style={{ backgroundColor: "rgba(0,0,0,0.5)" }} onClick={onClose}>
       <div className="w-full max-w-xl overflow-hidden rounded-xl bg-surface shadow-lift" onClick={(e) => e.stopPropagation()} role="dialog" aria-label="Search">
         <div className="flex items-center gap-3 border-b border-line px-4">
           <i className={`fa-solid fa-magnifying-glass text-muted ${isFetching ? 'fa-fade' : ''}`} aria-hidden="true" />

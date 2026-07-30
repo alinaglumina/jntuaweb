@@ -16,14 +16,17 @@ const OPTIONS = {
 };
 
 // Strips dangerous markup from request bodies before they reach controllers.
-// HTML fields are sanitized (kept safe); all other strings are stripped of tags.
+// HTML fields are sanitized (kept safe, entities preserved for correct HTML
+// rendering). Plain-text fields just have tags stripped — no entity encoding,
+// since these are rendered as plain text (React escapes them safely on its
+// own), and encoding here would corrupt characters like "&" into "&amp;".
 export function sanitizeBody(req, res, next) {
   if (req.body && typeof req.body === 'object') {
     for (const [k, v] of Object.entries(req.body)) {
       if (typeof v !== 'string') continue;
       req.body[k] = HTML_FIELDS.has(k)
         ? sanitizeHtml(v, OPTIONS)
-        : sanitizeHtml(v, { allowedTags: [], allowedAttributes: {} });
+        : v.replace(/<[^>]*>/g, '');
     }
   }
   next();

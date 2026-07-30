@@ -128,7 +128,6 @@ export default function Home() {
           <h3 className="text-2xl"><i className="fa-solid fa-address-card text-crimson" aria-hidden="true" /> Contact Us</h3>
           <ul className="mt-4 space-y-3 text-sm text-slate-700">
             <li><i className="fa-solid fa-location-dot mr-2 text-navy" aria-hidden="true" /><strong>JNTU Anantapur</strong>, Ananthapuramu – 515002, Andhra Pradesh, India</li>
-            <li><i className="fa-solid fa-phone mr-2 text-navy" aria-hidden="true" />+91-8554-272475 (Main) · +91-8554-272476 (Exam Branch)</li>
             <li><i className="fa-solid fa-envelope mr-2 text-navy" aria-hidden="true" />registrar@jntua.ac.in · vc@jntua.ac.in</li>
             <li><i className="fa-solid fa-globe mr-2 text-navy" aria-hidden="true" /><a href="https://www.jntua.ac.in" target="_blank" rel="noopener noreferrer">www.jntua.ac.in</a></li>
           </ul>

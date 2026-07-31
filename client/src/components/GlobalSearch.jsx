@@ -57,7 +57,7 @@ export default function GlobalSearch({ open, onClose }) {
           <i className={`fa-solid fa-magnifying-glass text-muted ${isFetching ? 'fa-fade' : ''}`} aria-hidden="true" />
           <input ref={inputRef} value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={onKeyDown}
             placeholder="Search pages, news, faculty, results…" aria-label="Search query"
-            className="flex-1 bg-transparent py-4 text-content outline-none placeholder:text-muted" />
+            className="flex-1 bg-transparent py-4 text-content outline-none border-none ring-0 focus:outline-none focus:ring-0 focus:border-none placeholder:text-muted"
           <kbd className="hidden rounded border border-line px-1.5 py-0.5 text-[10px] text-muted sm:block">ESC</kbd>
         </div>
 

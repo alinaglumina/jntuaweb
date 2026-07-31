@@ -74,6 +74,7 @@ export default function Home() {
           <div className="mt-3 space-y-3 text-slate-700">
             <p>It is a matter of honor and immense pleasure that destiny has given me an opportunity to lead JNT University Anantapur.</p>
             <p>Higher education globally has witnessed significant change and remarkable growth. Every institution has geared up to meet global challenges by harnessing the latest technologies. The move towards inter-disciplinary studies, research-based and interactive learning with technology integration has opened up several options as well as multiple challenges.</p>
+            <p>At JNTU Anantapur, our constant endeavor is to provide a conducive environment for teaching, learning and research, while fostering innovation, industry collaboration and holistic development of our students to prepare them for the challenges of tomorrow.</p>
             <Link to="/administration/vice-chancellor" className="inline-flex items-center gap-1 font-semibold text-crimson">Read more <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" /></Link>
           </div>
         </div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSlides, useNotifications, useAdministration } from '../api/public.js';
-import { HeroSlider, NoticeCard } from '../components/index.js';
+import { HeroSlider, NoticeCard, EventsSlider } from '../components/index.js';
 
 const UNITS = [
   ['JNTUACEA Ananthapuramu', 'https://www.jntuacea.ac.in/', '/campuses/cea.jpg'],
@@ -79,13 +79,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Welcome */}
+      {/* Welcome + Events */}
       <section className="bg-paper">
         <div className="container py-14">
-          <div className="text-center"><h2 className="text-2xl">Welcome to JNTUA</h2><div className="mx-auto mt-2 h-1 w-16 rounded bg-gold" /></div>
-          <div className="mx-auto mt-6 max-w-4xl space-y-4 text-slate-700">
-            <p>The College of Engineering, Anantapur was started at Guindy, Madras in 1946 and shifted to Anantapur in 1948. Initially affiliated to Madras University (1946–1955) and Sri Venkateswara University, Tirupathi (1955–1972). In 1972, by an Act of State Legislature, JNT University was established at Hyderabad and the College of Engineering, Anantapur went into the fold of JNTU. In 2008, JNTU was trifurcated into three independent universities — JNTU Hyderabad, JNTU Kakinada and JNTU Anantapur.</p>
-            <p>In addition to its four constituent colleges, JNTUA has 98 Engineering Colleges, 33 Pharmacy Colleges and 29 stand-alone MBA/MCA colleges affiliated to it. Since its inception, JNTUA is committed to nurturing technological education and producing technical manpower comparable to the best in the world.</p>
+          <div className="grid gap-10 md:grid-cols-2">
+            <div>
+              <h2 className="text-2xl">Welcome to JNTUA</h2>
+              <div className="mt-2 h-1 w-16 rounded bg-gold" />
+              <div className="mt-6 space-y-4 text-slate-700">
+                <p>The College of Engineering, Anantapur was started at Guindy, Madras in 1946 and shifted to Anantapur in 1948. Initially affiliated to Madras University (1946–1955) and Sri Venkateswara University, Tirupathi (1955–1972). In 1972, by an Act of State Legislature, JNT University was established at Hyderabad and the College of Engineering, Anantapur went into the fold of JNTU. In 2008, JNTU was trifurcated into three independent universities — JNTU Hyderabad, JNTU Kakinada and JNTU Anantapur.</p>
+                <p>In addition to its four constituent colleges, JNTUA has 98 Engineering Colleges, 33 Pharmacy Colleges and 29 stand-alone MBA/MCA colleges affiliated to it. Since its inception, JNTUA is committed to nurturing technological education and producing technical manpower comparable to the best in the world.</p>
+              </div>
+            </div>
+            <div>
+              <h2 className="text-2xl">Latest University Events</h2>
+              <div className="mt-2 h-1 w-16 rounded bg-gold" />
+              <div className="mt-6">
+                <EventsSlider />
+              </div>
+            </div>
           </div>
         </div>
       </section>

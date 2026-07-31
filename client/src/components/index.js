@@ -1,5 +1,6 @@
 // Composite/domain components (built from the ui kit).
 export { default as HeroSlider } from './HeroSlider.jsx';
+export { default as EventsSlider } from './EventsSlider.jsx';
 export { default as NoticeCard } from './NoticeCard.jsx';
 export { default as NewsCard } from './NewsCard.jsx';
 export { default as GalleryGrid } from './GalleryGrid.jsx';

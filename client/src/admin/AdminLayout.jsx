@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useLocation, Navigate, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { RESOURCES, GROUPS } from './resources.js';
-import { DIRECTORATES } from '../content/nav.js';
+import { DIRECTORATES, UNITS } from '../content/nav.js';
 import { useQuery } from '@tanstack/react-query';
 import { adminPageQuery } from '../api/queries.js';
 import { useAuth } from '../hooks/useAuth.js';
@@ -92,12 +92,14 @@ export default function AdminLayout() {
   // directorate's scoped resources when expanded. Directors don't see this —
   // their own sidebar already only shows their directorate's data (server-scoped).
   if (isAdmin) {
-    const directorateGroups = DIRECTORATES.map(([, dirLabel, slug]) => {
+    // Shared builder — used for both Directorates and Important Units, since
+    // both are backed by the same directorate-page + directorate-menu system.
+    const buildCollapsibleGroup = (label, slug, iconClass) => {
       const isOpen = !!expandedDirs[slug];
       return {
         label: (
           <button type="button" onClick={() => toggleDir(slug)} className="flex w-full items-center justify-between text-left hover:text-white">
-            <span><i className="fa-solid fa-building-columns mr-1.5 text-[10px]" aria-hidden="true" />{dirLabel}</span>
+            <span><i className={`fa-solid ${iconClass} mr-1.5 text-[10px]`} aria-hidden="true" />{label}</span>
             <i className={`fa-solid ${isOpen ? 'fa-chevron-down' : 'fa-chevron-right'} text-[9px]`} aria-hidden="true" />
           </button>
         ),
@@ -117,8 +119,10 @@ export default function AdminLayout() {
               })),
             ]),
       };
-    });
-    groups.push(...directorateGroups);
+    };
+    const directorateGroups = DIRECTORATES.map(([, dirLabel, slug]) => buildCollapsibleGroup(dirLabel, slug, 'fa-building-columns'));
+    const unitGroups = UNITS.map(([, unitLabel, slug]) => buildCollapsibleGroup(unitLabel, slug, 'fa-flag'));
+    groups.push(...directorateGroups, ...unitGroups);
   }
 
   // Curated CMS/admin groups (custom screens beyond the resource manifest).

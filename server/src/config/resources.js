@@ -1,6 +1,6 @@
 import {
   Notification, News, GalleryItem, Mou, EMagazine, Slide, Faculty,
-  Administration, DirectorateContent, HonorisCausa, SenateDoc, Regulation,
+  Administration, ExecutiveCouncil, FormerViceChancellor, DirectorateContent, HonorisCausa, SenateDoc, Regulation,
   DacpFile, DafaDoc, PageContent,
   Event, Department, Student, Circular, Download, Menu,
   Admission, Examination, Result, ContentBlock,
@@ -19,6 +19,8 @@ export const RESOURCES = {
   slides:              { model: Slide,              upload: ['image', 'slider'],         roles: ['admin'] },
   faculty:             { model: Faculty,            upload: ['photo', 'images'],         searchable: ['name', 'department'], roles: ['admin', 'director'] },
   administration:      { model: Administration,     upload: ['photo', 'images'],         roles: ['admin'] },
+  'executive-council':        { model: ExecutiveCouncil,      upload: ['photo', 'images'], searchable: ['name'], roles: ['admin'] },
+  'former-vice-chancellors':  { model: FormerViceChancellor,  upload: ['photo', 'images'], searchable: ['name'], roles: ['admin'] },
   'directorate-content': { model: DirectorateContent, upload: ['directorPhoto', 'images'], searchable: ['directorName'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   'directorate-menu':    { model: DirectorateMenuItem, searchable: ['label', 'menuKey'], roles: ['admin'], sectionField: 'directorateKey' },
   'nav-menu':            { model: NavMenuItem, searchable: ['label', 'key'], roles: ['admin'] },

@@ -56,6 +56,20 @@ export const RESOURCES = {
     fields: [F('roleKey', 'Role key', 'select', { options: ['chancellor', 'vc', 'rector', 'registrar'], required: true }),
              F('name', 'Name'), F('designation', 'Designation'), F('photo', 'Photo', 'image'), F('profileText', 'Profile', 'html')],
   },
+  'executive-council': {
+    label: 'Executive Council', group: 'institutional', icon: 'fa-users', roles: ['admin'],
+    columns: ['name', 'designation', 'sortOrder'],
+    fields: [F('name', 'Name', 'text', { required: true }), F('designation', 'Designation'),
+             F('photo', 'Photo', 'image'), F('sortOrder', 'Order', 'number'),
+             F('isActive', 'Active', 'checkbox', { default: true })],
+  },
+  'former-vice-chancellors': {
+    label: 'Former Vice-Chancellors', group: 'institutional', icon: 'fa-user-tie', roles: ['admin'],
+    columns: ['name', 'tenure', 'sortOrder'],
+    fields: [F('name', 'Name', 'text', { required: true }), F('tenure', 'Tenure (e.g. 2015–2019)'),
+             F('photo', 'Photo', 'image'), F('profileText', 'Profile', 'html'),
+             F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   'directorate-content': {
     label: 'Directorate Pages', group: 'institutional', icon: 'fa-building-columns', roles: ['admin', 'director'],
     columns: ['directorateKey', 'directorName'],

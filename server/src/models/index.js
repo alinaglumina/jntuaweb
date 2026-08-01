@@ -15,6 +15,8 @@ export { default as SiteSetting }        from './SiteSetting.js';
 export { default as Regulation }         from './Regulation.js';
 export { default as SenateDoc }          from './SenateDoc.js';
 export { default as Faculty }            from './Faculty.js';
+export { default as ExecutiveCouncil }     from './ExecutiveCouncil.js';
+export { default as FormerViceChancellor } from './FormerViceChancellor.js';
 export { default as DacpFile }           from './DacpFile.js';
 export { default as DacpCircular }       from './DacpCircular.js';
 export { default as DacpNewsletter }     from './DacpNewsletter.js';

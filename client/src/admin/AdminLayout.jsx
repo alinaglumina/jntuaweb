@@ -78,7 +78,7 @@ export default function AdminLayout() {
   // Build the Sidebar groups from the resource manifest.
   const groups = GROUPS.map((g) => {
     const items = visible
-      .filter(([key, d]) => d.group === g.id && !(isAdmin && scopedKeys.has(key) && key !== 'faculty'))
+      .filter(([key, d]) => d.group === g.id && !(isAdmin && scopedKeys.has(key) && !['faculty', 'notifications'].includes(key)))
       .map(([key, d]) => ({ to: `/admin/r/${key}`, label: d.label, icon: d.icon, onClick: close }));
     if (g.id === 'system' && isAdmin) {
       items.push({ to: '/admin/media', label: 'Media Library', icon: 'fa-photo-film', onClick: close });

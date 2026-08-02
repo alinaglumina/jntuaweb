@@ -12,6 +12,8 @@ const Mous              = lazy(() => import('../pages/Mous.jsx'));
 const EMagazines        = lazy(() => import('../pages/EMagazines.jsx'));
 const Honoris           = lazy(() => import('../pages/Honoris.jsx'));
 const Faculty            = lazy(() => import('../pages/Faculty.jsx'));
+const ExecutiveCouncil        = lazy(() => import('../pages/ExecutiveCouncil.jsx'));
+const FormerViceChancellors   = lazy(() => import('../pages/FormerViceChancellors.jsx'));
 const AcademicDocs      = lazy(() => import('../pages/AcademicDocs.jsx'));
 const UIKit             = lazy(() => import('../pages/UIKit.jsx'));
 
@@ -37,7 +39,7 @@ const crumb = (arr) => ({ crumb: () => arr });
 // Fixed content leaves (not directorates/units/academics), tagged with their group.
 const fixedContent = NAV.flatMap((group) =>
   (group.children || [])
-    .filter((l) => l.kind === 'content' && !l.to.startsWith('/directorates/') && !l.to.startsWith('/units/'))
+    .filter((l) => l.kind === 'content' && !l.to.startsWith('/directorates/') && !l.to.startsWith('/units/') && l.to !== '/administration/executive-council' && l.to !== '/administration/former-vice-chancellors')
     .map((l) => ({
       path: l.to, element: S(<ContentPage pageId={l.id} />),
       loader: contentLoader(() => l.id),
@@ -64,6 +66,8 @@ export const publicRoutes = [
   { path: 'search', element: S(<SearchResults />), handle: crumb([{ label: 'Search' }]) },
   { path: 'alumni', element: S(<ContentPage pageId="alumni" />), loader: contentLoader(() => 'alumni'), handle: crumb([{ label: 'Alumni' }]) },
   { path: 'administration/faculty', element: S(<Faculty />), loader: facultyLoader, handle: crumb([{ label: 'Administration' }, { label: 'Faculty Corner', to: '/administration/faculty' }]) },
+  { path: 'administration/executive-council', element: S(<ExecutiveCouncil />), handle: crumb([{ label: 'Administration' }, { label: 'Executive Council', to: '/administration/executive-council' }]) },
+  { path: 'administration/former-vice-chancellors', element: S(<FormerViceChancellors />), handle: crumb([{ label: 'Administration' }, { label: 'Former Vice-Chancellors', to: '/administration/former-vice-chancellors' }]) },
   { path: 'ui-kit', element: S(<UIKit />), handle: crumb([{ label: 'UI Kit' }]) },
 
   // DYNAMIC routes — crumb derives the label from the URL param.

@@ -4,7 +4,7 @@ import { Router } from 'express';
 import { crudController } from '../controllers/crudController.js';
 import {
   GalleryItem, Mou, EMagazine, News, Administration,
-  DirectorateContent, HonorisCausa, Slide, Faculty,
+  DirectorateContent, HonorisCausa, Slide, Faculty, ExecutiveCouncil, FormerViceChancellor,
 } from '../models/index.js';
 
 const router = Router();
@@ -28,6 +28,8 @@ mount('/emagazines',  EMagazine,    { defaultSort: '-issueDate' });
 mount('/news',        News,         { defaultSort: '-createdAt',  baseFilter: () => ({ isPublished: true }), searchable: ['title'] });
 mount('/honoris',     HonorisCausa, { defaultSort: '-convocationDate' });
 mount('/faculty',     Faculty,      { defaultSort: 'sortOrder',    baseFilter: () => ({ isActive: true }), searchable: ['name', 'department', 'designation'] });
+mount('/executive-council',       ExecutiveCouncil,     { defaultSort: 'sortOrder', baseFilter: () => ({ isActive: true }), searchable: ['name'] });
+mount('/former-vice-chancellors', FormerViceChancellor, { defaultSort: 'sortOrder', baseFilter: () => ({ isActive: true }), searchable: ['name'] });
 mount('/administration', Administration, { defaultSort: 'createdAt' });
 mount('/directorate-content', DirectorateContent, { defaultSort: 'createdAt' });
 router.get('/nav-menu', async (req, res, next) => {

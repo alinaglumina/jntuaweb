@@ -3,6 +3,7 @@ import api from '../lib/axios.js';
 import {
   slidesQuery, galleryQuery, mousQuery, emagazinesQuery, honorisQuery,
   settingsQuery, notificationsQuery, newsQuery, facultyQuery, directorateMenuQuery, navMenuQuery,
+  executiveCouncilQuery, formerVCsQuery,
 } from './queries.js';
 
 export const useSlides       = () => useQuery(slidesQuery());
@@ -11,6 +12,8 @@ export const useMous         = () => useQuery(mousQuery());
 export const useEMagazines   = () => useQuery(emagazinesQuery());
 export const useHonoris      = () => useQuery(honorisQuery());
 export const useFaculty       = () => useQuery(facultyQuery());
+export const useExecutiveCouncil = () => useQuery(executiveCouncilQuery());
+export const useFormerVCs        = () => useQuery(formerVCsQuery());
 export const useDirectorateMenu = (key) => useQuery({ ...directorateMenuQuery(key), enabled: !!key });
 export const useNavMenu = () => useQuery(navMenuQuery());
 export const useNews          = () => useQuery(newsQuery());

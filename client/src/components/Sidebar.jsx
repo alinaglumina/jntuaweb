@@ -6,7 +6,7 @@ export default function Sidebar({ header, groups = [], footer, className = '' })
   return (
     <nav className={`flex h-full flex-col bg-navy-900 text-white ${className}`}>
       {header && <div className="border-b border-white/10 px-4 py-4">{header}</div>}
-      <div className="flex-1 overflow-y-auto py-2">
+      <div className="admin-sidebar-scroll flex-1 overflow-y-auto py-2">
         {groups.map((g) => (
           <div key={g.label} className="mb-2">
             <p className="px-4 py-1 text-[11px] font-semibold uppercase tracking-wide text-white/40">{g.label}</p>

@@ -3,7 +3,7 @@ import { useState } from 'react';
 // TODO: replace with real data once an events API/hook exists
 const EVENTS = [
   { name: 'Annual Tech Fest 2026', image: '/events/techfest.jpg' },
-  { name: 'Convocation Ceremony', image: '/events/convocation.jpg' },
+  { name: 'Convocation Ceremony', image: '/events/XIV Convocation.jpg' },
   { name: 'National Conference on AI & Robotics', image: '/events/conference.jpg' },
   { name: 'Sports Meet 2026', image: '/events/sportsmeet.jpg' },
 ];

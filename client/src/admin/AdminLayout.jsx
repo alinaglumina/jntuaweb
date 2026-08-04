@@ -103,21 +103,25 @@ export default function AdminLayout() {
             <i className={`fa-solid ${isOpen ? 'fa-chevron-down' : 'fa-chevron-right'} text-[9px]`} aria-hidden="true" />
           </button>
         ),
-        items: !isOpen ? [] : (menuByDirectorate[slug]?.length
-          ? [
-              ...menuByDirectorate[slug].map((item) => ({
-                to: menuItemHref(item, slug),
-                label: `${'\u2003'.repeat(item.depth)}${item.children.length ? '' : ''}${item.label}`,
-                icon: item.children.length ? 'fa-folder' : (TYPE_ICON[item.type] || 'fa-file'),
-                onClick: close,
-              })),
-              { to: `/admin/r/directorate-menu?directorate=${slug}`, label: 'Manage menu items', icon: 'fa-sliders', onClick: close },
-            ]
-          : [
-              ...scopedEntries.map(([key, d]) => ({
-                to: `/admin/r/${key}?directorate=${slug}`, label: d.label, icon: d.icon, onClick: close,
-              })),
-            ]),
+        items: !isOpen ? [] : [
+          // Migrated public-page structure (Home, About, Courses Offered, etc.)
+          ...(menuByDirectorate[slug]?.length
+            ? [
+                ...menuByDirectorate[slug].map((item) => ({
+                  to: menuItemHref(item, slug),
+                  label: `${'\u2003'.repeat(item.depth)}${item.label}`,
+                  icon: item.children.length ? 'fa-folder' : (TYPE_ICON[item.type] || 'fa-file'),
+                  onClick: close,
+                })),
+                { to: `/admin/r/directorate-menu?directorate=${slug}`, label: 'Manage menu items', icon: 'fa-sliders', onClick: close },
+              ]
+            : []),
+          // Underlying raw content resources (News, Notifications, Circulars, etc.) —
+          // always shown too, matching what a Director sees for their own directorate.
+          ...scopedEntries.map(([key, d]) => ({
+            to: `/admin/r/${key}?directorate=${slug}`, label: d.label, icon: d.icon, onClick: close,
+          })),
+        ],
       };
     };
     const directorateGroups = DIRECTORATES.map(([, dirLabel, slug]) => buildCollapsibleGroup(dirLabel, slug, 'fa-building-columns'));

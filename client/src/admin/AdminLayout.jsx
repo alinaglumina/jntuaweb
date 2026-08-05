@@ -78,7 +78,7 @@ export default function AdminLayout() {
   // Build the Sidebar groups from the resource manifest.
   const groups = GROUPS.map((g) => {
     const items = visible
-      .filter(([key, d]) => d.group === g.id && !(isAdmin && scopedKeys.has(key) && !['faculty', 'notifications'].includes(key)))
+      .filter(([key, d]) => d.group === g.id && !(isAdmin && scopedKeys.has(key) && !['faculty', 'notifications', 'news'].includes(key)))
       .map(([key, d]) => ({ to: `/admin/r/${key}`, label: d.label, icon: d.icon, onClick: close }));
     if (g.id === 'system' && isAdmin) {
       items.push({ to: '/admin/media', label: 'Media Library', icon: 'fa-photo-film', onClick: close });
@@ -116,9 +116,10 @@ export default function AdminLayout() {
                 { to: `/admin/r/directorate-menu?directorate=${slug}`, label: 'Manage menu items', icon: 'fa-sliders', onClick: close },
               ]
             : []),
-          // Underlying raw content resources (News, Notifications, Circulars, etc.) —
+          // Underlying raw content resources (Notifications, Circulars, etc.) —
           // always shown too, matching what a Director sees for their own directorate.
-          ...scopedEntries.map(([key, d]) => ({
+          // "News" is excluded here since it now lives only under the Content group.
+          ...scopedEntries.filter(([key]) => key !== 'news').map(([key, d]) => ({
             to: `/admin/r/${key}?directorate=${slug}`, label: d.label, icon: d.icon, onClick: close,
           })),
         ],

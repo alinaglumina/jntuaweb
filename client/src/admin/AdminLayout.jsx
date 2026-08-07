@@ -37,7 +37,7 @@ export default function AdminLayout() {
 
   // Fetch ALL directorate menu items in one go (admin sees every directorate
   // unfiltered), then group them client-side — avoids 13 separate requests.
-  const { data: menuData } = useQuery({ ...adminPageQuery('directorate-menu', { limit: 500 }), enabled: isAdmin });
+  const { data: menuData } = useQuery({ ...adminPageQuery('directorate-menu', { limit: 500 }), enabled: isAdmin || user?.role === 'director' });
   // Build a nested tree (parentKey) per directorate, then flatten it with
   // depth info for the sidebar's flat item list (indented + folder icon for groups).
   function buildMenuTree(items) {
@@ -88,6 +88,25 @@ export default function AdminLayout() {
     }
     return { label: g.label, items };
   }).filter((g) => g.items.length);
+
+  // Director: show their own directorate's menu-tree (Home, About, etc.) —
+  // always expanded, no collapsible toggle since they only have one directorate.
+  if (!isAdmin && user?.role === 'director' && user?.directorate) {
+    const dirItems = menuByDirectorate[user.directorate] || [];
+    if (dirItems.length) {
+      groups.unshift({
+        label: 'My Directorate Pages',
+        items: [
+          ...dirItems.map((item) => ({
+            to: menuItemHref(item, user.directorate),
+            label: `${'\u2003'.repeat(item.depth)}${item.label}`,
+            icon: item.children.length ? 'fa-folder' : (TYPE_ICON[item.type] || 'fa-file'),
+            onClick: close,
+          })),
+        ],
+      });
+    }
+  }
 
   // Super Admin: one collapsible section per Directorate, listing that
   // directorate's scoped resources when expanded. Directors don't see this —

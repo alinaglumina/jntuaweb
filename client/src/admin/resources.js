@@ -90,7 +90,7 @@ export const RESOURCES = {
     ],
   },
   'directorate-menu': {
-    label: 'Menu Items', group: 'institutional', icon: 'fa-bars', roles: ['admin'],
+    label: 'Menu Items', group: 'institutional', icon: 'fa-bars', roles: ['admin', 'director'],
     columns: ['label', 'menuKey', 'type', 'sortOrder'],
     fields: [directorateField(),
              F('label', 'Menu label (e.g. "Syllabus")', 'text', { required: true }),

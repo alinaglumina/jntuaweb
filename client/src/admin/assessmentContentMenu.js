@@ -12,3 +12,12 @@ export const ASSESSMENT_ADMIN_GROUPS = [
     items: NAAC_ITEMS.map(([id, label]) => ({ id, label })),
   },
 ];
+
+import { ACADEMICS } from '../content/nav.js';
+
+export const ACADEMICS_ADMIN_GROUPS = [
+  {
+    label: 'Academics',
+    items: ACADEMICS.map(([id, label]) => ({ id, label })),
+  },
+];

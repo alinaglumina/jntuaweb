@@ -75,11 +75,11 @@ export const publicRoutes = [
     handle: { crumb: (m) => [{ label: 'Directorates' }, { label: dirLabel(m.params.key), to: `/directorates/${m.params.key}` }] } },
   { path: 'units/:key', element: S(<DirectoratePage resolveKey={(p) => p.key} />), loader: contentLoader(unitId),
     handle: { crumb: (m) => [{ label: 'Important Units' }, { label: unitLabel(m.params.key), to: `/units/${m.params.key}` }] } },
-  { path: 'naac/:key', element: S(<ContentPage resolveId={naacId} />), loader: contentLoader(naacId),
+  { path: 'naac/:key', element: S(<ContentPage resolveId={naacId} sidebar />), loader: contentLoader(naacId),
   handle: { crumb: (m) => [{ label: 'NAAC' }, { label: naacLabel(m.params.key), to: `/naac/${m.params.key}` }] } },
   { path: 'academics/:slug', element: S(<AcademicDocs />),
     handle: { crumb: (m) => [{ label: 'Academics' }, { label: acadLabel(m.params.slug), to: `/academics/${m.params.slug}` }] } },
-  { path: 'assessment/*', element: S(<ContentPage resolveId={assessmentId} />), loader: contentLoader(assessmentId),
+  { path: 'assessment/*', element: S(<ContentPage resolveId={assessmentId} sidebar />), loader: contentLoader(assessmentId),
   handle: { crumb: (m) => [{ label: 'Assessment & Accreditation' }, { label: assessmentLabel(m.params['*']), to: `/assessment/${m.params['*']}` }] } },
 
   ...fixedContent,

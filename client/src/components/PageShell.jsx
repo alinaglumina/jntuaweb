@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Seo from './Seo.jsx';
 
-export default function PageShell({ title, subtitle, description, children }) {
+export default function PageShell({ title, subtitle, description, children, sidebar }) {
   return (
     <>
       <Seo title={title} description={description || subtitle} auto />
@@ -14,7 +14,14 @@ export default function PageShell({ title, subtitle, description, children }) {
           <div className="mt-3 h-1 w-20 rounded bg-gold" />
         </div>
       </div>
-      <div className="container py-10">{children}</div>
+      <div className="container py-10">
+        {sidebar ? (
+          <div className="grid gap-8 md:grid-cols-[280px_1fr] md:items-start">
+            <aside>{sidebar}</aside>
+            <div>{children}</div>
+          </div>
+        ) : children}
+      </div>
     </>
   );
 }

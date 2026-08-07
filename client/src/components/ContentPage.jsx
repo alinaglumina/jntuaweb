@@ -5,6 +5,8 @@ import PageShell from './PageShell.jsx';
 import SafeHtml from './SafeHtml.jsx';
 import { pageContentQuery, administrationQuery } from '../api/queries.js';
 import pages from '../content/pages.json';
+import Sidebar from './Sidebar.jsx';
+import { ASSESSMENT_SIDEBAR_GROUPS } from '../content/assessmentSidebar.js';
 
 // Maps a content page id to an Administration roleKey, when that page
 // should show a photo pulled from the Administration collection.
@@ -17,7 +19,7 @@ const ROLE_KEY_BY_PAGE = {
 
 // Renders a static page from the content manifest. If an admin has published an
 // editable PageContent override under the same key, that HTML wins.
-export default function ContentPage({ pageId, resolveId }) {
+export default function ContentPage({ pageId, resolveId, sidebar }) {
   const params = useParams();
   const id = pageId || (resolveId ? resolveId(params) : null);
   const page = id && pages[id];
@@ -38,9 +40,11 @@ export default function ContentPage({ pageId, resolveId }) {
     />
   ) : null;
 
+  const sidebarEl = sidebar ? <Sidebar variant="light" header={<h3 className="font-display text-lg font-bold">Assessment &amp; Accreditation</h3>} groups={ASSESSMENT_SIDEBAR_GROUPS} /> : null;
+
   if (override?.body) {
     return (
-      <PageShell title={override.heading || page?.title || 'Page'}>
+      <PageShell title={override.heading || page?.title || 'Page'} sidebar={sidebarEl}>
         {PhotoBlock}
         <div className={`mx-auto max-w-3xl relative ${!expanded ? 'max-h-64 overflow-hidden' : ''}`}>
           <SafeHtml html={override.body} />
@@ -62,7 +66,7 @@ export default function ContentPage({ pageId, resolveId }) {
   }
   if (!page) return <PageShell title="Page not found"><p className="text-slate-600">This page has no content yet.</p></PageShell>;
   return (
-    <PageShell title={page.title}>
+    <PageShell title={page.title} sidebar={sidebarEl}>
       {PhotoBlock}
       <div className={`mx-auto max-w-3xl relative ${!expanded ? 'max-h-64 overflow-hidden' : ''}`}>
         <article className="prose-jntua space-y-4">

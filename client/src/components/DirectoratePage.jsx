@@ -5,6 +5,8 @@ import ContentPage from './ContentPage.jsx';
 import SafeHtml from './SafeHtml.jsx';
 import directorates from '../content/directorates.json';
 import { useDirectorateMenu } from '../api/public.js';
+import { useQuery } from '@tanstack/react-query';
+import { directorateContentQuery } from '../api/queries.js';
 
 function Avatar({ name, role }) {
   const source = name || role || '?';
@@ -192,10 +194,16 @@ export default function DirectoratePage({ resolveKey }) {
   const [activeKey, setActiveKey] = useState('0');
 
   const { data: dynamicItems = [] } = useDirectorateMenu(key);
+  const { data: dbContent } = useQuery(directorateContentQuery(key));
 
   if (!data && dynamicItems.length === 0) return <ContentPage resolveId={() => `dir-${key}`} />;
 
-  const { title, director, notifications = [], quickLinks = [], tabs: staticTabs = [] } = data || {};
+  const { title, director: staticDirector, notifications = [], quickLinks = [], tabs: staticTabs = [] } = data || {};
+  // A database-managed director profile (admin's Directorate Pages screen) always
+  // wins over the static JSON fallback, matching ContentPage's override pattern.
+  const director = dbContent?.directorName || dbContent?.directorPhoto
+    ? { name: dbContent.directorName, role: dbContent.directorDesignation || staticDirector?.role, photo: dbContent.directorPhoto }
+    : staticDirector;
   // Prefer the admin-managed (database) menu items — they're the migrated,
   // editable source of truth. Fall back to the static tabs only if this
   // directorate has no database items yet.

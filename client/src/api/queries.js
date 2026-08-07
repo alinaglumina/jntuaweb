@@ -50,3 +50,9 @@ export const administrationQuery = (roleKey) => ({
   select: roleKey ? (items) => items.find((a) => a.roleKey === roleKey) ?? null : undefined,
   enabled: !!roleKey,
 });
+
+export const directorateContentQuery = (directorateKey) => ({
+  queryKey: ['directorate-content', directorateKey],
+  queryFn: () => api.get(`/directorate-content/key/${directorateKey}`).catch(() => null),
+  enabled: !!directorateKey,
+});

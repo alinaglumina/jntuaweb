@@ -56,6 +56,10 @@
   .prose-jntua h3 { @apply text-xl; }
   .prose-jntua h4 { @apply text-lg; }
   .prose-jntua { @apply text-content; }
+  .prose-jntua ul { @apply my-3 list-disc space-y-1 pl-6; }
+  .prose-jntua ol { @apply my-3 list-decimal space-y-1 pl-6; }
+  .prose-jntua li { @apply leading-relaxed; }
+  .prose-jntua li > ul, .prose-jntua li > ol { @apply mt-1; }
 }
 
 /* Visible thin scrollbar for the admin sidebar (dark track to match navy bg) */

@@ -21,7 +21,7 @@ export default function RichTextEditor({ value = '', onChange, minHeight = 160 }
     <div className="rounded-md border border-slate-300 focus-within:border-navy focus-within:ring-2 focus-within:ring-crimson/30">
       <div className="flex flex-wrap gap-1 border-b border-slate-200 bg-slate-50 p-1">
         {TOOLS.map(([cmd, icon]) => (
-          <button key={cmd} type="button" onClick={() => exec(cmd)} className="grid h-8 w-8 place-items-center rounded text-slate-600 hover:bg-navy hover:text-white" aria-label={cmd}>
+          <button key={cmd} type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => exec(cmd)} className="grid h-8 w-8 place-items-center rounded text-slate-600 hover:bg-navy hover:text-white" aria-label={cmd}>
             <i className={`fa-solid ${icon} text-xs`} aria-hidden="true" />
           </button>
         ))}

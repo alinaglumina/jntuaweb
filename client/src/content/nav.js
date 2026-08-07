@@ -5,7 +5,8 @@
 export const DIRECTORATES = [
   ['dir-academic', 'Academic & Planning', 'academic'],
   ['dir-audit', 'Academic Audit', 'audit'],
-  ['dir-admissions', 'Admissions, Foreign Affairs & Alumni', 'admissions'],
+  ['dir-admissions', 'Admissions', 'admissions'],
+  ['dir-foreign-affairs-alumni', 'Foreign Affairs & Alumni Matters', 'foreign-affairs-alumni'],
   ['dir-evaluation', 'Evaluation', 'evaluation'],
   ['dir-rd', 'Research & Development', 'rd'],
   ['dir-placements', 'IR, Placements & Sponsored Research', 'placements'],

@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
   passwordHash:  { type: String, required: true, select: false },
   fullName:      { type: String, default: '' },
   // 'admin' = super admin; 'director' = directorate manager
-  role:          { type: String, enum: ['admin', 'director'], default: 'director', index: true },
+  role:          { type: String, enum: ['admin', 'director', 'examiner'], default: 'director', index: true },
   // directorate key this user manages, e.g. 'dap', 'otpri', 'iqac' (empty for super admin)
   directorate:   { type: String, default: '', index: true },
   isActive:      { type: Boolean, default: true },

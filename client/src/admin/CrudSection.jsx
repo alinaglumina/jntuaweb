@@ -17,12 +17,14 @@ export default function CrudSection() {
   const [searchParams] = useSearchParams();
   const directorateParam = searchParams.get('directorate');
   const editParam = searchParams.get('edit');
+  const editKeyParam = searchParams.get('editKey');
+  const headingParam = searchParams.get('heading');
   const isDirectorateScoped = !!def?.fields?.some((f) => f.name === 'directorateKey');
   const toast = useToast();
   const [view, setView] = useState('active');
   const [editing, setEditing] = useState(null);
   const [confirm, setConfirm] = useState(null);
-  const [q, setQ] = useState('');
+  const [q, setQ] = useState(editKeyParam || '');
   const [page, setPage] = useState(1);
   const debouncedQ = useDebounce(q, 350);   // query only after typing stops
 
@@ -47,7 +49,17 @@ export default function CrudSection() {
     }
   }, [editParam, rows]);
 
-  const onSave = async (values) => { try { await save.mutateAsync({ id: editing === 'new' ? null : editing._id, values }); setEditing(null); toast.success('Saved.'); } catch (e) { toast.error(e.message); } };
+  // Deep-link support: /admin/r/page-content?editKey=<key>&heading=<label>
+  // Opens the existing record for that key, or pre-fills a new one if it doesn't exist yet.
+  useEffect(() => {
+    if (editKeyParam && !isLoading) {
+      const match = rows.find((r) => r.key === editKeyParam);
+      setEditing(match || { key: editKeyParam, heading: headingParam || '' });
+    }
+  }, [editKeyParam, headingParam, rows, isLoading]);
+
+  const isNew = editing === 'new' || (editing && !editing._id);
+  const onSave = async (values) => { try { await save.mutateAsync({ id: isNew ? null : editing._id, values }); setEditing(null); toast.success('Saved.'); } catch (e) { toast.error(e.message); } };
   const onDelete = async () => { try { await del.mutateAsync({ id: confirm.row._id, hard: confirm.hard }); setConfirm(null); toast.success(confirm.hard ? 'Permanently deleted.' : 'Moved to trash.'); } catch (e) { toast.error(e.message); } };
   const onRestore = async (row) => { try { await restore.mutateAsync(row._id); toast.success('Restored.'); } catch (e) { toast.error(e.message); } };
 
@@ -97,7 +109,7 @@ export default function CrudSection() {
         </>
       )}
 
-      <Modal open={!!editing} onClose={() => setEditing(null)} title={editing === 'new' ? `Add ${def.label}` : `Edit ${def.label}`}>
+      <Modal open={!!editing} onClose={() => setEditing(null)} title={isNew ? `Add ${def.label}` : `Edit ${def.label}`}>
         {editing && <ResourceForm fields={visibleFields} initial={editing === 'new' ? newRecordDefaults : editing} onSubmit={onSave} onCancel={() => setEditing(null)} busy={save.isPending} error={save.error} />}
       </Modal>
       <ConfirmDialog open={!!confirm} title={confirm?.hard ? 'Delete permanently?' : 'Move to trash?'}

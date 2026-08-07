@@ -3,6 +3,7 @@ import { Outlet, useNavigate, useLocation, Navigate, Link } from 'react-router-d
 import { Helmet } from 'react-helmet-async';
 import { RESOURCES, GROUPS } from './resources.js';
 import { DIRECTORATES, UNITS } from '../content/nav.js';
+import { ASSESSMENT_ADMIN_GROUPS } from './assessmentContentMenu.js';
 import { useQuery } from '@tanstack/react-query';
 import { adminPageQuery } from '../api/queries.js';
 import { useAuth } from '../hooks/useAuth.js';
@@ -132,6 +133,13 @@ export default function AdminLayout() {
 
   // Curated CMS/admin groups (custom screens beyond the resource manifest).
   if (isAdmin) {
+    groups.push(...ASSESSMENT_ADMIN_GROUPS.map((g) => ({
+      label: g.label,
+      items: g.items.map((it) => ({
+        to: `/admin/r/page-content?editKey=${it.id}&heading=${encodeURIComponent(it.label)}`,
+        label: it.label, icon: 'fa-file-pen', onClick: close,
+      })),
+    })));
     groups.push({ label: 'Communication', items: [
       { to: '/admin/messages', label: 'Contact Messages', icon: 'fa-inbox', onClick: close },
       { to: '/admin/enquiries', label: 'Enquiries', icon: 'fa-comments', onClick: close },

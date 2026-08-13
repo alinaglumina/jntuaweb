@@ -36,6 +36,15 @@
   .field { @apply w-full rounded-md border border-line bg-surface px-3 py-2 text-sm text-content focus:border-navy; }
   .card { @apply rounded-lg bg-surface shadow-card; }
 
+  /* Richer card: gold foil edge + lift-on-hover, used for units/quick-facts */
+  .card-rich { @apply card relative overflow-hidden border-t-2 border-gold shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lift; }
+  /* Foil badge: soft gold wash for accreditation/recognition logos */
+  .badge-foil { @apply flex flex-col items-center justify-center gap-1 rounded-xl border border-gold/25 bg-gradient-to-b from-gold/10 via-white to-white p-4 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-lift; }
+  /* Quick-facts stat chip */
+  .stat-chip { @apply rounded-lg border border-navy/5 bg-white/80 px-4 py-3 text-center shadow-sm backdrop-blur-sm; }
+  /* Alternating section wash instead of flat white repetition */
+  .section-tint { @apply bg-gradient-to-b from-navy/[0.035] via-white to-white; }
+
   /* Skip-to-content link (a11y) */
   .skip-link { @apply sr-only; }
   .skip-link:focus { @apply not-sr-only fixed left-4 top-4 z-[100] rounded bg-navy px-4 py-2 text-white; }

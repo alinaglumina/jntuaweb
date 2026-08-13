@@ -58,24 +58,27 @@ export default function Home() {
       <Hero />
 
       {/* VC message */}
-      <section className="container grid gap-8 py-14 md:grid-cols-[240px_1fr] md:items-start">
-        <div className="text-center">
-          {vc?.photo ? (
-            <img src={vc.photo} alt={vc?.name || 'Vice Chancellor'} className="mx-auto h-64 w-56 rounded-lg border-4 border-white object-cover shadow-card" />
-          ) : (
-            <div className="mx-auto grid h-64 w-56 place-items-center rounded-lg border-4 border-white bg-navy/5 font-display text-lg text-navy shadow-card">Photo</div>
-          )}
-          <p className="mt-3 font-display text-lg font-bold text-navy">Prof. H. Sudarsana Rao</p>
-          <p className="text-sm text-slate-500">Vice Chancellor, JNTUA</p>
-          <Link to="/administration/vice-chancellor" className="btn-ghost mt-3 text-sm">View Profile</Link>
-        </div>
-        <div>
-          <h3 className="text-2xl">Vice-Chancellor’s Message</h3>
-          <div className="mt-3 space-y-3 text-slate-700">
+      <section className="section-tint">
+        <div className="container grid gap-8 py-14 md:grid-cols-[240px_1fr] md:items-start">
+          <div className="text-center">
+            {vc?.photo ? (
+              <img src={vc.photo} alt={vc?.name || 'Vice Chancellor'} className="mx-auto h-64 w-56 rounded-lg border-4 border-white object-cover shadow-lift ring-1 ring-gold/40" />
+            ) : (
+              <div className="mx-auto grid h-64 w-56 place-items-center rounded-lg border-4 border-white bg-navy/5 font-display text-lg text-navy shadow-lift ring-1 ring-gold/40">Photo</div>
+            )}
+            <p className="mt-3 font-display text-lg font-bold text-navy">Prof. H. Sudarsana Rao</p>
+            <p className="text-sm text-slate-500">Vice Chancellor, JNTUA</p>
+            <Link to="/administration/vice-chancellor" className="btn-ghost mt-3 text-sm">View Profile</Link>
+          </div>
+          <div className="relative">
+            <i className="fa-solid fa-quote-left absolute -left-2 -top-4 text-5xl text-gold/20" aria-hidden="true" />
+            <h3 className="text-2xl">Vice-Chancellor's Message</h3>
+            <div className="mt-3 space-y-3 text-slate-700">
             <p>It is a matter of honor and immense pleasure that destiny has given me an opportunity to lead JNT University Anantapur.</p>
             <p>Higher education globally has witnessed significant change and remarkable growth. Every institution has geared up to meet global challenges by harnessing the latest technologies. The move towards inter-disciplinary studies, research-based and interactive learning with technology integration has opened up several options as well as multiple challenges.</p>
             <p>At JNTU Anantapur, our constant endeavor is to provide a conducive environment for teaching, learning and research, while fostering innovation, industry collaboration and holistic development of our students to prepare them for the challenges of tomorrow.</p>
-            <Link to="/administration/vice-chancellor" className="inline-flex items-center gap-1 font-semibold text-crimson">Read more <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" /></Link>
+              <Link to="/administration/vice-chancellor" className="inline-flex items-center gap-1 font-semibold text-crimson">Read more <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" /></Link>
+            </div>
           </div>
         </div>
       </section>
@@ -89,7 +92,12 @@ export default function Home() {
               <div className="mt-2 h-1 w-16 rounded bg-gold" />
               <div className="mt-6 space-y-4 text-slate-700">
                 <p>The College of Engineering, Anantapur was started at Guindy, Madras in 1946 and shifted to Anantapur in 1948. Initially affiliated to Madras University (1946–1955) and Sri Venkateswara University, Tirupathi (1955–1972). In 1972, by an Act of State Legislature, JNT University was established at Hyderabad and the College of Engineering, Anantapur went into the fold of JNTU. In 2008, JNTU was trifurcated into three independent universities — JNTU Hyderabad, JNTU Kakinada and JNTU Anantapur.</p>
-                <p>In addition to its four constituent colleges, JNTUA has 98 Engineering Colleges, 33 Pharmacy Colleges and 29 stand-alone MBA/MCA colleges affiliated to it. Since its inception, JNTUA is committed to nurturing technological education and producing technical manpower comparable to the best in the world.</p>
+                <p>Since its inception, JNTUA is committed to nurturing technological education and producing technical manpower comparable to the best in the world.</p>
+              </div>
+              <div className="mt-6 grid grid-cols-3 gap-3">
+                <div className="stat-chip"><p className="font-display text-2xl font-bold text-navy">98</p><p className="text-xs text-slate-500">Engineering Colleges</p></div>
+                <div className="stat-chip"><p className="font-display text-2xl font-bold text-navy">33</p><p className="text-xs text-slate-500">Pharmacy Colleges</p></div>
+                <div className="stat-chip"><p className="font-display text-2xl font-bold text-navy">29</p><p className="text-xs text-slate-500">MBA/MCA Colleges</p></div>
               </div>
             </div>
             <div>
@@ -108,9 +116,9 @@ export default function Home() {
         <div className="text-center"><h2 className="text-2xl">Constituent Units</h2><div className="mx-auto mt-2 h-1 w-16 rounded bg-gold" /></div>
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5">
           {UNITS.map(([name, url, photo]) => (
-            <a key={name} href={url} target="_blank" rel="noopener noreferrer" className="card overflow-hidden text-center hover:shadow-lift">
+            <a key={name} href={url} target="_blank" rel="noopener noreferrer" className="card-rich overflow-hidden text-center">
               <div className="h-24 w-full overflow-hidden bg-navy/5">
-                <img src={photo} alt={name} className="h-full w-full object-cover" />
+                <img src={photo} alt={name} className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" />
               </div>
               <span className="block p-4 text-sm font-semibold text-navy">{name}</span>
             </a>
@@ -121,12 +129,12 @@ export default function Home() {
       <Notifications />
 
       {/* Recognitions */}
-      <section className="bg-paper">
+      <section className="section-tint">
         <div className="container py-14">
           <div className="text-center"><h2 className="text-2xl">Our Recognitions & Approvals</h2><div className="mx-auto mt-2 h-1 w-16 rounded bg-gold" /></div>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             {RECOGNITIONS.map(([label, url, logo]) => (
-              <a key={label} href={url} target="_blank" rel="noopener noreferrer" className="card flex h-24 w-32 flex-col items-center justify-center gap-1 p-3 text-center hover:shadow-lift">
+              <a key={label} href={url} target="_blank" rel="noopener noreferrer" className="badge-foil h-24 w-32">
                 <img src={logo} alt={label} className="h-10 w-auto object-contain" />
                 <span className="text-xs font-semibold text-navy">{label}</span>
               </a>

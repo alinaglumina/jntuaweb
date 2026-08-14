@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import api from '../lib/axios.js';
@@ -40,7 +39,7 @@ export default function Seo({ title, description, image, canonical, noindex, typ
   const jsonLd = [...siteSchema, ...pageSchema];
 
   return (
-    <Helmet>
+    <>
       <title>{fullTitle}</title>
       <meta name="description" content={desc} />
       {meta?.keywords && <meta name="keywords" content={meta.keywords} />}
@@ -57,10 +56,15 @@ export default function Seo({ title, description, image, canonical, noindex, typ
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={desc} />
       {img && <meta name="twitter:image" content={img} />}
-      {jsonLd.map((obj, i) => <script key={i} type="application/ld+json">{JSON.stringify(obj)}</script>)}
-    </Helmet>
+      {jsonLd.map((obj, i) => (
+        <script
+          key={i}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(obj) }}
+        />
+      ))}
+    </>
   );
-}
 
 // Helpers to build common page-level schemas.
 export const articleSchema = ({ title, description, image, datePublished, url }) => ({

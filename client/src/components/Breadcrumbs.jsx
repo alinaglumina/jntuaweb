@@ -1,5 +1,4 @@
 import { useMatches } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import Breadcrumb from './ui/Breadcrumb.jsx';
 import { SITE_URL } from './Seo.jsx';
 
@@ -26,7 +25,7 @@ export default function Breadcrumbs({ root, bar = true }) {
       ...(c.to ? { item: `${SITE_URL}${c.to}` } : {}),
     })),
   };
-  const jsonLd = <Helmet><script type="application/ld+json">{JSON.stringify(breadcrumbLd)}</script></Helmet>;
+  const jsonLd = <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />;
 
   if (!bar) return <>{jsonLd}<Breadcrumb items={trail} /></>;
   return (

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { useForgotPassword } from '../api/auth.js';
 import { Card, Button, FormField, Input } from '../components/ui/index.js';
 
@@ -11,7 +10,7 @@ export default function ForgotPassword() {
 
   return (
     <div className="grid min-h-screen place-items-center bg-canvas p-4">
-      <Helmet><title>Forgot Password — JNTUA</title></Helmet>
+      <title>Forgot Password — JNTUA</title>
       <Card className="w-full max-w-md p-8">
         <h1 className="font-display text-2xl text-navy">Forgot password</h1>
         {done ? (

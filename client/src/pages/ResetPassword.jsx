@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link, useSearchParams, useNavigate } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { useResetPassword } from '../api/auth.js';
 import { Card, Button, FormField, Input } from '../components/ui/index.js';
 
@@ -22,7 +21,7 @@ export default function ResetPassword() {
 
   return (
     <div className="grid min-h-screen place-items-center bg-canvas p-4">
-      <Helmet><title>Reset Password — JNTUA</title></Helmet>
+      <title>Reset Password — JNTUA</title>
       <Card className="w-full max-w-md p-8">
         <h1 className="font-display text-2xl text-navy">Set a new password</h1>
         {reset.isSuccess ? (

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSlides, useNotifications, useAdministration } from '../api/public.js';
 import { HeroSlider, NoticeCard, EventsSlider } from '../components/index.js';
@@ -54,7 +53,7 @@ export default function Home() {
   const { data: vc } = useAdministration('vc');
   return (
     <>
-      <Helmet><title>JNTUA — Jawaharlal Nehru Technological University Anantapur</title></Helmet>
+      <title>JNTUA — Jawaharlal Nehru Technological University Anantapur</title>
       <Hero />
 
       {/* VC message */}

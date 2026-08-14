@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Outlet, useNavigate, useLocation, Navigate, Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { RESOURCES, GROUPS } from './resources.js';
 import { DIRECTORATES, UNITS } from '../content/nav.js';
 import { ASSESSMENT_ADMIN_GROUPS, ACADEMICS_ADMIN_GROUPS } from './assessmentContentMenu.js';
@@ -200,7 +199,7 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-canvas text-content"><NavProgress />
-      <Helmet><title>Admin — JNTUA</title></Helmet>
+      <title>Admin — JNTUA</title>
       <aside className="fixed inset-y-0 left-0 hidden w-64 md:block">{nav}</aside>
       {open && <><aside className="fixed inset-y-0 left-0 z-50 w-64 md:hidden">{nav}</aside><div className="fixed inset-0 z-40 bg-black/40 md:hidden" onClick={close} /></>}
       <div className="md:pl-64">

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import {
   Button, Card, CardHeader, CardBody, Badge, Banner, Breadcrumb, Spinner,
   FormField, Input, Select, Checkbox, SearchBar, FileUpload, RichTextEditor,
@@ -27,7 +26,7 @@ export default function UIKit() {
 
   return (
     <div>
-      <Helmet><title>UI Kit — JNTUA</title></Helmet>
+      <title>UI Kit — JNTUA</title>
       <Banner title="JNTUA Component Library" subtitle="Every reusable building block, in one place." eyebrow="Design System" />
       <div className="container">
         <Section title="Breadcrumb"><Breadcrumb items={[{ label: 'About', to: '/about/genesis' }, { label: 'UI Kit' }]} /></Section>

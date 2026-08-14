@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 import { useLogin } from '../api/auth.js';
 
 export default function Login() {
@@ -19,7 +18,7 @@ export default function Login() {
 
   return (
     <>
-      <Helmet><title>Admin Login — JNTUA</title></Helmet>
+      <title>Admin Login — JNTUA</title>
       <div className="container grid min-h-[70vh] place-items-center py-12">
         <div className="card w-full max-w-md p-8">
           <h1 className="text-2xl">Admin &amp; Directorate Login</h1>

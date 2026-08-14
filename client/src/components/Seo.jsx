@@ -56,6 +56,7 @@ export default function Seo({ title, description, image, canonical, noindex, typ
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={desc} />
       {img && <meta name="twitter:image" content={img} />}
+<<<<<<< HEAD
       {jsonLd.map((obj, i) => (
         <script
           key={i}
@@ -63,6 +64,9 @@ export default function Seo({ title, description, image, canonical, noindex, typ
           dangerouslySetInnerHTML={{ __html: JSON.stringify(obj) }}
         />
       ))}
+=======
+      {jsonLd.map((obj, i) => <script key={i} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(obj) }} />)}
+>>>>>>> 8230811 (Migrate from react-helmet-async to React 19 native document metadata)
     </>
   );
 

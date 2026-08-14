@@ -12,9 +12,17 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
+<<<<<<< HEAD
         <ToastProvider>
           <App />
         </ToastProvider>
+=======
+
+          <ToastProvider>
+            <App />
+          </ToastProvider>
+
+>>>>>>> 8230811 (Migrate from react-helmet-async to React 19 native document metadata)
       </QueryClientProvider>
     </Provider>
   </React.StrictMode>

@@ -15,12 +15,18 @@ export function useResourcePage(resource, params) {
 
 // If any field is a File, send multipart; otherwise JSON.
 function toPayload(values) {
-  const hasFile = Object.values(values).some((v) => v instanceof File);
+  const hasFile = Object.values(values).some((v) =>
+    v instanceof File || (Array.isArray(v) && v.some((item) => item instanceof File))
+  );
   if (!hasFile) return { data: values, headers: undefined };
   const fd = new FormData();
   for (const [k, v] of Object.entries(values)) {
     if (v == null || v === '') continue;
-    fd.append(k, v instanceof File ? v : String(v));
+    if (Array.isArray(v) && v.every((item) => item instanceof File)) {
+      v.forEach((file) => fd.append(k, file));
+    } else {
+      fd.append(k, v instanceof File ? v : String(v));
+    }
   }
   return { data: fd, headers: { 'Content-Type': 'multipart/form-data' } };
 }

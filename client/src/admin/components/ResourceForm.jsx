@@ -1,12 +1,12 @@
 import { useForm, Controller } from 'react-hook-form';
-import { FormField, Input, Textarea, Select, Checkbox, FileUpload, RichTextEditor, Button } from '../../components/ui/index.js';
+import { FormField, Input, Textarea, Select, Checkbox, FileUpload, MultiImageUpload, RichTextEditor, Button } from '../../components/ui/index.js';
 
 // Builds a create/edit form from a resource's field defs, using the UI kit.
 // html → RichTextEditor, file/image → FileUpload, plus text/select/date/checkbox.
 export default function ResourceForm({ fields, initial, onSubmit, onCancel, busy, error }) {
   const defaults = {};
   for (const f of fields) {
-    if (f.type === 'file' || f.type === 'image') continue;
+    if (f.type === 'file' || f.type === 'image' || f.type === 'images') continue;
     if (f.type === 'date' && initial?.[f.name]) defaults[f.name] = String(initial[f.name]).slice(0, 10);
     else defaults[f.name] = initial?.[f.name] ?? (f.type === 'checkbox' ? (f.default ?? false) : '');
   }
@@ -15,6 +15,7 @@ export default function ResourceForm({ fields, initial, onSubmit, onCancel, busy
   const submit = (values) => {
     const out = { ...values };
     for (const f of fields) if ((f.type === 'file' || f.type === 'image') && !(out[f.name] instanceof File)) delete out[f.name];
+    for (const f of fields) if (f.type === 'images' && !(Array.isArray(out[f.name]) && out[f.name].every((v) => v instanceof File))) delete out[f.name];
     onSubmit(out);
   };
 
@@ -24,6 +25,10 @@ export default function ResourceForm({ fields, initial, onSubmit, onCancel, busy
         if (f.type === 'file' || f.type === 'image') {
           return <FileUpload key={f.name} label={f.label} accept={f.type === 'image' ? 'image/*' : undefined}
             current={initial?.[f.name]} onFile={(file) => setValue(f.name, file)} />;
+        }
+        if (f.type === 'images') {
+          return <MultiImageUpload key={f.name} label={f.label} min={f.min || 4} max={f.max || 8}
+            current={Array.isArray(initial?.[f.name]) ? initial[f.name] : []} onFiles={(files) => setValue(f.name, files)} />;
         }
         if (f.type === 'checkbox') return <Controller key={f.name} name={f.name} control={control} render={({ field }) => <Checkbox label={f.label} checked={!!field.value} onChange={field.onChange} />} />;
         if (f.type === 'html') {

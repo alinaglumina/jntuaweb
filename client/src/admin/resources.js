@@ -155,11 +155,12 @@ export const RESOURCES = {
   },
 
   events: {
-    label: 'Events', group: 'content', icon: 'fa-calendar-day', roles: ['admin', 'director'],
+    label: 'Events', group: 'content', icon: 'fa-calendar-day', roles: ['admin'],
     columns: ['title', 'startDate', 'venue'],
     fields: [directorateField(), F('title', 'Title', 'text', { required: true }), F('category', 'Category'),
              F('startDate', 'Start date', 'date', { required: true }), F('endDate', 'End date', 'date'),
              F('venue', 'Venue'), F('description', 'Description', 'html'), F('banner', 'Banner', 'image'),
+             F('images', 'Homepage Slider Images (min 4)', 'images', { min: 4, max: 8 }),
              F('registrationUrl', 'Registration URL'), F('isPublished', 'Published', 'checkbox', { default: true })],
   },
   circulars: {

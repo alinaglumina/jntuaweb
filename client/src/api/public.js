@@ -12,6 +12,7 @@ export const useMous         = () => useQuery(mousQuery());
 export const useEMagazines   = () => useQuery(emagazinesQuery());
 export const useHonoris      = () => useQuery(honorisQuery());
 export const useFaculty       = () => useQuery(facultyQuery());
+export const useEvents       = () => useQuery(eventsQuery());
 export const useExecutiveCouncil = () => useQuery(executiveCouncilQuery());
 export const useFormerVCs        = () => useQuery(formerVCsQuery());
 export const useDirectorateMenu = (key) => useQuery({ ...directorateMenuQuery(key), enabled: !!key });

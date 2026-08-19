@@ -54,7 +54,8 @@ export const RESOURCES = {
     label: 'Administration', group: 'institutional', icon: 'fa-user-tie', roles: ['admin'],
     columns: ['roleKey', 'name', 'designation'],
     fields: [F('roleKey', 'Role key', 'select', { options: ['chancellor', 'vc', 'rector', 'registrar'], required: true }),
-             F('name', 'Name'), F('designation', 'Designation'), F('photo', 'Photo', 'image'), F('profileText', 'Profile', 'html')],
+             F('name', 'Name'), F('designation', 'Designation'), F('photo', 'Photo', 'image'), F('profileText', 'Profile', 'html'),
+             F('attachment', 'Profile Attachment URL (upload PDF via Media Library first, then paste its URL here)')],
   },
   'executive-council': {
     label: 'Executive Council', group: 'institutional', icon: 'fa-users', roles: ['admin'],

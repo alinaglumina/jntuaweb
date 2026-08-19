@@ -67,7 +67,11 @@ export default function Home() {
             )}
             <p className="mt-3 font-display text-lg font-bold text-navy">Prof. H. Sudarsana Rao</p>
             <p className="text-sm text-slate-500">Vice Chancellor, JNTUA</p>
-            <Link to="/administration/vice-chancellor" className="btn-ghost mt-3 text-sm">View Profile</Link>
+            {vc?.attachment ? (
+              <a href={vc.attachment} target="_blank" rel="noopener noreferrer" className="btn-ghost mt-3 text-sm">View Profile</a>
+            ) : (
+              <Link to="/administration/vice-chancellor" className="btn-ghost mt-3 text-sm">View Profile</Link>
+            )}
           </div>
           <div className="relative">
             <i className="fa-solid fa-quote-left absolute -left-2 -top-4 text-5xl text-gold/20" aria-hidden="true" />

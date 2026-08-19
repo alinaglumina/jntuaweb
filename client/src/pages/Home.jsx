@@ -58,12 +58,12 @@ export default function Home() {
 
       {/* VC message */}
       <section className="section-tint">
-        <div className="w-full px-4 sm:px-8 lg:px-16 grid gap-8 py-14 md:grid-cols-[240px_1fr] md:items-start">
+        <div className="w-full px-4 sm:px-8 lg:px-16 grid gap-8 py-14 md:grid-cols-[320px_1fr] md:items-start">
           <div className="text-center">
             {vc?.photo ? (
-              <img src={vc.photo} alt={vc?.name || 'Vice Chancellor'} className="mx-auto h-64 w-56 rounded-lg border-4 border-white object-cover shadow-lift ring-1 ring-gold/40" />
+              <img src={vc.photo} alt={vc?.name || 'Vice Chancellor'} className="mx-auto h-72 w-72 rounded-lg border-4 border-white object-cover shadow-lift ring-1 ring-gold/40" />
             ) : (
-              <div className="mx-auto grid h-64 w-56 place-items-center rounded-lg border-4 border-white bg-navy/5 font-display text-lg text-navy shadow-lift ring-1 ring-gold/40">Photo</div>
+              <div className="mx-auto grid h-72 w-72 place-items-center rounded-lg border-4 border-white bg-navy/5 font-display text-lg text-navy shadow-lift ring-1 ring-gold/40">Photo</div>
             )}
             <p className="mt-3 font-display text-lg font-bold text-navy">Prof. H. Sudarsana Rao</p>
             <p className="text-sm text-slate-500">Vice Chancellor, JNTUA</p>

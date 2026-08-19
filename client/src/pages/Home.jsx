@@ -94,9 +94,9 @@ export default function Home() {
                 <p>Since its inception, JNTUA is committed to nurturing technological education and producing technical manpower comparable to the best in the world.</p>
               </div>
               <div className="mt-6 grid grid-cols-3 gap-3">
-                <div className="stat-chip"><p className="font-display text-2xl font-bold text-navy">98</p><p className="text-xs text-slate-500">Engineering Colleges</p></div>
-                <div className="stat-chip"><p className="font-display text-2xl font-bold text-navy">33</p><p className="text-xs text-slate-500">Pharmacy Colleges</p></div>
-                <div className="stat-chip"><p className="font-display text-2xl font-bold text-navy">29</p><p className="text-xs text-slate-500">MBA/MCA Colleges</p></div>
+                <div className="stat-chip"><p className="font-display text-2xl font-bold text-navy">65</p><p className="text-xs text-slate-500">Engineering Colleges</p></div>
+                <div className="stat-chip"><p className="font-display text-2xl font-bold text-navy">45</p><p className="text-xs text-slate-500">Pharmacy Colleges</p></div>
+                <div className="stat-chip"><p className="font-display text-2xl font-bold text-navy">24</p><p className="text-xs text-slate-500">MBA/MCA Colleges</p></div>
               </div>
             </div>
             <div>

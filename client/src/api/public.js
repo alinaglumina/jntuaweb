@@ -1,7 +1,7 @@
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import api from '../lib/axios.js';
 import {
-  slidesQuery, galleryQuery, mousQuery, emagazinesQuery, honorisQuery,
+  slidesQuery, galleryQuery, mousQuery, emagazinesQuery, honorisQuery, eventsQuery,
   settingsQuery, notificationsQuery, newsQuery, facultyQuery, directorateMenuQuery, navMenuQuery,
   executiveCouncilQuery, formerVCsQuery,
 } from './queries.js';

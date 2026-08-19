@@ -26,7 +26,7 @@ function Notifications() {
   const [cat, setCat] = useState('news');
   const { data = [] } = useNotifications(cat);
   return (
-    <section className="container py-14">
+    <section className="w-full px-4 sm:px-8 lg:px-16 py-14">
       <div className="text-center"><h2 className="text-2xl">University Notifications</h2><div className="mx-auto mt-2 h-1 w-16 rounded bg-gold" /></div>
       <div className="mt-6 flex flex-wrap justify-center gap-2">
         {NOTIF_TABS.map(([k, l]) => (
@@ -58,7 +58,7 @@ export default function Home() {
 
       {/* VC message */}
       <section className="section-tint">
-        <div className="container grid gap-8 py-14 md:grid-cols-[240px_1fr] md:items-start">
+        <div className="w-full px-4 sm:px-8 lg:px-16 grid gap-8 py-14 md:grid-cols-[240px_1fr] md:items-start">
           <div className="text-center">
             {vc?.photo ? (
               <img src={vc.photo} alt={vc?.name || 'Vice Chancellor'} className="mx-auto h-64 w-56 rounded-lg border-4 border-white object-cover shadow-lift ring-1 ring-gold/40" />
@@ -84,7 +84,7 @@ export default function Home() {
 
       {/* Welcome + Events */}
       <section className="bg-paper">
-        <div className="container py-14">
+        <div className="w-full px-4 sm:px-8 lg:px-16 py-14">
           <div className="grid gap-10 md:grid-cols-2">
             <div>
               <h2 className="text-2xl">Welcome to JNTUA</h2>
@@ -111,7 +111,7 @@ export default function Home() {
       </section>
 
       {/* Constituent units */}
-      <section className="container py-14">
+      <section className="w-full px-4 sm:px-8 lg:px-16 py-14">
         <div className="text-center"><h2 className="text-2xl">Constituent Units</h2><div className="mx-auto mt-2 h-1 w-16 rounded bg-gold" /></div>
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-5">
           {UNITS.map(([name, url, photo]) => (
@@ -129,7 +129,7 @@ export default function Home() {
 
       {/* Recognitions */}
       <section className="section-tint">
-        <div className="container py-14">
+        <div className="w-full px-4 sm:px-8 lg:px-16 py-14">
           <div className="text-center"><h2 className="text-2xl">Our Recognitions & Approvals</h2><div className="mx-auto mt-2 h-1 w-16 rounded bg-gold" /></div>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             {RECOGNITIONS.map(([label, url, logo]) => (
@@ -143,7 +143,7 @@ export default function Home() {
       </section>
 
       {/* Contact */}
-      <section className="container grid gap-8 py-14 md:grid-cols-2">
+      <section className="w-full px-4 sm:px-8 lg:px-16 grid gap-8 py-14 md:grid-cols-2">
         <div>
           <h3 className="text-2xl"><i className="fa-solid fa-address-card text-crimson" aria-hidden="true" /> Contact Us</h3>
           <ul className="mt-4 space-y-3 text-sm text-slate-700">

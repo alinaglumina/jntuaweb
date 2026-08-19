@@ -4,7 +4,7 @@ import { crudController } from '../controllers/crudController.js';
 import { requireAuth } from '../middleware/auth.js';
 import { requireRole } from '../middleware/roleGuard.js';
 import { requirePermission } from '../middleware/permission.js';
-import { resourceUpload } from '../middleware/resourceUpload.js';
+import { resourceUpload, resourceUploadMulti } from '../middleware/resourceUpload.js';
 import { auditLogger } from '../middleware/audit.js';
 import * as media from '../controllers/mediaController.js';
 import { adminSearch } from '../controllers/adminSearchController.js';
@@ -50,7 +50,10 @@ function scopedWrite(def) {
 for (const [key, def] of Object.entries(RESOURCES)) {
   const c = crudController(def.model, { searchable: def.searchable || [], baseFilter: scopedFilter(def), beforeWrite: scopedWrite(def) });
   const guard = requireRole(...def.roles);
-  const withUpload = def.upload ? [resourceUpload(def.upload[0], def.upload[1])] : [];
+  const withUpload = [
+    ...(def.upload ? [resourceUpload(def.upload[0], def.upload[1])] : []),
+    ...(def.uploadMulti ? [resourceUploadMulti(def.uploadMulti[0], def.uploadMulti[1], def.uploadMulti[2])] : []),
+  ];
   router.get(`/${key}`, guard, c.list);
   router.get(`/${key}/:id`, guard, c.getOne);
   router.post(`/${key}`, guard, ...withUpload, c.create);

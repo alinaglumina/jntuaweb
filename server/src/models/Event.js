@@ -8,6 +8,7 @@ const schema = new mongoose.Schema({
   endDate:     { type: Date, default: null },
   venue:       { type: String, default: '' },
   banner:      { type: String, default: '' },
+  images:      { type: [String], default: [] },  // homepage slider gallery (4+ images)
   registrationUrl: { type: String, default: '' },
   isPublished: { type: Boolean, default: true, index: true },
   createdBy:   { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },

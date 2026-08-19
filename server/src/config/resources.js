@@ -31,7 +31,7 @@ export const RESOURCES = {
   'dafa-docs':         { model: DafaDoc,            upload: ['filename', 'dafa-docs'],   searchable: ['title', 'section'], roles: ['admin', 'director'], sectionField: 'section' },
   'page-content':      { model: PageContent,        searchable: ['key', 'heading'],      roles: ['admin', 'director'], sectionField: 'key' },
 
-  events:              { model: Event,            upload: ['banner', 'events'],        searchable: ['title', 'category'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
+  events:              { model: Event,            upload: ['banner', 'events'],  uploadMulti: ['images', 'events', 8],  searchable: ['title', 'category'], roles: ['admin'], sectionField: 'directorateKey' },
   circulars:           { model: Circular,         upload: ['attachment', 'circulars'], searchable: ['title', 'refNo'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   downloads:           { model: Download,         upload: ['attachment', 'downloads'], searchable: ['title', 'category'], roles: ['admin', 'director'], sectionField: 'section' },
   departments:         { model: Department,       searchable: ['name', 'code'], roles: ['admin'] },

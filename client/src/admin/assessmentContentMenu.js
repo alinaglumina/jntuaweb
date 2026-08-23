@@ -14,6 +14,8 @@ import { ACADEMICS } from '../content/nav.js';
 export const ACADEMICS_ADMIN_GROUPS = [
   {
     label: 'Academics',
-    items: ACADEMICS.map(([id, label]) => ({ id, label })),
+    // 'acad-downloads' is excluded: that page now renders a table via the
+    // Downloads resource (Section = "academics-downloads"), not page-content.
+    items: ACADEMICS.filter(([id]) => id !== 'acad-downloads').map(([id, label]) => ({ id, label })),
   },
 ];

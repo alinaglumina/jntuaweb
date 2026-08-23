@@ -41,6 +41,12 @@ export const naacDocumentsQuery = (criteria) => ({
   enabled: !!criteria,
 });
 
+export const downloadsQuery = (section) => ({
+  queryKey: ['downloads', section],
+  queryFn: () => api.get('/downloads', { params: { section, limit: 200 } }),
+  enabled: !!section,
+});
+
 export const adminListQuery = (resource, params) => ({
   queryKey: ['admin', resource, params],
   queryFn: list(`/admin/${resource}`, params),

@@ -28,6 +28,7 @@ export default function ContentPage({ pageId, resolveId, sidebar, naacTable }) {
   const { data: override } = useQuery({ ...pageContentQuery(id), enabled: !!id });
   const { data: admin } = useQuery({ ...administrationQuery(roleKey) });
   const [expanded, setExpanded] = useState(false);
+  const collapsible = id === 'vice-chancellor';
 
   const photo = admin?.photo
     ? (admin.photo.startsWith('http') ? admin.photo : admin.photo)
@@ -49,21 +50,23 @@ export default function ContentPage({ pageId, resolveId, sidebar, naacTable }) {
       <PageShell title={override.heading || page?.title || 'Page'} sidebar={sidebarEl}>
         {PhotoBlock}
         {naacTableEl && <div className="mb-6">{naacTableEl}</div>}
-        <div className={`mx-auto max-w-3xl relative ${!expanded ? 'max-h-64 overflow-hidden' : ''}`}>
+        <div className={`mx-auto max-w-3xl relative ${collapsible && !expanded ? 'max-h-64 overflow-hidden' : ''}`}>
           <SafeHtml html={override.body} />
-          {!expanded && (
+          {collapsible && !expanded && (
             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />
           )}
         </div>
-        <div className="mx-auto max-w-3xl mt-2 clear-both">
-          <button
-            type="button"
-            onClick={() => setExpanded((e) => !e)}
-            className="font-medium text-navy underline underline-offset-2"
-          >
-            {expanded ? 'Show less' : 'Read more...'}
-          </button>
-        </div>
+        {collapsible && (
+          <div className="mx-auto max-w-3xl mt-2 clear-both">
+            <button
+              type="button"
+              onClick={() => setExpanded((e) => !e)}
+              className="font-medium text-navy underline underline-offset-2"
+            >
+              {expanded ? 'Show less' : 'Read more...'}
+            </button>
+          </div>
+        )}
       </PageShell>
     );
   }
@@ -72,7 +75,7 @@ export default function ContentPage({ pageId, resolveId, sidebar, naacTable }) {
     <PageShell title={page.title} sidebar={sidebarEl}>
       {PhotoBlock}
       {naacTableEl && <div className="mb-6">{naacTableEl}</div>}
-      <div className={`mx-auto max-w-3xl relative ${!expanded ? 'max-h-64 overflow-hidden' : ''}`}>
+      <div className={`mx-auto max-w-3xl relative ${collapsible && !expanded ? 'max-h-64 overflow-hidden' : ''}`}>
         <article className="prose-jntua space-y-4">
           {page.blocks.map((b, i) => {
             if (b.type === 'heading') { const Tag = `h${Math.min(b.level + 1, 4)}`; return <Tag key={i} className="mt-6 font-display text-navy">{b.text}</Tag>; }
@@ -81,11 +84,11 @@ export default function ContentPage({ pageId, resolveId, sidebar, naacTable }) {
           })}
           {page.blocks.length === 0 && <p className="text-slate-500">Content coming soon.</p>}
         </article>
-        {!expanded && page.blocks.length > 0 && (
+        {collapsible && !expanded && page.blocks.length > 0 && (
           <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />
         )}
       </div>
-      {page.blocks.length > 0 && (
+      {collapsible && page.blocks.length > 0 && (
         <div className="mx-auto max-w-3xl mt-2 clear-both">
           <button
             type="button"

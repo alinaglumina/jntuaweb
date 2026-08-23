@@ -251,4 +251,22 @@ export const RESOURCES = {
              F('description', 'Meta description', 'textarea'), F('keywords', 'Keywords'),
              F('ogImage', 'OG image', 'image'), F('canonical', 'Canonical URL'), F('noindex', 'No-index', 'checkbox')],
   },
+  'naac-documents': {
+    label: 'NAAC Documents', group: 'institutional', icon: 'fa-table-list', roles: ['admin'],
+    columns: ['criteria', 'title', 'sortOrder'],
+    fields: [F('criteria', 'Criteria / Section', 'select', { required: true, options: [
+               { value: 'extended-profile', label: 'Extended Profile Metrics' },
+               { value: 'criteria-1', label: 'Criteria 1' },
+               { value: 'criteria-2', label: 'Criteria 2' },
+               { value: 'criteria-3', label: 'Criteria 3' },
+               { value: 'criteria-4', label: 'Criteria 4' },
+               { value: 'criteria-5', label: 'Criteria 5' },
+               { value: 'criteria-6', label: 'Criteria 6' },
+               { value: 'criteria-7', label: 'Criteria 7' },
+               { value: 'workshops-seminars', label: 'Workshops / Seminars' },
+             ] }),
+             F('title', 'Title', 'text', { required: true }),
+             F('attachment', 'Attachment (PDF)', 'file'),
+             F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],
+  },
 };

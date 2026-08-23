@@ -35,6 +35,12 @@ export const pageContentQuery = (id) => ({
   retry: false,
 });
 
+export const naacDocumentsQuery = (criteria) => ({
+  queryKey: ['naac-documents', criteria],
+  queryFn: () => api.get('/naac-documents', { params: { criteria, limit: 200 } }),
+  enabled: !!criteria,
+});
+
 export const adminListQuery = (resource, params) => ({
   queryKey: ['admin', resource, params],
   queryFn: list(`/admin/${resource}`, params),

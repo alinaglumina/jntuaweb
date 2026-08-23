@@ -7,6 +7,7 @@ import { pageContentQuery, administrationQuery } from '../api/queries.js';
 import pages from '../content/pages.json';
 import Sidebar from './Sidebar.jsx';
 import { ASSESSMENT_SIDEBAR_GROUPS } from '../content/assessmentSidebar.js';
+import NaacDocumentsTable from './NaacDocumentsTable.jsx';
 
 // Maps a content page id to an Administration roleKey, when that page
 // should show a photo pulled from the Administration collection.
@@ -19,7 +20,7 @@ const ROLE_KEY_BY_PAGE = {
 
 // Renders a static page from the content manifest. If an admin has published an
 // editable PageContent override under the same key, that HTML wins.
-export default function ContentPage({ pageId, resolveId, sidebar }) {
+export default function ContentPage({ pageId, resolveId, sidebar, naacTable }) {
   const params = useParams();
   const id = pageId || (resolveId ? resolveId(params) : null);
   const page = id && pages[id];
@@ -41,11 +42,13 @@ export default function ContentPage({ pageId, resolveId, sidebar }) {
   ) : null;
 
   const sidebarEl = sidebar ? <Sidebar variant="light" header={<h3 className="font-display text-lg font-bold">Assessment &amp; Accreditation</h3>} groups={ASSESSMENT_SIDEBAR_GROUPS} /> : null;
+  const naacTableEl = naacTable && params.key ? <NaacDocumentsTable criteria={params.key} /> : null;
 
   if (override?.body) {
     return (
       <PageShell title={override.heading || page?.title || 'Page'} sidebar={sidebarEl}>
         {PhotoBlock}
+        {naacTableEl && <div className="mb-6">{naacTableEl}</div>}
         <div className={`mx-auto max-w-3xl relative ${!expanded ? 'max-h-64 overflow-hidden' : ''}`}>
           <SafeHtml html={override.body} />
           {!expanded && (
@@ -68,6 +71,7 @@ export default function ContentPage({ pageId, resolveId, sidebar }) {
   return (
     <PageShell title={page.title} sidebar={sidebarEl}>
       {PhotoBlock}
+      {naacTableEl && <div className="mb-6">{naacTableEl}</div>}
       <div className={`mx-auto max-w-3xl relative ${!expanded ? 'max-h-64 overflow-hidden' : ''}`}>
         <article className="prose-jntua space-y-4">
           {page.blocks.map((b, i) => {

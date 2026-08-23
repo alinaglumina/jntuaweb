@@ -7,6 +7,7 @@ const CRITERIA_OPTIONS = [
 
 const schema = new mongoose.Schema({
   criteria:   { type: String, required: true, enum: CRITERIA_OPTIONS, index: true },
+  metricNumber: { type: String, default: '', trim: true },  // e.g. "1.1", "1.2"
   title:      { type: String, required: true, trim: true },
   attachment: { type: String, default: '' },
   sortOrder:  { type: Number, default: 0, index: true },

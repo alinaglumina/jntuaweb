@@ -5,6 +5,7 @@ import { crudController } from '../controllers/crudController.js';
 import {
   GalleryItem, Mou, EMagazine, News, Administration,
   DirectorateContent, HonorisCausa, Slide, Faculty, ExecutiveCouncil, FormerViceChancellor,
+  NaacDocument,
 } from '../models/index.js';
 
 const router = Router();
@@ -31,6 +32,14 @@ mount('/faculty',     Faculty,      { defaultSort: 'sortOrder',    baseFilter: (
 mount('/executive-council',       ExecutiveCouncil,     { defaultSort: 'sortOrder', baseFilter: () => ({ isActive: true }), searchable: ['name'] });
 mount('/former-vice-chancellors', FormerViceChancellor, { defaultSort: 'sortOrder', baseFilter: () => ({ isActive: true }), searchable: ['name'] });
 mount('/administration', Administration, { defaultSort: 'createdAt' });
+
+// NAAC documents table (Extended Profile Metrics, Criteria 1-7, Workshops/Seminars).
+// Filtered by ?criteria=<slug> so the public NAAC page shows only its own section's rows.
+router.get('/naac-documents', crudController(NaacDocument, {
+  defaultSort: 'sortOrder',
+  baseFilter: (req) => ({ isActive: true, ...(req.query.criteria ? { criteria: req.query.criteria } : {}) }),
+  searchable: ['title'],
+}).list);
 mount('/directorate-content', DirectorateContent, { defaultSort: 'createdAt' });
 router.get('/nav-menu', async (req, res, next) => {
   try {

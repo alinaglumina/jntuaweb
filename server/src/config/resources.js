@@ -4,7 +4,7 @@ import {
   DacpFile, DafaDoc, PageContent,
   Event, Department, Student, Circular, Download, Menu,
   Admission, Examination, Result, ContentBlock,
-  Video, SeoMeta, DirectorateMenuItem, NavMenuItem,
+  Video, SeoMeta, NaacDocument, DirectorateMenuItem, NavMenuItem,
 } from '../models/index.js';
 
 // Each entry: model + upload config + which roles may write + list search fields.
@@ -45,4 +45,5 @@ export const RESOURCES = {
 
   videos:              { model: Video,            upload: ['thumbnail', 'videos'], searchable: ['title', 'category'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   seo:                 { model: SeoMeta,          upload: ['ogImage', 'seo'],      searchable: ['path', 'title'], roles: ['admin'] },
+  'naac-documents':    { model: NaacDocument,     upload: ['attachment', 'naac'],  searchable: ['title'], roles: ['admin'] },
 };

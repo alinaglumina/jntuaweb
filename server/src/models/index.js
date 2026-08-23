@@ -40,6 +40,7 @@ export { default as Result }       from './Result.js';
 export { default as ContentBlock } from './ContentBlock.js';
 export { default as Video }          from './Video.js';
 export { default as SeoMeta }        from './SeoMeta.js';
+export { default as NaacDocument }    from './NaacDocument.js';
 export { default as ContactMessage } from './ContactMessage.js';
 export { default as Enquiry }        from './Enquiry.js';
 export { default as RefreshToken } from './RefreshToken.js';

@@ -1,4 +1,5 @@
-import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import { Upload } from '@aws-sdk/lib-storage';
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
@@ -21,14 +22,23 @@ const PUBLIC_BASE = process.env.R2_PUBLIC_BASE_URL; // e.g. https://pub-xxxx.r2.
 export async function uploadToR2(localPath, subfolder) {
   const ext = path.extname(localPath);
   const key = `jntuaweb/${subfolder}/${Date.now()}_${crypto.randomBytes(4).toString('hex')}${ext}`;
-  const body = fs.readFileSync(localPath);
 
-  await r2.send(new PutObjectCommand({
-    Bucket: BUCKET,
-    Key: key,
-    Body: body,
-    ContentType: guessContentType(ext),
-  }));
+  // Stream the file instead of reading it fully into memory — critical for
+  // large uploads (videos, big PDFs) on memory-constrained hosting like Render.
+  const stream = fs.createReadStream(localPath);
+  const uploader = new Upload({
+    client: r2,
+    params: {
+      Bucket: BUCKET,
+      Key: key,
+      Body: stream,
+      ContentType: guessContentType(ext),
+    },
+    queueSize: 4,
+    partSize: 8 * 1024 * 1024, // 8MB multipart chunks
+  });
+
+  await uploader.done();
 
   return { url: `${PUBLIC_BASE}/${key}`, publicId: key };
 }

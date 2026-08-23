@@ -56,7 +56,9 @@ api.interceptors.response.use(
         return Promise.reject(new Error('Your session has expired. Please sign in again.'));
       }
     }
-    const msg = response?.data?.error || err.message || 'Network error';
+    const rawErr = response?.data?.error;
+    const msg = typeof rawErr === 'string' ? rawErr
+      : (rawErr?.message || err.message || 'Network error');
     return Promise.reject(new Error(msg));
   }
 );

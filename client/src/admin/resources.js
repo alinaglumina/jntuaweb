@@ -264,6 +264,7 @@ export const RESOURCES = {
                { value: 'criteria-6', label: 'Criteria 6' },
                { value: 'criteria-7', label: 'Criteria 7' },
                { value: 'workshops-seminars', label: 'Workshops / Seminars' },
+               { value: 'ssr', label: 'Self Study Report (SSR)' },
              ] }),
              F('metricNumber', 'Criteria/Metric Number (e.g. 1.1)', 'text'),
              F('title', 'Title', 'text', { required: true }),

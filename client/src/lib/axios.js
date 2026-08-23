@@ -35,7 +35,10 @@ api.interceptors.response.use(
   (res) => {
     const body = res.data;
     if (body && typeof body.success === 'boolean') {
-      return body.success ? body.data : Promise.reject(new Error(body.error || 'Request failed'));
+      if (body.success) return body.data;
+    const errMsg = typeof body.error === 'string' ? body.error
+      : (body.error?.message || 'Request failed');
+    return Promise.reject(new Error(errMsg));
     }
     return body;
   },

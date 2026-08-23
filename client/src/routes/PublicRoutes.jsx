@@ -39,7 +39,7 @@ const crumb = (arr) => ({ crumb: () => arr });
 // Fixed content leaves (not directorates/units/academics), tagged with their group.
 const fixedContent = NAV.flatMap((group) =>
   (group.children || [])
-    .filter((l) => l.kind === 'content' && !l.to.startsWith('/directorates/') && !l.to.startsWith('/units/') && l.to !== '/administration/executive-council' && l.to !== '/administration/former-vice-chancellors')
+    .filter((l) => l.kind === 'content' && !l.to.startsWith('/directorates/') && !l.to.startsWith('/units/') && !l.to.startsWith('/naac/') && !l.to.startsWith('/assessment/') && l.to !== '/administration/executive-council' && l.to !== '/administration/former-vice-chancellors')
     .map((l) => ({
       path: l.to, element: S(<ContentPage pageId={l.id} />),
       loader: contentLoader(() => l.id),

@@ -30,7 +30,11 @@ function Notifications() {
       <div className="text-center"><h2 className="text-2xl">University Notifications</h2><div className="mx-auto mt-2 h-1 w-16 rounded bg-gold" /></div>
       <div className="mt-6 flex flex-wrap justify-center gap-2">
         {NOTIF_TABS.map(([k, l]) => (
-          <button key={k} onClick={() => setCat(k)} className={`rounded-full px-3 py-1.5 text-xs font-semibold ${cat === k ? 'bg-navy text-white' : 'bg-slate-100 text-navy hover:bg-slate-200'}`}>{l}</button>
+          k === 'exam' ? (
+            <Link key={k} to="/academics/exam-calendars" className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-navy hover:bg-slate-200">{l}</Link>
+          ) : (
+            <button key={k} onClick={() => setCat(k)} className={`rounded-full px-3 py-1.5 text-xs font-semibold ${cat === k ? 'bg-navy text-white' : 'bg-slate-100 text-navy hover:bg-slate-200'}`}>{l}</button>
+          )
         ))}
       </div>
       <div className="mx-auto mt-6 max-w-3xl">

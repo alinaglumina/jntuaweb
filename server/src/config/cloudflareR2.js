@@ -1,5 +1,6 @@
-import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, DeleteObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 import { Upload } from '@aws-sdk/lib-storage';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
@@ -41,6 +42,23 @@ export async function uploadToR2(localPath, subfolder) {
   await uploader.done();
 
   return { url: `${PUBLIC_BASE}/${key}`, publicId: key };
+}
+
+// Generates a short-lived presigned PUT URL so large files can be uploaded
+// DIRECTLY from the browser to R2, bypassing the app server entirely — this
+// avoids platform request timeouts (e.g. Render) for big files (videos, PDFs).
+export async function getPresignedUploadUrl(subfolder, originalFilename, contentType) {
+  const ext = path.extname(originalFilename);
+  const key = `jntuaweb/${subfolder}/${Date.now()}_${crypto.randomBytes(4).toString('hex')}${ext}`;
+
+  const command = new PutObjectCommand({
+    Bucket: BUCKET,
+    Key: key,
+    ContentType: contentType || guessContentType(ext),
+  });
+
+  const uploadUrl = await getSignedUrl(r2, command, { expiresIn: 300 }); // 5 minutes
+  return { uploadUrl, publicUrl: `${PUBLIC_BASE}/${key}`, key };
 }
 
 export async function deleteFromR2(key) {

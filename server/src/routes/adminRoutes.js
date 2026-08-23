@@ -5,6 +5,9 @@ import { requireAuth } from '../middleware/auth.js';
 import { requireRole } from '../middleware/roleGuard.js';
 import { requirePermission } from '../middleware/permission.js';
 import { resourceUpload, resourceUploadMulti } from '../middleware/resourceUpload.js';
+import { getPresignedUploadUrl } from '../config/cloudflareR2.js';
+import asyncHandler from '../utils/asyncHandler.js';
+import { ok } from '../utils/ApiResponse.js';
 import { auditLogger } from '../middleware/audit.js';
 import * as media from '../controllers/mediaController.js';
 import { adminSearch } from '../controllers/adminSearchController.js';
@@ -19,6 +22,16 @@ import { uploader } from '../middleware/upload.js';
 const router = Router();
 
 router.use(requireAuth);   // every /api/admin route requires a session
+
+// Presigned direct-to-R2 upload — the browser uploads the file bytes straight
+// to Cloudflare, bypassing this server entirely. Avoids platform request
+// timeouts (e.g. Render) for large files (videos, big PDFs).
+router.post('/uploads/presign', asyncHandler(async (req, res) => {
+  const { subdir, filename, contentType } = req.body;
+  if (!subdir || !filename) return res.status(400).json({ success: false, data: null, error: 'subdir and filename are required' });
+  const result = await getPresignedUploadUrl(subdir, filename, contentType);
+  return ok(res, result);
+}));
 router.get('/search', adminSearch);   // cross-resource admin search (authed)
 router.use(auditLogger);   // record all successful mutations
 

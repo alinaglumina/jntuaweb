@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const CRITERIA_OPTIONS = [
   'extended-profile', 'criteria-1', 'criteria-2', 'criteria-3', 'criteria-4',
-  'criteria-5', 'criteria-6', 'criteria-7', 'workshops-seminars',
+  'criteria-5', 'criteria-6', 'criteria-7', 'workshops-seminars', 'ssr',
 ];
 
 const schema = new mongoose.Schema({

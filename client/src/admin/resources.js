@@ -253,7 +253,7 @@ export const RESOURCES = {
   },
   'naac-documents': {
     label: 'NAAC Documents', group: 'institutional', icon: 'fa-table-list', roles: ['admin'],
-    columns: ['criteria', 'title', 'sortOrder'],
+    columns: ['criteria', 'metricNumber', 'title', 'sortOrder'],
     fields: [F('criteria', 'Criteria / Section', 'select', { required: true, options: [
                { value: 'extended-profile', label: 'Extended Profile Metrics' },
                { value: 'criteria-1', label: 'Criteria 1' },
@@ -265,6 +265,7 @@ export const RESOURCES = {
                { value: 'criteria-7', label: 'Criteria 7' },
                { value: 'workshops-seminars', label: 'Workshops / Seminars' },
              ] }),
+             F('metricNumber', 'Criteria/Metric Number (e.g. 1.1)', 'text'),
              F('title', 'Title', 'text', { required: true }),
              F('attachment', 'Attachment (PDF)', 'file'),
              F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],

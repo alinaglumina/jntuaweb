@@ -16,6 +16,7 @@ export default function NaacDocumentsTable({ criteria }) {
         <thead className="bg-navy/5 text-navy">
           <tr>
             <th className="px-4 py-3 w-16">S.No</th>
+            <th className="px-4 py-3 w-24">Metric No.</th>
             <th className="px-4 py-3">Title</th>
             <th className="px-4 py-3 w-28 text-center">Download</th>
           </tr>
@@ -24,6 +25,7 @@ export default function NaacDocumentsTable({ criteria }) {
           {items.map((doc, i) => (
             <tr key={doc._id} className={i % 2 === 0 ? 'bg-white' : 'bg-navy/[0.02]'}>
               <td className="px-4 py-3 text-slate-500">{String(i + 1).padStart(2, '0')}.</td>
+              <td className="px-4 py-3 text-slate-700">{doc.metricNumber || '—'}</td>
               <td className="px-4 py-3 text-slate-700">{doc.title}</td>
               <td className="px-4 py-3 text-center">
                 {doc.attachment ? (

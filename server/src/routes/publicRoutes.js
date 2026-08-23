@@ -87,7 +87,7 @@ router.get('/page-content/key/:key', async (req, res, next) => {
 // ── New public content (read-only) ──
 import { Event, Download, Circular, Menu } from '../models/index.js';
 mount('/events',    Event,    { defaultSort: '-startDate', baseFilter: () => ({ isPublished: true }), searchable: ['title'] });
-mount('/downloads', Download, { defaultSort: 'sortOrder',  baseFilter: () => ({ isActive: true }),    searchable: ['title', 'category'] });
+mount('/downloads', Download, { defaultSort: 'sortOrder',  baseFilter: (req) => ({ isActive: true, ...(req.query.section ? { section: req.query.section } : {}) }),    searchable: ['title', 'category'] });
 mount('/circulars', Circular, { defaultSort: '-circularDate', baseFilter: () => ({ isActive: true }), searchable: ['title'] });
 mount('/menus',     Menu,     { defaultSort: 'order',      baseFilter: (req) => ({ isActive: true, ...(req.query.location ? { location: req.query.location } : {}) }) });
 

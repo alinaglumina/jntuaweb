@@ -16,6 +16,9 @@ export function errorHandler(err, req, res, next) {
   } else if (err.code === 11000) {
     err.statusCode = 409;
     err.message = `Duplicate value for ${Object.keys(err.keyValue || {}).join(', ')}`;
+  } else if (err.code === 'LIMIT_FILE_SIZE') {
+    err.statusCode = 413;
+    err.message = `File too large. Maximum allowed size is ${env.upload.maxBytes / 1024 / 1024}MB.`;
   }
   const status = err.statusCode || 500;
   if (status >= 500) logger.error(err.stack || err.message);

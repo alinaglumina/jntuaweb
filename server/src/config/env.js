@@ -21,7 +21,7 @@ const env = {
   },
   upload: {
     dir: process.env.UPLOAD_DIR || 'uploads',
-    maxBytes: parseInt(process.env.MAX_UPLOAD_MB || '20', 10) * 1024 * 1024,
+    maxBytes: parseInt(process.env.MAX_UPLOAD_MB || '100', 10) * 1024 * 1024,
     assetBase: process.env.PUBLIC_ASSET_BASE || '',
   },
   mail: {

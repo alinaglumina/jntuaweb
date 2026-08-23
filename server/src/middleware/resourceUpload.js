@@ -3,7 +3,7 @@ import { uploader } from './upload.js';
 import fs from 'fs';
 import { optimizeImage } from '../services/imageOptimize.js';
 import { validateFileContent } from './fileValidation.js';
-import { uploadToCloudinary } from '../config/cloudinary.js';
+import { uploadToR2 as uploadToCloudinary } from '../config/cloudflareR2.js';
 import { categorize } from '../utils/fileType.js';
 import { MediaFile } from '../models/index.js';
 import ApiError from '../utils/ApiError.js';

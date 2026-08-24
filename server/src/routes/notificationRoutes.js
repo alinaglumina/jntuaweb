@@ -8,7 +8,7 @@ const c = crudController(Notification, {
   searchable: ['title'],
   defaultSort: '-publishedAt',
   // Public list only shows active notifications; staff see all.
-  baseFilter: (req) => ({ ...(req.user ? {} : { isActive: true }), ...(req.query.category ? { category: req.query.category } : {}) }),
+  baseFilter: (req) => ({ ...(req.user ? {} : { isActive: true }), ...(req.query.category ? { category: { $in: [req.query.category] } } : {}) }),
 });
 
 const router = Router();

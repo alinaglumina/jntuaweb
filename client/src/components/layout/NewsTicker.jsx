@@ -23,7 +23,7 @@ export default function NewsTicker() {
               {loopItems.map((n, i) => (
                 <Link
                   key={`${n._id}-${i}`}
-                  to={n.attachments?.[0] || '/notifications'}
+                  to={`/notifications/${n._id}`}
                   className="text-xs font-medium text-navy hover:text-crimson"
                 >
                   {n.title}

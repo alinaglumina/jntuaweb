@@ -5,6 +5,7 @@ import { S } from './lazy.jsx';
 import { homeLoader, notificationsLoader, galleryLoader, mousLoader, emagazinesLoader, honorisLoader, contentLoader, facultyLoader } from './loaders.js';
 
 const Home              = lazy(() => import('../pages/Home.jsx'));
+const NotificationDetail = lazy(() => import('../pages/NotificationDetail.jsx'));
 const NotificationCentre= lazy(() => import('../pages/NotificationCentre.jsx'));
 const SearchResults     = lazy(() => import('../pages/SearchResults.jsx'));
 const Gallery           = lazy(() => import('../pages/Gallery.jsx'));
@@ -63,6 +64,7 @@ const dynamicRoutes = NAV.flatMap((group) =>
 export const publicRoutes = [
   { index: true, element: S(<Home />), loader: homeLoader },
   { path: 'notifications', element: S(<NotificationCentre />), loader: notificationsLoader, handle: crumb([{ label: 'Notification Centre' }]) },
+  { path: 'notifications/:id', element: S(<NotificationDetail />), handle: crumb([{ label: 'Notification Centre', to: '/notifications' }, { label: 'Notification' }]) },
   { path: 'search', element: S(<SearchResults />), handle: crumb([{ label: 'Search' }]) },
   { path: 'alumni', element: S(<ContentPage pageId="alumni" />), loader: contentLoader(() => 'alumni'), handle: crumb([{ label: 'Alumni' }]) },
   { path: 'administration/faculty', element: S(<Faculty />), loader: facultyLoader, handle: crumb([{ label: 'Administration' }, { label: 'Faculty Corner', to: '/administration/faculty' }]) },

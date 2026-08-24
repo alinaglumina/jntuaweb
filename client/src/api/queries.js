@@ -25,8 +25,7 @@ export const settingsQuery    = () => ({ queryKey: ['settings'],    queryFn: () 
 
 export const notificationsQuery = (category) => ({
   queryKey: ['notifications', category],
-  queryFn: list('/notifications'),
-  select: category ? (items) => items.filter((n) => n.category === category) : undefined,
+  queryFn: list('/notifications', category ? { category } : undefined),
 });
 
 export const pageContentQuery = (id) => ({

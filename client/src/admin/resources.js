@@ -17,13 +17,22 @@ export const GROUPS = [
   { id: 'system', label: 'System' },
 ];
 
-const CAT = ['news', 'exam', 'admission', 'research', 'placement', 'sports', 'tenders'];
+const CAT = [
+  { value: 'news', label: 'News' },
+  { value: 'live-news', label: 'Live News' },
+  { value: 'exam', label: 'Examinations' },
+  { value: 'admission', label: 'Admissions' },
+  { value: 'research', label: 'R&D' },
+  { value: 'placement', label: 'Placements' },
+  { value: 'sports', label: 'Sports' },
+  { value: 'tenders', label: 'Tenders' },
+];
 
 export const RESOURCES = {
   notifications: {
     label: 'Notifications', group: 'content', icon: 'fa-bell', roles: ['admin', 'director', 'examiner'],
     columns: ['title', 'category', 'publishedAt'],
-    fields: [directorateField(), F('title', 'Title'), F('category', 'Category', 'select', { options: CAT }),
+    fields: [directorateField(), F('title', 'Title'), F('category', 'Category', 'multiselect', { options: CAT }),
              F('publishedAt', 'Date', 'date'),
              F('attachment', 'PDF attachment', 'file'), F('isActive', 'Active', 'checkbox', { default: true })],
   },

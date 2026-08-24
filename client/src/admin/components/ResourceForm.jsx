@@ -7,6 +7,7 @@ export default function ResourceForm({ fields, initial, onSubmit, onCancel, busy
   const defaults = {};
   for (const f of fields) {
     if (f.type === 'file' || f.type === 'image' || f.type === 'images') continue;
+    if (f.type === 'multiselect') { defaults[f.name] = Array.isArray(initial?.[f.name]) ? initial[f.name] : (f.default || []); continue; }
     if (f.type === 'date' && initial?.[f.name]) defaults[f.name] = String(initial[f.name]).slice(0, 10);
     else defaults[f.name] = initial?.[f.name] ?? (f.type === 'checkbox' ? (f.default ?? false) : '');
   }
@@ -31,6 +32,31 @@ export default function ResourceForm({ fields, initial, onSubmit, onCancel, busy
             current={Array.isArray(initial?.[f.name]) ? initial[f.name] : []} onFiles={(files) => setValue(f.name, files)} />;
         }
         if (f.type === 'checkbox') return <Controller key={f.name} name={f.name} control={control} render={({ field }) => <Checkbox label={f.label} checked={!!field.value} onChange={field.onChange} />} />;
+        if (f.type === 'multiselect') {
+          return (
+            <FormField key={f.name} label={f.label} required={f.required} error={errors[f.name] && `${f.label} is required`}>
+              <Controller name={f.name} control={control} rules={{ required: f.required ? (v) => (v && v.length > 0) : false }}
+                render={({ field }) => (
+                  <div className="flex flex-wrap gap-3">
+                    {f.options.map((o) => {
+                      const opt = typeof o === 'string' ? { value: o, label: o } : o;
+                      const checked = Array.isArray(field.value) && field.value.includes(opt.value);
+                      return (
+                        <label key={opt.value} className="flex items-center gap-1.5 text-sm text-slate-700">
+                          <input type="checkbox" className="h-4 w-4 rounded border-line text-navy focus:ring-crimson/30" checked={checked}
+                            onChange={(e) => {
+                              const current = Array.isArray(field.value) ? field.value : [];
+                              field.onChange(e.target.checked ? [...current, opt.value] : current.filter((v) => v !== opt.value));
+                            }} />
+                          {opt.label}
+                        </label>
+                      );
+                    })}
+                  </div>
+                )} />
+            </FormField>
+          );
+        }
         if (f.type === 'html') {
           return (
             <FormField key={f.name} label={f.label} required={f.required} error={errors[f.name] && `${f.label} is required`}>

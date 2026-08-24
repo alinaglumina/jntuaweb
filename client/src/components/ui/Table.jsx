@@ -4,6 +4,7 @@ import { memo } from 'react';
 function auto(row, col) {
   const v = row[col.key];
   if (v == null || v === '') return '—';
+  if (Array.isArray(v)) return v.length ? v.join(', ') : '—';
   if (typeof v === 'boolean') return v ? 'Yes' : 'No';
   if (/date|createdAt|updatedAt|uploadedAt/i.test(col.key)) { const d = new Date(v); if (!isNaN(d)) return d.toLocaleDateString('en-IN'); }
   const s = String(v); return s.length > 70 ? s.slice(0, 70) + '…' : s;

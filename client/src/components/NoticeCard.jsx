@@ -1,7 +1,8 @@
 import Badge from './ui/Badge.jsx';
+import { Link } from 'react-router-dom';
 // Notification/notice row with category badge(s), date and optional attachment link(s).
 const TONE = { exam: 'crimson', admission: 'gold', tenders: 'slate', news: 'navy', 'live-news': 'crimson', research: 'navy', placement: 'green', sports: 'gold' };
-export default function NoticeCard({ title, category, date, href, attachments, attachmentsNames }) {
+export default function NoticeCard({ id, title, category, date, href, attachments, attachmentsNames }) {
   const categories = Array.isArray(category) ? category : (category ? [category] : []);
   const files = Array.isArray(attachments) ? attachments : (href ? [href] : []);
   const names = Array.isArray(attachmentsNames) ? attachmentsNames : [];
@@ -14,7 +15,11 @@ export default function NoticeCard({ title, category, date, href, attachments, a
           </div>
         )}
         <div>
-          <p className="text-sm font-medium text-ink">{title}</p>
+          {id ? (
+            <Link to={`/notifications/${id}`} className="text-sm font-medium text-ink hover:text-crimson hover:underline">{title}</Link>
+          ) : (
+            <p className="text-sm font-medium text-ink">{title}</p>
+          )}
           {date && <p className="text-xs text-muted">{new Date(date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}</p>}
         </div>
       </div>

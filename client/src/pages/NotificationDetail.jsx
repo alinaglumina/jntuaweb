@@ -22,6 +22,7 @@ export default function NotificationDetail() {
 
   const categories = Array.isArray(data.category) ? data.category : (data.category ? [data.category] : []);
   const files = Array.isArray(data.attachments) ? data.attachments : [];
+  const fileNames = Array.isArray(data.attachmentsNames) ? data.attachmentsNames : [];
   const date = data.publishedAt || data.createdAt;
 
   return (
@@ -48,7 +49,7 @@ export default function NotificationDetail() {
                 {files.map((url, i) => (
                   <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-navy/[0.02]'}>
                     <td className="px-4 py-3 text-slate-500">{String(i + 1).padStart(2, '0')}.</td>
-                    <td className="px-4 py-3 text-slate-700">File {i + 1}</td>
+                    <td className="px-4 py-3 text-slate-700">{fileNames[i] || `File ${i + 1}`}</td>
                     <td className="px-4 py-3 text-center">
                       <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`Download file ${i + 1}`}
                          className="inline-grid h-8 w-8 place-items-center rounded bg-crimson/10 text-crimson hover:bg-crimson hover:text-white">

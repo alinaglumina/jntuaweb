@@ -59,12 +59,14 @@ export function resourceUploadMulti(field, subdir, maxCount = 8) {
     if (files.length === 0) return next();
     try {
       const urls = [];
+      const names = [];
       for (const file of files) {
         const check = validateFileContent(file.path);
         if (!check.ok) { try { fs.unlinkSync(file.path); } catch {} continue; }
         await optimizeImage(file.path);
         const { url, publicId } = await uploadToCloudinary(file.path, subdir);
         urls.push(url);
+        names.push(file.originalname);
         const ext = path.extname(file.originalname).replace('.', '').toLowerCase();
         MediaFile.create({
           folderId: null,
@@ -82,6 +84,11 @@ export function resourceUploadMulti(field, subdir, maxCount = 8) {
         try { fs.unlinkSync(file.path); } catch {}
       }
       req.body[field] = urls;
+      // Also expose original filenames under `<field>Names`, e.g. `attachmentsNames`,
+      // so resources that store this field can display real names instead of
+      // generic "File 1", "File 2" placeholders. Harmless for schemas that don't
+      // define a matching field — Mongoose silently drops unknown keys.
+      req.body[`${field}Names`] = names;
       next();
     } catch (e) {
       files.forEach((f) => { try { fs.unlinkSync(f.path); } catch {} });

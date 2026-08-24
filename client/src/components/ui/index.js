@@ -12,6 +12,7 @@ export { FormField, Input, Textarea, Select, Checkbox } from './Field.jsx';
 export { default as SearchBar } from './SearchBar.jsx';
 export { default as FileUpload } from './FileUpload.jsx';
 export { default as MultiImageUpload } from './MultiImageUpload.jsx';
+export { default as MultiFileUpload } from './MultiFileUpload.jsx';
 export { default as RichTextEditor } from './RichTextEditor.jsx';
 export { default as Table } from './Table.jsx';
 export { default as Pagination } from './Pagination.jsx';

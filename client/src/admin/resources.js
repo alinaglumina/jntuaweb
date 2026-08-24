@@ -34,7 +34,7 @@ export const RESOURCES = {
     columns: ['title', 'category', 'publishedAt'],
     fields: [directorateField(), F('title', 'Title'), F('category', 'Category', 'multiselect', { options: CAT }),
              F('publishedAt', 'Date', 'date'),
-             F('attachment', 'PDF attachment', 'file'), F('isActive', 'Active', 'checkbox', { default: true })],
+             F('attachments', 'Attachments', 'files', { max: 8 }), F('isActive', 'Active', 'checkbox', { default: true })],
   },
   news: {
     label: 'News', group: 'content', icon: 'fa-newspaper', roles: ['admin', 'director'],

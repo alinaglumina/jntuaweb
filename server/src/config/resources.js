@@ -11,7 +11,7 @@ import {
 // `uploadField`/`uploadSubdir` enable file uploads on create/update.
 // `sectionField` marks resources a director can only edit within their scope.
 export const RESOURCES = {
-  notifications:       { model: Notification,       upload: ['attachment', 'documents'], searchable: ['title'], roles: ['admin', 'director', 'examiner'], sectionField: 'directorateKey' },
+  notifications:       { model: Notification,       uploadMulti: ['attachments', 'documents', 8], searchable: ['title'], roles: ['admin', 'director', 'examiner'], sectionField: 'directorateKey' },
   news:                { model: News,               upload: ['attachment', 'documents'], searchable: ['title'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   gallery:             { model: GalleryItem,        upload: ['filename', 'gallery'],     searchable: ['caption'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   mous:                { model: Mou,                upload: ['document', 'mous'],         searchable: ['orgName'], roles: ['admin', 'director'], sectionField: 'directorateKey' },

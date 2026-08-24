@@ -22,8 +22,12 @@ function toPayload(values) {
   const fd = new FormData();
   for (const [k, v] of Object.entries(values)) {
     if (v == null || v === '') continue;
-    if (Array.isArray(v) && v.every((item) => item instanceof File)) {
-      v.forEach((file) => fd.append(k, file));
+    if (Array.isArray(v)) {
+      if (v.length === 0) continue;
+      // Append each item under the same field name — multer/Express collects
+      // repeated keys back into an array on req.body, whether the items are
+      // Files (attachments/images) or plain strings (e.g. multiselect values).
+      v.forEach((item) => fd.append(k, item instanceof File ? item : String(item)));
     } else {
       fd.append(k, v instanceof File ? v : String(v));
     }

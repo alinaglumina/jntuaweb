@@ -123,6 +123,19 @@ export const RESOURCES = {
              F('mobile', 'Mobile'), F('photo', 'Photo', 'image'), F('sortOrder', 'Order', 'number'),
              F('isActive', 'Active', 'checkbox', { default: true })],
   },
+  courses: {
+    label: 'Courses Offered (Academics)', group: 'institutional', icon: 'fa-graduation-cap', roles: ['admin', 'director'],
+    columns: ['programmeType', 'degree', 'name'],
+    fields: [F('programmeType', 'Programme Type', 'select', { required: true, options: [
+               { value: 'ug', label: 'UG Programmes' },
+               { value: 'pg', label: 'PG Programmes' },
+               { value: 'integrated', label: 'Integrated Dual Degree Programmes' },
+             ] }),
+             F('degree', 'Degree', 'text', { required: true }),
+             F('name', 'Course/Specialization', 'text', { required: true }),
+             F('category', 'Category'), F('duration', 'Duration'), F('courseType', 'Course Type'),
+             F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   honoris: {
     label: 'Honoris Causa', group: 'institutional', icon: 'fa-award', roles: ['admin'],
     columns: ['name', 'honorDegree', 'convocationDate'],

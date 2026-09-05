@@ -5,7 +5,7 @@ import { crudController } from '../controllers/crudController.js';
 import {
   GalleryItem, Mou, EMagazine, News, Administration,
   DirectorateContent, HonorisCausa, Slide, Faculty, ExecutiveCouncil, FormerViceChancellor,
-  NaacDocument, Course, CurriculumEntry,
+  NaacDocument, Course, CurriculumEntry, CurriculumFile,
 } from '../models/index.js';
 
 const router = Router();
@@ -31,6 +31,12 @@ mount('/honoris',     HonorisCausa, { defaultSort: '-convocationDate' });
 mount('/faculty',     Faculty,      { defaultSort: 'sortOrder',    baseFilter: () => ({ isActive: true }), searchable: ['name', 'department', 'designation'] });
 mount('/courses',    Course,       { defaultSort: 'sortOrder',    baseFilter: (req) => ({ isActive: true, ...(req.query.programmeType ? { programmeType: req.query.programmeType } : {}) }), searchable: ['name', 'degree', 'programme'] });
 mount('/curriculum', CurriculumEntry, { defaultSort: 'sortOrder', baseFilter: (req) => ({ isActive: true, ...(req.query.level ? { level: req.query.level } : {}) }), searchable: ['courseName', 'regulationYear'] });
+mount('/curriculum-files', CurriculumFile, { defaultSort: 'sortOrder', baseFilter: (req) => ({
+  isActive: true,
+  ...(req.query.courseName ? { courseName: req.query.courseName } : {}),
+  ...(req.query.level ? { level: req.query.level } : {}),
+  ...(req.query.regulationYear ? { regulationYear: req.query.regulationYear } : {}),
+}), searchable: ['courseName', 'branch'] });
 mount('/executive-council',       ExecutiveCouncil,     { defaultSort: 'sortOrder', baseFilter: () => ({ isActive: true }), searchable: ['name'] });
 mount('/former-vice-chancellors', FormerViceChancellor, { defaultSort: 'sortOrder', baseFilter: () => ({ isActive: true }), searchable: ['name'] });
 mount('/administration', Administration, { defaultSort: 'createdAt' });

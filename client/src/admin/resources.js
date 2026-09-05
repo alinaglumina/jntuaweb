@@ -146,7 +146,19 @@ export const RESOURCES = {
              ] }),
              F('regulationYear', 'Regulation Year/Batch (e.g. R19, R23)'),
              F('regulations', 'Regulations (attachment)', 'file'),
-             F('courseStructureAndSyllabus', 'Course Structure and Syllabus (attachment)', 'file'),
+             F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],
+  },
+  'curriculum-files': {
+    label: 'Curriculum — Branch Files (Course Structure & Syllabus)', group: 'institutional', icon: 'fa-file-lines', roles: ['admin', 'director'],
+    columns: ['courseName', 'level', 'regulationYear', 'branch'],
+    fields: [F('courseName', 'Course Name (must match the Curriculum entry exactly)', 'text', { required: true }),
+             F('level', 'Level', 'select', { required: true, options: [
+               { value: 'ug', label: 'UG' },
+               { value: 'pg', label: 'PG' },
+             ] }),
+             F('regulationYear', 'Regulation Year/Batch (must match, e.g. R19, R23)'),
+             F('branch', 'Branch/Specialization', 'text', { required: true }),
+             F('attachment', 'File', 'file'),
              F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],
   },
   honoris: {

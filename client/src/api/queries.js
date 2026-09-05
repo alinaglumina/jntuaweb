@@ -13,6 +13,11 @@ export const honorisQuery     = () => ({ queryKey: ['honoris'],     queryFn: lis
 export const facultyQuery     = () => ({ queryKey: ['faculty'],     queryFn: list('/faculty') });
 export const coursesByProgrammeQuery = (programmeType) => ({ queryKey: ['courses', programmeType], queryFn: list('/courses', programmeType ? { programmeType } : undefined), enabled: !!programmeType });
 export const curriculumByLevelQuery = (level) => ({ queryKey: ['curriculum', level], queryFn: list('/curriculum', level ? { level } : undefined), enabled: !!level });
+export const curriculumFilesQuery = (courseName, level, regulationYear) => ({
+  queryKey: ['curriculum-files', courseName, level, regulationYear],
+  queryFn: list('/curriculum-files', { courseName, level, regulationYear }),
+  enabled: !!courseName && !!level,
+});
 export const eventsQuery      = () => ({ queryKey: ['events'],      queryFn: list('/events') });
 export const executiveCouncilQuery = () => ({ queryKey: ['executive-council'], queryFn: list('/executive-council') });
 export const formerVCsQuery        = () => ({ queryKey: ['former-vice-chancellors'], queryFn: list('/former-vice-chancellors') });

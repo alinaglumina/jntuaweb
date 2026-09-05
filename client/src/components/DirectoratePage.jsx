@@ -4,6 +4,7 @@ import PageShell from './PageShell.jsx';
 import ContentPage from './ContentPage.jsx';
 import SafeHtml from './SafeHtml.jsx';
 import ProgrammesTable from './ProgrammesTable.jsx';
+import DirectorateNotificationsTable from './DirectorateNotificationsTable.jsx';
 import CurriculumTable from './CurriculumTable.jsx';
 import directorates from '../content/directorates.json';
 import { useDirectorateMenu } from '../api/public.js';
@@ -48,7 +49,7 @@ function buildDynamicTabs(items) {
   return roots;
 }
 
-function DynamicTabContent({ item }) {
+function DynamicTabContent({ item, directorateKey }) {
   if (item.menuKey === 'ug-programmes') return <ProgrammesTable programmeType="ug" />;
   if (item.menuKey === 'pg-programmes') return <ProgrammesTable programmeType="pg" />;
   if (item.menuKey === 'integrated-dual-degree-programmes') return <ProgrammesTable programmeType="integrated" />;
@@ -64,6 +65,9 @@ function DynamicTabContent({ item }) {
         Open {item.label} <i className="fa-solid fa-arrow-up-right-from-square text-xs" aria-hidden="true" />
       </a>
     ) : <p className="text-slate-500">Link not set yet.</p>;
+  }
+  if (item.type === 'resource' && item.linkResource === 'notifications') {
+    return <DirectorateNotificationsTable directorateKey={directorateKey} />;
   }
   if (item.type === 'resource' && item.linkResource) {
     return (
@@ -272,7 +276,7 @@ export default function DirectoratePage({ resolveKey }) {
             <div className="rounded-lg border border-slate-200 bg-white shadow-sm">
               <TabBar tabs={tabs} activeKey={active.key} onSelect={setActiveKey} />
               <div className="p-6">
-                {active.dynamic ? <DynamicTabContent item={active.item} /> : <Blocks blocks={active.blocks} />}
+                {active.dynamic ? <DynamicTabContent item={active.item} directorateKey={key} /> : <Blocks blocks={active.blocks} />}
               </div>
             </div>
           )}

@@ -34,6 +34,11 @@ export const notificationsQuery = (category) => ({
   queryKey: ['notifications', category],
   queryFn: list('/notifications', category ? { category } : undefined),
 });
+export const notificationsByDirectorateQuery = (directorateKey) => ({
+  queryKey: ['notifications', 'directorate', directorateKey],
+  queryFn: list('/notifications', directorateKey ? { directorateKey } : undefined),
+  enabled: !!directorateKey,
+});
 
 export const pageContentQuery = (id) => ({
   queryKey: ['page-content', id],

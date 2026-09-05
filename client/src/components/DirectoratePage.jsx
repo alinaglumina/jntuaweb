@@ -50,6 +50,9 @@ function buildDynamicTabs(items) {
 }
 
 function DynamicTabContent({ item, directorateKey }) {
+  if (item.menuKey === 'notifications' || item.menuKey === 'Notifications' || (item.type === 'resource' && item.linkResource === 'notifications')) {
+    return <DirectorateNotificationsTable directorateKey={directorateKey} />;
+  }
   if (item.menuKey === 'ug-programmes') return <ProgrammesTable programmeType="ug" />;
   if (item.menuKey === 'pg-programmes') return <ProgrammesTable programmeType="pg" />;
   if (item.menuKey === 'integrated-dual-degree-programmes') return <ProgrammesTable programmeType="integrated" />;
@@ -65,9 +68,6 @@ function DynamicTabContent({ item, directorateKey }) {
         Open {item.label} <i className="fa-solid fa-arrow-up-right-from-square text-xs" aria-hidden="true" />
       </a>
     ) : <p className="text-slate-500">Link not set yet.</p>;
-  }
-  if (item.menuKey === 'notifications' || item.menuKey === 'Notifications' || (item.type === 'resource' && item.linkResource === 'notifications')) {
-    return <DirectorateNotificationsTable directorateKey={directorateKey} />;
   }
   if (item.type === 'resource' && item.linkResource) {
     return (

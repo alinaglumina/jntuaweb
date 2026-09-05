@@ -207,7 +207,7 @@ export const RESOURCES = {
     fields: [directorateField(), F('title', 'Title', 'text', { required: true }), F('category', 'Category'),
              F('startDate', 'Start date', 'date', { required: true }), F('endDate', 'End date', 'date'),
              F('venue', 'Venue'), F('description', 'Description', 'html'), F('banner', 'Banner', 'image'),
-             F('images', 'Homepage Slider Images (min 4)', 'images', { min: 4, max: 8 }),
+             F('images', 'Event Images (min 1, max 5)', 'images', { min: 1, max: 5 }),
              F('registrationUrl', 'Registration URL'), F('isPublished', 'Published', 'checkbox', { default: true })],
   },
   circulars: {

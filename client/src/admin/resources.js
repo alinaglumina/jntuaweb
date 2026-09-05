@@ -146,8 +146,7 @@ export const RESOURCES = {
              ] }),
              F('regulationYear', 'Regulation Year/Batch (e.g. R19, R23)'),
              F('regulations', 'Regulations (attachment)', 'file'),
-             F('courseStructure', 'Course Structure (attachment)', 'file'),
-             F('syllabus', 'Syllabus (attachment)', 'file'),
+             F('courseStructureAndSyllabus', 'Course Structure and Syllabus (attachment)', 'file'),
              F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],
   },
   honoris: {

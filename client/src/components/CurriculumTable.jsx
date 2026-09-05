@@ -33,8 +33,7 @@ export default function CurriculumTable({ level }) {
                   <th className="px-4 py-3 w-16">S.No</th>
                   <th className="px-4 py-3">Regulation Year</th>
                   <th className="px-4 py-3 w-28 text-center">Regulations</th>
-                  <th className="px-4 py-3 w-28 text-center">Course Structure</th>
-                  <th className="px-4 py-3 w-28 text-center">Syllabus</th>
+                  <th className="px-4 py-3 w-40 text-center">Course Structure and Syllabus</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-line">
@@ -43,8 +42,7 @@ export default function CurriculumTable({ level }) {
                     <td className="px-4 py-3 text-slate-500">{String(i + 1).padStart(2, '0')}.</td>
                     <td className="px-4 py-3 text-slate-700">{row.regulationYear || '—'}</td>
                     <td className="px-4 py-3 text-center">{fileLink(row.regulations, `Regulations for ${courseName}`)}</td>
-                    <td className="px-4 py-3 text-center">{fileLink(row.courseStructure, `Course Structure for ${courseName}`)}</td>
-                    <td className="px-4 py-3 text-center">{fileLink(row.syllabus, `Syllabus for ${courseName}`)}</td>
+                    <td className="px-4 py-3 text-center">{fileLink(row.courseStructureAndSyllabus, `Course Structure and Syllabus for ${courseName}`)}</td>
                   </tr>
                 ))}
               </tbody>

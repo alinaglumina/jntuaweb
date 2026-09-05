@@ -7,9 +7,8 @@ const schema = new mongoose.Schema({
   courseName:      { type: String, required: true, trim: true, index: true },
   level:           { type: String, enum: ['ug', 'pg'], required: true, index: true },
   regulationYear:  { type: String, default: '' },   // e.g. "R19", "R23"
-  regulations:     { type: String, default: '' },   // attachment URL
-  courseStructure: { type: String, default: '' },   // attachment URL
-  syllabus:        { type: String, default: '' },   // attachment URL
+  regulations:               { type: String, default: '' },   // attachment URL
+  courseStructureAndSyllabus:{ type: String, default: '' },   // attachment URL (single combined document)
   isActive:        { type: Boolean, default: true },
   sortOrder:       { type: Number, default: 0 },
 }, { timestamps: true });

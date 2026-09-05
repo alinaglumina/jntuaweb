@@ -24,7 +24,7 @@ export default function NewsTicker() {
                 <Link
                   key={`${n._id}-${i}`}
                   to={`/notifications/${n._id}`}
-                  className="text-xs font-medium text-navy hover:text-crimson"
+                  className="text-sm font-medium text-navy hover:text-crimson"
                 >
                   {n.title}
                 </Link>

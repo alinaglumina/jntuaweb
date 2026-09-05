@@ -11,13 +11,15 @@ export default function Honoris() {
       ) : (
         <div className="overflow-hidden rounded-lg bg-white shadow-card">
           <table className="w-full text-left text-sm">
-            <thead className="bg-navy/5 text-navy"><tr><th className="px-4 py-3">Name</th><th className="px-4 py-3">Degree</th><th className="px-4 py-3">Convocation</th></tr></thead>
+            <thead className="bg-navy/5 text-navy">
+              <tr><th className="px-4 py-3 w-16">S.No</th><th className="px-4 py-3">Title</th><th className="px-4 py-3">Guest</th></tr>
+            </thead>
             <tbody className="divide-y divide-slate-100">
-              {data.map((h) => (
+              {data.map((h, i) => (
                 <tr key={h._id} className="hover:bg-navy/5">
+                  <td className="px-4 py-3 text-slate-500">{String(i + 1).padStart(2, '0')}.</td>
+                  <td className="px-4 py-3">{h.honorDegree || '—'}</td>
                   <td className="px-4 py-3 font-medium">{h.name}</td>
-                  <td className="px-4 py-3">{h.honorDegree}</td>
-                  <td className="px-4 py-3">{h.convocationDate ? new Date(h.convocationDate).toLocaleDateString('en-IN') : '—'}</td>
                 </tr>
               ))}
             </tbody>

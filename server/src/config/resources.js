@@ -4,7 +4,7 @@ import {
   DacpFile, DafaDoc, PageContent,
   Event, Department, Student, Circular, Download, Menu,
   Admission, Examination, Result, ContentBlock,
-  Video, SeoMeta, NaacDocument, DirectorateMenuItem, NavMenuItem, Course,
+  Video, SeoMeta, NaacDocument, DirectorateMenuItem, NavMenuItem, Course, CurriculumEntry,
 } from '../models/index.js';
 
 // Each entry: model + upload config + which roles may write + list search fields.
@@ -24,6 +24,7 @@ export const RESOURCES = {
   'directorate-content': { model: DirectorateContent, upload: ['directorPhoto', 'images'], searchable: ['directorName'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   'directorate-menu':    { model: DirectorateMenuItem, searchable: ['label', 'menuKey'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   courses:               { model: Course, searchable: ['name', 'degree', 'programme'], roles: ['admin', 'director'] },
+  curriculum:            { model: CurriculumEntry, uploadFields: [['regulations', 'curriculum-regulations'], ['courseStructure', 'curriculum-structure'], ['syllabus', 'curriculum-syllabus']], searchable: ['courseName', 'regulationYear'], roles: ['admin', 'director'] },
   'nav-menu':            { model: NavMenuItem, searchable: ['label', 'key'], roles: ['admin'] },
   honoris:             { model: HonorisCausa,       searchable: ['name'], roles: ['admin'] },
   senate:              { model: SenateDoc,          upload: ['filename', 'senate'],      searchable: ['title'], roles: ['admin', 'director'], sectionField: 'directorateKey' },

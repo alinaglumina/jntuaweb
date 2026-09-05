@@ -4,6 +4,7 @@ import PageShell from './PageShell.jsx';
 import ContentPage from './ContentPage.jsx';
 import SafeHtml from './SafeHtml.jsx';
 import ProgrammesTable from './ProgrammesTable.jsx';
+import CurriculumTable from './CurriculumTable.jsx';
 import directorates from '../content/directorates.json';
 import { useDirectorateMenu } from '../api/public.js';
 import { useQuery } from '@tanstack/react-query';
@@ -51,6 +52,8 @@ function DynamicTabContent({ item }) {
   if (item.menuKey === 'ug-programmes') return <ProgrammesTable programmeType="ug" />;
   if (item.menuKey === 'pg-programmes') return <ProgrammesTable programmeType="pg" />;
   if (item.menuKey === 'integrated-dual-degree-programmes') return <ProgrammesTable programmeType="integrated" />;
+  if (item.menuKey === 'ug' && item.parentKey === 'curriculum-syllabus') return <CurriculumTable level="ug" />;
+  if (item.menuKey === 'pg' && item.parentKey === 'curriculum-syllabus') return <CurriculumTable level="pg" />;
   if (item.type === 'page') {
     return item.body ? <SafeHtml html={item.body} /> : <p className="text-slate-500">Content coming soon.</p>;
   }

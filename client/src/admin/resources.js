@@ -136,6 +136,20 @@ export const RESOURCES = {
              F('category', 'Category'), F('duration', 'Duration'), F('courseType', 'Course Type'),
              F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],
   },
+  curriculum: {
+    label: 'Curriculum & Syllabus (Academics)', group: 'institutional', icon: 'fa-book', roles: ['admin', 'director'],
+    columns: ['courseName', 'level', 'regulationYear'],
+    fields: [F('courseName', 'Course Name', 'text', { required: true }),
+             F('level', 'Level', 'select', { required: true, options: [
+               { value: 'ug', label: 'UG' },
+               { value: 'pg', label: 'PG' },
+             ] }),
+             F('regulationYear', 'Regulation Year/Batch (e.g. R19, R23)'),
+             F('regulations', 'Regulations (attachment)', 'file'),
+             F('courseStructure', 'Course Structure (attachment)', 'file'),
+             F('syllabus', 'Syllabus (attachment)', 'file'),
+             F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   honoris: {
     label: 'Honoris Causa', group: 'institutional', icon: 'fa-award', roles: ['admin'],
     columns: ['name', 'honorDegree', 'convocationDate'],

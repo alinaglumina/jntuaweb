@@ -66,7 +66,7 @@ function DynamicTabContent({ item, directorateKey }) {
       </a>
     ) : <p className="text-slate-500">Link not set yet.</p>;
   }
-  if (item.type === 'resource' && item.linkResource === 'notifications') {
+  if (item.menuKey === 'notifications' || item.menuKey === 'Notifications' || (item.type === 'resource' && item.linkResource === 'notifications')) {
     return <DirectorateNotificationsTable directorateKey={directorateKey} />;
   }
   if (item.type === 'resource' && item.linkResource) {

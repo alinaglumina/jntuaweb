@@ -1,23 +1,21 @@
 import { Link } from 'react-router-dom';
-import { DIRECTORATE_PREFIX } from '../content/directorateAbbr.js';
-// Notification/notice row: directorate prefix, date, and title (in that
-// order). Attachments are hidden here — clicking the title opens the full
-// file table instead of showing "View" links inline in the list.
-export default function NoticeCard({ id, title, date, directorateKey }) {
-  const prefix = directorateKey && DIRECTORATE_PREFIX[directorateKey];
+import { DIRECTORATE_ABBR } from '../content/directorateAbbr.js';
+// One row of the notifications table: S.No / Date / "CODE-Title" (clickable,
+// opens the full file table). sNo is 1-based index within the current list.
+export default function NoticeCard({ id, title, date, directorateKey, sNo }) {
+  const abbr = directorateKey && DIRECTORATE_ABBR[directorateKey];
+  const displayTitle = abbr ? `${abbr}-${title}` : title;
   return (
-    <div className="flex items-center justify-between gap-4 px-5 py-3 hover:bg-navy/5">
-      <div className="flex items-center gap-3">
-        <div>
-          {prefix && <p className="text-xs font-semibold text-crimson">{prefix}</p>}
-          {date && <p className="text-xs text-muted">{new Date(date).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}</p>}
-          {id ? (
-            <Link to={`/notifications/${id}`} className="text-sm font-medium text-ink hover:text-crimson hover:underline">{title}</Link>
-          ) : (
-            <p className="text-sm font-medium text-ink">{title}</p>
-          )}
-        </div>
-      </div>
-    </div>
+    <tr className={sNo % 2 === 0 ? 'bg-navy/[0.02]' : 'bg-white'}>
+      <td className="px-4 py-3 text-slate-500">{String(sNo).padStart(2, '0')}.</td>
+      <td className="px-4 py-3 whitespace-nowrap text-slate-700">{date ? new Date(date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '—'}</td>
+      <td className="px-4 py-3">
+        {id ? (
+          <Link to={`/notifications/${id}`} className="text-sm font-medium text-ink hover:text-crimson hover:underline">{displayTitle}</Link>
+        ) : (
+          <p className="text-sm font-medium text-ink">{displayTitle}</p>
+        )}
+      </td>
+    </tr>
   );
 }

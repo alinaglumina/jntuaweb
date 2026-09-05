@@ -35,8 +35,19 @@ export default function NotificationCentre() {
         <EmptyState label="No notifications in this category yet." icon="fa-bell" />
       ) : (
         <>
-          <Card><div className="divide-y divide-line">
-            {items.map((n) => <NoticeCard key={n._id} id={n._id} title={n.title} date={n.publishedAt || n.createdAt} directorateKey={n.directorateKey} />)}
+          <Card><div className="overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-navy/5 text-navy">
+                <tr>
+                  <th className="px-4 py-3 w-16">S.No</th>
+                  <th className="px-4 py-3 w-32">Date</th>
+                  <th className="px-4 py-3">Notification</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {items.map((n, i) => <NoticeCard key={n._id} id={n._id} title={n.title} date={n.publishedAt || n.createdAt} directorateKey={n.directorateKey} sNo={i + 1} />)}
+              </tbody>
+            </table>
           </div></Card>
           {/* Infinite-scroll sentinel */}
           <div ref={sentinel} className="grid place-items-center py-6">

@@ -14,6 +14,7 @@ const schema = new mongoose.Schema({
   body:           { type: String, default: '' },     // HTML, used when type = 'page'
   linkResource:   { type: String, default: '' },      // resource key, used when type = 'resource'
   externalUrl:    { type: String, default: '' },      // used when type = 'link'
+  image:          { type: String, default: '' },      // optional photo (e.g. Director/Coordinator pages)
   sortOrder:      { type: Number, default: 0, index: true },
   isActive:       { type: Boolean, default: true },
   updatedBy:      { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },

@@ -111,6 +111,7 @@ export const RESOURCES = {
                { value: 'link', label: 'External URL' },
              ] }),
              F('body', 'Page content (only if Type = Content page)', 'html'),
+             F('image', 'Photo (e.g. Director/Coordinator page)', 'image'),
              F('linkResource', 'Resource key (only if Type = Linked resource, e.g. "notifications")'),
              F('externalUrl', 'External URL (only if Type = External URL)'),
              F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],

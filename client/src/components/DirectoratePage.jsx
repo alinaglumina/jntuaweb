@@ -53,6 +53,21 @@ function DynamicTabContent({ item, directorateKey }) {
   if (item.menuKey === 'notifications' || item.menuKey === 'Notifications' || (item.type === 'resource' && item.linkResource === 'notifications')) {
     return <DirectorateNotificationsTable directorateKey={directorateKey} />;
   }
+  if (item.menuKey === 'director-head' || item.menuKey === 'principal') {
+    return (
+      <div className="flex flex-col items-center text-center">
+        {item.image ? (
+          <img src={item.image} alt={item.label} className="max-h-96 w-auto rounded-lg object-contain shadow-card" />
+        ) : (
+          <div className="grid h-40 w-40 place-items-center rounded-full bg-navy/5 text-navy shadow-card">
+            <i className="fa-solid fa-user text-4xl" aria-hidden="true" />
+          </div>
+        )}
+        {item.body && <div className="mt-4 font-display text-xl font-bold text-navy"><SafeHtml html={item.body} /></div>}
+        <p className="mt-1 text-base font-semibold text-slate-700">{item.label}</p>
+      </div>
+    );
+  }
   if (item.menuKey === 'ug-programmes') return <ProgrammesTable programmeType="ug" />;
   if (item.menuKey === 'pg-programmes') return <ProgrammesTable programmeType="pg" />;
   if (item.menuKey === 'integrated-dual-degree-programmes') return <ProgrammesTable programmeType="integrated" />;

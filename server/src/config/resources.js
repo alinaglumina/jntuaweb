@@ -22,7 +22,7 @@ export const RESOURCES = {
   'executive-council':        { model: ExecutiveCouncil,      upload: ['photo', 'images'], searchable: ['name'], roles: ['admin'] },
   'former-vice-chancellors':  { model: FormerViceChancellor,  upload: ['photo', 'images'], searchable: ['name'], roles: ['admin'] },
   'directorate-content': { model: DirectorateContent, upload: ['directorPhoto', 'images'], searchable: ['directorName'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
-  'directorate-menu':    { model: DirectorateMenuItem, searchable: ['label', 'menuKey'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
+  'directorate-menu':    { model: DirectorateMenuItem, uploadFields: [['image', 'menu-images']], searchable: ['label', 'menuKey'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   courses:               { model: Course, searchable: ['name', 'degree', 'programme'], roles: ['admin', 'director'] },
   curriculum:            { model: CurriculumEntry, upload: ['regulations', 'curriculum-regulations'], searchable: ['courseName', 'regulationYear'], roles: ['admin', 'director'] },
   'curriculum-files':    { model: CurriculumFile, upload: ['attachment', 'curriculum-branch-files'], searchable: ['courseName', 'branch'], roles: ['admin', 'director'] },

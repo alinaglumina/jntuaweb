@@ -3,10 +3,10 @@
 // (matching a server registry key) and a fully working panel appears.
 // field types: text | textarea | html | number | date | checkbox | select | file | image
 
-import { DIRECTORATES } from '../content/nav.js';
+import { DIRECTORATES, UNITS } from '../content/nav.js';
 
 const F = (name, label, type = 'text', extra = {}) => ({ name, label, type, ...extra });
-const DIRECTORATE_OPTIONS = DIRECTORATES.map(([, label, slug]) => ({ value: slug, label }));
+const DIRECTORATE_OPTIONS = [...DIRECTORATES, ...UNITS].map(([, label, slug]) => ({ value: slug, label }));
 const directorateField = () => F('directorateKey', 'Directorate', 'select', { options: DIRECTORATE_OPTIONS, required: true });
 
 export const GROUPS = [

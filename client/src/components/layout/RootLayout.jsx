@@ -10,6 +10,7 @@ import Footer from './Footer.jsx';
 import Breadcrumbs from '../Breadcrumbs.jsx';
 import NavProgress from '../NavProgress.jsx';
 import Seo from '../Seo.jsx';
+import PopupBanner from '../PopupBanner.jsx';
 
 export default function RootLayout() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -36,6 +37,7 @@ export default function RootLayout() {
       <main id="main" tabIndex={-1} className="flex-1 focus:outline-none"><Outlet /></main>
       <Footer />
       <GlobalSearch open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <PopupBanner />
     </div>
     </SearchContext.Provider>
   );

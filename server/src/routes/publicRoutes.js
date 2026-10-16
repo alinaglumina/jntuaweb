@@ -5,7 +5,7 @@ import { crudController } from '../controllers/crudController.js';
 import {
   GalleryItem, Mou, EMagazine, News, Administration,
   DirectorateContent, HonorisCausa, Slide, Faculty, ExecutiveCouncil, FormerViceChancellor,
-  NaacDocument, Course, CurriculumEntry, CurriculumFile,
+  NaacDocument, Course, CurriculumEntry, CurriculumFile, PopupBanner,
 } from '../models/index.js';
 
 const router = Router();
@@ -28,6 +28,14 @@ mount('/mous',        Mou,          { defaultSort: '-mouDate',    baseFilter: ()
 mount('/emagazines',  EMagazine,    { defaultSort: '-issueDate' });
 mount('/news',        News,         { defaultSort: '-createdAt',  baseFilter: () => ({ isPublished: true }), searchable: ['title'] });
 mount('/honoris',     HonorisCausa, { defaultSort: '-convocationDate' });
+mount('/popup-banners', PopupBanner, { defaultSort: 'sortOrder', baseFilter: () => {
+  const now = new Date();
+  const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0);   // end date is inclusive of the whole day
+  return { isActive: true, $and: [
+    { $or: [{ startDate: null }, { startDate: { $lte: now } }] },
+    { $or: [{ endDate: null }, { endDate: { $gte: startOfToday } }] },
+  ] };
+}, searchable: ['title'] });
 mount('/faculty',     Faculty,      { defaultSort: 'sortOrder',    baseFilter: () => ({ isActive: true }), searchable: ['name', 'department', 'designation'] });
 mount('/courses',    Course,       { defaultSort: 'sortOrder',    baseFilter: (req) => ({ isActive: true, ...(req.query.programmeType ? { programmeType: req.query.programmeType } : {}) }), searchable: ['name', 'degree', 'programme'] });
 mount('/curriculum', CurriculumEntry, { defaultSort: 'sortOrder', baseFilter: (req) => ({ isActive: true, ...(req.query.level ? { level: req.query.level } : {}) }), searchable: ['courseName', 'regulationYear'] });

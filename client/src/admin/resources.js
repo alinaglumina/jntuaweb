@@ -202,6 +202,19 @@ export const RESOURCES = {
              F('mouDate', 'Date', 'date'), F('document', 'Document', 'file'), F('isActive', 'Active', 'checkbox', { default: true })],
   },
 
+  'popup-banners': {
+    label: 'Popup Banner', group: 'content', icon: 'fa-bullhorn', roles: ['admin'],
+    columns: ['title', 'startDate', 'endDate', 'isActive'],
+    fields: [F('title', 'Title', 'text', { required: true }),
+             F('image', 'Banner image', 'image'),
+             F('message', 'Message (optional)', 'textarea'),
+             F('linkUrl', 'Link URL (optional, e.g. https://... or /notifications)'),
+             F('linkLabel', 'Button text (default: Learn more)'),
+             F('startDate', 'Show from (optional)', 'date'),
+             F('endDate', 'Show until (optional)', 'date'),
+             F('sortOrder', 'Order (lowest shows first)', 'number'),
+             F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   events: {
     label: 'Events', group: 'content', icon: 'fa-calendar-day', roles: ['admin'],
     columns: ['title', 'startDate', 'venue'],

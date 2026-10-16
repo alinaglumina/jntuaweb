@@ -18,7 +18,7 @@ export const RESOURCES = {
   emagazines:          { model: EMagazine,          upload: ['filename', 'magazines'],   searchable: ['monthYear'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   slides:              { model: Slide,              upload: ['image', 'slider'],         roles: ['admin'] },
   faculty:             { model: Faculty,            upload: ['photo', 'images'],         searchable: ['name', 'department'], roles: ['admin', 'director'] },
-  administration:      { model: Administration,     upload: ['photo', 'images'],         roles: ['admin'] },
+  administration:      { model: Administration,     uploadFields: [['photo', 'images'], ['attachment', 'administration-profiles']],         roles: ['admin'] },
   'executive-council':        { model: ExecutiveCouncil,      upload: ['photo', 'images'], searchable: ['name'], roles: ['admin'] },
   'former-vice-chancellors':  { model: FormerViceChancellor,  upload: ['photo', 'images'], searchable: ['name'], roles: ['admin'] },
   'directorate-content': { model: DirectorateContent, upload: ['directorPhoto', 'images'], searchable: ['directorName'], roles: ['admin', 'director'], sectionField: 'directorateKey' },

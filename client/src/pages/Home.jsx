@@ -98,7 +98,7 @@ export default function Home() {
       </section>
 
       {/* Welcome + Events */}
-      <section className="bg-paper flex min-h-[871px] items-center">
+      <section className="bg-paper">
         <div className="w-full px-4 sm:px-8 lg:px-16 py-14">
           <div className="grid gap-10 md:grid-cols-2">
             <div>

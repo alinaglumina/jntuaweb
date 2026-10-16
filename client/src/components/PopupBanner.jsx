@@ -3,10 +3,11 @@ import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { popupBannersQuery } from '../api/queries.js';
 
-// Homepage popup banner managed from admin. Shows the first active banner once
-// per browser session (re-shows if the admin edits it). Closes via the X button,
-// the Esc key, or a click outside the card.
-const seenKey = (b) => `popup-banner-seen:${b._id}:${b.updatedAt}`;
+// Homepage popup banner managed from admin. Shows the first active banner on every
+// page load/refresh of the homepage. Closing it keeps it hidden while the visitor
+// navigates around the site, until the next full page load. Closes via the X
+// button, the Esc key, or a click outside the card.
+let dismissedThisLoad = false;   // module-level: resets on a full reload, survives in-app navigation
 
 export default function PopupBanner() {
   const { pathname } = useLocation();
@@ -17,13 +18,13 @@ export default function PopupBanner() {
 
   useEffect(() => {
     if (!banner || pathname !== '/') return;
-    try { if (sessionStorage.getItem(seenKey(banner))) return; } catch { /* storage blocked: just show it */ }
+    if (dismissedThisLoad) return;
     setOpen(true);
   }, [banner, pathname]);
 
   const close = () => {
+    dismissedThisLoad = true;
     setOpen(false);
-    try { sessionStorage.setItem(seenKey(banner), '1'); } catch { /* ignore */ }
   };
 
   useEffect(() => {

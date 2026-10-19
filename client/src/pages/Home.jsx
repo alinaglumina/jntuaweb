@@ -37,26 +37,15 @@ function Notifications() {
         {data.length === 0 ? (
           <p className="rounded-md border border-dashed border-slate-300 p-8 text-center text-sm text-slate-500">No notifications in this category yet.</p>
         ) : (
-          <div className="overflow-x-auto rounded-lg bg-white shadow-card">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-navy/5 text-navy">
-                <tr>
-                  <th className="px-4 py-3 w-16">S.No</th>
-                  <th className="px-4 py-3 w-32">Date</th>
-                  <th className="px-4 py-3">Notification</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {data.slice(0, 8).map((n, i) => <NoticeCard key={n._id} id={n._id} title={n.title} date={n.publishedAt || n.createdAt} directorateKey={n.directorateKey} sNo={i + 1} />)}
-              </tbody>
-            </table>
-          </div>
+          <NotificationScroller items={data} />
         )}
         <div className="mt-4 text-center"><Link to="/notifications" className="btn-ghost text-sm">View all notifications</Link></div>
       </div>
     </section>
   );
 }
+
+import NotificationScroller from '../components/NotificationScroller.jsx';
 
 function Hero() { const { data: slides = [] } = useSlides(); return <HeroSlider slides={slides} />; }
 

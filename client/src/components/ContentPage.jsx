@@ -89,7 +89,7 @@ export default function ContentPage({ pageId, resolveId, sidebar, naacTable }) {
             if (b.type === 'list') return <ul key={i} className="list-disc space-y-1 pl-6 text-slate-700">{b.items.map((it, j) => <li key={j}>{it}</li>)}</ul>;
             return <p key={i} className="leading-relaxed text-slate-700">{b.text}</p>;
           })}
-          {page.blocks.length === 0 && <p className="text-slate-500">Content coming soon.</p>}
+          {page.blocks.length === 0 && !naacTableEl && <p className="text-slate-500">Content coming soon.</p>}
         </article>
         {collapsible && !expanded && page.blocks.length > 0 && (
           <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />

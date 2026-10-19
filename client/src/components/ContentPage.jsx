@@ -9,6 +9,11 @@ import Sidebar from './Sidebar.jsx';
 import { ASSESSMENT_SIDEBAR_GROUPS } from '../content/assessmentSidebar.js';
 import NaacDocumentsTable from './NaacDocumentsTable.jsx';
 
+// Page title repeated at the top of the content area, in crimson.
+function PageTitle({ children }) {
+  return <h2 className="mx-auto mb-4 max-w-3xl font-display text-3xl font-bold text-crimson">{children}</h2>;
+}
+
 // Maps a content page id to an Administration roleKey, when that page
 // should show a photo pulled from the Administration collection.
 const ROLE_KEY_BY_PAGE = {
@@ -48,10 +53,11 @@ export default function ContentPage({ pageId, resolveId, sidebar, naacTable }) {
   if (override?.body) {
     return (
       <PageShell title={override.heading || page?.title || 'Page'} sidebar={sidebarEl}>
+        <PageTitle>{override.heading || page?.title || 'Page'}</PageTitle>
         {PhotoBlock}
         {naacTableEl && <div className="mb-6">{naacTableEl}</div>}
         <div className={`mx-auto max-w-3xl relative ${collapsible && !expanded ? 'max-h-64 overflow-hidden' : ''}`}>
-          <SafeHtml html={override.body} />
+          <SafeHtml html={override.body} markHeadings />
           {collapsible && !expanded && (
             <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />
           )}
@@ -73,6 +79,7 @@ export default function ContentPage({ pageId, resolveId, sidebar, naacTable }) {
   if (!page) return <PageShell title="Page not found"><p className="text-slate-600">This page has no content yet.</p></PageShell>;
   return (
     <PageShell title={page.title} sidebar={sidebarEl}>
+      <PageTitle>{page.title}</PageTitle>
       {PhotoBlock}
       {naacTableEl && <div className="mb-6">{naacTableEl}</div>}
       <div className={`mx-auto max-w-3xl relative ${collapsible && !expanded ? 'max-h-64 overflow-hidden' : ''}`}>

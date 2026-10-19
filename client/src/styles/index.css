@@ -89,3 +89,10 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
 }
+
+
+/* --- crimson titles + justified paragraphs --- */
+.prose-jntua h2, .prose-jntua h3, .prose-jntua h4 { color: #c8102e; }
+.prose-jntua p { text-align: justify; hyphens: auto; overflow-wrap: break-word; }
+.prose-jntua p.heading-line { text-align: left; hyphens: manual; }
+.prose-jntua p.heading-line, .prose-jntua p.heading-line * { color: #c8102e !important; }

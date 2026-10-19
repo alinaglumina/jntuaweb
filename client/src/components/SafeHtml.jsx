@@ -17,12 +17,30 @@ DOMPurify.addHook('uponSanitizeElement', (node, data) => {
   }
 });
 
-export default function SafeHtml({ html, className = '' }) {
+// Paragraphs whose entire text is one short bold element (e.g. "Our Vision") are
+// really headings typed as bold text. Tag them so CSS can style them as headings.
+function markHeadingLines(html) {
+  if (typeof document === 'undefined') return html;
+  const tpl = document.createElement('template');
+  tpl.innerHTML = html;
+  tpl.content.querySelectorAll('p').forEach((p) => {
+    const text = p.textContent.trim();
+    if (!text || text.length > 90 || p.children.length !== 1) return;
+    const el = p.children[0];
+    const bold = el.tagName === 'STRONG' || el.tagName === 'B'
+      || /font-weight:\s*(bold|bolder|[6-9]00)/i.test(el.getAttribute('style') || '');
+    if (bold && el.textContent.trim() === text) p.classList.add('heading-line');
+  });
+  return tpl.innerHTML;
+}
+
+export default function SafeHtml({ html, className = '', markHeadings = false }) {
   if (!html) return null;
   const clean = DOMPurify.sanitize(html, {
     USE_PROFILES: { html: true },
     ADD_TAGS: ['iframe'],
     ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'title'],
   });
-  return <div className={`prose-jntua max-w-none ${className}`} dangerouslySetInnerHTML={{ __html: clean }} />;
+  const out = markHeadings ? markHeadingLines(clean) : clean;
+  return <div className={`prose-jntua max-w-none ${className}`} dangerouslySetInnerHTML={{ __html: out }} />;
 }

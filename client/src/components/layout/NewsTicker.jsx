@@ -12,7 +12,7 @@ export default function NewsTicker() {
   return (
     <div className="overflow-hidden border-b border-gold/40 bg-gold/10">
       <div className="container flex items-center gap-3 py-1.5">
-        <span className="flex shrink-0 items-center gap-1.5 rounded bg-crimson px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-white">
+        <span className="flex shrink-0 items-center gap-1.5 rounded bg-gold px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-navy">
           <i className="fa-solid fa-tower-broadcast" aria-hidden="true" /> Live News
         </span>
         <div className="relative flex-1 overflow-hidden">

@@ -6,7 +6,7 @@ export default function TopRibbon() {
   return (
     <div className="border-b border-line bg-white text-navy">
       <div className="flex flex-wrap items-stretch justify-between gap-2 text-xs">
-        <span className="flex items-center gap-2 bg-crimson px-4 py-1.5 font-semibold text-white"><i className="fa-solid fa-calendar-days" aria-hidden="true" />{today}</span>
+        <span className="flex items-center gap-2 bg-gold px-4 py-1.5 font-semibold text-navy"><i className="fa-solid fa-calendar-days" aria-hidden="true" />{today}</span>
         <div className="flex flex-1 flex-wrap items-center justify-end gap-3 px-4 py-1.5">
           {RIBBON_LINKS.map((l) => (
             <Link key={l.to} to={l.to} className="flex items-center gap-1 text-navy/80 hover:text-crimson">
@@ -14,7 +14,7 @@ export default function TopRibbon() {
             </Link>
           ))}
           <a href="https://jntuaebranchpayment.in/" target="_blank" rel="noopener noreferrer"
-             className="rounded bg-crimson px-2 py-0.5 font-semibold text-white hover:bg-crimson-700">
+             className="rounded bg-gold px-2 py-0.5 font-semibold text-navy hover:bg-gold/80">
             <i className="fa-solid fa-file-pen" aria-hidden="true" /> Apply Online OD
           </a>
         </div>

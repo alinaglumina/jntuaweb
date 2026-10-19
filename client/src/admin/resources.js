@@ -202,6 +202,15 @@ export const RESOURCES = {
              F('mouDate', 'Date', 'date'), F('document', 'Document', 'file'), F('isActive', 'Active', 'checkbox', { default: true })],
   },
 
+  newsletters: {
+    label: 'Newsletters', group: 'content', icon: 'fa-newspaper', roles: ['admin', 'director'],
+    columns: ['title', 'directorateKey', 'createdAt'],
+    fields: [directorateField(),
+             F('title', 'Title', 'text', { required: true }),
+             F('attachment', 'Attachment (optional)', 'file'),
+             F('sortOrder', 'Order (lowest first; same order = newest first)', 'number'),
+             F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   'academic-senate': {
     label: 'Academic Senate Documents', group: 'institutional', icon: 'fa-landmark', roles: ['admin', 'director'],
     columns: ['title', 'createdAt'],

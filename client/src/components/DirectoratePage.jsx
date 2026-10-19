@@ -6,6 +6,7 @@ import SafeHtml from './SafeHtml.jsx';
 import ProgrammesTable from './ProgrammesTable.jsx';
 import AcademicMousTables from './AcademicMousTables.jsx';
 import AcademicSenateTable from './AcademicSenateTable.jsx';
+import NewsletterTable from './NewsletterTable.jsx';
 import DirectorateNotificationsTable from './DirectorateNotificationsTable.jsx';
 import CurriculumTable from './CurriculumTable.jsx';
 import directorates from '../content/directorates.json';
@@ -52,6 +53,7 @@ function buildDynamicTabs(items) {
 }
 
 function DynamicTabContent({ item, directorateKey }) {
+  if (/^newsletter$/i.test(item.menuKey || '')) return <NewsletterTable directorateKey={directorateKey} />;
   if (item.menuKey === 'notifications' || item.menuKey === 'Notifications' || (item.type === 'resource' && item.linkResource === 'notifications')) {
     return <DirectorateNotificationsTable directorateKey={directorateKey} />;
   }

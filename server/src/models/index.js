@@ -31,6 +31,7 @@ export { default as CurriculumFile }     from './CurriculumFile.js';
 export { default as PopupBanner }        from './PopupBanner.js';
 export { default as AcademicMou }         from './AcademicMou.js';
 export { default as AcademicSenateDoc }  from './AcademicSenateDoc.js';
+export { default as NewsletterIssue }    from './NewsletterIssue.js';
 export { default as Event }       from './Event.js';
 export { default as Department }  from './Department.js';
 export { default as Student }     from './Student.js';

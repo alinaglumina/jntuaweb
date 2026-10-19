@@ -5,7 +5,7 @@ import { crudController } from '../controllers/crudController.js';
 import {
   GalleryItem, Mou, EMagazine, News, Administration,
   DirectorateContent, HonorisCausa, Slide, Faculty, ExecutiveCouncil, FormerViceChancellor,
-  NaacDocument, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc,
+  NaacDocument, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, NewsletterIssue,
 } from '../models/index.js';
 
 const router = Router();
@@ -28,6 +28,7 @@ mount('/mous',        Mou,          { defaultSort: '-mouDate',    baseFilter: ()
 mount('/emagazines',  EMagazine,    { defaultSort: '-issueDate' });
 mount('/news',        News,         { defaultSort: '-createdAt',  baseFilter: () => ({ isPublished: true }), searchable: ['title'] });
 mount('/honoris',     HonorisCausa, { defaultSort: '-convocationDate' });
+mount('/newsletters', NewsletterIssue, { defaultSort: 'sortOrder -createdAt', baseFilter: (req) => ({ isActive: true, ...(req.query.directorateKey ? { directorateKey: req.query.directorateKey } : {}) }), searchable: ['title'] });
 mount('/academic-senate', AcademicSenateDoc, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title'] });
 mount('/academic-mous', AcademicMou, { defaultSort: 'sortOrder createdAt', baseFilter: () => ({ isActive: true }), searchable: ['orgName'] });
 mount('/popup-banners', PopupBanner, { defaultSort: 'sortOrder', baseFilter: () => {

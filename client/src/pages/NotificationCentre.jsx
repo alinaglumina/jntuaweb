@@ -1,10 +1,11 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import PageShell from '../components/PageShell.jsx';
-import { NoticeCard, Card, SkeletonList, ErrorState, EmptyState, Spinner } from '../components/index.js';
-import { useInfiniteNotifications } from '../api/public.js';
+import { NoticeCard, Card, SkeletonList, ErrorState, EmptyState } from '../components/index.js';
+import { useNotificationsPage } from '../api/public.js';
 import { DIRECTORATE_ABBR } from '../content/directorateAbbr.js';
 
+const PAGE_SIZE = 25;
 const DIRECTORATES = Object.entries(DIRECTORATE_ABBR);   // [slug, short code]
 
 // Left sidebar: one "<CODE> Notifications" link per directorate.
@@ -23,26 +24,56 @@ function NotificationSidebar({ activeDir }) {
   );
 }
 
+// 1 … 4 5 6 … 20 style page list.
+function pageList(current, last) {
+  const set = new Set([1, last, current - 1, current, current + 1]);
+  const nums = [...set].filter((n) => n >= 1 && n <= last).sort((a, b) => a - b);
+  const out = [];
+  nums.forEach((n, i) => { if (i && n - nums[i - 1] > 1) out.push('…'); out.push(n); });
+  return out;
+}
+
+function Pager({ page, pages, onGo }) {
+  if (pages <= 1) return null;
+  const btn = 'min-w-9 rounded-md px-3 py-1.5 text-sm font-semibold transition';
+  const idle = 'bg-surface text-brand hover:bg-navy/5';
+  return (
+    <nav aria-label="Pagination" className="mt-4 flex flex-wrap items-center justify-center gap-1">
+      <button type="button" disabled={page <= 1} onClick={() => onGo(page - 1)} className={`${btn} ${idle} disabled:cursor-not-allowed disabled:opacity-40`}>Previous</button>
+      {pageList(page, pages).map((p, i) => (p === '…'
+        ? <span key={`gap-${i}`} className="px-1 text-slate-400">…</span>
+        : <button key={p} type="button" onClick={() => onGo(p)} aria-current={p === page ? 'page' : undefined} className={`${btn} ${p === page ? 'bg-navy text-white' : idle}`}>{p}</button>))}
+      <button type="button" disabled={page >= pages} onClick={() => onGo(page + 1)} className={`${btn} ${idle} disabled:cursor-not-allowed disabled:opacity-40`}>Next</button>
+    </nav>
+  );
+}
+
 export default function NotificationCentre() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const rawDir = searchParams.get('dir');
   const dir = rawDir && DIRECTORATE_ABBR[rawDir] ? rawDir : null;   // ignore unknown values
+  const pageParam = parseInt(searchParams.get('page'), 10);
+  const page = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
+
   // No directorate picked = Latest News; otherwise all of that directorate's notifications.
   const filters = dir ? { directorateKey: dir } : { category: 'news' };
-  const { data, isLoading, isError, error, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteNotifications(filters);
+  const { data, isLoading, isError, error, isPlaceholderData } = useNotificationsPage({ ...filters, page, limit: PAGE_SIZE });
 
-  // IntersectionObserver sentinel: load the next page when it scrolls into view.
-  const sentinel = useRef(null);
-  const onIntersect = useCallback((entries) => {
-    if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) fetchNextPage();
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
-  useEffect(() => {
-    const el = sentinel.current; if (!el) return;
-    const obs = new IntersectionObserver(onIntersect, { rootMargin: '200px' });
-    obs.observe(el); return () => obs.disconnect();
-  }, [onIntersect]);
+  const items = data?.items || [];
+  const total = data?.total || 0;
+  const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  const first = total === 0 ? 0 : (page - 1) * PAGE_SIZE + 1;
+  const last = Math.min(page * PAGE_SIZE, total);
 
-  const items = data?.pages.flatMap((p) => p.items || []) || [];
+  const goTo = (p, replace = false) => {
+    const next = new URLSearchParams(searchParams);
+    if (p > 1) next.set('page', String(p)); else next.delete('page');
+    setSearchParams(next, { replace });
+  };
+
+  // If the URL asks for a page past the end (e.g. edited by hand), jump to the last page.
+  useEffect(() => { if (data && page > pages) goTo(pages, true); }, [data, page, pages]);   // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }, [page, dir]);
 
   return (
     <PageShell title="Notification Centre" subtitle="University news, notices and announcements." sidebar={<NotificationSidebar activeDir={dir} />}>
@@ -55,7 +86,7 @@ export default function NotificationCentre() {
         <EmptyState label={dir ? 'No notifications from this directorate yet.' : 'No news yet.'} icon="fa-bell" />
       ) : (
         <>
-          <Card><div className="overflow-x-auto">
+          <Card><div className={`overflow-x-auto transition-opacity ${isPlaceholderData ? 'opacity-60' : ''}`}>
             <table className="w-full text-left text-sm">
               <thead className="bg-navy/5 text-navy">
                 <tr>
@@ -65,14 +96,12 @@ export default function NotificationCentre() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-line">
-                {items.map((n, i) => <NoticeCard key={n._id} id={n._id} title={n.title} date={n.publishedAt || n.createdAt} directorateKey={n.directorateKey} sNo={i + 1} />)}
+                {items.map((n, i) => <NoticeCard key={n._id} id={n._id} title={n.title} date={n.publishedAt || n.createdAt} directorateKey={n.directorateKey} sNo={(page - 1) * PAGE_SIZE + i + 1} />)}
               </tbody>
             </table>
           </div></Card>
-          {/* Infinite-scroll sentinel */}
-          <div ref={sentinel} className="grid place-items-center py-6">
-            {isFetchingNextPage ? <Spinner /> : hasNextPage ? <span className="text-xs text-muted">Scroll for more…</span> : <span className="text-xs text-muted">— End —</span>}
-          </div>
+          <p className="mt-3 text-center text-xs text-muted">Showing {first}–{last} of {total}</p>
+          <Pager page={page} pages={pages} onGo={goTo} />
         </>
       )}
     </PageShell>

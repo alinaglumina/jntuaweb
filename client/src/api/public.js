@@ -25,6 +25,15 @@ export const useAdministration = (roleKey) =>
   useQuery({ queryKey: ['administration', roleKey], queryFn: () => api.get(`/administration/key/${roleKey}`), enabled: !!roleKey });
 
 // Server-paginated infinite feed for the Notification Centre.
+// One page of notifications (numbered pages, not infinite scroll). Keeps the
+// previous page on screen while the next one loads.
+export const useNotificationsPage = ({ category, directorateKey, page = 1, limit = 25 } = {}) =>
+  useQuery({
+    queryKey: ['notifications-page', category, directorateKey, page, limit],
+    queryFn: () => api.get('/notifications', { params: { category, directorateKey, page, limit } }),
+    placeholderData: (prev) => prev,
+  });
+
 export function useInfiniteNotifications({ category, directorateKey } = {}, pageSize = 10) {
   return useInfiniteQuery({
     queryKey: ['notifications-infinite', category, directorateKey],

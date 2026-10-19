@@ -5,6 +5,7 @@ import ContentPage from './ContentPage.jsx';
 import SafeHtml from './SafeHtml.jsx';
 import ProgrammesTable from './ProgrammesTable.jsx';
 import AcademicMousTables from './AcademicMousTables.jsx';
+import AcademicSenateTable from './AcademicSenateTable.jsx';
 import DirectorateNotificationsTable from './DirectorateNotificationsTable.jsx';
 import CurriculumTable from './CurriculumTable.jsx';
 import directorates from '../content/directorates.json';
@@ -70,6 +71,7 @@ function DynamicTabContent({ item, directorateKey }) {
     );
   }
   if (directorateKey === 'academic' && /^mou/i.test(item.menuKey || item.label || '')) return <AcademicMousTables />;
+  if (directorateKey === 'academic' && item.menuKey === 'academic-senate') return <AcademicSenateTable />;
   if (item.menuKey === 'ug-programmes') return <ProgrammesTable programmeType="ug" />;
   if (item.menuKey === 'pg-programmes') return <ProgrammesTable programmeType="pg" />;
   if (item.menuKey === 'integrated-dual-degree-programmes') return <ProgrammesTable programmeType="integrated" />;

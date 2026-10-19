@@ -202,6 +202,14 @@ export const RESOURCES = {
              F('mouDate', 'Date', 'date'), F('document', 'Document', 'file'), F('isActive', 'Active', 'checkbox', { default: true })],
   },
 
+  'academic-senate': {
+    label: 'Academic Senate Documents', group: 'institutional', icon: 'fa-landmark', roles: ['admin', 'director'],
+    columns: ['title', 'createdAt'],
+    fields: [F('title', 'Title', 'text', { required: true }),
+             F('attachment', 'Attachment (optional)', 'file'),
+             F('sortOrder', 'Order (lowest first; same order = newest first)', 'number'),
+             F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   'academic-mous': {
     label: "MoU's & Companies (Academic & Planning)", group: 'institutional', icon: 'fa-handshake', roles: ['admin', 'director'],
     columns: ['category', 'orgName', 'startDate'],

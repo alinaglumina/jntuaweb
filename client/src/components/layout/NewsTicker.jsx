@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useNotifications } from '../../api/public.js';
 const MAX_ITEMS = 15;
+const NEW_DAYS = 14;   // items published within this many days get a NEW badge
+const isNew = (n) => (Date.now() - new Date(n.publishedAt || n.createdAt).getTime()) <= NEW_DAYS * 24 * 60 * 60 * 1000;
 // Scrolling "LIVE NEWS" ticker — pulls from Notifications tagged with the
 // "live-news" category, sorted by most recent, into a continuously moving marquee.
 export default function NewsTicker() {
@@ -26,7 +28,7 @@ export default function NewsTicker() {
                   to={`/notifications/${n._id}`}
                   className="text-sm font-medium text-navy hover:text-crimson"
                 >
-                  {n.title}
+                  <span className="mr-1.5 font-semibold text-slate-500">{(i % merged.length) + 1}.</span>{isNew(n) && <span className="mr-2 inline-block animate-pulse rounded bg-crimson px-1.5 py-0.5 align-middle text-[10px] font-bold uppercase tracking-wide text-white">New</span>}{n.title}
                 </Link>
               ))}
             </div>

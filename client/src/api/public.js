@@ -25,11 +25,11 @@ export const useAdministration = (roleKey) =>
   useQuery({ queryKey: ['administration', roleKey], queryFn: () => api.get(`/administration/key/${roleKey}`), enabled: !!roleKey });
 
 // Server-paginated infinite feed for the Notification Centre.
-export function useInfiniteNotifications(category, pageSize = 10) {
+export function useInfiniteNotifications({ category, directorateKey } = {}, pageSize = 10) {
   return useInfiniteQuery({
-    queryKey: ['notifications-infinite', category],
+    queryKey: ['notifications-infinite', category, directorateKey],
     queryFn: ({ pageParam = 1 }) =>
-      api.get('/notifications', { params: { category, page: pageParam, limit: pageSize } }),
+      api.get('/notifications', { params: { category, directorateKey, page: pageParam, limit: pageSize } }),
     initialPageParam: 1,
     getNextPageParam: (last, pages) => {
       const loaded = pages.reduce((n, p) => n + (p.items?.length || 0), 0);

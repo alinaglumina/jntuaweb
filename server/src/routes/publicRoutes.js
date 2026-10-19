@@ -5,7 +5,7 @@ import { crudController } from '../controllers/crudController.js';
 import {
   GalleryItem, Mou, EMagazine, News, Administration,
   DirectorateContent, HonorisCausa, Slide, Faculty, ExecutiveCouncil, FormerViceChancellor,
-  NaacDocument, Course, CurriculumEntry, CurriculumFile, PopupBanner,
+  NaacDocument, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou,
 } from '../models/index.js';
 
 const router = Router();
@@ -28,6 +28,7 @@ mount('/mous',        Mou,          { defaultSort: '-mouDate',    baseFilter: ()
 mount('/emagazines',  EMagazine,    { defaultSort: '-issueDate' });
 mount('/news',        News,         { defaultSort: '-createdAt',  baseFilter: () => ({ isPublished: true }), searchable: ['title'] });
 mount('/honoris',     HonorisCausa, { defaultSort: '-convocationDate' });
+mount('/academic-mous', AcademicMou, { defaultSort: 'sortOrder createdAt', baseFilter: () => ({ isActive: true }), searchable: ['orgName'] });
 mount('/popup-banners', PopupBanner, { defaultSort: 'sortOrder', baseFilter: () => {
   const now = new Date();
   const startOfToday = new Date(); startOfToday.setHours(0, 0, 0, 0);   // end date is inclusive of the whole day

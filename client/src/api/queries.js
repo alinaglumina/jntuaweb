@@ -10,6 +10,7 @@ export const galleryQuery     = () => ({ queryKey: ['gallery'],     queryFn: lis
 export const mousQuery        = () => ({ queryKey: ['mous'],        queryFn: list('/mous') });
 export const emagazinesQuery  = () => ({ queryKey: ['emagazines'],  queryFn: list('/emagazines') });
 export const honorisQuery     = () => ({ queryKey: ['honoris'],     queryFn: list('/honoris') });
+export const academicMousQuery = () => ({ queryKey: ['academic-mous'], queryFn: list('/academic-mous', { limit: 500 }) });
 export const popupBannersQuery = () => ({ queryKey: ['popup-banners'], queryFn: list('/popup-banners') });
 export const facultyQuery     = () => ({ queryKey: ['faculty'],     queryFn: list('/faculty') });
 export const coursesByProgrammeQuery = (programmeType) => ({ queryKey: ['courses', programmeType], queryFn: list('/courses', programmeType ? { programmeType } : undefined), enabled: !!programmeType });

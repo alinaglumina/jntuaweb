@@ -202,6 +202,20 @@ export const RESOURCES = {
              F('mouDate', 'Date', 'date'), F('document', 'Document', 'file'), F('isActive', 'Active', 'checkbox', { default: true })],
   },
 
+  'academic-mous': {
+    label: "MoU's & Companies (Academic & Planning)", group: 'institutional', icon: 'fa-handshake', roles: ['admin', 'director'],
+    columns: ['category', 'orgName', 'startDate'],
+    fields: [F('category', 'Table', 'select', { required: true, options: [
+               { value: 'national-mou', label: "National MoU's" },
+               { value: 'international-mou', label: "International MoU's" },
+               { value: 'national-company', label: 'National Companies List' },
+               { value: 'international-company', label: 'International Companies List' },
+             ] }),
+             F('orgName', 'Name of the Organization', 'text', { required: true }),
+             F('startDate', 'MoU Starting Date', 'date'),
+             F('period', 'Period of MoU (Years, e.g. 3)'),
+             F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   'popup-banners': {
     label: 'Popup Banner', group: 'content', icon: 'fa-bullhorn', roles: ['admin'],
     columns: ['title', 'startDate', 'endDate', 'isActive'],

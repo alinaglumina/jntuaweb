@@ -7,6 +7,7 @@ import ProgrammesTable from './ProgrammesTable.jsx';
 import AcademicMousTables from './AcademicMousTables.jsx';
 import AcademicSenateTable from './AcademicSenateTable.jsx';
 import IqacCommitteeTable from './IqacCommitteeTable.jsx';
+import IqacSsrMinutesTable from './IqacSsrMinutesTable.jsx';
 import NewsletterTable from './NewsletterTable.jsx';
 import NssUnitsTables from './NssUnitsTables.jsx';
 import DirectorateNotificationsTable from './DirectorateNotificationsTable.jsx';
@@ -78,6 +79,7 @@ function DynamicTabContent({ item, directorateKey }) {
   if (directorateKey === 'academic' && /^mou/i.test(item.menuKey || item.label || '')) return <AcademicMousTables />;
   if (directorateKey === 'academic' && item.menuKey === 'academic-senate') return <AcademicSenateTable />;
   if (directorateKey === 'iqac' && item.menuKey === 'committee') return <IqacCommitteeTable />;
+  if (directorateKey === 'iqac' && item.menuKey === 'ssr-minutes') return <IqacSsrMinutesTable />;
   if (item.menuKey === 'ug-programmes') return <ProgrammesTable programmeType="ug" />;
   if (item.menuKey === 'pg-programmes') return <ProgrammesTable programmeType="pg" />;
   if (item.menuKey === 'integrated-dual-degree-programmes') return <ProgrammesTable programmeType="integrated" />;

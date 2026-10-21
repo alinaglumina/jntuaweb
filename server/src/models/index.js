@@ -54,3 +54,4 @@ export { default as RefreshToken } from './RefreshToken.js';
 export { default as LoginHistory } from './LoginHistory.js';
 export { default as SearchLog } from './SearchLog.js';
 export { default as IqacCommitteeDoc } from './IqacCommitteeDoc.js';
+export { default as IqacSsrMinutesDoc } from './IqacSsrMinutesDoc.js';

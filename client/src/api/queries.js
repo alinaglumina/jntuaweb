@@ -10,6 +10,7 @@ export const galleryQuery     = () => ({ queryKey: ['gallery'],     queryFn: lis
 export const mousQuery        = () => ({ queryKey: ['mous'],        queryFn: list('/mous') });
 export const emagazinesQuery  = () => ({ queryKey: ['emagazines'],  queryFn: list('/emagazines') });
 export const honorisQuery     = () => ({ queryKey: ['honoris'],     queryFn: list('/honoris') });
+export const nssUnitsQuery = () => ({ queryKey: ['nss-units'], queryFn: list('/nss-units', { limit: 500 }) });
 export const newslettersQuery = (directorateKey) => ({ queryKey: ['newsletters', directorateKey], queryFn: list('/newsletters', { directorateKey, limit: 500 }), enabled: !!directorateKey });
 export const academicSenateQuery = () => ({ queryKey: ['academic-senate'], queryFn: list('/academic-senate', { limit: 500 }) });
 export const academicMousQuery = () => ({ queryKey: ['academic-mous'], queryFn: list('/academic-mous', { limit: 500 }) });

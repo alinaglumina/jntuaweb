@@ -7,6 +7,7 @@ import ProgrammesTable from './ProgrammesTable.jsx';
 import AcademicMousTables from './AcademicMousTables.jsx';
 import AcademicSenateTable from './AcademicSenateTable.jsx';
 import NewsletterTable from './NewsletterTable.jsx';
+import NssUnitsTables from './NssUnitsTables.jsx';
 import DirectorateNotificationsTable from './DirectorateNotificationsTable.jsx';
 import CurriculumTable from './CurriculumTable.jsx';
 import directorates from '../content/directorates.json';
@@ -54,6 +55,7 @@ function buildDynamicTabs(items) {
 
 function DynamicTabContent({ item, directorateKey }) {
   if (/^newsletter$/i.test(item.menuKey || '')) return <NewsletterTable directorateKey={directorateKey} />;
+  if (directorateKey === 'nss' && /nss[\s-]*units/i.test(`${item.label} ${item.menuKey}`)) return <NssUnitsTables />;
   if (item.menuKey === 'notifications' || item.menuKey === 'Notifications' || (item.type === 'resource' && item.linkResource === 'notifications')) {
     return <DirectorateNotificationsTable directorateKey={directorateKey} />;
   }

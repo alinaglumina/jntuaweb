@@ -4,7 +4,7 @@ import {
   DacpFile, DafaDoc, PageContent,
   Event, Department, Student, Circular, Download, Menu,
   Admission, Examination, Result, ContentBlock,
-  Video, SeoMeta, NaacDocument, DirectorateMenuItem, NavMenuItem, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, NewsletterIssue,
+  Video, SeoMeta, NaacDocument, DirectorateMenuItem, NavMenuItem, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, NewsletterIssue, NssUnit,
 } from '../models/index.js';
 
 // Each entry: model + upload config + which roles may write + list search fields.
@@ -22,6 +22,7 @@ export const RESOURCES = {
   'executive-council':        { model: ExecutiveCouncil,      upload: ['photo', 'images'], searchable: ['name'], roles: ['admin'] },
   'former-vice-chancellors':  { model: FormerViceChancellor,  upload: ['photo', 'images'], searchable: ['name'], roles: ['admin'] },
   'directorate-content': { model: DirectorateContent, upload: ['directorPhoto', 'images'], searchable: ['directorName'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
+  'nss-units':           { model: NssUnit, searchable: ['collegeName', 'district'], roles: ['admin'] },
   newsletters:           { model: NewsletterIssue, upload: ['attachment', 'newsletters'], searchable: ['title'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   'academic-senate':     { model: AcademicSenateDoc, upload: ['attachment', 'academic-senate'], searchable: ['title'], roles: ['admin', 'director'] },
   'academic-mous':       { model: AcademicMou, searchable: ['orgName'], roles: ['admin', 'director'] },

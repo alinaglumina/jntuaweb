@@ -202,6 +202,14 @@ export const RESOURCES = {
              F('mouDate', 'Date', 'date'), F('document', 'Document', 'file'), F('isActive', 'Active', 'checkbox', { default: true })],
   },
 
+  'nss-units': {
+    label: 'NSS Units under JNTUA', group: 'institutional', icon: 'fa-people-group', roles: ['admin'],
+    columns: ['district', 'collegeName'],
+    fields: [F('district', 'District', 'select', { required: true, options: ['Anantapuramu', 'Chittoor', 'Kadapa', 'Kurnool', 'Nellore'] }),
+             F('collegeName', 'Name of the College', 'textarea', { required: true }),
+             F('sortOrder', 'Order (lowest first)', 'number'),
+             F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   newsletters: {
     label: 'Newsletters', group: 'content', icon: 'fa-newspaper', roles: ['admin', 'director'],
     columns: ['title', 'directorateKey', 'createdAt'],

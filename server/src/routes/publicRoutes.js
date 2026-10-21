@@ -5,7 +5,7 @@ import { crudController } from '../controllers/crudController.js';
 import {
   GalleryItem, Mou, EMagazine, News, Administration,
   DirectorateContent, HonorisCausa, Slide, Faculty, ExecutiveCouncil, FormerViceChancellor,
-  NaacDocument, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, NewsletterIssue, NssUnit,
+  NaacDocument, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, IqacCertificateDoc, NewsletterIssue, NssUnit,
 } from '../models/index.js';
 
 const router = Router();
@@ -33,6 +33,7 @@ mount('/newsletters', NewsletterIssue, { defaultSort: 'sortOrder -createdAt', ba
 mount('/academic-senate', AcademicSenateDoc, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title'] });
 mount('/iqac-committee', IqacCommitteeDoc, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title'] });
 mount('/iqac-ssr-minutes', IqacSsrMinutesDoc, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title'] });
+mount('/iqac-certificates', IqacCertificateDoc, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title'] });
 mount('/academic-mous', AcademicMou, { defaultSort: 'sortOrder createdAt', baseFilter: () => ({ isActive: true }), searchable: ['orgName'] });
 mount('/popup-banners', PopupBanner, { defaultSort: 'sortOrder', baseFilter: () => {
   const now = new Date();

@@ -13,6 +13,7 @@ export const honorisQuery     = () => ({ queryKey: ['honoris'],     queryFn: lis
 export const nssUnitsQuery = () => ({ queryKey: ['nss-units'], queryFn: list('/nss-units', { limit: 500 }) });
 export const newslettersQuery = (directorateKey) => ({ queryKey: ['newsletters', directorateKey], queryFn: list('/newsletters', { directorateKey, limit: 500 }), enabled: !!directorateKey });
 export const academicSenateQuery = () => ({ queryKey: ['academic-senate'], queryFn: list('/academic-senate', { limit: 500 }) });
+export const iqacCommitteeQuery = () => ({ queryKey: ['iqac-committee'], queryFn: list('/iqac-committee', { limit: 500 }) });
 export const academicMousQuery = () => ({ queryKey: ['academic-mous'], queryFn: list('/academic-mous', { limit: 500 }) });
 export const popupBannersQuery = () => ({ queryKey: ['popup-banners'], queryFn: list('/popup-banners') });
 export const facultyQuery     = () => ({ queryKey: ['faculty'],     queryFn: list('/faculty') });

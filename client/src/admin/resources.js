@@ -227,6 +227,14 @@ export const RESOURCES = {
              F('sortOrder', 'Order (lowest first; same order = newest first)', 'number'),
              F('isActive', 'Active', 'checkbox', { default: true })],
   },
+  'iqac-committee': {
+    label: 'IQAC Committee Documents', group: 'institutional', icon: 'fa-users', roles: ['admin', 'director'],
+    columns: ['title', 'createdAt'],
+    fields: [F('title', 'Title', 'text', { required: true }),
+             F('attachment', 'Attachment (optional)', 'file'),
+             F('sortOrder', 'Order (lowest first; same order = newest first)', 'number'),
+             F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   'academic-mous': {
     label: "MoU's & Companies (Academic & Planning)", group: 'institutional', icon: 'fa-handshake', roles: ['admin', 'director'],
     columns: ['category', 'orgName', 'startDate'],

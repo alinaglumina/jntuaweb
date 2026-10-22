@@ -5,7 +5,7 @@ import { crudController } from '../controllers/crudController.js';
 import {
   GalleryItem, Mou, EMagazine, News, Administration,
   DirectorateContent, HonorisCausa, Slide, Faculty, ExecutiveCouncil, FormerViceChancellor,
-  NaacDocument, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, RdSyllabusDoc, RdPhdScholarDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, IqacCertificateDoc, NewsletterIssue, NssUnit,
+  NaacDocument, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, RdSyllabusDoc, RdSyllabusPartDoc, RdPhdScholarDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, IqacCertificateDoc, NewsletterIssue, NssUnit,
 } from '../models/index.js';
 
 const router = Router();
@@ -36,6 +36,7 @@ mount('/iqac-ssr-minutes', IqacSsrMinutesDoc, { defaultSort: 'sortOrder -created
 mount('/iqac-certificates', IqacCertificateDoc, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title'] });
 mount('/rd-phd-scholars', RdPhdScholarDoc, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title'] });
 mount('/rd-syllabus', RdSyllabusDoc, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title', 'regulation'] });
+mount('/rd-syllabus-parts', RdSyllabusPartDoc, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title'] });
 mount('/academic-mous', AcademicMou, { defaultSort: 'sortOrder createdAt', baseFilter: () => ({ isActive: true }), searchable: ['orgName'] });
 mount('/popup-banners', PopupBanner, { defaultSort: 'sortOrder', baseFilter: () => {
   const now = new Date();

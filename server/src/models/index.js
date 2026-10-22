@@ -58,3 +58,4 @@ export { default as IqacSsrMinutesDoc } from './IqacSsrMinutesDoc.js';
 export { default as IqacCertificateDoc } from './IqacCertificateDoc.js';
 export { default as RdPhdScholarDoc } from './RdPhdScholarDoc.js';
 export { default as RdSyllabusDoc } from './RdSyllabusDoc.js';
+export { default as RdSyllabusPartDoc } from './RdSyllabusPartDoc.js';

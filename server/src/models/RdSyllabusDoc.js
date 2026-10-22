@@ -5,6 +5,7 @@ const schema = new mongoose.Schema({
   regulation: { type: String, default: '', trim: true },
   title:      { type: String, required: true, trim: true },
   attachment: { type: String, default: '' },
+  hasSubTable: { type: Boolean, default: false },
   isActive:   { type: Boolean, default: true },
   sortOrder:  { type: Number, default: 0 },
 }, { timestamps: true });

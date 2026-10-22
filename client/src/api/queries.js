@@ -13,6 +13,7 @@ export const honorisQuery     = () => ({ queryKey: ['honoris'],     queryFn: lis
 export const nssUnitsQuery = () => ({ queryKey: ['nss-units'], queryFn: list('/nss-units', { limit: 500 }) });
 export const newslettersQuery = (directorateKey) => ({ queryKey: ['newsletters', directorateKey], queryFn: list('/newsletters', { directorateKey, limit: 500 }), enabled: !!directorateKey });
 export const academicSenateQuery = () => ({ queryKey: ['academic-senate'], queryFn: list('/academic-senate', { limit: 500 }) });
+export const seedGrantDocsQuery = () => ({ queryKey: ['seed-grant-docs'], queryFn: list('/seed-grant-docs', { limit: 500 }) });
 export const placementDocsQuery = () => ({ queryKey: ['placement-docs'], queryFn: list('/placement-docs', { limit: 500 }) });
 export const evalApplicationFormsQuery = () => ({ queryKey: ['eval-application-forms'], queryFn: list('/eval-application-forms', { limit: 500 }) });
 export const evalAddlControllersQuery = () => ({ queryKey: ['eval-addl-controllers'], queryFn: list('/eval-addl-controllers', { limit: 500 }) });

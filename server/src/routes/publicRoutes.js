@@ -5,7 +5,7 @@ import { crudController } from '../controllers/crudController.js';
 import {
   GalleryItem, Mou, EMagazine, News, Administration,
   DirectorateContent, HonorisCausa, Slide, Faculty, ExecutiveCouncil, FormerViceChancellor,
-  NaacDocument, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, PlacementDoc, EvalApplicationForm, EvalAddlController, RdDocument, RdSyllabusDoc, RdSyllabusPartDoc, RdPhdScholarDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, IqacCertificateDoc, NewsletterIssue, NssUnit,
+  NaacDocument, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, SeedGrantDoc, PlacementDoc, EvalApplicationForm, EvalAddlController, RdDocument, RdSyllabusDoc, RdSyllabusPartDoc, RdPhdScholarDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, IqacCertificateDoc, NewsletterIssue, NssUnit,
 } from '../models/index.js';
 
 const router = Router();
@@ -41,6 +41,7 @@ mount('/rd-documents', RdDocument, { defaultSort: 'sortOrder -createdAt', baseFi
 mount('/eval-addl-controllers', EvalAddlController, { defaultSort: 'sortOrder createdAt', baseFilter: () => ({ isActive: true }), searchable: ['name'] });
 mount('/eval-application-forms', EvalApplicationForm, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title'] });
 mount('/placement-docs', PlacementDoc, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title'] });
+mount('/seed-grant-docs', SeedGrantDoc, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title'] });
 mount('/academic-mous', AcademicMou, { defaultSort: 'sortOrder createdAt', baseFilter: () => ({ isActive: true }), searchable: ['orgName'] });
 mount('/popup-banners', PopupBanner, { defaultSort: 'sortOrder', baseFilter: () => {
   const now = new Date();

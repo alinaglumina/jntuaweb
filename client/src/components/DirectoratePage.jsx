@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PageShell from './PageShell.jsx';
 import ContentPage from './ContentPage.jsx';
@@ -61,7 +61,19 @@ function buildDynamicTabs(items) {
   return roots;
 }
 
+
+// Sends the visitor straight to an external site (used for Evaluation > Results).
+function ExternalRedirect({ url, label }) {
+  useEffect(() => { window.location.replace(url); }, [url]);
+  return (
+    <p className="text-slate-700">
+      Redirecting to <a href={url} className="font-semibold text-crimson hover:underline">{label}</a>…
+    </p>
+  );
+}
+
 function DynamicTabContent({ item, directorateKey }) {
+  if (directorateKey === 'evaluation' && item.menuKey === 'results') return <ExternalRedirect url={item.externalUrl || 'https://jntuaresults.ac.in'} label={item.label} />;
   if (/^newsletter$/i.test(item.menuKey || '')) return <NewsletterTable directorateKey={directorateKey} />;
   if (directorateKey === 'nss' && /nss[\s-]*units/i.test(`${item.label} ${item.menuKey}`)) return <NssUnitsTables />;
   if (item.menuKey === 'notifications' || item.menuKey === 'Notifications' || (item.type === 'resource' && item.linkResource === 'notifications')) {

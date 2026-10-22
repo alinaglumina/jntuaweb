@@ -92,6 +92,7 @@ function ExternalNewTab({ url, label }) {
 function DynamicTabContent({ item, directorateKey }) {
   if (directorateKey === 'evaluation' && item.menuKey === 'results') return <ExternalRedirect url={item.externalUrl || 'https://jntuaresults.ac.in'} label={item.label} />;
   if (directorateKey === 'placements' && ['patents-published-granted', 'research-projects', 'research-facilities'].includes(item.menuKey) && item.externalUrl) return <ExternalNewTab url={item.externalUrl} label={item.label} />;
+  if (directorateKey === 'consultancy' && item.menuKey === 'infrastructure-resources' && item.externalUrl) return <ExternalNewTab url={item.externalUrl} label={item.label} />;
   if (/^newsletter$/i.test(item.menuKey || '')) return <NewsletterTable directorateKey={directorateKey} />;
   if (directorateKey === 'nss' && /nss[\s-]*units/i.test(`${item.label} ${item.menuKey}`)) return <NssUnitsTables />;
   if (item.menuKey === 'notifications' || item.menuKey === 'Notifications' || (item.type === 'resource' && item.linkResource === 'notifications')) {

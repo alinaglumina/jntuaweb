@@ -83,7 +83,7 @@ export const RESOURCES = {
   'directorate-content': {
     label: 'Directorate Pages', group: 'institutional', icon: 'fa-building-columns', roles: ['admin', 'director'],
     columns: ['directorateKey', 'directorName'],
-    fields: [F('directorateKey', 'Directorate key', 'text', { required: true }), F('directorName', 'Director name'),
+    fields: [directorateField(), F('directorName', 'Director name'),
              F('directorDesignation', 'Designation'), F('directorPhoto', 'Photo', 'image'), F('aboutText', 'About', 'html')],
   },
   'nav-menu': {

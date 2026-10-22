@@ -56,3 +56,4 @@ export { default as SearchLog } from './SearchLog.js';
 export { default as IqacCommitteeDoc } from './IqacCommitteeDoc.js';
 export { default as IqacSsrMinutesDoc } from './IqacSsrMinutesDoc.js';
 export { default as IqacCertificateDoc } from './IqacCertificateDoc.js';
+export { default as RdPhdScholarDoc } from './RdPhdScholarDoc.js';

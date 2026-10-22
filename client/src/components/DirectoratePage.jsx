@@ -6,6 +6,7 @@ import SafeHtml from './SafeHtml.jsx';
 import ProgrammesTable from './ProgrammesTable.jsx';
 import AcademicMousTables from './AcademicMousTables.jsx';
 import AcademicSenateTable from './AcademicSenateTable.jsx';
+import RdPhdScholarsTable from './RdPhdScholarsTable.jsx';
 import IqacCommitteeTable from './IqacCommitteeTable.jsx';
 import IqacSsrMinutesTable from './IqacSsrMinutesTable.jsx';
 import IqacCertificatesTable from './IqacCertificatesTable.jsx';
@@ -79,6 +80,7 @@ function DynamicTabContent({ item, directorateKey }) {
   }
   if (directorateKey === 'academic' && /^mou/i.test(item.menuKey || item.label || '')) return <AcademicMousTables />;
   if (directorateKey === 'academic' && item.menuKey === 'academic-senate') return <AcademicSenateTable />;
+  if (directorateKey === 'rd' && item.menuKey === 'ph-d-scholars-admitted') return <RdPhdScholarsTable />;
   if (directorateKey === 'iqac' && item.menuKey === 'committee') return <IqacCommitteeTable />;
   if (directorateKey === 'iqac' && item.menuKey === 'ssr-minutes') return <IqacSsrMinutesTable />;
   if (directorateKey === 'iqac' && item.menuKey === 'certificates') return <IqacCertificatesTable />;

@@ -4,7 +4,7 @@ import {
   DacpFile, DafaDoc, PageContent,
   Event, Department, Student, Circular, Download, Menu,
   Admission, Examination, Result, ContentBlock,
-  Video, SeoMeta, NaacDocument, DirectorateMenuItem, NavMenuItem, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, IqacCertificateDoc, NewsletterIssue, NssUnit,
+  Video, SeoMeta, NaacDocument, DirectorateMenuItem, NavMenuItem, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, RdPhdScholarDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, IqacCertificateDoc, NewsletterIssue, NssUnit,
 } from '../models/index.js';
 
 // Each entry: model + upload config + which roles may write + list search fields.
@@ -28,6 +28,7 @@ export const RESOURCES = {
   'iqac-committee':      { model: IqacCommitteeDoc, upload: ['attachment', 'iqac-committee'], searchable: ['title'], roles: ['admin', 'director'] },
   'iqac-ssr-minutes':    { model: IqacSsrMinutesDoc, upload: ['attachment', 'iqac-ssr-minutes'], searchable: ['title'], roles: ['admin', 'director'] },
   'iqac-certificates':   { model: IqacCertificateDoc, upload: ['attachment', 'iqac-certificates'], searchable: ['title'], roles: ['admin', 'director'] },
+  'rd-phd-scholars':     { model: RdPhdScholarDoc, upload: ['attachment', 'rd-phd-scholars'], searchable: ['title'], roles: ['admin', 'director'] },
   'academic-mous':       { model: AcademicMou, searchable: ['orgName'], roles: ['admin', 'director'] },
   'popup-banners':       { model: PopupBanner, upload: ['image', 'popup-banners'], searchable: ['title'], roles: ['admin'] },
   'directorate-menu':    { model: DirectorateMenuItem, uploadFields: [['image', 'menu-images']], searchable: ['label', 'menuKey'], roles: ['admin', 'director'], sectionField: 'directorateKey' },

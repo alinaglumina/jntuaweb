@@ -289,6 +289,14 @@ export const RESOURCES = {
              F('sortOrder', 'Order (lowest first; same order = newest first)', 'number'),
              F('isActive', 'Active', 'checkbox', { default: true })],
   },
+  'eval-addl-controllers': {
+    label: 'Additional Controllers of Examinations', group: 'institutional', icon: 'fa-user-tie', roles: ['admin', 'director'],
+    columns: ['name', 'designation'],
+    fields: [F('name', 'Name', 'text', { required: true }),
+             F('designation', 'Designation', 'text'),
+             F('sortOrder', 'Order (lowest first)', 'number'),
+             F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   'academic-mous': {
     label: "MoU's & Companies (Academic & Planning)", group: 'institutional', icon: 'fa-handshake', roles: ['admin', 'director'],
     columns: ['category', 'orgName', 'startDate'],

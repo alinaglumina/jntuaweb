@@ -277,6 +277,18 @@ export const RESOURCES = {
              F('sortOrder', 'Order (lowest first; same order = newest first)', 'number'),
              F('isActive', 'Active', 'checkbox', { default: true })],
   },
+  'rd-documents': {
+    label: 'R&D Documents (Vacancies / Regulations / Downloads)', group: 'institutional', icon: 'fa-file-pdf', roles: ['admin', 'director'],
+    columns: ['section', 'title', 'createdAt'],
+    fields: [F('section', 'Table', 'select', { required: true, options: [
+               { value: 'vacancies', label: 'Ph.D Vacancies' },
+               { value: 'regulations', label: 'Regulations' },
+               { value: 'downloads', label: 'Downloads' }] }),
+             F('title', 'Title', 'text', { required: true }),
+             F('attachment', 'Attachment (optional)', 'file'),
+             F('sortOrder', 'Order (lowest first; same order = newest first)', 'number'),
+             F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   'academic-mous': {
     label: "MoU's & Companies (Academic & Planning)", group: 'institutional', icon: 'fa-handshake', roles: ['admin', 'director'],
     columns: ['category', 'orgName', 'startDate'],

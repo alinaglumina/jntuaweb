@@ -4,7 +4,7 @@ import {
   DacpFile, DafaDoc, PageContent,
   Event, Department, Student, Circular, Download, Menu,
   Admission, Examination, Result, ContentBlock,
-  Video, SeoMeta, NaacDocument, DirectorateMenuItem, NavMenuItem, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, RdSyllabusDoc, RdSyllabusPartDoc, RdPhdScholarDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, IqacCertificateDoc, NewsletterIssue, NssUnit,
+  Video, SeoMeta, NaacDocument, DirectorateMenuItem, NavMenuItem, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, RdDocument, RdSyllabusDoc, RdSyllabusPartDoc, RdPhdScholarDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, IqacCertificateDoc, NewsletterIssue, NssUnit,
 } from '../models/index.js';
 
 // Each entry: model + upload config + which roles may write + list search fields.
@@ -31,6 +31,7 @@ export const RESOURCES = {
   'rd-phd-scholars':     { model: RdPhdScholarDoc, upload: ['attachment', 'rd-phd-scholars'], searchable: ['title'], roles: ['admin', 'director'] },
   'rd-syllabus':         { model: RdSyllabusDoc, upload: ['attachment', 'rd-syllabus'], searchable: ['title', 'regulation'], roles: ['admin', 'director'] },
   'rd-syllabus-parts':   { model: RdSyllabusPartDoc, upload: ['attachment', 'rd-syllabus'], searchable: ['title'], roles: ['admin', 'director'] },
+  'rd-documents':        { model: RdDocument, upload: ['attachment', 'rd-documents'], searchable: ['title'], roles: ['admin', 'director'] },
   'academic-mous':       { model: AcademicMou, searchable: ['orgName'], roles: ['admin', 'director'] },
   'popup-banners':       { model: PopupBanner, upload: ['image', 'popup-banners'], searchable: ['title'], roles: ['admin'] },
   'directorate-menu':    { model: DirectorateMenuItem, uploadFields: [['image', 'menu-images']], searchable: ['label', 'menuKey'], roles: ['admin', 'director'], sectionField: 'directorateKey' },

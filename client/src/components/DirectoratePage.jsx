@@ -74,9 +74,24 @@ function ExternalRedirect({ url, label }) {
   );
 }
 
+
+// Opens a file/site in a new tab; the button stays as a fallback if the browser blocks pop-ups.
+function ExternalNewTab({ url, label }) {
+  useEffect(() => { window.open(url, '_blank', 'noopener,noreferrer'); }, [url]);
+  return (
+    <div className="rounded-lg border border-line bg-white p-6 text-center shadow-card">
+      <p className="mb-4 text-slate-700">{label} opened in a new tab.</p>
+      <a href={url} target="_blank" rel="noopener noreferrer"
+         className="inline-flex items-center gap-2 rounded-md bg-navy px-4 py-2 text-sm font-semibold text-white hover:bg-navy/90">
+        Open {label} <i className="fa-solid fa-arrow-up-right-from-square text-xs" aria-hidden="true" />
+      </a>
+    </div>
+  );
+}
+
 function DynamicTabContent({ item, directorateKey }) {
   if (directorateKey === 'evaluation' && item.menuKey === 'results') return <ExternalRedirect url={item.externalUrl || 'https://jntuaresults.ac.in'} label={item.label} />;
-  if (directorateKey === 'placements' && ['patents-published-granted', 'research-projects', 'research-facilities'].includes(item.menuKey) && item.externalUrl) return <ExternalRedirect url={item.externalUrl} label={item.label} />;
+  if (directorateKey === 'placements' && ['patents-published-granted', 'research-projects', 'research-facilities'].includes(item.menuKey) && item.externalUrl) return <ExternalNewTab url={item.externalUrl} label={item.label} />;
   if (/^newsletter$/i.test(item.menuKey || '')) return <NewsletterTable directorateKey={directorateKey} />;
   if (directorateKey === 'nss' && /nss[\s-]*units/i.test(`${item.label} ${item.menuKey}`)) return <NssUnitsTables />;
   if (item.menuKey === 'notifications' || item.menuKey === 'Notifications' || (item.type === 'resource' && item.linkResource === 'notifications')) {

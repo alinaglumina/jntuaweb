@@ -95,6 +95,16 @@ function DynamicTabContent({ item, directorateKey }) {
   if (item.menuKey === 'ug' && item.parentKey === 'curriculum-syllabus') return <CurriculumTable level="ug" />;
   if (item.menuKey === 'pg' && item.parentKey === 'curriculum-syllabus') return <CurriculumTable level="pg" />;
   if (item.type === 'page') {
+    if (item.image) {
+      return (
+        <div className="flex flex-col gap-6 md:flex-row md:items-start">
+          <img src={item.image} alt={item.label} className="mx-auto w-48 shrink-0 rounded-lg object-cover shadow-card md:mx-0 md:w-56" />
+          <div className="min-w-0 flex-1">
+            {item.body ? <SafeHtml html={item.body} /> : <p className="font-display text-lg font-bold text-navy">{item.label}</p>}
+          </div>
+        </div>
+      );
+    }
     return item.body ? <SafeHtml html={item.body} /> : <p className="text-slate-500">Content coming soon.</p>;
   }
   if (item.type === 'link') {

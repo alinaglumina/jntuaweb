@@ -291,7 +291,7 @@ export default function DirectoratePage({ resolveKey }) {
           {director && (
             <div className="flex flex-col items-center rounded-lg border border-slate-200 bg-white p-6 text-center shadow-sm">
               {director.photo ? (
-                <img src={director.photo} alt={director.name || director.role} className="h-28 w-28 rounded-full object-cover" />
+                <img src={director.photo} alt={director.name || director.role} className="h-auto max-h-44 w-auto max-w-[8rem] rounded-lg bg-white object-contain shadow-card" />
               ) : (
                 <Avatar name={director.name} role={director.role} />
               )}

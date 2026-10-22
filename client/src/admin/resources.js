@@ -321,6 +321,16 @@ export const RESOURCES = {
              F('sortOrder', 'Order (lowest first; same order = newest first)', 'number'),
              F('isActive', 'Active', 'checkbox', { default: true })],
   },
+  'icc-members': {
+    label: 'ICC Members (Faculty Development & Women Empowerment Cell)', group: 'institutional', icon: 'fa-people-group', roles: ['admin', 'director'],
+    columns: ['name', 'role'],
+    fields: [F('name', 'Name & Designation', 'text', { required: true }),
+             F('role', 'Chairperson / Member', 'select', { options: [
+               { value: 'Chairperson', label: 'Chairperson' },
+               { value: 'Member', label: 'Member' }] }),
+             F('sortOrder', 'Order (lowest first)', 'number'),
+             F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   'academic-mous': {
     label: "MoU's & Companies (Academic & Planning)", group: 'institutional', icon: 'fa-handshake', roles: ['admin', 'director'],
     columns: ['category', 'orgName', 'startDate'],

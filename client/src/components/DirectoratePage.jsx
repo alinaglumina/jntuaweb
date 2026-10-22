@@ -6,6 +6,7 @@ import SafeHtml from './SafeHtml.jsx';
 import ProgrammesTable from './ProgrammesTable.jsx';
 import AcademicMousTables from './AcademicMousTables.jsx';
 import AcademicSenateTable from './AcademicSenateTable.jsx';
+import IccMembersTable from './IccMembersTable.jsx';
 import SeedGrantDocsTable from './SeedGrantDocsTable.jsx';
 import PlacementDocsTable from './PlacementDocsTable.jsx';
 import EvalApplicationFormsTable from './EvalApplicationFormsTable.jsx';
@@ -93,6 +94,7 @@ function DynamicTabContent({ item, directorateKey }) {
   if (directorateKey === 'evaluation' && item.menuKey === 'results') return <ExternalRedirect url={item.externalUrl || 'https://jntuaresults.ac.in'} label={item.label} />;
   if (directorateKey === 'placements' && ['patents-published-granted', 'research-projects', 'research-facilities'].includes(item.menuKey) && item.externalUrl) return <ExternalNewTab url={item.externalUrl} label={item.label} />;
   if (directorateKey === 'consultancy' && item.menuKey === 'infrastructure-resources' && item.externalUrl) return <ExternalNewTab url={item.externalUrl} label={item.label} />;
+  if (directorateKey === 'faculty' && /internal[\s-]*compl/i.test(`${item.label} ${item.menuKey}`)) return <IccMembersTable intro={item.body} />;
   if (/^newsletter$/i.test(item.menuKey || '')) return <NewsletterTable directorateKey={directorateKey} />;
   if (directorateKey === 'nss' && /nss[\s-]*units/i.test(`${item.label} ${item.menuKey}`)) return <NssUnitsTables />;
   if (item.menuKey === 'notifications' || item.menuKey === 'Notifications' || (item.type === 'resource' && item.linkResource === 'notifications')) {

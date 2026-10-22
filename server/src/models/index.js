@@ -64,3 +64,4 @@ export { default as EvalAddlController } from './EvalAddlController.js';
 export { default as EvalApplicationForm } from './EvalApplicationForm.js';
 export { default as PlacementDoc } from './PlacementDoc.js';
 export { default as SeedGrantDoc } from './SeedGrantDoc.js';
+export { default as IccMember } from './IccMember.js';

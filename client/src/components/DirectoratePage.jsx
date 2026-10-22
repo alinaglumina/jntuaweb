@@ -6,6 +6,7 @@ import SafeHtml from './SafeHtml.jsx';
 import ProgrammesTable from './ProgrammesTable.jsx';
 import AcademicMousTables from './AcademicMousTables.jsx';
 import AcademicSenateTable from './AcademicSenateTable.jsx';
+import PlacementDocsTable from './PlacementDocsTable.jsx';
 import EvalApplicationFormsTable from './EvalApplicationFormsTable.jsx';
 import EvalAddlControllersTable from './EvalAddlControllersTable.jsx';
 import RdDocsTable from './RdDocsTable.jsx';
@@ -96,6 +97,7 @@ function DynamicTabContent({ item, directorateKey }) {
   }
   if (directorateKey === 'academic' && /^mou/i.test(item.menuKey || item.label || '')) return <AcademicMousTables />;
   if (directorateKey === 'academic' && item.menuKey === 'academic-senate') return <AcademicSenateTable />;
+  if (directorateKey === 'placements' && item.menuKey === 'placements') return <PlacementDocsTable />;
   if (directorateKey === 'evaluation' && item.menuKey === 'application-forms') return <EvalApplicationFormsTable />;
   if (directorateKey === 'evaluation' && item.menuKey === 'additional-controller-of-examinations') return <EvalAddlControllersTable />;
   const rdSection = directorateKey === 'rd' ? ({ 'ph-d-vacancies': 'vacancies', regulations: 'regulations', downloads: 'downloads' })[item.menuKey] : null;

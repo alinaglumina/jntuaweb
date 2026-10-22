@@ -62,3 +62,4 @@ export { default as RdSyllabusPartDoc } from './RdSyllabusPartDoc.js';
 export { default as RdDocument } from './RdDocument.js';
 export { default as EvalAddlController } from './EvalAddlController.js';
 export { default as EvalApplicationForm } from './EvalApplicationForm.js';
+export { default as PlacementDoc } from './PlacementDoc.js';

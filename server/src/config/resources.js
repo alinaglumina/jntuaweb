@@ -4,7 +4,7 @@ import {
   DacpFile, DafaDoc, PageContent,
   Event, Department, Student, Circular, Download, Menu,
   Admission, Examination, Result, ContentBlock,
-  Video, SeoMeta, NaacDocument, DirectorateMenuItem, NavMenuItem, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, EvalApplicationForm, EvalAddlController, RdDocument, RdSyllabusDoc, RdSyllabusPartDoc, RdPhdScholarDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, IqacCertificateDoc, NewsletterIssue, NssUnit,
+  Video, SeoMeta, NaacDocument, DirectorateMenuItem, NavMenuItem, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, PlacementDoc, EvalApplicationForm, EvalAddlController, RdDocument, RdSyllabusDoc, RdSyllabusPartDoc, RdPhdScholarDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, IqacCertificateDoc, NewsletterIssue, NssUnit,
 } from '../models/index.js';
 
 // Each entry: model + upload config + which roles may write + list search fields.
@@ -34,6 +34,7 @@ export const RESOURCES = {
   'rd-documents':        { model: RdDocument, upload: ['attachment', 'rd-documents'], searchable: ['title'], roles: ['admin', 'director'] },
   'eval-addl-controllers': { model: EvalAddlController, searchable: ['name', 'designation'], roles: ['admin', 'director'] },
   'eval-application-forms': { model: EvalApplicationForm, upload: ['attachment', 'eval-application-forms'], searchable: ['title'], roles: ['admin', 'director'] },
+  'placement-docs':      { model: PlacementDoc, upload: ['attachment', 'placement-docs'], searchable: ['title'], roles: ['admin', 'director'] },
   'academic-mous':       { model: AcademicMou, searchable: ['orgName'], roles: ['admin', 'director'] },
   'popup-banners':       { model: PopupBanner, upload: ['image', 'popup-banners'], searchable: ['title'], roles: ['admin'] },
   'directorate-menu':    { model: DirectorateMenuItem, uploadFields: [['image', 'menu-images']], searchable: ['label', 'menuKey'], roles: ['admin', 'director'], sectionField: 'directorateKey' },

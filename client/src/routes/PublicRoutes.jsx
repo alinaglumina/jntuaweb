@@ -1,3 +1,4 @@
+import { Navigate } from 'react-router-dom';
 import DirectoratePage from '../components/DirectoratePage.jsx';
 import { lazy } from 'react';
 import ContentPage from '../components/ContentPage.jsx';

@@ -73,6 +73,7 @@ export const publicRoutes = [
   { path: 'ui-kit', element: S(<UIKit />), handle: crumb([{ label: 'UI Kit' }]) },
 
   // DYNAMIC routes — crumb derives the label from the URL param.
+  { path: 'directorates/ipr', element: <Navigate to="/units/ipr" replace /> },
   { path: 'directorates/:key', element: S(<DirectoratePage resolveKey={(p) => p.key} />), loader: contentLoader(dirId),
     handle: { crumb: (m) => [{ label: 'Directorates' }, { label: dirLabel(m.params.key), to: `/directorates/${m.params.key}` }] } },
   { path: 'units/:key', element: S(<DirectoratePage resolveKey={(p) => p.key} />), loader: contentLoader(unitId),

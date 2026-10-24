@@ -14,7 +14,6 @@ export const DIRECTORATES = [
   ['dir-faculty', 'Faculty Development & Women Empowerment', 'faculty'],
   ['dir-iqac', 'Internal Quality Assurance Cell', 'iqac'],
   ['dir-skill', 'Skill, Software Development & Incubation Centre', 'skill'],
-  ['dir-ipr', 'Intellectual Property Rights', 'ipr'],
   ['dir-otpri', 'Oil Technological & Pharmaceutical Research Institute', 'otpri'],
   ['dir-sms', 'School of Management Studies', 'sms'],
 ];
@@ -25,6 +24,7 @@ export const UNITS = [
   ['unit-anti-ragging', 'Anti-Ragging Cell', 'anti-ragging'],
   ['unit-pro', 'Public Relations Office', 'public-relations'],
   ['unit-sports', 'Sports Council', 'sports'],
+  ['unit-ipr', 'Intellectual Property Rights', 'ipr'],
 ];
 
 export const ASSESSMENT_ACCREDITATION = [

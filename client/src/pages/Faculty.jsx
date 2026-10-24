@@ -106,7 +106,7 @@ export default function Faculty() {
                   {f.department && <p className="text-xs text-slate-500">{f.department}</p>}
                   {f.qualification && <p className="mt-1 text-xs text-slate-500">{f.qualification}</p>}
                   {f.email && (
-                    <a href={`mailto:${f.email}`} className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-crimson">
+                    <a href={`mailto:${f.email}`} className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-brand transition-colors hover:text-gold hover:underline">
                       <i className="fa-solid fa-envelope" aria-hidden="true" /> {f.email}
                     </a>
                   )}

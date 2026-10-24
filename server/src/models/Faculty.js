@@ -7,6 +7,8 @@ const schema = new mongoose.Schema({
   qualification:  { type: String, default: '' },
   specialization: { type: String, default: '' },
   experience:     { type: String, default: '' },
+  institute:      { type: String, default: '' },
+  vidwanProfile:  { type: String, default: '' },
   email:          { type: String, default: '' },
   mobile:         { type: String, default: '' },
   researchArea:   { type: String, default: '' },

@@ -104,7 +104,13 @@ export default function Faculty() {
                   <p className="mt-3 font-display text-base font-bold text-navy">{f.name}</p>
                   {f.designation && <p className="text-sm text-slate-600">{f.designation}</p>}
                   {f.department && <p className="text-xs text-slate-500">{f.department}</p>}
+                  {f.institute && <p className="text-xs text-slate-500">{f.institute}</p>}
                   {f.qualification && <p className="mt-1 text-xs text-slate-500">{f.qualification}</p>}
+                  {/^https?:\/\//i.test(f.vidwanProfile || '') && (
+                    <a href={f.vidwanProfile} target="_blank" rel="noopener noreferrer" className="mt-2 flex items-center justify-center gap-1 text-xs font-semibold text-brand transition-colors hover:text-gold hover:underline">
+                      <i className="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" /> Vidwan Profile
+                    </a>
+                  )}
                   {f.email && (
                     <a href={`mailto:${f.email}`} className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-brand transition-colors hover:text-gold hover:underline">
                       <i className="fa-solid fa-envelope" aria-hidden="true" /> {f.email}

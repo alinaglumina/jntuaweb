@@ -120,6 +120,8 @@ export const RESOURCES = {
     label: 'Faculty', group: 'institutional', icon: 'fa-chalkboard-user', roles: ['admin', 'director'],
     columns: ['name', 'designation', 'department'],
     fields: [F('name', 'Name', 'text', { required: true }), F('designation', 'Designation'), F('department', 'Department'),
+             F('institute', 'Institute'),
+             F('vidwanProfile', 'Vidwan Profile (link)', 'text', { placeholder: 'https://vidwan.inflibnet.ac.in/profile/...' }),
              F('qualification', 'Qualification'), F('specialization', 'Specialization'), F('email', 'Email'),
              F('mobile', 'Mobile'), F('photo', 'Photo', 'image'), F('sortOrder', 'Order', 'number'),
              F('isActive', 'Active', 'checkbox', { default: true })],

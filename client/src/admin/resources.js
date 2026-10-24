@@ -120,7 +120,11 @@ export const RESOURCES = {
     label: 'Faculty', group: 'institutional', icon: 'fa-chalkboard-user', roles: ['admin', 'director'],
     columns: ['name', 'designation', 'department'],
     fields: [F('name', 'Name', 'text', { required: true }), F('designation', 'Designation'), F('department', 'Department'),
-             F('institute', 'Institute'),
+             F('institute', 'Institute', 'select', { options: [
+               { value: 'JNTUA CEA', label: 'JNTUA CEA' },
+               { value: 'JNTUA CEP', label: 'JNTUA CEP' },
+               { value: 'JNTUA CEK', label: 'JNTUA CEK' },
+             ] }),
              F('vidwanProfile', 'Vidwan Profile (link)', 'text', { placeholder: 'https://vidwan.inflibnet.ac.in/profile/...' }),
              F('qualification', 'Qualification'), F('specialization', 'Specialization'), F('email', 'Email'),
              F('mobile', 'Mobile'), F('photo', 'Photo', 'image'), F('sortOrder', 'Order', 'number'),

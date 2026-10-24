@@ -25,9 +25,15 @@ const STAT_LABELS = [
 export default function Faculty() {
   const { data = [], isLoading, isError, error } = useFaculty();
   const [dept, setDept] = useState('all');
+  const [inst, setInst] = useState('all');
 
   const departments = useMemo(() => {
     const set = new Set(data.map((f) => f.department).filter(Boolean));
+    return Array.from(set).sort();
+  }, [data]);
+
+  const institutes = useMemo(() => {
+    const set = new Set(data.map((f) => f.institute).filter(Boolean));
     return Array.from(set).sort();
   }, [data]);
 
@@ -41,8 +47,8 @@ export default function Faculty() {
   }, [data]);
 
   const filtered = useMemo(
-    () => (dept === 'all' ? data : data.filter((f) => f.department === dept)),
-    [data, dept]
+    () => data.filter((f) => (dept === 'all' || f.department === dept) && (inst === 'all' || f.institute === inst)),
+    [data, dept, inst]
   );
 
   return (
@@ -67,29 +73,47 @@ export default function Faculty() {
             ))}
           </div>
 
-          {/* Department filter */}
-          {departments.length > 0 && (
-            <div className="mb-6 flex flex-wrap items-center gap-2">
-              <label htmlFor="dept-filter" className="text-sm font-medium text-slate-600">Department:</label>
-              <select
-                id="dept-filter"
-                value={dept}
-                onChange={(e) => setDept(e.target.value)}
-                className="rounded-md border border-line bg-white px-3 py-1.5 text-sm text-navy"
-              >
-                <option value="all">All Departments</option>
-                {departments.map((d) => <option key={d} value={d}>{d}</option>)}
-              </select>
-              {dept !== 'all' && (
-                <button onClick={() => setDept('all')} className="text-xs font-semibold text-crimson hover:underline">
-                  Clear filter
+          {/* Institute + Department filters */}
+          {(institutes.length > 0 || departments.length > 0) && (
+            <div className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-2">
+              {institutes.length > 0 && (
+                <div className="flex items-center gap-2">
+                  <label htmlFor="inst-filter" className="text-sm font-medium text-slate-600">Institute:</label>
+                  <select
+                    id="inst-filter"
+                    value={inst}
+                    onChange={(e) => setInst(e.target.value)}
+                    className="rounded-md border border-line bg-white px-3 py-1.5 text-sm text-navy"
+                  >
+                    <option value="all">All Institutes</option>
+                    {institutes.map((i) => <option key={i} value={i}>{i}</option>)}
+                  </select>
+                </div>
+              )}
+              {departments.length > 0 && (
+                <div className="flex items-center gap-2">
+                  <label htmlFor="dept-filter" className="text-sm font-medium text-slate-600">Department:</label>
+                  <select
+                    id="dept-filter"
+                    value={dept}
+                    onChange={(e) => setDept(e.target.value)}
+                    className="rounded-md border border-line bg-white px-3 py-1.5 text-sm text-navy"
+                  >
+                    <option value="all">All Departments</option>
+                    {departments.map((d) => <option key={d} value={d}>{d}</option>)}
+                  </select>
+                </div>
+              )}
+              {(dept !== 'all' || inst !== 'all') && (
+                <button onClick={() => { setDept('all'); setInst('all'); }} className="text-xs font-semibold text-brand hover:text-gold hover:underline">
+                  Clear filters
                 </button>
               )}
             </div>
           )}
 
           {filtered.length === 0 ? (
-            <EmptyState label="No faculty found in this department." icon="fa-chalkboard-user" />
+            <EmptyState label="No faculty found for the selected filters." icon="fa-chalkboard-user" />
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
               {filtered.map((f) => (

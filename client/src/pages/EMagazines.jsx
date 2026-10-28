@@ -25,7 +25,7 @@ export default function EMagazines() {
                   <td className="px-4 py-3 text-center">
                     {e.filename ? (
                       <a href={e.filename} target="_blank" rel="noopener noreferrer" aria-label={`View ${e.monthYear} issue`}
-                         className="inline-grid h-8 w-8 place-items-center rounded bg-crimson/10 text-crimson hover:bg-crimson hover:text-white">
+                         className="inline-grid h-8 w-8 place-items-center rounded bg-accent/10 text-accent hover:bg-accent hover:text-white">
                         <i className="fa-solid fa-book-open" aria-hidden="true" />
                       </a>
                     ) : <span className="text-slate-300">—</span>}

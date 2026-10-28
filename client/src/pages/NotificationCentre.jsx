@@ -12,11 +12,11 @@ const DIRECTORATES = Object.entries(DIRECTORATE_ABBR);   // [slug, short code]
 function NotificationSidebar({ activeDir }) {
   return (
     <nav aria-label="Notification Center" className="overflow-hidden rounded-lg border border-line bg-white shadow-card">
-      <h3 className="bg-crimson px-4 py-3 font-display text-lg font-bold text-white">Notification Center</h3>
+      <h3 className="bg-accent px-4 py-3 font-display text-lg font-bold text-white">Notification Center</h3>
       <ul className="py-1">
         {DIRECTORATES.map(([slug, code]) => (
           <li key={slug}>
-            <Link to={`/notifications?dir=${slug}`} aria-current={activeDir === slug ? 'page' : undefined} className={`block px-4 py-2 text-sm transition ${activeDir === slug ? 'bg-navy/5 font-semibold text-crimson' : 'text-slate-700 hover:bg-navy/5 hover:text-navy'}`}>{code} Notifications</Link>
+            <Link to={`/notifications?dir=${slug}`} aria-current={activeDir === slug ? 'page' : undefined} className={`block px-4 py-2 text-sm transition ${activeDir === slug ? 'bg-navy/5 font-semibold text-accent' : 'text-slate-700 hover:bg-navy/5 hover:text-navy'}`}>{code} Notifications</Link>
           </li>
         ))}
       </ul>

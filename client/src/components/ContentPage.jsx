@@ -1,17 +1,17 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import PageShell from './PageShell.jsx';
 import SafeHtml from './SafeHtml.jsx';
 import { pageContentQuery, administrationQuery } from '../api/queries.js';
 import pages from '../content/pages.json';
 import Sidebar from './Sidebar.jsx';
-import { ASSESSMENT_SIDEBAR_GROUPS } from '../content/assessmentSidebar.js';
+import { ASSESSMENT_ONLY_GROUPS, NAAC_SIDEBAR_GROUPS } from '../content/assessmentSidebar.js';
 import NaacDocumentsTable from './NaacDocumentsTable.jsx';
 
 // Page title repeated at the top of the content area, in crimson.
 function PageTitle({ children }) {
-  return <h2 className="mx-auto mb-4 max-w-3xl font-display text-3xl font-bold text-crimson">{children}</h2>;
+  return <h2 className="mx-auto mb-4 max-w-3xl font-display text-3xl font-bold text-accent">{children}</h2>;
 }
 
 // Maps a content page id to an Administration roleKey, when that page
@@ -27,6 +27,8 @@ const ROLE_KEY_BY_PAGE = {
 // editable PageContent override under the same key, that HTML wins.
 export default function ContentPage({ pageId, resolveId, sidebar, naacTable }) {
   const params = useParams();
+  const { pathname } = useLocation();
+  const isNaac = pathname.startsWith('/naac');
   const id = pageId || (resolveId ? resolveId(params) : null);
   const page = id && pages[id];
   const roleKey = id && ROLE_KEY_BY_PAGE[id];
@@ -47,7 +49,7 @@ export default function ContentPage({ pageId, resolveId, sidebar, naacTable }) {
     />
   ) : null;
 
-  const sidebarEl = sidebar ? <Sidebar variant="light" header={<h3 className="font-display text-lg font-bold">Assessment &amp; Accreditation</h3>} groups={ASSESSMENT_SIDEBAR_GROUPS} /> : null;
+  const sidebarEl = sidebar ? <Sidebar variant="light" header={<h3 className="font-display text-lg font-bold">{isNaac ? 'NAAC' : 'Assessment & Accreditation'}</h3>} groups={isNaac ? NAAC_SIDEBAR_GROUPS : ASSESSMENT_ONLY_GROUPS} /> : null;
   const naacTableEl = naacTable && params.key ? <NaacDocumentsTable criteria={params.key} /> : null;
 
   if (override?.body) {

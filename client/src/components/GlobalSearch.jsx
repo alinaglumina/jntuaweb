@@ -67,7 +67,7 @@ export default function GlobalSearch({ open, onClose }) {
               {recent.length > 0 && (
                 <div className="mb-4">
                   <div className="mb-2 flex items-center justify-between"><p className="text-[11px] font-semibold uppercase tracking-wide text-muted">Recent</p>
-                    <button className="text-[11px] text-muted hover:text-crimson" onClick={clearRecent}>Clear</button></div>
+                    <button className="text-[11px] text-muted hover:text-accent" onClick={clearRecent}>Clear</button></div>
                   <div className="flex flex-wrap gap-2">
                     {recent.map((t) => <button key={t} onClick={() => setQ(t)} className="rounded-full border border-line px-3 py-1 text-xs text-brand hover:bg-navy/5"><i className="fa-solid fa-clock-rotate-left mr-1 text-muted" />{t}</button>)}
                   </div>
@@ -77,7 +77,7 @@ export default function GlobalSearch({ open, onClose }) {
                 <div>
                   <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-muted">Popular</p>
                   <div className="flex flex-wrap gap-2">
-                    {popular.terms.map((t) => <button key={t} onClick={() => setQ(t)} className="rounded-full border border-line px-3 py-1 text-xs text-brand hover:bg-navy/5"><i className="fa-solid fa-fire mr-1 text-crimson" />{t}</button>)}
+                    {popular.terms.map((t) => <button key={t} onClick={() => setQ(t)} className="rounded-full border border-line px-3 py-1 text-xs text-brand hover:bg-navy/5"><i className="fa-solid fa-fire mr-1 text-accent" />{t}</button>)}
                   </div>
                 </div>
               )}

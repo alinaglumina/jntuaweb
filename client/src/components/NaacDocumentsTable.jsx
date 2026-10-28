@@ -33,7 +33,7 @@ export default function NaacDocumentsTable({ criteria }) {
               <td className="px-4 py-3 text-center">
                 {doc.attachment ? (
                   <a href={doc.attachment} target="_blank" rel="noopener noreferrer" aria-label={`Download ${doc.title}`}
-                     className="inline-grid h-8 w-8 place-items-center rounded bg-crimson/10 text-crimson hover:bg-crimson hover:text-white">
+                     className="inline-grid h-8 w-8 place-items-center rounded bg-accent/10 text-accent hover:bg-accent hover:text-white">
                     <i className="fa-solid fa-file-pdf" aria-hidden="true" />
                   </a>
                 ) : <span className="text-slate-300">—</span>}

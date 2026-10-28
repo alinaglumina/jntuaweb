@@ -36,7 +36,7 @@ export default function SearchResults() {
           <div className="space-y-6">
             {groups.map((g) => (
               <section key={g.type}>
-                <h2 className="mb-2 flex items-center gap-2 text-lg"><i className={`fa-solid ${g.icon} text-crimson`} />{g.label} <Badge tone="slate">{g.count}</Badge></h2>
+                <h2 className="mb-2 flex items-center gap-2 text-lg"><i className={`fa-solid ${g.icon} text-accent`} />{g.label} <Badge tone="slate">{g.count}</Badge></h2>
                 <Card><div className="divide-y divide-line">
                   {g.items.map((it) => {
                     const inner = (

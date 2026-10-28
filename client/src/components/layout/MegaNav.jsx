@@ -36,7 +36,7 @@ function DesktopChild({ c, pathname }) {
         <div className="invisible absolute left-full top-0 w-64 rounded-lg bg-surface py-2 opacity-0 shadow-lift transition group-hover/sub:visible group-hover/sub:opacity-100">
           {c.children.map((sc) => (
             <PrefetchLink key={sc.to} to={sc.to}
-              className={`block px-4 py-2 text-sm hover:bg-navy/5 ${pathname === sc.to ? 'font-semibold text-crimson' : 'text-ink'}`}>
+              className={`block px-4 py-2 text-sm hover:bg-navy/5 ${pathname === sc.to ? 'font-semibold text-accent' : 'text-ink'}`}>
               {sc.label}
             </PrefetchLink>
           ))}
@@ -46,7 +46,7 @@ function DesktopChild({ c, pathname }) {
   }
   return (
     <PrefetchLink to={c.to}
-      className={`block px-4 py-2 text-sm hover:bg-navy/5 ${pathname === c.to ? 'font-semibold text-crimson' : 'text-ink'}`}>
+      className={`block px-4 py-2 text-sm hover:bg-navy/5 ${pathname === c.to ? 'font-semibold text-accent' : 'text-ink'}`}>
       {c.label}
     </PrefetchLink>
   );

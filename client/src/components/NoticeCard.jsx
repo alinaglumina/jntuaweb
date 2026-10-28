@@ -11,7 +11,7 @@ export default function NoticeCard({ id, title, date, directorateKey, sNo }) {
       <td className="px-4 py-3 whitespace-nowrap text-slate-700">{date ? new Date(date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '—'}</td>
       <td className="px-4 py-3">
         {id ? (
-          <Link to={`/notifications/${id}`} className="text-sm font-medium text-ink hover:text-crimson hover:underline">{displayTitle}</Link>
+          <Link to={`/notifications/${id}`} className="text-sm font-medium text-ink hover:text-accent hover:underline">{displayTitle}</Link>
         ) : (
           <p className="text-sm font-medium text-ink">{displayTitle}</p>
         )}

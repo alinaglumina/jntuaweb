@@ -8,6 +8,7 @@ export default {
         // JNTUA institutional identity — preserved from the legacy site.
         navy:    { DEFAULT: '#0f4a3c', 700: '#0b3a2f', 900: '#072a22' },
         crimson: { DEFAULT: '#c8102e', 700: '#a50d26' },
+        accent:  { DEFAULT: '#a1620f', 700: '#7f4c0b' },   // rich bronze highlight
         gold:    { DEFAULT: '#c9a227' },
         ink:     '#1b1f2a',
         paper:   '#f7f8fa',

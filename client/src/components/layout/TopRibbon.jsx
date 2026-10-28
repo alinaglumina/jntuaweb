@@ -9,7 +9,7 @@ export default function TopRibbon() {
         <span className="flex items-center gap-2 bg-gold px-4 py-1.5 font-semibold text-navy"><i className="fa-solid fa-calendar-days" aria-hidden="true" />{today}</span>
         <div className="flex flex-1 flex-wrap items-center justify-end gap-3 px-4 py-1.5">
           {RIBBON_LINKS.map((l) => (
-            <Link key={l.to} to={l.to} className="flex items-center gap-1 text-navy/80 hover:text-crimson">
+            <Link key={l.to} to={l.to} className="flex items-center gap-1 text-navy/80 hover:text-accent">
               <i className={`fa-solid ${l.icon}`} aria-hidden="true" />{l.label}
             </Link>
           ))}
@@ -21,7 +21,7 @@ export default function TopRibbon() {
         <div className="flex items-center gap-2">
           {SOCIALS.map(([icon, url]) => (
             <a key={icon} href={url} target="_blank" rel="noopener noreferrer" aria-label={icon}
-               className="grid h-6 w-6 place-items-center rounded-full border border-navy/15 bg-navy/5 text-navy/70 hover:border-crimson hover:bg-crimson hover:text-white">
+               className="grid h-6 w-6 place-items-center rounded-full border border-navy/15 bg-navy/5 text-navy/70 hover:border-accent hover:bg-accent hover:text-white">
               <i className={`fab fa-${icon} text-[11px]`} aria-hidden="true" />
             </a>
           ))}

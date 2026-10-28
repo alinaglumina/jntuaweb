@@ -70,7 +70,7 @@ function ExternalRedirect({ url, label }) {
   useEffect(() => { window.location.replace(url); }, [url]);
   return (
     <p className="text-slate-700">
-      Redirecting to <a href={url} className="font-semibold text-crimson hover:underline">{label}</a>…
+      Redirecting to <a href={url} className="font-semibold text-accent hover:underline">{label}</a>…
     </p>
   );
 }
@@ -157,7 +157,7 @@ function DynamicTabContent({ item, directorateKey }) {
   if (item.type === 'resource' && item.linkResource) {
     return (
       <p className="text-slate-700">
-        See <a href={`/${item.linkResource}`} className="font-semibold text-crimson hover:underline">{item.label}</a> for this directorate.
+        See <a href={`/${item.linkResource}`} className="font-semibold text-accent hover:underline">{item.label}</a> for this directorate.
       </p>
     );
   }
@@ -212,7 +212,7 @@ function FlyoutMenu({ nodes, prefix, activeKey, onSelect }) {
             <div key={n.label} className="relative" onMouseEnter={() => setOpenIndex(i)}>
               <button
                 className={`flex w-full items-center justify-between gap-3 px-4 py-2 text-left text-sm hover:bg-navy/5 ${
-                  isActiveBranch ? 'font-semibold text-crimson' : 'text-ink'
+                  isActiveBranch ? 'font-semibold text-accent' : 'text-ink'
                 }`}
               >
                 {n.label} <i className="fa-solid fa-chevron-right text-[9px]" aria-hidden="true" />
@@ -231,7 +231,7 @@ function FlyoutMenu({ nodes, prefix, activeKey, onSelect }) {
             onMouseEnter={() => setOpenIndex(i)}
             onClick={() => onSelect(key)}
             className={`block w-full px-4 py-2 text-left text-sm hover:bg-navy/5 ${
-              activeKey === key ? 'font-semibold text-crimson' : 'text-ink'
+              activeKey === key ? 'font-semibold text-accent' : 'text-ink'
             }`}
           >
             {n.label}

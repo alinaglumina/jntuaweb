@@ -26,9 +26,9 @@ export default function NewsTicker() {
                 <Link
                   key={`${n._id}-${i}`}
                   to={`/notifications/${n._id}`}
-                  className="text-sm font-medium text-navy hover:text-crimson"
+                  className="text-sm font-medium text-navy hover:text-accent"
                 >
-                  <span className="mr-1.5 font-semibold text-slate-500">{(i % merged.length) + 1}.</span>{isNew(n) && <span className="mr-2 inline-block animate-pulse rounded bg-crimson px-1.5 py-0.5 align-middle text-[10px] font-bold uppercase tracking-wide text-white">New</span>}{n.title}
+                  <span className="mr-1.5 font-semibold text-slate-500">{(i % merged.length) + 1}.</span>{isNew(n) && <span className="mr-2 inline-block animate-pulse rounded bg-accent px-1.5 py-0.5 align-middle text-[10px] font-bold uppercase tracking-wide text-white">New</span>}{n.title}
                 </Link>
               ))}
             </div>

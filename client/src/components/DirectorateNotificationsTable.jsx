@@ -32,7 +32,7 @@ export default function DirectorateNotificationsTable({ directorateKey }) {
                 {(n.publishedAt || n.createdAt) ? new Date(n.publishedAt || n.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '—'}
               </td>
               <td className="px-4 py-3">
-                <Link to={`/notifications/${n._id}`} className="font-medium text-ink hover:text-crimson hover:underline">{n.title}</Link>
+                <Link to={`/notifications/${n._id}`} className="font-medium text-ink hover:text-accent hover:underline">{n.title}</Link>
               </td>
             </tr>
           ))}

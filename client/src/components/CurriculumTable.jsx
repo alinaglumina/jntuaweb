@@ -27,7 +27,7 @@ function BranchFilesTable({ courseName, level, regulationYear }) {
             <td className="px-4 py-2 text-center">
               {f.attachment ? (
                 <a href={f.attachment} target="_blank" rel="noopener noreferrer" aria-label={`Download ${f.branch}`}
-                   className="inline-grid h-8 w-8 place-items-center rounded bg-crimson/10 text-crimson hover:bg-crimson hover:text-white">
+                   className="inline-grid h-8 w-8 place-items-center rounded bg-accent/10 text-accent hover:bg-accent hover:text-white">
                   <i className="fa-solid fa-file-pdf" aria-hidden="true" />
                 </a>
               ) : <span className="text-slate-300">—</span>}
@@ -81,7 +81,7 @@ export default function CurriculumTable({ level }) {
                         <td className="px-4 py-3 text-center">
                           {row.regulations ? (
                             <a href={row.regulations} target="_blank" rel="noopener noreferrer" aria-label={`Regulations for ${courseName}`}
-                               className="inline-grid h-8 w-8 place-items-center rounded bg-crimson/10 text-crimson hover:bg-crimson hover:text-white">
+                               className="inline-grid h-8 w-8 place-items-center rounded bg-accent/10 text-accent hover:bg-accent hover:text-white">
                               <i className="fa-solid fa-file-pdf" aria-hidden="true" />
                             </a>
                           ) : <span className="text-slate-300">—</span>}

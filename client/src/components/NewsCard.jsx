@@ -10,7 +10,7 @@ export default function NewsCard({ title, image, excerpt, date, href }) {
         {date && <p className="mb-1 text-xs text-slate-400">{new Date(date).toLocaleDateString('en-IN')}</p>}
         <h3 className="font-display text-lg text-navy">{title}</h3>
         {excerpt && <div className="mt-1 line-clamp-3 text-sm text-muted"><SafeHtml html={excerpt} /></div>}
-        {href && <a href={href} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-crimson">Read more <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" /></a>}
+        {href && <a href={href} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent">Read more <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" /></a>}
       </div>
     </Card>
   );

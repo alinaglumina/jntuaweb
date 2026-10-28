@@ -80,7 +80,7 @@ export default function Home() {
             <p>It is a matter of honor and immense pleasure that destiny has given me an opportunity to lead JNT University Anantapur.</p>
             <p>Higher education globally has witnessed significant change and remarkable growth. Every institution has geared up to meet global challenges by harnessing the latest technologies. The move towards inter-disciplinary studies, research-based and interactive learning with technology integration has opened up several options as well as multiple challenges.</p>
             <p>At JNTU Anantapur, our constant endeavor is to provide a conducive environment for teaching, learning and research, while fostering innovation, industry collaboration and holistic development of our students to prepare them for the challenges of tomorrow.</p>
-              <Link to="/administration/vice-chancellor" className="inline-flex items-center gap-1 font-semibold text-crimson">Read more <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" /></Link>
+              <Link to="/administration/vice-chancellor" className="inline-flex items-center gap-1 font-semibold text-accent">Read more <i className="fa-solid fa-arrow-right text-xs" aria-hidden="true" /></Link>
             </div>
           </div>
         </div>
@@ -149,7 +149,7 @@ export default function Home() {
       {/* Contact */}
       <section className="w-full px-4 sm:px-8 lg:px-16 grid gap-8 py-14 md:grid-cols-2">
         <div>
-          <h3 className="text-2xl"><i className="fa-solid fa-address-card text-crimson" aria-hidden="true" /> Contact Us</h3>
+          <h3 className="text-2xl"><i className="fa-solid fa-address-card text-accent" aria-hidden="true" /> Contact Us</h3>
           <ul className="mt-4 space-y-3 text-sm text-slate-700">
             <li><i className="fa-solid fa-location-dot mr-2 text-navy" aria-hidden="true" /><strong>JNTU Anantapur</strong>, Ananthapuramu – 515002, Andhra Pradesh, India</li>
             <li><i className="fa-solid fa-envelope mr-2 text-navy" aria-hidden="true" />registrar@jntua.ac.in · vc@jntua.ac.in</li>

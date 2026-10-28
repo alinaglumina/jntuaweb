@@ -1,10 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { coursesByProgrammeQuery } from '../api/queries.js';
+import { usePagination } from '../hooks/usePagination.js';
+import Pagination from './ui/Pagination.jsx';
 
 // Renders a Courses Offered sub-table (UG / PG / Integrated Dual Degree):
 // S.No, Degree, Course/Specialization, Category, Duration, Course Type.
 export default function ProgrammesTable({ programmeType }) {
   const { data = [], isLoading } = useQuery(coursesByProgrammeQuery(programmeType));
+  const pg = usePagination(data);
 
   if (isLoading) return <div className="skeleton h-40 w-full rounded-lg" />;
   if (data.length === 0) return <p className="rounded-md border border-dashed border-slate-300 p-8 text-center text-sm text-slate-500">No programmes listed yet.</p>;
@@ -23,9 +26,9 @@ export default function ProgrammesTable({ programmeType }) {
           </tr>
         </thead>
         <tbody className="divide-y divide-line">
-          {data.map((c, i) => (
+          {pg.rows.map((c, i) => (
             <tr key={c._id} className={i % 2 === 0 ? 'bg-white' : 'bg-navy/[0.02]'}>
-              <td className="px-4 py-3 text-slate-500">{String(i + 1).padStart(2, '0')}.</td>
+              <td className="px-4 py-3 text-slate-500">{String(pg.offset + i + 1).padStart(2, '0')}.</td>
               <td className="px-4 py-3 font-medium text-slate-800">{c.degree || '—'}</td>
               <td className="px-4 py-3 text-slate-700">{c.name}</td>
               <td className="px-4 py-3 text-slate-700">{c.category || '—'}</td>
@@ -35,6 +38,7 @@ export default function ProgrammesTable({ programmeType }) {
           ))}
         </tbody>
       </table>
+      <div className="pb-3"><Pagination page={pg.page} total={pg.total} pageSize={pg.pageSize} onPage={pg.setPage} /></div>
     </div>
   );
 }

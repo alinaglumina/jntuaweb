@@ -1,9 +1,12 @@
 import PageShell from '../components/PageShell.jsx';
 import { Loading, ErrorState, EmptyState } from '../components/AsyncState.jsx';
 import { useMous } from '../api/public.js';
+import { usePagination } from '../hooks/usePagination.js';
+import Pagination from '../components/ui/Pagination.jsx';
 
 export default function Mous() {
   const { data = [], isLoading, isError, error } = useMous();
+  const pg = usePagination(data);
   return (
     <PageShell title="Tie-Ups & MOUs" subtitle="National and international collaborations.">
       {isLoading ? <Loading /> : isError ? <ErrorState error={error} /> : data.length === 0 ? (
@@ -15,9 +18,9 @@ export default function Mous() {
               <tr><th className="px-4 py-3 w-16">S.No</th><th className="px-4 py-3">Date of MoU</th><th className="px-4 py-3">Name of the Organization</th><th className="px-4 py-3 w-28 text-center">Document</th></tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {data.map((m, i) => (
+              {pg.rows.map((m, i) => (
                 <tr key={m._id} className="hover:bg-navy/5">
-                  <td className="px-4 py-3 text-slate-500">{String(i + 1).padStart(2, '0')}.</td>
+                  <td className="px-4 py-3 text-slate-500">{String(pg.offset + i + 1).padStart(2, '0')}.</td>
                   <td className="px-4 py-3">{m.mouDate ? new Date(m.mouDate).toLocaleDateString('en-IN') : '—'}</td>
                   <td className="px-4 py-3 font-medium">{m.orgName}</td>
                   <td className="px-4 py-3 text-center">
@@ -32,6 +35,7 @@ export default function Mous() {
               ))}
             </tbody>
           </table>
+      <div className="pb-3"><Pagination page={pg.page} total={pg.total} pageSize={pg.pageSize} onPage={pg.setPage} /></div>
         </div>
       )}
     </PageShell>

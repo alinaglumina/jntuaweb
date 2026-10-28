@@ -1,11 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { naacDocumentsQuery } from '../api/queries.js';
+import { usePagination } from '../hooks/usePagination.js';
+import Pagination from './ui/Pagination.jsx';
 
 // Renders a S.No / Title / Download table for a NAAC section (Extended Profile
 // Metrics, Criteria 1-7, Workshops/Seminars), matching the legacy site's layout.
 export default function NaacDocumentsTable({ criteria }) {
   const { data, isLoading } = useQuery(naacDocumentsQuery(criteria));
   const items = data?.items || [];
+  const pg = usePagination(items);
 
   if (isLoading) return <div className="skeleton h-40 w-full rounded-lg" />;
   if (items.length === 0) return null;
@@ -22,9 +25,9 @@ export default function NaacDocumentsTable({ criteria }) {
           </tr>
         </thead>
         <tbody className="divide-y divide-line">
-          {items.map((doc, i) => (
+          {pg.rows.map((doc, i) => (
             <tr key={doc._id} className={i % 2 === 0 ? 'bg-white' : 'bg-navy/[0.02]'}>
-              <td className="px-4 py-3 text-slate-500">{String(i + 1).padStart(2, '0')}.</td>
+              <td className="px-4 py-3 text-slate-500">{String(pg.offset + i + 1).padStart(2, '0')}.</td>
               <td className="px-4 py-3 text-slate-700">{doc.metricNumber || '—'}</td>
               <td className="px-4 py-3 text-slate-700">{doc.title}</td>
               <td className="px-4 py-3 text-center">
@@ -39,6 +42,7 @@ export default function NaacDocumentsTable({ criteria }) {
           ))}
         </tbody>
       </table>
+      <div className="pb-3"><Pagination page={pg.page} total={pg.total} pageSize={pg.pageSize} onPage={pg.setPage} /></div>
     </div>
   );
 }

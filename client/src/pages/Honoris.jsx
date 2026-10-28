@@ -1,9 +1,12 @@
 import PageShell from '../components/PageShell.jsx';
 import { Loading, ErrorState, EmptyState } from '../components/AsyncState.jsx';
 import { useHonoris } from '../api/public.js';
+import { usePagination } from '../hooks/usePagination.js';
+import Pagination from '../components/ui/Pagination.jsx';
 
 export default function Honoris() {
   const { data = [], isLoading, isError, error } = useHonoris();
+  const pg = usePagination(data);
   return (
     <PageShell title="Honoris Causa" subtitle="Honorary doctorates conferred by the university.">
       {isLoading ? <Loading /> : isError ? <ErrorState error={error} /> : data.length === 0 ? (
@@ -15,15 +18,16 @@ export default function Honoris() {
               <tr><th className="px-4 py-3 w-16">S.No</th><th className="px-4 py-3">Title</th><th className="px-4 py-3">Guest</th></tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
-              {data.map((h, i) => (
+              {pg.rows.map((h, i) => (
                 <tr key={h._id} className="hover:bg-navy/5">
-                  <td className="px-4 py-3 text-slate-500">{String(i + 1).padStart(2, '0')}.</td>
+                  <td className="px-4 py-3 text-slate-500">{String(pg.offset + i + 1).padStart(2, '0')}.</td>
                   <td className="px-4 py-3">{h.honorDegree || '—'}</td>
                   <td className="px-4 py-3 font-medium">{h.name}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+      <div className="pb-3"><Pagination page={pg.page} total={pg.total} pageSize={pg.pageSize} onPage={pg.setPage} /></div>
         </div>
       )}
     </PageShell>

@@ -1,10 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { iccMembersQuery } from '../api/queries.js';
 import SafeHtml from './SafeHtml.jsx';
+import { usePagination } from '../hooks/usePagination.js';
+import Pagination from './ui/Pagination.jsx';
 
 // Internal Complaint Committee: intro text (from the menu item) + S.No / Name & Designation / Chairperson/ Member.
 export default function IccMembersTable({ intro }) {
   const { data = [], isLoading } = useQuery(iccMembersQuery());
+  const pg = usePagination(data);
   return (
     <div className="space-y-4">
       {intro ? <SafeHtml html={intro} /> : null}
@@ -21,15 +24,16 @@ export default function IccMembersTable({ intro }) {
               </tr>
             </thead>
             <tbody>
-              {data.map((m, i) => (
+              {pg.rows.map((m, i) => (
                 <tr key={m._id} className={i % 2 === 0 ? 'bg-blue-50' : 'bg-white'}>
-                  <td className="px-4 py-2.5 text-slate-700">{String(i + 1).padStart(2, '0')}.</td>
+                  <td className="px-4 py-2.5 text-slate-700">{String(pg.offset + i + 1).padStart(2, '0')}.</td>
                   <td className="px-4 py-2.5 text-slate-800">{m.name}</td>
                   <td className="px-4 py-2.5 text-slate-800">{m.role || 'Member'}</td>
                 </tr>
               ))}
             </tbody>
           </table>
+      <div className="pb-3"><Pagination page={pg.page} total={pg.total} pageSize={pg.pageSize} onPage={pg.setPage} /></div>
         </div>
       )}
     </div>

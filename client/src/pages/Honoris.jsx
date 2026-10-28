@@ -22,7 +22,7 @@ export default function Honoris() {
                 <tr key={h._id} className="hover:bg-navy/5">
                   <td className="px-4 py-3 text-slate-500">{String(pg.offset + i + 1).padStart(2, '0')}.</td>
                   <td className="px-4 py-3">{h.honorDegree || '—'}</td>
-                  <td className="px-4 py-3 font-medium">{h.name}</td>
+                  <td className="whitespace-pre-line px-4 py-3 font-medium">{h.name}</td>
                 </tr>
               ))}
             </tbody>

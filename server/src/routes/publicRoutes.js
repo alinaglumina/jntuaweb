@@ -27,7 +27,7 @@ mount('/gallery',     GalleryItem,  { defaultSort: '-uploadedAt', searchable: ['
 mount('/mous',        Mou,          { defaultSort: '-mouDate',    baseFilter: () => ({ isActive: true }), searchable: ['orgName'] });
 mount('/emagazines',  EMagazine,    { defaultSort: '-issueDate' });
 mount('/news',        News,         { defaultSort: '-createdAt',  baseFilter: () => ({ isPublished: true }), searchable: ['title'] });
-mount('/honoris',     HonorisCausa, { defaultSort: '-convocationDate' });
+mount('/honoris',     HonorisCausa, { defaultSort: 'convocationDate' });
 mount('/nss-units', NssUnit, { defaultSort: 'sortOrder createdAt', baseFilter: () => ({ isActive: true }), searchable: ['collegeName'] });
 mount('/newsletters', NewsletterIssue, { defaultSort: 'sortOrder -createdAt', baseFilter: (req) => ({ isActive: true, ...(req.query.directorateKey ? { directorateKey: req.query.directorateKey } : {}) }), searchable: ['title'] });
 mount('/academic-senate', AcademicSenateDoc, { defaultSort: 'sortOrder -createdAt', baseFilter: () => ({ isActive: true }), searchable: ['title'] });

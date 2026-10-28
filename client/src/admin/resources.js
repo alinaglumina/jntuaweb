@@ -200,6 +200,15 @@ export const RESOURCES = {
     columns: ['key', 'heading'],
     fields: [F('key', 'Page key', 'text', { required: true }), F('heading', 'Heading'), F('body', 'Body', 'html')],
   },
+  'programmes-offered': {
+    label: 'Programmes Offered', group: 'institutional', icon: 'fa-graduation-cap', roles: ['admin', 'director'],
+    columns: ['institution', 'department', 'level', 'programme'],
+    fields: [F('institution', 'Institution', 'select', { options: ['JNTUA CEA', 'JNTUA CEP', 'JNTUA CEK', 'JNTUA OTPRI', 'JNTUA SMS', 'JNTUA Research Programs'], required: true }),
+             F('department', 'Department', 'text'),
+             F('level', 'Level', 'select', { options: ['UG', 'PG', 'Ph.D.'] }),
+             F('programme', 'Programme', 'text', { required: true }),
+             F('sortOrder', 'Order', 'number'), F('isActive', 'Active', 'checkbox', { default: true })],
+  },
   mous: {
     label: 'Tie-Ups & MOUs', group: 'collaboration', icon: 'fa-handshake', roles: ['admin', 'director'],
     columns: ['orgName', 'mouType', 'mouDate'],

@@ -97,3 +97,5 @@ export const directorateContentQuery = (directorateKey) => ({
   queryFn: () => api.get(`/directorate-content/key/${directorateKey}`).catch(() => null),
   enabled: !!directorateKey,
 });
+
+export const programmesOfferedQuery = () => ({ queryKey: ['programmes-offered'], queryFn: list('/programmes-offered', { limit: 500 }) });

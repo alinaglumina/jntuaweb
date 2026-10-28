@@ -26,6 +26,7 @@ mount('/slides',      Slide,        { defaultSort: 'order',      baseFilter: () 
 mount('/gallery',     GalleryItem,  { defaultSort: '-uploadedAt', searchable: ['caption', 'category'] });
 mount('/mous',        Mou,          { defaultSort: '-mouDate',    baseFilter: () => ({ isActive: true }), searchable: ['orgName'] });
 mount('/emagazines',  EMagazine,    { defaultSort: '-issueDate' });
+mount('/programmes-offered', ProgrammeOffered, { defaultSort: 'institution department level', baseFilter: () => ({ isActive: true }), searchable: ['department', 'programme'] });
 mount('/news',        News,         { defaultSort: '-createdAt',  baseFilter: () => ({ isPublished: true }), searchable: ['title'] });
 mount('/honoris',     HonorisCausa, { defaultSort: 'convocationDate' });
 mount('/nss-units', NssUnit, { defaultSort: 'sortOrder createdAt', baseFilter: () => ({ isActive: true }), searchable: ['collegeName'] });
@@ -149,4 +150,5 @@ router.post('/enquiries', submitLimiter, submitEnquiry);
 
 // ── Public file download with tracking ──
 import { downloadMedia } from '../controllers/mediaController.js';
+import ProgrammeOffered from '../models/ProgrammeOffered.js';
 router.get('/media/:id/download', downloadMedia);

@@ -6,11 +6,13 @@ import {
   Admission, Examination, Result, ContentBlock,
   Video, SeoMeta, NaacDocument, DirectorateMenuItem, NavMenuItem, Course, CurriculumEntry, CurriculumFile, PopupBanner, AcademicMou, AcademicSenateDoc, IccMember, SeedGrantDoc, PlacementDoc, EvalApplicationForm, EvalAddlController, RdDocument, RdSyllabusDoc, RdSyllabusPartDoc, RdPhdScholarDoc, IqacCommitteeDoc, IqacSsrMinutesDoc, IqacCertificateDoc, NewsletterIssue, NssUnit,
 } from '../models/index.js';
+import ProgrammeOffered from '../models/ProgrammeOffered.js';
 
 // Each entry: model + upload config + which roles may write + list search fields.
 // `uploadField`/`uploadSubdir` enable file uploads on create/update.
 // `sectionField` marks resources a director can only edit within their scope.
 export const RESOURCES = {
+  'programmes-offered': { model: ProgrammeOffered, searchable: ['department', 'programme', 'institution'], roles: ['admin', 'director'] },
   notifications:       { model: Notification,       uploadMulti: ['attachments', 'documents', 8], searchable: ['title'], roles: ['admin', 'director', 'examiner'], sectionField: 'directorateKey' },
   news:                { model: News,               upload: ['attachment', 'documents'], searchable: ['title'], roles: ['admin', 'director'], sectionField: 'directorateKey' },
   gallery:             { model: GalleryItem,        upload: ['filename', 'gallery'],     searchable: ['caption'], roles: ['admin', 'director'], sectionField: 'directorateKey' },

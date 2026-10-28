@@ -69,10 +69,8 @@ export const NAAC_ITEMS = [
 export const ACADEMICS = [
   ['acad-methodology', 'Methodology', 'methodology'],
   ['acad-admission', 'Admission', 'admission'],
-  ['acad-regsyllabus', 'Regulations & Syllabus', 'regulations-syllabus'],
-  ['acad-examinations', 'Examinations', 'examinations'],
+  ['acad-programmes-offered', 'Programmes Offered', 'programmes-offered'],
   ['acad-downloads', 'Downloadable Documents', 'downloads'],
-  ['acad-examcal', 'Exam Calendars', 'exam-calendars'],
   ['acad-affiliated', 'Affiliated Colleges', 'affiliated-colleges'],
 ];
 

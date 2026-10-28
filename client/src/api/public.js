@@ -46,3 +46,6 @@ export function useInfiniteNotifications({ category, directorateKey } = {}, page
     },
   });
 }
+
+import { programmesOfferedQuery } from './queries.js';
+export const useProgrammesOffered = () => useQuery(programmesOfferedQuery());

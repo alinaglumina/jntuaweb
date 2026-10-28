@@ -64,11 +64,9 @@ const ITEMS = [
   { key: 'academics', parentKey: null, label: 'Academics', to: '', order: 6 },
   { key: 'acad-methodology', parentKey: 'academics', label: 'Methodology', to: '/academics/methodology', order: 0 },
   { key: 'acad-admission', parentKey: 'academics', label: 'Admission', to: '/academics/admission', order: 1 },
-  { key: 'acad-regsyllabus', parentKey: 'academics', label: 'Regulations & Syllabus', to: '/academics/regulations-syllabus', order: 2 },
-  { key: 'acad-examinations', parentKey: 'academics', label: 'Examinations', to: '/academics/examinations', order: 3 },
-  { key: 'acad-downloads', parentKey: 'academics', label: 'Downloadable Documents', to: '/academics/downloads', order: 4 },
-  { key: 'acad-examcal', parentKey: 'academics', label: 'Exam Calendars', to: '/academics/exam-calendars', order: 5 },
-  { key: 'acad-affiliated', parentKey: 'academics', label: 'Affiliated Colleges', to: '/academics/affiliated-colleges', order: 6 },
+  { key: 'acad-programmes-offered', parentKey: 'academics', label: 'Programmes Offered', to: '/academics/programmes-offered', order: 2 },
+  { key: 'acad-downloads', parentKey: 'academics', label: 'Downloadable Documents', to: '/academics/downloads', order: 3 },
+  { key: 'acad-affiliated', parentKey: 'academics', label: 'Affiliated Colleges', to: '/academics/affiliated-colleges', order: 4 },
 
   // Important Units
   { key: 'units', parentKey: null, label: 'Important Units', to: '', order: 7 },

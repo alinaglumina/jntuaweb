@@ -20,11 +20,11 @@ export const DIRECTORATES = [
 
 export const UNITS = [
   ['unit-nss', 'NSS Cell', 'nss'],
-  ['unit-scst', 'SC/ST Cell', 'scst'],
-  ['unit-anti-ragging', 'Anti-Ragging Cell', 'anti-ragging'],
   ['unit-pro', 'Public Relations Office', 'public-relations'],
   ['unit-sports', 'Sports Council', 'sports'],
   ['unit-ipr', 'Intellectual Property Rights', 'ipr'],
+  ['unit-scst', 'SC/ST Cell', 'scst'],
+  ['unit-anti-ragging', 'Anti-Ragging Cell', 'anti-ragging'],
 ];
 
 export const ASSESSMENT_ACCREDITATION = [

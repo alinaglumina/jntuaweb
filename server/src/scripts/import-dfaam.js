@@ -7,6 +7,7 @@ import DirectorateMenuItem from '../models/DirectorateMenuItem.js';
 import { uploadToR2 } from '../config/cloudflareR2.js';
 
 const APPLY = process.argv.includes('--apply');
+const FORCE = process.argv.includes('--force');
 const DK = 'foreign-affairs-alumni';
 const BASE = 'https://app.jntua.ac.in';
 const HEAD = { 'User-Agent': 'Mozilla/5.0' };
@@ -63,7 +64,7 @@ const blocksHtml = (blocks) => (blocks || []).map((b) => {
   }
   return plain(kids) ? `<p>${kids}</p>` : '';
 }).join('');
-const table = (head, rows) => `<table><thead><tr>${['S.No', ...head].map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map((r, i) => `<tr><td>${String(i + 1).padStart(2, '0')}.</td>${r.map((c) => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+const table = (head, rows, nw = []) => `<table><thead><tr>${['S.No', ...head].map((h) => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map((r, i) => `<tr><td style="white-space:nowrap">${String(i + 1).padStart(2, '0')}.</td>${r.map((c, j) => `<td${nw.includes(j) ? ' style="white-space:nowrap"' : ''}>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
 async function linkList(path_, sub) {
   const items = []; let files = 0;
   for (const rec of await all(path_)) for (const f of filesOf(rec.File)) {
@@ -82,11 +83,11 @@ const TARGETS = [
   } },
   { key: 'mou-s-collaborations', build: async () => {
       const recs = (await all('/dfaam-international-mo-u-s?populate=*')).sort((a, b) => (b.Date || '').localeCompare(a.Date || ''));
-      return { html: table(['Name of the Organization', 'Date', 'Purpose'], recs.map((r) => [r.Name, dmy(r.Date), r.Purpose])) };
+      return { html: table(['Name of the Organization', 'Date', 'Purpose'], recs.map((r) => [r.Name, dmy(r.Date), r.Purpose]), [1]) };
   } },
   { key: 'list-of-foreign-students', build: async () => {
       const recs = await all('/list-of-foreign-students?populate=*&sort=createdAt:asc');
-      return { html: table(['Name', 'Country', 'Course', 'Year of Admission', 'College'], recs.map((r) => [r.Name, r.Country, r.Course, r.Year_of_Admission, r.College])) };
+      return { html: table(['Name', 'Country', 'Course', 'Year of Admission', 'College'], recs.map((r) => [r.Name, r.Country, r.Course, r.Year_of_Admission, r.College]), [1, 2, 3]) };
   } },
   { key: '12-b-and-2-f-certificates', build: () => linkList('/dfaam-12-b-and-2-f-certificates?populate=*', SUB) },
   { key: 'newsletter', build: () => linkList('/dfaam-newsletters?populate=*&sort=createdAt:asc', SUB) },
@@ -110,7 +111,7 @@ const ONLY = (process.argv.find((a) => a.startsWith('--only=')) || '').slice(7).
 for (const t of TARGETS) {
   if (ONLY.length && !ONLY.includes(t.key)) continue;
   const ex = byKey[t.key];
-  if (ex && plain(ex.body).length >= 200) { console.log(`SKIP (already has content): ${t.key}`); continue; }
+  if (ex && plain(ex.body).length >= 200 && !FORCE) { console.log(`SKIP (already has content): ${t.key}`); continue; }
   if (!ex && !t.create) { console.log(`SKIP (no such menu item): ${t.key}`); continue; }
   let out;
   try { out = await t.build(); } catch (e) { console.log(`FAILED ${t.key}: ${e.message}`); continue; }

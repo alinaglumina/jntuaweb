@@ -96,3 +96,9 @@
 .prose-jntua p { text-align: justify; hyphens: auto; overflow-wrap: break-word; }
 .prose-jntua p.heading-line { text-align: left; hyphens: manual; }
 .prose-jntua p.heading-line, .prose-jntua p.heading-line * { color: #c8102e !important; }
+
+/* page-body tables */
+.prose-jntua table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; }
+.prose-jntua th, .prose-jntua td { border: 1px solid rgb(var(--line)); padding: 0.55rem 0.75rem; text-align: left; vertical-align: top; }
+.prose-jntua thead th { background: rgb(var(--brand) / 0.09); font-weight: 600; white-space: nowrap; }
+.prose-jntua tbody tr:nth-child(even) { background: rgb(var(--brand) / 0.035); }
